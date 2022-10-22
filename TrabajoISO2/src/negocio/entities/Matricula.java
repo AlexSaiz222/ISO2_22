@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Matricula {
 
+	private int idMatricula;
 	Estudiante estudiante;
 	CursoPropio titulo;
 	ModoPago tipoPago;
@@ -11,9 +12,10 @@ public class Matricula {
 	private boolean pagado;
 	private int attribute;
 	
-	public Matricula(Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha, boolean pagado,
+	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha, boolean pagado,
 			int attribute) {
 		super();
+		this.idMatricula = idMatricula;
 		this.estudiante = estudiante;
 		this.titulo = titulo;
 		this.tipoPago = tipoPago;
@@ -21,8 +23,15 @@ public class Matricula {
 		this.pagado = pagado;
 		this.attribute = attribute;
 	}
-
 	
+	public int getIdMatricula() {
+		return idMatricula;
+	}
+
+	public void setIdMatricula(int idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+
 	public Estudiante getEstudiante() {
 		return estudiante;
 	}

@@ -5,14 +5,16 @@ import java.sql.Date;
 public class Materia {
 
 	Profesor responsable;
+	private int idMateria;
 	private String nombre;
 	private double horas;
 	private Date fechaInicio;
 	private Date fechaFin;
 	
-	public Materia(Profesor responsable, String nombre, double horas, Date fechaInicio, Date fechaFin) {
+	public Materia(Profesor responsable, int idMateria, String nombre, double horas, Date fechaInicio, Date fechaFin) {
 		super();
 		this.responsable = responsable;
+		this.idMateria = idMateria;
 		this.nombre = nombre;
 		this.horas = horas;
 		this.fechaInicio = fechaInicio;
@@ -25,6 +27,15 @@ public class Materia {
 	public void setResponsable(Profesor responsable) {
 		this.responsable = responsable;
 	}
+	
+	public int getIdMateria() {
+		return idMateria;
+	}
+
+	public void setIdMateria(int idMateria) {
+		this.idMateria = idMateria;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

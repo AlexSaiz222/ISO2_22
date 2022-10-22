@@ -13,7 +13,7 @@ public class CursoPropio {
 	EstadoCurso estado;
 	TipoCurso tipo;
 	CursoPropioDAO cursoPropioDao;
-	private String id;
+	private int id;
 	private String nombre;
 	private int ECTS;
 	private Date fechaInicio;
@@ -22,7 +22,7 @@ public class CursoPropio {
 	private int edicion;
 	
 	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, ProfesorUCLM secretario,
-			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, String id,
+			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, int id,
 			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
 		super();
 		this.matriculas = matriculas;
@@ -106,11 +106,11 @@ public class CursoPropio {
 		this.cursoPropioDao = cursoPropioDao;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -17,8 +17,8 @@ public class GestorBD {
 	protected static GestorBD instancia = null;
 	protected static Connection mBD;
 	private final static String DRIVER ="jdbc:derby";
-	private final static String CONNECTION_STRING ="jdbc:derby:proyecto_iso;create=true";
-	private final static String DBNAME ="proyecto_iso";
+	private final static String CONNECTION_STRING ="jdbc:derby:db_proyecto_iso2;create=true";
+	private final static String DBNAME ="db_proyecto_iso2";
 	private final static String DBUSER ="admin";
 	private final static String DBPASS ="admin";
 	
@@ -38,15 +38,17 @@ public class GestorBD {
 		try {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
 			mBD = DriverManager.getConnection(DRIVER+":"+DBNAME, DBUSER, DBPASS);
+			System.out.println("BBDD existente. Conectado");
 		} catch (SQLException e) {
 			// Si no esta creada la base de datos, la crea y se conecta
 			if (((e.getErrorCode() == 40000) && ("XJ004".equals(e.getSQLState())))) {
+				System.out.println("BBDD no creada");
 				crearBaseDatosSinoExiste();
 				conectarBD();
 			} else {
-				System.out.println(e.getMessage());
-				System.out.println(e.getErrorCode());
-				System.out.println(e.getSQLState());
+				System.out.println("Mensaje error: "+e.getMessage());
+				System.out.println("Codigo error: "+e.getErrorCode());
+				System.out.println("Estado SQL: "+e.getSQLState());
 			}
 		}
 	}
@@ -151,13 +153,13 @@ public class GestorBD {
 	}
 	
 	private static void crearBaseDatosSinoExiste() {
-		
+		System.out.println("Creando base de datos...");
 		PreparedStatement pstmt;
 		Statement stmt;
 		ResultSet rs = null;
-		String createSQL = "create table estudiantes (dni varchar(10) not null,"
-				+ " nombre varchar(50) not null, apellidos varchar(50) not null,"
-				+ " titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
+		String createSQL = "create table estudiantes (dni varchar(10) not null, "
+				+ "nombre varchar(50) not null, apellidos varchar(50) not null, "
+				+ "titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
 
 		try {
 			// Crear la conexion y la BBDD
@@ -171,41 +173,39 @@ public class GestorBD {
 			stmt.execute(createSQL);
 
 			// Datos iniciales de estudiantes
-			pstmt = mBD.prepareStatement("insert into estudiantes (dni, nombre, apellidos, titulacion, cualificacion) values(?,?,?,?,?)");
+			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE , APELLIDOS , TITULACION , CUALIFICACION) VALUES (?,?,?,?,?)");
 			pstmt.setString(1, "11111111A");
 			pstmt.setString(2, "Pepe");
 			pstmt.setString(3, "Pérez");
 			pstmt.setString(4, "Ingeniería Informática");
-			pstmt.setString(4, "Ingeniero SW");
+			pstmt.setString(5, "Ingeniero SW");
 			pstmt.executeUpdate();
-			
+						
 			// Crear la tabla centros
-			createSQL = "create table centros (idCentro int not null auto_increment, nombre varchar(50) not null, "
+			createSQL = "create table centros (idCentro int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), nombre varchar(50) not null, "
 					+ "localizacion varchar(50) not null, attribute int, primary key (idCentro))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesores
 			createSQL = "create table profesores (dni varchar(10) not null, nombre varchar(50) not null, "
-					+ "apellidos varchar(50) not null, doctor bool, primary key (dni))";
+					+ "apellidos varchar(50) not null, doctor boolean, primary key (dni))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesoresExternos
 			createSQL = "create table profesoresExternos (dni varchar(10) not null, nombre varchar(50) not null, "
-					+ "apellidos varchar(50) not null, doctor bool, titulacion varchar(50) not null, primary key (dni))";
+					+ "apellidos varchar(50) not null, doctor boolean, titulacion varchar(50) not null, primary key (dni))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesoresUCLM
 			createSQL = "create table profesoresUCLM (dni varchar(10) not null, centroAdscripcion int not null, "
-					+ "categoria enum('CATEDRATICO', 'TITULAR_UNIVERSIDAD', 'CONTRATADO_DOCTOR', 'AYUDANTE_DOCTOR', 'AYUDANTE', 'ASOCIADO') not null, "
-					+ "nombre varchar(50) not null, apellidos varchar(50) not null, attribute int, primary key (idCentro), "
-					+ "foreign key (centroAdscripcion) references centros(idCentro))";
+					+ "categoria varchar(30) not null, nombre varchar(50) not null, apellidos varchar(50) not null, "
+					+ "attribute int, primary key (dni), foreign key (centroAdscripcion) references centros(idCentro))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla cursosPropios
-			createSQL = "create table cursosPropios (idCursoPropio int not null auto_increment, idCentro int not null, "
-					+ "idDirector varchar(10) not null, idSecretario varchar(10) not null,"
-					+ "estado enum('PROPUESTO', 'VALIDADO', 'PROPUESTA_RECHAZADA', 'EN_MATRICULACION', 'EN_IMPARTICION', 'TERMINADO') not null, "
-					+ "tipo enum('MASTER', 'EXPERTO', 'ESPECIALISTA', 'FORMACION_AVANZADA', 'FORMACION_CONTINUA', 'MICROCREDENCIALES', 'CORTA_DURACION') not null, "
+			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idCentro int not null, "
+					+ "idDirector varchar(10) not null, idSecretario varchar(10) not null, "
+					+ "estado varchar(30) not null, tipo varchar(30) not null, "
 					+ "nombre varchar(50) not null, ECTS int not null, fechaInicio date, fechaFin date, tasaMatricula double, edicion int, "
 					+ "primary key (idCursoPropio), foreign key (idCentro) references centros(idCentro), "
 					+ "foreign key (idDirector) references profesoresUCLM(dni), "
@@ -213,14 +213,14 @@ public class GestorBD {
 			stmt.execute(createSQL);
 			
 			// Crear la tabla matriculas
-			createSQL = "create table matriculas (idMatricula int not null auto_increment, idEstudiante int not null, "
-					+ "idCursoPropio int not null, tipoPago enum('TARJETA_CREDITO', 'TRANSFERENCIA') not null, fecha date, pagado bool, "
-					+ "attribute int, primary key (idMatricula), foreign key (idEstudiante) references estudiantes(dni),"
+			createSQL = "create table matriculas (idMatricula int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idEstudiante varchar(10) not null, "
+					+ "idCursoPropio int not null, tipoPago varchar(30) not null, fecha date, pagado boolean, "
+					+ "attribute int, primary key (idMatricula), foreign key (idEstudiante) references estudiantes(dni), "
 					+ "foreign key (idCursoPropio) references cursosPropios(idCursoPropio))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla materias
-			createSQL = "create table materias (idMateria int not null auto_increment, responsable varchar(10) not null, "
+			createSQL = "create table materias (idMateria int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), responsable varchar(10) not null, "
 					+ "nombre varchar(50) not null, horas double not null, fechaInicio date, fechaFin date, "
 					+ "primary key (idMateria), foreign key (responsable) references profesores(dni))";
 			stmt.execute(createSQL);

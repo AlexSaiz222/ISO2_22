@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class PantallaJefeGabineteVicerrectorado extends JFrame {
+public class PantallaDireccionCurso extends JFrame {
 
 	private JPanel contentPane;
 
@@ -17,7 +17,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();
+					PantallaDireccionCurso frame = new PantallaDireccionCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,7 +29,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaJefeGabineteVicerrectorado() {
+	public PantallaDireccionCurso() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,8 +38,14 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		setContentPane(contentPane);
 	}
 
-	public void realizarConsulta() {
-		// TODO - implement PantallaJefeGabineteVicerrectorado.realizarConsulta
+	public void altaCurso() {
+		// TODO - implement PantallaDireccionCursos.altaCurso
 		throw new UnsupportedOperationException();
 	}
+
+	public void edicionCurso() {
+		// TODO - implement PantallaDireccionCursos.edicionCurso
+		throw new UnsupportedOperationException();
+	}
+
 }

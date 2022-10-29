@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
 
@@ -72,39 +73,36 @@ public class GestorBD {
 	 * @param sql
 	 * @return 
 	 */
-	public ResultSet select(String sql) {
-		List<String> resultado = new ArrayList<String>();
-		String v = "";
+	public Vector<Object> select(String sql) {
+		Vector<Object> resultado = new Vector<Object>();
 		conectarBD();
 		Statement stmt;
 		ResultSet rs = null;
 		try {
 			stmt = mBD.createStatement();
 			rs = stmt.executeQuery(sql);
-			/*
+			
 			while (rs.next()) {
-				String [] datos = new String[rs.getMetaData().getColumnCount()];
-				for(int i=1; i<=rs.getMetaData().getColumnCount(); i++) {
-					v = String.valueOf(rs.getObject(i));
-					System.out.println(String.valueOf(rs.getObject(i)));
-					if(rs.getMetaData().getColumnType(i) == 4) {
-						v.add(rs.getInt(i));
-					} else if(rs.getMetaData().getColumnType(i) == 12) {
-						v.add(rs.getString(i));
+				Vector<Object> v = new Vector<Object>();
+				int i = 1;
+				while (true) {
+					try {
+						v.add(rs.getObject(i));
+						i++;
+					} catch (SQLException e) {
+						break;
 					}
-					
-					datos[i] = v;
 				}
-				resultado.add(datos);
+				resultado.add(v);
 			}
-			*/
+
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		desconectarBD();
-		return rs;
+		return resultado;
 	}
 
 	/**

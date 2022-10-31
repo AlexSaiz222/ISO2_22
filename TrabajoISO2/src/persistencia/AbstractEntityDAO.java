@@ -22,8 +22,11 @@ public abstract class AbstractEntityDAO<E> {
 	 * @param entity
 	 */
 	public int insert(E entity) {
-		// TODO - implement AbstractEntityDAO.insert
-		throw new UnsupportedOperationException();
+		int resultado = -1;
+		
+		
+		
+		return resultado;
 	}
 
 	/**
@@ -41,11 +44,6 @@ public abstract class AbstractEntityDAO<E> {
 	 */
 	public int delete(E entity) {
 		// TODO - implement AbstractEntityDAO.delete
-		throw new UnsupportedOperationException();
-	}
-
-	public void operation() {
-		// TODO - implement AbstractEntityDAO.operation
 		throw new UnsupportedOperationException();
 	}
 

@@ -10,10 +10,20 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param curso
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
 	 */
 	public int crearNuevoCurso(CursoPropio curso) {
-		// TODO - implement CursoPropioDAO.crearNuevoCurso
-		throw new UnsupportedOperationException();
+		int resultado = -1;
+		
+		GestorBD agente = GestorBD.getAgente();
+		resultado = agente.insert("insert into cursospropios (idcentro, iddirector, idsecretario, "
+				+ "estado, tipo, nombre, ects, fechainicio, fechafin, tasamatricula, edicion) "
+				+ "values("+curso.getCentro().getIdCentro()+",'"+curso.getDirector().getDni()+"',"
+				+ "'"+curso.getSecretario().getDni()+"','"+curso.getEstado()+"',"
+				+ "'"+curso.getTipo()+"','"+curso.getNombre()+"',"+curso.getECTS()+",'"+curso.getFechaInicio()+"',"
+				+ "'"+curso.getFechaFin()+"',"+curso.getTasaMatricula()+","+curso.getECTS()+")");
+		
+		return resultado;
 	}
 
 	/**

@@ -3,12 +3,22 @@ package negocio.controllers;
 import negocio.entities.*;
 
 public class GestorPropuestasCursos {
-
+	/*
 	public CursoPropio realizarPropuestaCurso() {
-		// TODO - implement GestorPropuestasCursos.realizarPropuestaCurso
-		throw new UnsupportedOperationException();
+		
+		 * CursoPropio curso = new CursoPropio(
+		 
+				null, 1, "11111111B", 
+				null, null, null, 
+				null, null, 0, 
+				null, 0, null, 
+				null, 0, 0
+				);
+		
+		return curso;
+		
 	}
-
+	*/
 	/**
 	 * 
 	 * @param curso

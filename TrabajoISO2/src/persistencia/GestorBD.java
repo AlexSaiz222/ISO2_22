@@ -167,7 +167,7 @@ public class GestorBD {
 
 			// Datos iniciales de estudiantes
 			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
-			pstmt.setString(1, "11111111A");
+			pstmt.setString(1, "00000000A");
 			pstmt.setString(2, "Pepe");
 			pstmt.setString(3, "Pérez");
 			pstmt.setString(4, "PepePerez");
@@ -186,14 +186,14 @@ public class GestorBD {
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesoresExternos
-			createSQL = "create table profesoresExternos (dni varchar(10) not null, nombre varchar(50) not null, "
-					+ "apellidos varchar(50) not null, doctor boolean, titulacion varchar(50) not null, primary key (dni))";
+			createSQL = "create table profesoresExternos (dni varchar(10) not null, "
+					+ "titulacion varchar(50) not null, primary key (dni), foreign key (dni) references profesores(dni))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesoresUCLM
 			createSQL = "create table profesoresUCLM (dni varchar(10) not null, centroAdscripcion int not null, "
-					+ "categoria varchar(30) not null, nombre varchar(50) not null, apellidos varchar(50) not null, "
-					+ "attribute int, primary key (dni), foreign key (centroAdscripcion) references centros(idCentro))";
+					+ "categoria varchar(30) not null, primary key (dni), foreign key (centroAdscripcion) references centros(idCentro), "
+					+ "foreign key (dni) references profesores(dni))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla cursosPropios

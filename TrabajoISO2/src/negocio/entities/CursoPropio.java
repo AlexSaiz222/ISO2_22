@@ -35,7 +35,7 @@ public class CursoPropio {
 		this.cursoPropioDao = cursoPropioDao;
 		this.id = id;
 		this.nombre = nombre;
-		ECTS = eCTS;
+		this.ECTS = eCTS;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tasaMatricula = tasaMatricula;

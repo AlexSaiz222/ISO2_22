@@ -10,10 +10,8 @@ public class Matricula {
 	ModoPago tipoPago;
 	private Date fecha;
 	private boolean pagado;
-	private int attribute;
 	
-	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha, boolean pagado,
-			int attribute) {
+	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha, boolean pagado) {
 		super();
 		this.idMatricula = idMatricula;
 		this.estudiante = estudiante;
@@ -21,7 +19,6 @@ public class Matricula {
 		this.tipoPago = tipoPago;
 		this.fecha = fecha;
 		this.pagado = pagado;
-		this.attribute = attribute;
 	}
 	
 	public int getIdMatricula() {
@@ -70,14 +67,6 @@ public class Matricula {
 
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
-	}
-
-	public int getAttribute() {
-		return attribute;
-	}
-
-	public void setAttribute(int attribute) {
-		this.attribute = attribute;
 	}
 
 

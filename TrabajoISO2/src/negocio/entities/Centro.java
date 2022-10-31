@@ -9,17 +9,15 @@ public class Centro {
 	private int idCentro;
 	private String nombre;
 	private String localizacion;
-	private int attribute;
 	
 	public Centro(Collection<CursoPropio> cursoPropios, Collection<ProfesorUCLM> plantilla, int idCentro, String nombre,
-			String localizacion, int attribute) {
+			String localizacion) {
 		super();
 		this.cursoPropios = cursoPropios;
 		this.plantilla = plantilla;
 		this.idCentro = idCentro;
 		this.nombre = nombre;
 		this.localizacion = localizacion;
-		this.attribute = attribute;
 	}
 	public Collection<CursoPropio> getCursoPropios() {
 		return cursoPropios;
@@ -51,12 +49,6 @@ public class Centro {
 	}
 	public void setLocalizacion(String localizacion) {
 		this.localizacion = localizacion;
-	}
-	public int getAttribute() {
-		return attribute;
-	}
-	public void setAttribute(int attribute) {
-		this.attribute = attribute;
 	}
 
 	

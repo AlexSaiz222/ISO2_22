@@ -1,4 +1,30 @@
 {
 	"folders": {},
-	"connections": {}
+	"connections": {
+		"derby-1842d6a81ca-39e55cfc44c9c0df": {
+			"provider": "generic",
+			"driver": "derby",
+			"name": "db_proyecto_iso2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\aleja\\git\\ISO2_22\\TrabajoISO2\\db_proyecto_iso2",
+				"url": "jdbc:derby:C:\\Users\\aleja\\git\\ISO2_22\\TrabajoISO2\\db_proyecto_iso2",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
 }

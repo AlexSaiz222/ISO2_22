@@ -144,11 +144,6 @@ public class GestorBD {
 		// TODO - implement GestorBD.delete
 		throw new UnsupportedOperationException();
 	}
-
-	public void operation() {
-		// TODO - implement GestorBD.operation
-		throw new UnsupportedOperationException();
-	}
 	
 	private static void crearBaseDatosSinoExiste() {
 		System.out.println("Creando base de datos...");
@@ -157,7 +152,7 @@ public class GestorBD {
 		ResultSet rs = null;
 		String createSQL = "create table estudiantes (dni varchar(10) not null, "
 				+ "nombre varchar(50) not null, apellidos varchar(50) not null, "
-				+ "titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
+				+ "password varchar(50), titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
 
 		try {
 			// Crear la conexion y la BBDD
@@ -171,17 +166,18 @@ public class GestorBD {
 			stmt.execute(createSQL);
 
 			// Datos iniciales de estudiantes
-			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE , APELLIDOS , TITULACION , CUALIFICACION) VALUES (?,?,?,?,?)");
+			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
 			pstmt.setString(1, "11111111A");
 			pstmt.setString(2, "Pepe");
 			pstmt.setString(3, "Pérez");
-			pstmt.setString(4, "Ingeniería Informática");
-			pstmt.setString(5, "Ingeniero SW");
+			pstmt.setString(4, "PepePerez");
+			pstmt.setString(5, "Ingeniería Informática");
+			pstmt.setString(6, "Ingeniero SW");
 			pstmt.executeUpdate();
 						
 			// Crear la tabla centros
 			createSQL = "create table centros (idCentro int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), nombre varchar(50) not null, "
-					+ "localizacion varchar(50) not null, attribute int, primary key (idCentro))";
+					+ "localizacion varchar(50) not null, primary key (idCentro))";
 			stmt.execute(createSQL);
 			
 			// Crear la tabla profesores
@@ -213,7 +209,7 @@ public class GestorBD {
 			// Crear la tabla matriculas
 			createSQL = "create table matriculas (idMatricula int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idEstudiante varchar(10) not null, "
 					+ "idCursoPropio int not null, tipoPago varchar(30) not null, fecha date, pagado boolean, "
-					+ "attribute int, primary key (idMatricula), foreign key (idEstudiante) references estudiantes(dni), "
+					+ "primary key (idMatricula), foreign key (idEstudiante) references estudiantes(dni), "
 					+ "foreign key (idCursoPropio) references cursosPropios(idCursoPropio))";
 			stmt.execute(createSQL);
 			

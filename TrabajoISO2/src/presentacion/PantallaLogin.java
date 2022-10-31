@@ -47,6 +47,7 @@ public class PantallaLogin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 693, 424);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -66,6 +67,7 @@ public class PantallaLogin extends JFrame {
 		contentPane.add(PsswdText);
 		
 		UsrField = new JTextField();
+		UsrField.setBackground(new Color(192, 192, 192));
 		UsrField.setForeground(SystemColor.infoText);
 		UsrField.setBounds(309, 119, 133, 20);
 		contentPane.add(UsrField);
@@ -77,6 +79,7 @@ public class PantallaLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		PsswdField = new JTextField();
+		PsswdField.setBackground(new Color(192, 192, 192));
 		PsswdField.setForeground(Color.BLACK);
 		PsswdField.setColumns(10);
 		PsswdField.setBounds(309, 159, 133, 20);
@@ -84,9 +87,15 @@ public class PantallaLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Sign in");
 		btnNewButton.setBackground(new Color(0, 0, 0));
-		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBounds(212, 199, 225, 61);
 		contentPane.add(btnNewButton);
+		
+		JLabel dni_info = new JLabel(new ImageIcon("./images/ayuda.png"));
+		dni_info.setToolTipText("f.e 03435754P");
+		dni_info.setText("");
+		dni_info.setBounds(452, 119, 23, 20);
+		contentPane.add(dni_info);
 	}
 	
 	public void login() {

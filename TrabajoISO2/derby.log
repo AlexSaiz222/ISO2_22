@@ -1,4 +1,4 @@
-Sat Oct 29 13:31:15 CEST 2022 Thread[main,5,main] Cleanup action starting
+Mon Oct 31 11:12:40 CET 2022 Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'db_proyecto_iso2' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b9af9a9, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
@@ -17,7 +17,7 @@ java.sql.SQLException: Failed to start database 'db_proyecto_iso2' with class lo
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 Caused by: ERROR XJ040: Failed to start database 'db_proyecto_iso2' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b9af9a9, see the next exception for details.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
@@ -88,7 +88,7 @@ java.sql.SQLException: Another instance of Derby may have already booted the dat
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database C:\Users\PEDRO\git\ISO2_22\TrabajoISO2\db_proyecto_iso2.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
@@ -200,10 +200,10 @@ ERROR XSDB6: Another instance of Derby may have already booted the database C:\U
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 ============= end nested exception, level (2) ===========
 Cleanup action completed
-Sat Oct 29 13:31:15 CEST 2022 Thread[main,5,main] Cleanup action starting
+Mon Oct 31 11:12:40 CET 2022 Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'db_proyecto_iso2' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b9af9a9, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
@@ -222,7 +222,7 @@ java.sql.SQLException: Failed to start database 'db_proyecto_iso2' with class lo
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 Caused by: ERROR XJ040: Failed to start database 'db_proyecto_iso2' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b9af9a9, see the next exception for details.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
@@ -293,7 +293,7 @@ java.sql.SQLException: Another instance of Derby may have already booted the dat
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database C:\Users\PEDRO\git\ISO2_22\TrabajoISO2\db_proyecto_iso2.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
@@ -405,6 +405,6 @@ ERROR XSDB6: Another instance of Derby may have already booted the database C:\U
 	at persistencia.GestorBD.conectarBD(GestorBD.java:41)
 	at persistencia.GestorBD.<init>(GestorBD.java:27)
 	at persistencia.GestorBD.getAgente(GestorBD.java:32)
-	at presentacion.PantallaLogin.main(PantallaLogin.java:28)
+	at presentacion.PantallaLogin.main(PantallaLogin.java:30)
 ============= end nested exception, level (2) ===========
 Cleanup action completed

@@ -13,16 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JList;
 
-public class EditCourseProposal extends JFrame {
+public class PantallaEditCourseProposal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField NameField;
 	private JTextField EtcsField;
 	private JTextField StartDateField;
 	private JTextField EndDateField;
 	private JTextField FeeField;
 	private JTextField EditionField;
+	private JTextField NameField;
 
 	/**
 	 * Launch the application.
@@ -31,7 +32,7 @@ public class EditCourseProposal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditCourseProposal frame = new EditCourseProposal();
+					PantallaEditCourseProposal frame = new PantallaEditCourseProposal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +44,7 @@ public class EditCourseProposal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditCourseProposal() {
+	public PantallaEditCourseProposal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -98,15 +99,10 @@ public class EditCourseProposal extends JFrame {
 		EndDateTxt.setBounds(82, 176, 57, 14);
 		contentPane.add(EndDateTxt);
 		
-		JButton RegisterBtn = new JButton("Register course proposal");
-		RegisterBtn.setBackground(new Color(50, 205, 50));
-		RegisterBtn.setBounds(82, 279, 247, 39);
-		contentPane.add(RegisterBtn);
-		
-		NameField = new JTextField();
-		NameField.setBounds(172, 91, 157, 20);
-		contentPane.add(NameField);
-		NameField.setColumns(10);
+		JButton EditBtn = new JButton("Edit course proposal");
+		EditBtn.setBackground(new Color(50, 205, 50));
+		EditBtn.setBounds(82, 279, 247, 39);
+		contentPane.add(EditBtn);
 		
 		EtcsField = new JTextField();
 		EtcsField.setColumns(10);
@@ -144,6 +140,10 @@ public class EditCourseProposal extends JFrame {
 		JLabel Photo = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		Photo.setBounds(432, 94, 196, 184);
 		contentPane.add(Photo);
+		
+		NameField = new JTextField();
+		NameField.setBounds(170, 91, 159, 20);
+		contentPane.add(NameField);
+		NameField.setColumns(10);
 	}
-
 }

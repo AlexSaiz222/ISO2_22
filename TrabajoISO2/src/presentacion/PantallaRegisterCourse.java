@@ -16,7 +16,7 @@ import javax.swing.JList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class RegisterCourse extends JFrame {
+public class PantallaRegisterCourse extends JFrame {
 
 	private JPanel contentPane;
 
@@ -27,7 +27,7 @@ public class RegisterCourse extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegisterCourse frame = new RegisterCourse();
+					PantallaRegisterCourse frame = new PantallaRegisterCourse();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class RegisterCourse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterCourse() {
+	public PantallaRegisterCourse() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();

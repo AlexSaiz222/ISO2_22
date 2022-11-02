@@ -53,7 +53,7 @@ public class PantallaDireccionCurso extends JFrame {
 		JButton EditBtn = new JButton("Edit a course proposal");
 		EditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditCourseProposal E1 = new EditCourseProposal();
+				PantallaEditCourseProposal E1 = new PantallaEditCourseProposal();
 				E1.setVisible(true);
 			}
 		});
@@ -76,7 +76,7 @@ public class PantallaDireccionCurso extends JFrame {
 		RegisterCourse.setForeground(Color.BLACK);
 		RegisterCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RegisterCourse R1 = new RegisterCourse();
+				PantallaRegisterCourse R1 = new PantallaRegisterCourse();
 				R1.setVisible(true);
 			}
 		});

@@ -82,7 +82,7 @@ public class PantallaPagar extends JFrame {
 		JButton CardBtn = new JButton("Card payment");
 		CardBtn.setForeground(Color.BLACK);
 		CardBtn.setBackground(Color.LIGHT_GRAY);
-		CardBtn.setBounds(107, 104, 112, 47);
+		CardBtn.setBounds(104, 104, 131, 47);
 		contentPane.add(CardBtn);
 		
 		JButton TransferBtn = new JButton("Wire transfer");

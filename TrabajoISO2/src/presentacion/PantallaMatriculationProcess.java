@@ -15,11 +15,11 @@ import javax.swing.JList;
 import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 public class PantallaMatriculationProcess extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField DateField;
 
 	/**
 	 * Launch the application.
@@ -104,14 +104,12 @@ public class PantallaMatriculationProcess extends JFrame {
 		UCLM_letters.setBounds(358, 79, 241, 213);
 		contentPane.add(UCLM_letters);
 		
-		DateField = new JTextField();
-		DateField.setBounds(87, 254, 156, 20);
-		contentPane.add(DateField);
-		DateField.setColumns(10);
-		
 		JLabel DateTxt = new JLabel("Date");
 		DateTxt.setBounds(31, 257, 46, 14);
 		contentPane.add(DateTxt);
+		
+		JDateChooser DateField = new JDateChooser();
+		DateField.setBounds(87, 251, 156, 20);
+		contentPane.add(DateField);
 	}
-
 }

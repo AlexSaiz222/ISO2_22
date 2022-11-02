@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +18,8 @@ import javax.swing.JList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import com.toedter.calendar.JDateChooser;
+
+import persistencia.CursoPropioDAO;
 
 public class PantallaRegisterCourse extends JFrame {
 
@@ -94,11 +98,6 @@ public class PantallaRegisterCourse extends JFrame {
 		EndDateTxt.setBounds(82, 176, 57, 14);
 		contentPane.add(EndDateTxt);
 		
-		JButton EditBtn = new JButton("Register course proposal");
-		EditBtn.setBackground(new Color(50, 205, 50));
-		EditBtn.setBounds(82, 279, 247, 39);
-		contentPane.add(EditBtn);
-		
 		JLabel FeeTxt = new JLabel("Tuition fee");
 		FeeTxt.setBounds(82, 207, 80, 14);
 		contentPane.add(FeeTxt);
@@ -131,13 +130,31 @@ public class PantallaRegisterCourse extends JFrame {
 		EditionField.setBounds(170, 229, 159, 20);
 		contentPane.add(EditionField);
 		
-		JDateChooser StartDate = new JDateChooser();
-		StartDate.setBounds(170, 145, 159, 20);
-		contentPane.add(StartDate);
+		JDateChooser StartDateField = new JDateChooser();
+		StartDateField.setBounds(170, 145, 159, 20);
+		contentPane.add(StartDateField);
 		
-		JDateChooser EndDate = new JDateChooser();
-		EndDate.setBounds(170, 176, 159, 20);
-		contentPane.add(EndDate);
+		JDateChooser EndDateField = new JDateChooser();
+		EndDateField.setBounds(170, 176, 159, 20);
+		contentPane.add(EndDateField);
 		
+		JButton EditBtn = new JButton("Register course proposal");
+		EditBtn.setBackground(new Color(50, 205, 50));
+		EditBtn.setBounds(82, 279, 247, 39);
+		EditBtn.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int ETCSnumber = Integer.parseInt(ETCSField.getText());
+					String pattern = "d-MMM-y";
+					CursoPropioDAO.crearNuevoCurso(NameField.getText(),ETCSnumber,StartDateField.getDate(),EndDateField.getDate());
+				} catch (Exception e) {
+
+					//textPane.setText("Ha ocurrido un error,vuelva a intentarlo");
+				}
+
+			}
+		});
+		contentPane.add(EditBtn);
 	}
 }

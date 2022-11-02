@@ -146,8 +146,9 @@ public class PantallaRegisterCourse extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					int ETCSnumber = Integer.parseInt(ETCSField.getText());
-					String pattern = "d-MMM-y";
-					CursoPropioDAO.crearNuevoCurso(NameField.getText(),ETCSnumber,StartDateField.getDate(),EndDateField.getDate());
+					double feeNumber = Double.parseDouble(FeeField.getText());
+					int Editionnumber = Integer.parseInt(EditionField.getText());
+					CursoPropioDAO.crearNuevoCurso(NameField.getText(),ETCSnumber,StartDateField.getDate(),EndDateField.getDate(),feeNumber, Editionnumber);
 				} catch (Exception e) {
 
 					//textPane.setText("Ha ocurrido un error,vuelva a intentarlo");

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
 
@@ -73,8 +72,8 @@ public class GestorBD {
 	 * @param sql
 	 * @return 
 	 */
-	public Vector<Object> select(String sql) {
-		Vector<Object> resultado = new Vector<Object>();
+	public List<Object> select(String sql) {
+		List<Object> resultado = new ArrayList<Object>();
 		conectarBD();
 		Statement stmt;
 		ResultSet rs = null;
@@ -83,7 +82,7 @@ public class GestorBD {
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				Vector<Object> v = new Vector<Object>();
+				List<Object> v = new ArrayList<Object>();
 				int i = 1;
 				while (true) {
 					try {
@@ -149,7 +148,6 @@ public class GestorBD {
 		System.out.println("Creando base de datos...");
 		PreparedStatement pstmt;
 		Statement stmt;
-		ResultSet rs = null;
 		String createSQL = "create table estudiantes (dni varchar(10) not null, "
 				+ "nombre varchar(50) not null, apellidos varchar(50) not null, "
 				+ "password varchar(50), titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
@@ -180,10 +178,31 @@ public class GestorBD {
 					+ "localizacion varchar(50) not null, primary key (idCentro))";
 			stmt.execute(createSQL);
 			
+			// Datos iniciales de centros
+			pstmt = mBD.prepareStatement("insert into centros (nombre, localizacion) VALUES (?,?)");
+			pstmt.setString(1, "Facultad de Ciencias Sociales");
+			pstmt.setString(2, "Talavera de la Reina");
+			pstmt.executeUpdate();
+			
 			// Crear la tabla profesores
 			createSQL = "create table profesores (dni varchar(10) not null, nombre varchar(50) not null, "
 					+ "apellidos varchar(50) not null, doctor boolean, primary key (dni))";
 			stmt.execute(createSQL);
+			
+			// Datos iniciales de profesores
+			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt.setString(1, "11111111B");
+			pstmt.setString(2, "Jaime");
+			pstmt.setString(3, "García");
+			pstmt.setBoolean(4, true);
+			pstmt.executeUpdate();
+			
+			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt.setString(1, "22222222C");
+			pstmt.setString(2, "Alberto");
+			pstmt.setString(3, "Sánchez");
+			pstmt.setBoolean(4, false);
+			pstmt.executeUpdate();
 			
 			// Crear la tabla profesoresExternos
 			createSQL = "create table profesoresExternos (dni varchar(10) not null, "
@@ -195,6 +214,19 @@ public class GestorBD {
 					+ "categoria varchar(30) not null, primary key (dni), foreign key (centroAdscripcion) references centros(idCentro), "
 					+ "foreign key (dni) references profesores(dni))";
 			stmt.execute(createSQL);
+			
+			// Datos iniciales de profesoresUCLM
+			pstmt = mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
+			pstmt.setString(1, "11111111B");
+			pstmt.setInt(2, 1);
+			pstmt.setString(3, "CATEDRATICO");
+			pstmt.executeUpdate();
+			
+			pstmt = mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
+			pstmt.setString(1, "22222222C");
+			pstmt.setInt(2, 1);
+			pstmt.setString(3, "TITULAR_UNIVERSIDAD");
+			pstmt.executeUpdate();
 			
 			// Crear la tabla cursosPropios
 			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idCentro int not null, "

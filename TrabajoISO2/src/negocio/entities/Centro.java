@@ -10,6 +10,10 @@ public class Centro {
 	private String nombre;
 	private String localizacion;
 	
+	public Centro() {
+		
+	}
+	
 	public Centro(Collection<CursoPropio> cursoPropios, Collection<ProfesorUCLM> plantilla, int idCentro, String nombre,
 			String localizacion) {
 		super();
@@ -19,6 +23,13 @@ public class Centro {
 		this.nombre = nombre;
 		this.localizacion = localizacion;
 	}
+	
+	public Centro( int idCentro, String nombre, String localizacion) {
+		this.idCentro = idCentro;
+		this.nombre = nombre;
+		this.localizacion = localizacion;
+	}
+
 	public Collection<CursoPropio> getCursoPropios() {
 		return cursoPropios;
 	}

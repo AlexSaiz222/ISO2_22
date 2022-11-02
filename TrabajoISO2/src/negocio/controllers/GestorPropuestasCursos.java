@@ -6,7 +6,7 @@ public class GestorPropuestasCursos {
 	/*
 	public CursoPropio realizarPropuestaCurso() {
 		
-		 * CursoPropio curso = new CursoPropio(
+		 CursoPropio curso = new CursoPropio(
 		 
 				null, 1, "11111111B", 
 				null, null, null, 

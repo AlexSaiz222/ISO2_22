@@ -21,6 +21,10 @@ public class CursoPropio {
 	private double tasaMatricula;
 	private int edicion;
 	
+	public CursoPropio() {
+		
+	}
+	
 	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, ProfesorUCLM secretario,
 			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, int id,
 			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {

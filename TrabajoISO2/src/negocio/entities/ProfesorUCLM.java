@@ -5,6 +5,10 @@ public class ProfesorUCLM extends Profesor {
 	Centro centroAdscripcion;
 	CategoriaProfesor categoria;
 	
+	public ProfesorUCLM() {
+		
+	}
+	
 	public ProfesorUCLM(String dni, String nombre, String apellidos, boolean doctor, Centro centroAdscripcion,
 			CategoriaProfesor categoria) {
 		super(dni, nombre, apellidos, doctor);

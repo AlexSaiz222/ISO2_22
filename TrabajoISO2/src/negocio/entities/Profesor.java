@@ -7,6 +7,10 @@ public class Profesor {
 	private String apellidos;
 	private boolean doctor;
 	
+	public Profesor() {
+		
+	}
+	
 	public Profesor(String dni, String nombre, String apellidos, boolean doctor) {
 		super();
 		this.dni = dni;

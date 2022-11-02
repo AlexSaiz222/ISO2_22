@@ -14,16 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
+import com.toedter.calendar.JDateChooser;
 
 public class PantallaEditCourseProposal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField EtcsField;
-	private JTextField StartDateField;
-	private JTextField EndDateField;
 	private JTextField FeeField;
 	private JTextField EditionField;
-	private JTextField NameField;
 
 	/**
 	 * Launch the application.
@@ -79,7 +77,7 @@ public class PantallaEditCourseProposal extends JFrame {
 		contentPane.add(GoBackBttn);
 		
 		JLabel Name = new JLabel("Name");
-		Name.setBounds(82, 94, 35, 14);
+		Name.setBounds(82, 62, 35, 14);
 		contentPane.add(Name);
 		
 		JLabel ETCStxt = new JLabel("ETCS");
@@ -109,19 +107,9 @@ public class PantallaEditCourseProposal extends JFrame {
 		EtcsField.setBounds(172, 116, 157, 20);
 		contentPane.add(EtcsField);
 		
-		StartDateField = new JTextField();
-		StartDateField.setColumns(10);
-		StartDateField.setBounds(170, 142, 157, 20);
-		contentPane.add(StartDateField);
-		
-		EndDateField = new JTextField();
-		EndDateField.setColumns(10);
-		EndDateField.setBounds(170, 173, 157, 20);
-		contentPane.add(EndDateField);
-		
 		FeeField = new JTextField();
 		FeeField.setColumns(10);
-		FeeField.setBounds(172, 204, 157, 20);
+		FeeField.setBounds(170, 204, 159, 20);
 		contentPane.add(FeeField);
 		
 		EditionField = new JTextField();
@@ -141,9 +129,20 @@ public class PantallaEditCourseProposal extends JFrame {
 		Photo.setBounds(432, 94, 196, 184);
 		contentPane.add(Photo);
 		
-		NameField = new JTextField();
-		NameField.setBounds(170, 91, 159, 20);
-		contentPane.add(NameField);
-		NameField.setColumns(10);
+		JList list = new JList();
+		list.setBounds(188, 71, 1, 1);
+		contentPane.add(list);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(170, 61, 159, 49);
+		contentPane.add(list_1);
+		
+		JDateChooser EndDate = new JDateChooser();
+		EndDate.setBounds(170, 170, 159, 20);
+		contentPane.add(EndDate);
+		
+		JDateChooser StartDate = new JDateChooser();
+		StartDate.setBounds(170, 139, 159, 20);
+		contentPane.add(StartDate);
 	}
 }

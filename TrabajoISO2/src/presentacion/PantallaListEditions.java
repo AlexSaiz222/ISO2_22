@@ -1,20 +1,21 @@
 package presentacion;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JTextArea;
+import java.awt.Color;
 
-public class PantallaJefeGabineteVicerrectorado extends JFrame {
+public class PantallaListEditions extends JFrame {
 
 	private JPanel contentPane;
 
@@ -25,7 +26,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();
+					PantallaListEditions frame = new PantallaListEditions();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +38,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaJefeGabineteVicerrectorado() {
+	public PantallaListEditions() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -46,10 +47,10 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel Title = new JLabel("Evaluate a course proposal");
-		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
-		Title.setBounds(170, 11, 315, 39);
-		contentPane.add(Title);
+		JLabel ChooseAnOption = new JLabel("List Course Editions");
+		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
+		ChooseAnOption.setBounds(23, 11, 270, 39);
+		contentPane.add(ChooseAnOption);
 		
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
@@ -64,38 +65,37 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaDireccionCurso D1 = new PantallaDireccionCurso();
-				D1.setVisible(true);
+				PantallaEmpleadosVicerrectorado v1 = new PantallaEmpleadosVicerrectorado();
+				v1.setVisible(true);
 			}
 		});
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel Name = new JLabel("Name");
-		Name.setBounds(66, 94, 35, 14);
-		contentPane.add(Name);
+		JLabel lblNewLabel = new JLabel("Start Date");
+		lblNewLabel.setBounds(23, 83, 77, 14);
+		contentPane.add(lblNewLabel);
 		
-		JButton ApproveBtn = new JButton("Approve proposal");
-		ApproveBtn.setBackground(new Color(50, 205, 50));
-		ApproveBtn.setBounds(30, 239, 151, 39);
-		contentPane.add(ApproveBtn);
+		JLabel lblNewLabel_1 = new JLabel("End Date");
+		lblNewLabel_1.setBounds(23, 108, 56, 14);
+		contentPane.add(lblNewLabel_1);
 		
-		JList list = new JList();
-		list.setBounds(111, 93, 247, 120);
-		contentPane.add(list);
+		JDateChooser StartDateField = new JDateChooser();
+		StartDateField.setBounds(121, 83, 153, 20);
+		contentPane.add(StartDateField);
 		
-		JLabel Photo = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
-		Photo.setBounds(422, 94, 196, 184);
-		contentPane.add(Photo);
+		JDateChooser EndDate = new JDateChooser();
+		EndDate.setBounds(121, 108, 153, 20);
+		contentPane.add(EndDate);
 		
-		JButton RejectBtn = new JButton("Reject proposal");
-		RejectBtn.setBackground(Color.RED);
-		RejectBtn.setBounds(207, 239, 151, 39);
-		contentPane.add(RejectBtn);
-	}
-
-	public void realizarConsulta() {
-		// TODO - implement PantallaJefeGabineteVicerrectorado.realizarConsulta
-		throw new UnsupportedOperationException();
+		JTextArea Plot = new JTextArea();
+		Plot.setBounds(377, 81, 228, 192);
+		contentPane.add(Plot);
+		
+		JButton ListBttn = new JButton("See Course Editions");
+		ListBttn.setForeground(Color.BLACK);
+		ListBttn.setBackground(Color.LIGHT_GRAY);
+		ListBttn.setBounds(23, 148, 251, 57);
+		contentPane.add(ListBttn);
 	}
 }

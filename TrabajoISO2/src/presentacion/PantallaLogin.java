@@ -16,12 +16,14 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.UIManager;
 
 public class PantallaLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField UsrField;
-	private JTextField PsswdField;
+	private JPasswordField PsswdField;
 
 	/**
 	 * Launch the application.
@@ -45,8 +47,9 @@ public class PantallaLogin extends JFrame {
 	 */
 	public PantallaLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 693, 424);
+		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -66,6 +69,7 @@ public class PantallaLogin extends JFrame {
 		contentPane.add(PsswdText);
 		
 		UsrField = new JTextField();
+		UsrField.setBackground(Color.LIGHT_GRAY);
 		UsrField.setForeground(SystemColor.infoText);
 		UsrField.setBounds(309, 119, 133, 20);
 		contentPane.add(UsrField);
@@ -76,17 +80,24 @@ public class PantallaLogin extends JFrame {
 		lblNewLabel.setBounds(59, 22, 566, 31);
 		contentPane.add(lblNewLabel);
 		
-		PsswdField = new JTextField();
-		PsswdField.setForeground(Color.BLACK);
-		PsswdField.setColumns(10);
+		//Aqui hay que poner un controlador para que, sabiendo el tipo de inicio de sesion, se abra una pantalla u otra
+		JButton btnNewButton = new JButton("Sign in");
+		btnNewButton.setBackground(new Color(0, 0, 0));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBounds(212, 199, 225, 61);
+		contentPane.add(btnNewButton);
+		
+		JLabel dni_info = new JLabel(new ImageIcon("./images/ayuda.png"));
+		dni_info.setToolTipText("f.e 03435754P");
+		dni_info.setBounds(452, 119, 23, 20);
+		contentPane.add(dni_info);
+		
+		PsswdField = new JPasswordField();
+		PsswdField.setEchoChar('*');
+		PsswdField.setBackground(Color.LIGHT_GRAY);
 		PsswdField.setBounds(309, 159, 133, 20);
 		contentPane.add(PsswdField);
 		
-		JButton btnNewButton = new JButton("Sign in");
-		btnNewButton.setBackground(new Color(0, 0, 0));
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBounds(212, 199, 225, 61);
-		contentPane.add(btnNewButton);
 	}
 	
 	public void login() {

@@ -1,8 +1,6 @@
-# PIQUE BLINDERS's Project
+# Memoria de PIQUE BLINDERS's Project
 
-## Memoria
-
-Los cambios efectuados hasta el día 3/11/2022 son los siguientes:
+## Cambios efectuados hasta el día 3/11/2022
 
   * Creación de sprints en la plataforma ClickUp.
 
@@ -44,3 +42,8 @@ Los cambios efectuados hasta el día 3/11/2022 son los siguientes:
       - List Course Editions -> Este boton nos dirigira hacia la ventana PantallaListEditions, la cual tendrá campos para introducir el dia de inicio y el dia que acaba. Una vez introducidos esos campos, se pulsa el boton que dice "See Course Editions" y automáticamente, aparecerán los cursos con esos filtros.
       - Check the status of a course -> Este boton nos dirigira hacia la ventana PantallaStatusCourse, la cual tendrá campos para introducir el dia de inicio y el dia que acaba. Una vez introducidos esos campos, se pulsa el boton que dice "See Course Status" y automáticamente, aparecerán los cursos con esos filtros.
       - Tendran dos botones en la esquina derecha los cuales serán de log out(el cual nos dirigirá a la pantalla de inicio) y otro de Go Back que nos dirigira a la pestaña anterior.
+
+## Aclaraciones adicionales
+
+ * Cambio en la clase CursoPropio el atributo secretario de tipo ProfesorUCLM a Profesor, ya que se especifica que el profesor secretario puede ser de UCLM o externo.
+ * Para el acceso a la BD, no se utiliza la Clase AbstractEntityDAO

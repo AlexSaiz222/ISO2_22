@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import negocio.entities.*;
@@ -16,15 +17,25 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 
 	public int crearNuevoCurso(CursoPropio curso) {
 		int resultado = -1;
-		
 		GestorBD agente = GestorBD.getAgente();
+		
+		/*
+		String pattern = "yyyy-mm-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String fechaInicio = simpleDateFormat.format(curso.getFechaInicio());
+		String fechaFin = simpleDateFormat.format(curso.getFechaFin());
+		System.out.println(fechaInicio);
+		System.out.println(fechaFin);
+		*/
+		// TODO Insertar fechas
 		resultado = agente.insert("insert into cursospropios (idcentro, iddirector, idsecretario, "
-				+ "estado, tipo, nombre, ects, fechainicio, fechafin, tasamatricula, edicion) "
+				+ "estado, tipo, nombre, ects, tasamatricula, edicion) "
 				+ "values ("+curso.getCentro().getIdCentro()+",'"+curso.getDirector().getDni()+"',"
 				+ "'"+curso.getSecretario().getDni()+"','"+curso.getEstado()+"',"
-				+ "'"+curso.getTipo()+"','"+curso.getNombre()+"',"+curso.getECTS()+",'"+curso.getFechaInicio()+"',"
-				+ "'"+curso.getFechaFin()+"',"+curso.getTasaMatricula()+","+curso.getECTS()+")");
+				+ "'"+curso.getTipo()+"','"+curso.getNombre()+"',"+curso.getECTS()+","
+				+ curso.getTasaMatricula()+","+curso.getECTS()+")");
 		
+		agente.desconectarBD();
 		return resultado;
 	}
 	

@@ -33,6 +33,7 @@ public class ProfesorUCLMDAO {
 			profesoresUCLM.add(profesorUCLM);
 		}
 		
+		gestor.desconectarBD();
 		return profesoresUCLM;
 	}
 

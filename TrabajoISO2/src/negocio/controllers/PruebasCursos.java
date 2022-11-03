@@ -9,7 +9,7 @@ import negocio.entities.*;
 public class PruebasCursos {
 
 	public static void main(String[] args) {
-		
+		/*
 		Scanner sc = new Scanner(System.in);
 		int i;
 		
@@ -38,7 +38,7 @@ public class PruebasCursos {
 		// Probar listado de profesoresUCLM
 		
 		sc.close();
-
+		*/
 	}
 
 }

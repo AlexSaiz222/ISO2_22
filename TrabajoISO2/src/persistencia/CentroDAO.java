@@ -22,6 +22,7 @@ public class CentroDAO {
 			centros.add(centro);
 		}
 		
+		gestor.desconectarBD();
 		return centros;
 	}
 	
@@ -34,6 +35,7 @@ public class CentroDAO {
 				c.get(1).toString(),
 				c.get(2).toString());
 		
+		gestor.desconectarBD();
 		return centro;
 	}
 

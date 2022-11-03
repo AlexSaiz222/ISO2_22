@@ -38,11 +38,9 @@ public class GestorBD {
 		try {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
 			mBD = DriverManager.getConnection(DRIVER+":"+DBNAME, DBUSER, DBPASS);
-			System.out.println("BBDD existente. Conectado");
 		} catch (SQLException e) {
 			// Si no esta creada la base de datos, la crea y se conecta
 			if (((e.getErrorCode() == 40000) && ("XJ004".equals(e.getSQLState())))) {
-				System.out.println("BBDD no creada");
 				crearBaseDatosSinoExiste();
 				conectarBD();
 			} else {

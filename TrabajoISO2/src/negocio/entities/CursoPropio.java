@@ -8,7 +8,7 @@ public class CursoPropio {
 	Collection<Matricula> matriculas;
 	Centro centro;
 	ProfesorUCLM director;
-	ProfesorUCLM secretario;
+	Profesor secretario;
 	Collection<Materia> materias;
 	EstadoCurso estado;
 	TipoCurso tipo;
@@ -25,7 +25,7 @@ public class CursoPropio {
 		
 	}
 	
-	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, ProfesorUCLM secretario,
+	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, Profesor secretario,
 			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, int id,
 			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
 		super();
@@ -70,11 +70,11 @@ public class CursoPropio {
 		this.director = director;
 	}
 
-	public ProfesorUCLM getSecretario() {
+	public Profesor getSecretario() {
 		return secretario;
 	}
 
-	public void setSecretario(ProfesorUCLM secretario) {
+	public void setSecretario(Profesor secretario) {
 		this.secretario = secretario;
 	}
 

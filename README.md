@@ -4,18 +4,25 @@
 
 Los cambios efectuados hasta 3/11/2022 son los siguientes:
 Creacion de una base de datos mediante derby. Métodos implementados en la clase  GestorBD:
+
   -ConectarBD-> Metodo que crea la base de datos en el caso que no este creada todavia.
+  
   -DesconectarBD-> Metodo que cierra la Base de Datos.
+  
   -Select->Metodo que selecciona uno/varios elementos de la base de datos.
+  
   -Insert->Nos ayuda a introducir ciertos valores en la BBDD.
+  
   -Update->
+  
   -Delete->
+  
   -CrearBaseDatosSinoExiste->Metodo que crea la Base de datos e introduce ciertos valores a varias columnas de la base de datos.
   
   Implementacion del método crearNuevoCurso de la clase CursoPropioDAO. En este método, se insertan los valores de los campos en la base de datos.
  
  Implementacion (beta) de las interfaces del proyecto:
-    -PantallaLogin-> En esta pantalla nos pedira que ingresemos el DNI y una contraseña. Además habra un icono de ayuda que pondra "f.e 03435754P". Acontonuacion hay otro boton que nos dirigira a la pestaña correspondiente dependiendo el tipo de usuario que haya iniciado sesion.
+    -PantallaLogin-> En esta pantalla nos pedira que ingresemos el DNI y una contraseña. Además habra un icono de ayuda que pondra "f.e 03435754P". A continuacion hay otro boton que nos dirigira a la pestaña correspondiente dependiendo el tipo de usuario que haya iniciado sesion.
     
     -PantallaMatriculacion-> En esta pantalla nos pedira que escojamos dos opciones (botones) que son:
       -Matriculate->Este boton nos dirigira hacia la ventana PantallaMatriculationProcess, la cual tendrá campos para seleccionar el tipo de curso e introducir el dia de que se realiza la matricula. Una vez introducidos esos campos, se pulsa el boton que dice "Pass to payment" y automáticamente, iremos a la pantalla del pago de la matricula (en el hipotetico caso que no se quiera pagar en ese momento, se puede dar en el boton de arriba a la derecha "Go back" y se podrá pagar más adelante).

@@ -3,8 +3,11 @@
 --------------------------------------------------------------------------------Memoria--------------------------------------------------------------------
 
 Los cambios efectuados hasta 3/11/2022 son los siguientes:
+
 ·Creación de sprints en la plataforma ClickUp.
+
 ·Creación del plan de gestión de configuración de software.
+
 ·Creacion de una base de datos mediante derby. Métodos implementados en la clase  GestorBD:
 
   -ConectarBD-> Metodo que crea la base de datos en el caso que no este creada todavia.

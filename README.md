@@ -9,6 +9,8 @@
 
 ## Cambios efectuados hasta el día 3/11/2022
 
+  * Revisión y actualización del CM a la versión 1.0.1
+
   * Creación de sprints en la plataforma ClickUp.
 
   * Creación del plan de gestión de configuración de software.

@@ -53,5 +53,7 @@
 
 ## Aclaraciones adicionales
 
+ * Se ha utilizado la **rama GestionCursos** para implementar el caso de uso Realizar Propuesta de Curso
+ * Se ha realizado la construcción del software utilizando Maven, que proporciona un archivo .jar ubicado en la carpeta target.
  * Cambio en la clase CursoPropio el atributo secretario de tipo ProfesorUCLM a Profesor, ya que se especifica que el profesor secretario puede ser de UCLM o externo.
  * Para el acceso a la BD, no se utiliza la Clase AbstractEntityDAO

@@ -1,5 +1,12 @@
 # Memoria de PIQUE BLINDERS's Project
 
+## Integrantes de la empresa
+
+ * **Estrella Bermejo**
+ * **Alejandro Ramiro Jiménez Batuecas**
+ * **Pedro Mena Castellanos**
+ * **Alejandro Saiz García**
+
 ## Cambios efectuados hasta el día 3/11/2022
 
   * Creación de sprints en la plataforma ClickUp.

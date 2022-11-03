@@ -1,6 +1,6 @@
 # PIQUE BLINDERS's Project
 
---------------------------------------------------------------------------------Memoria-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------Memoria--------------------------------------------------------------------
 
 Los cambios efectuados hasta 3/11/2022 son los siguientes:
 Creacion de una base de datos mediante derby. Métodos implementados en la clase  GestorBD:

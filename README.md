@@ -3,7 +3,9 @@
 --------------------------------------------------------------------------------Memoria--------------------------------------------------------------------
 
 Los cambios efectuados hasta 3/11/2022 son los siguientes:
-Creacion de una base de datos mediante derby. Métodos implementados en la clase  GestorBD:
+·Creación de sprints en la plataforma ClickUp.
+·Creación del plan de gestión de configuración de software.
+·Creacion de una base de datos mediante derby. Métodos implementados en la clase  GestorBD:
 
   -ConectarBD-> Metodo que crea la base de datos en el caso que no este creada todavia.
   
@@ -19,7 +21,7 @@ Creacion de una base de datos mediante derby. Métodos implementados en la clase
   
   -CrearBaseDatosSinoExiste->Metodo que crea la Base de datos e introduce ciertos valores a varias columnas de la base de datos.
   
-  Implementacion del método crearNuevoCurso de la clase CursoPropioDAO. En este método, se insertan los valores de los campos en la base de datos.
+ Implementacion del método crearNuevoCurso de la clase CursoPropioDAO. En este método, se insertan los valores de los campos en la base de datos.
  
  Implementacion (beta) de las interfaces del proyecto:
     -PantallaLogin-> En esta pantalla nos pedira que ingresemos el DNI y una contraseña. Además habra un icono de ayuda que pondra "f.e 03435754P". A continuacion hay otro boton que nos dirigira a la pestaña correspondiente dependiendo el tipo de usuario que haya iniciado sesion.

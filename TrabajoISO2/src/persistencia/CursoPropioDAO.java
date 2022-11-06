@@ -3,6 +3,7 @@ package persistencia;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import negocio.entities.*;
@@ -38,18 +39,6 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		agente.desconectarBD();
 		return resultado;
 	}
-	
-	/*
-	public static int crearNuevoCurso(String nombre, int ETCS,java.util.Date date, java.util.Date date2, double tasaMatricula, int edicion)
-			throws SQLException, Exception {
-
-		int id = (int) (Math.random()*999);
-		String insertSQL = "INSERT INTO CursoPropio (id, nombre, ETCS, fechaInicio, fechaFin, tasaMatricula, edicion) VALUES ("
-				+ id + ", " + nombre + ", " + ETCS + ", " +date + ", " + date2 + ","+ tasaMatricula + "," + edicion + ")";
-		//este seria el metodo insert en la base de datos
-		GestorBD.insert(insertSQL);
-	}
-	*/
 
 	/**
 	 * 
@@ -100,5 +89,24 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		// TODO - implement CursoPropioDAO.listarEdicionesCursos
 		throw new UnsupportedOperationException();
 	}
+	
+	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
+        // TODO Auto-generated method stub
+        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+        GestorBD gestor = GestorBD.getAgente();
+
+        List<Object> cursosListados = gestor.select("select * from cursosPropios where estado='"+estado+"'");
+
+        for(int i=0; i<cursosListados.size(); i++) {
+            CursoPropio cursoPropio = new CursoPropio();
+            List<Object> t = (List<Object>) cursosListados.get(i);
+            cursoPropio.setNombre(t.get(1).toString());
+
+            cursos.add(cursoPropio);
+        }
+
+        gestor.desconectarBD();
+        return cursos;
+    }
 
 }

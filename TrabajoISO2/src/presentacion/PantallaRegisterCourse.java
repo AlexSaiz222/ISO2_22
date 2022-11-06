@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -119,9 +120,10 @@ public class PantallaRegisterCourse extends JFrame {
 		EditionTxt.setBounds(82, 232, 46, 14);
 		contentPane.add(EditionTxt);
 		
-		JLabel Photo = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
-		Photo.setBounds(432, 94, 89, 77);
-		contentPane.add(Photo);
+		JLabel UCLM_Image = new JLabel(new ImageIcon("./images/uclm.png"));
+        UCLM_Image.setBackground(SystemColor.activeCaptionText);
+        UCLM_Image.setBounds(439, 95, 123, 70);
+        contentPane.add(UCLM_Image);
 		
 		NameField = new JTextField();
 		NameField.setColumns(10);

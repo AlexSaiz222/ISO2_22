@@ -1,4 +1,4 @@
 Reunion del dia 6/11/2022
 
 -Mejorar la gestión de configuración del software:
-    -Creacion de más ramas de desarrollo (
+    -Creacion de más ramas de desarrollo (develop que seria main, la release, features, master)

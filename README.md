@@ -53,13 +53,18 @@
     
     - Las pantallas tendrán dos botones en la esquina derecha los cuales serán de log out (el cual nos dirigirá a la pantalla de inicio) y otro de Go Back que nos dirigira a la pestaña anterior.
     
-##Creación y gestión de ramas (branches) en GitHub
+## Creación y gestión de ramas (branches) en GitHub
 
  1.- La rama desarrollo ```develop``` es creada de la rama principal ```main o master```.
+ 
  2.- La rama lanzamiento ```release``` es creada a partir de la rama desarrollo ```develop```.
+ 
  3.- Desde desarrollo ```develop```, también creamos las ramas ```feature```, que hacen referencia a las distintas características.
- 4.- Cuando una característica ```feature```se ha completado, unimos la rama ```feature```a la rama desarrollo ```develop```.
- 5.- Cuando la rama de lanzamiento ```release```está hecha, se une a la de desarrollo ```develop```y a la principal ```main o master```.
+ 
+ 4.- Cuando una característica ```feature``` se ha completado, unimos la rama ```feature``` a la rama desarrollo ```develop```.
+ 
+ 5.- Cuando la rama de lanzamiento ```release``` está hecha, se une a la de desarrollo ```develop``` y a la principal ```main o master```.
+ 
  6.- Si surge un error o problema, lo modificamos en la rama en la que se está trabajando.
 
 

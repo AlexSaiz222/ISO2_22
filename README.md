@@ -7,7 +7,7 @@
  * **Pedro Mena Castellanos**
  * **Alejandro Saiz García**
 
-## Cambios efectuados hasta el día 3/11/2022
+## Cambios efectuados hasta el día 7/11/2022
 
   * Revisión y actualización del CM a la versión 1.0.1
 
@@ -52,6 +52,16 @@
       - Check the status of a course -> Este boton nos dirigira hacia la ventana PantallaStatusCourse, la cual tendrá campos para introducir el dia de inicio y el dia que acaba. Una vez introducidos esos campos, se pulsa el boton que dice "See Course Status" y automáticamente, aparecerán los cursos con esos filtros.
     
     - Las pantallas tendrán dos botones en la esquina derecha los cuales serán de log out (el cual nos dirigirá a la pantalla de inicio) y otro de Go Back que nos dirigira a la pestaña anterior.
+    
+##Creación y gestión de ramas (branches) en GitHub
+
+ 1.- La rama desarrollo ```html develop``` es creada de la rama principal ```html main o master```.
+ 2.- La rama lanzamiento ```html release``` es creada a partir de la rama desarrollo ```html develop```.
+ 3.- Desde desarrollo ```html develop```, también creamos las ramas ```html feature```, que hacen referencia a las distintas características.
+ 4.- Cuando una característica ```html feature```se ha completado, unimos la rama ```html feature```a la rama desarrollo ```html develop```.
+ 5.- Cuando la rama de lanzamiento ```html release```está hecha, se une a la de desarrollo ```html develop```y a la principal ```html main o master```.
+ 6.- Si surge un error o problema, lo modificamos en la rama en la que se está trabajando.
+
 
 ## Aclaraciones adicionales
 

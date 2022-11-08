@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Nov 03 13:53:24 CET 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-3d8d-a803-00000b800000 
+Tue Nov 08 21:13:57 CET 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-58e0-c703-00000b8740b0 
 on database directory C:\Users\aleja\git\ISO2_22\TrabajoISO2\db_proyecto_iso2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@22d8cfe0 
 Loaded from file:/C:/Users/aleja/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Eclipse Adoptium
@@ -11,3 +11,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Nov 08 21:13:57 CET 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Nov 08 21:13:57 CET 2022:
+Shutting down instance a816c00e-0184-58e0-c703-00000b8740b0 on database directory C:\Users\aleja\git\ISO2_22\TrabajoISO2\db_proyecto_iso2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@22d8cfe0 
+----------------------------------------------------------------

@@ -95,8 +95,7 @@ public class GestorBD {
 
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		desconectarBD();
 		return resultado;
@@ -105,6 +104,9 @@ public class GestorBD {
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * *  0 si se ha insertado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int insert(String sql) {
 		conectarBD();
@@ -115,11 +117,15 @@ public class GestorBD {
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
-		if(res == 1)
+		
+		if(res==0)	// Si devuelve 0, es que no se ha insertado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha insertado 1 fila --> Correcto
 			res = 0;
+		
 		desconectarBD();
 		return res;
 	}
@@ -127,19 +133,59 @@ public class GestorBD {
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * *  0 si se ha actualizado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int update(String sql) {
-		// TODO - implement GestorBD.update
-		throw new UnsupportedOperationException();
+		conectarBD();
+		PreparedStatement stmt;
+		int res = -1;
+		try {
+			stmt = mBD.prepareStatement(sql);
+			res = stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if(res==0)	// Si devuelve 0, es que no se ha actualizado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha actualizado 1 fila --> Correcto
+			res = 0;
+		
+		desconectarBD();
+		return res;
 	}
 
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * * *  0 si se ha eliminado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int delete(String sql) {
-		// TODO - implement GestorBD.delete
-		throw new UnsupportedOperationException();
+		conectarBD();
+		PreparedStatement stmt;
+		int res = -1;
+		try {
+			stmt = mBD.prepareStatement(sql);
+			res = stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if(res==0)	// Si devuelve 0, es que no se ha eliminado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha eliminado 1 fila --> Correcto
+			res = 0;
+		
+		desconectarBD();
+		return res;
 	}
 	
 	private static void crearBaseDatosSinoExiste() {

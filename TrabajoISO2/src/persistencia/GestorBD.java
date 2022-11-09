@@ -211,9 +211,9 @@ public class GestorBD {
 			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
 			pstmt.setString(1, "00000000A");
 			pstmt.setString(2, "Pepe");
-			pstmt.setString(3, "Pérez");
+			pstmt.setString(3, "Perez");
 			pstmt.setString(4, "PepePerez");
-			pstmt.setString(5, "Ingeniería Informática");
+			pstmt.setString(5, "Ingenieria Informatica");
 			pstmt.setString(6, "Ingeniero SW");
 			pstmt.executeUpdate();
 						
@@ -237,14 +237,14 @@ public class GestorBD {
 			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "11111111B");
 			pstmt.setString(2, "Jaime");
-			pstmt.setString(3, "García");
+			pstmt.setString(3, "Garcia");
 			pstmt.setBoolean(4, true);
 			pstmt.executeUpdate();
 			
 			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "22222222C");
 			pstmt.setString(2, "Alberto");
-			pstmt.setString(3, "Sánchez");
+			pstmt.setString(3, "Sanchez");
 			pstmt.setBoolean(4, false);
 			pstmt.executeUpdate();
 			

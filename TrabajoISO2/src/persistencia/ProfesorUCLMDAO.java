@@ -22,7 +22,7 @@ public class ProfesorUCLMDAO {
 			ProfesorUCLM profesorUCLM = new ProfesorUCLM();
 			List<Object> c = (List<Object>) profesoresUCLMListados.get(i);
 			profesorUCLM.setDni(c.get(0).toString());
-			profesorUCLM.setCentroAdscripcion(centroDAO.listarCentro(Integer.parseInt(c.get(1).toString())));
+			profesorUCLM.setCentroAdscripcion(centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString())));
 			profesorUCLM.setCategoria(CategoriaProfesor.valueOf(c.get(2).toString()));
 			
 			Profesor profesor = profesorDAO.listarProfesor(profesorUCLM.getDni());

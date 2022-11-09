@@ -31,7 +31,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		// TODO Insertar fechas
 		resultado = agente.insert("insert into cursospropios (idcentro, iddirector, idsecretario, "
 				+ "estado, tipo, nombre, ects, tasamatricula, edicion) "
-				+ "values ("+curso.getCentro().getIdCentro()+",'"+curso.getDirector().getDni()+"',"
+				+ "values ("+curso.getCentro()+",'"+curso.getDirector().getDni()+"',"
 				+ "'"+curso.getSecretario().getDni()+"','"+curso.getEstado()+"',"
 				+ "'"+curso.getTipo()+"','"+curso.getNombre()+"',"+curso.getECTS()+","
 				+ curso.getTasaMatricula()+","+curso.getEdicion()+")");
@@ -44,14 +44,20 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param curso
 	 */
-	public List<Object> seleccionarCurso(CursoPropio curso) {
+	public CursoPropio seleccionarCurso(CursoPropio curso) {
 		GestorBD agente = GestorBD.getAgente();
 		List<Object>  resultado = new ArrayList<Object>();
-		
-		resultado = agente.select("select * from cursospropios where idcurso = "+curso.getId());
-		agente.desconectarBD();
-		
-		return resultado;
+				
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> cursoListado = gestor.select("select * from cursospropios where idcurso = "+curso.getId());
+		List<Object> c = (List<Object>) cursoListado.get(0);
+		CursoPropio curso1 = new CursoPropio();
+		curso1.setId(Integer.parseInt(c.get(0).toString()));
+		curso1.setCentro(Integer.parseInt(c.get(1).toString()));
+		//hacer completas todas las clases DAO
+		curso1.setDirector(null);
+		gestor.desconectarBD();
+		return curso1;
 	}
 
 	/**
@@ -63,7 +69,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	GestorBD agente = GestorBD.getAgente();
 
 	resultado = agente.update("update cursospropios "
-			+ "set( idcentro = "+ curso.getCentro().getIdCentro()+",iddirector="+curso.getDirector().getDni()
+			+ "set( idcentro = "+ curso.getCentro()+",iddirector="+curso.getDirector().getDni()
 			+ ",idsecretario ="+curso.getSecretario().getDni()+", estado = "+curso.getEstado()
 			+ ", tipo ="+curso.getTipo()+", nombre ="+curso.getNombre()+", ects = "+curso.getECTS()
 			+ ", tasamatricula = " +curso.getTasaMatricula()+", edicion ="+curso.getEdicion()+")");

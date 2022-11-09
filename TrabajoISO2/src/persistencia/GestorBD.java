@@ -273,10 +273,18 @@ public class GestorBD {
 			pstmt.executeUpdate();
 			
 			// Crear la tabla cursosPropios
-			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idCentro int not null, "
-					+ "idDirector varchar(10) not null, idSecretario varchar(10) not null, "
-					+ "estado varchar(30) not null, tipo varchar(30) not null, "
-					+ "nombre varchar(50) not null, ECTS int not null, fechaInicio date, fechaFin date, tasaMatricula double, edicion int, "
+			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "
+					+ "idCentro int not null, "
+					+ "idDirector varchar(10) not null, "
+					+ "idSecretario varchar(10) not null, "
+					+ "estado varchar(30) not null, "
+					+ "tipo varchar(30) not null, "
+					+ "nombre varchar(50) not null, "
+					+ "ECTS int not null, "
+					+ "fechaInicio date, "
+					+ "fechaFin date, "
+					+ "tasaMatricula double, "
+					+ "edicion int, "
 					+ "primary key (idCursoPropio), foreign key (idCentro) references centros(idCentro), "
 					+ "foreign key (idDirector) references profesoresUCLM(dni), "
 					+ "foreign key (idSecretario) references profesoresUCLM(dni))";

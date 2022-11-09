@@ -9,6 +9,14 @@ import negocio.entities.*;
 public class PruebasCursos {
 
 	public static void main(String[] args) {
+		
+		//GestorBD agente = GestorBD.getAgente();
+		// Ejemplo delete
+		//System.out.println(agente.delete("delete from cursospropios where idcursopropio=2"));
+		
+		// Ejemplo update
+		//System.out.println(agente.insert("update cursospropios set nombre='prueba2', ects=10 where idcursopropio=2"));
+		
 		/*
 		Scanner sc = new Scanner(System.in);
 		int i;

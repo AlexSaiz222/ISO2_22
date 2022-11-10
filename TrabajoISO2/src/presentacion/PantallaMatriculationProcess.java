@@ -133,7 +133,7 @@ public class PantallaMatriculationProcess extends JFrame {
 					mat.setEstudiante(est);
 					mat.setFecha((Date) DateField.getDate());
 					MatriculaDAO matDAO = new MatriculaDAO();
-					int resultado = matDAO.crearNuevaMatricula(mat);
+					int resultado = matDAO.crearMatricula(mat);
 					if(resultado == 0) {
 						resultadoField.setText("Successfully enroll in this course");
 						PantallaPagar PP1 = new PantallaPagar();

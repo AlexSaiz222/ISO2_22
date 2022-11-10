@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
+import negocio.entities.ModoPago;
 import negocio.entities.TipoCurso;
 
 public class MatriculaDAO extends AbstractEntityDAO{
@@ -34,8 +37,9 @@ public class MatriculaDAO extends AbstractEntityDAO{
 	/**
 	 * 
 	 * @param matricula
+	 * @throws ParseException 
 	 */
-	public Matricula seleccionarMatricula(int matricula) {
+	public Matricula seleccionarMatricula(int matricula) throws ParseException {
 		GestorBD agente = GestorBD.getAgente();
 		List<Object>  resultado = new ArrayList<Object>();
 				
@@ -45,18 +49,24 @@ public class MatriculaDAO extends AbstractEntityDAO{
 		
 		Matricula mat1 = new Matricula();
 		
-		mat1.setIdMatricula(Integer.parseInt(c.get(0).toString()));
-		
 		EstudianteDAO estudianteDAO = new EstudianteDAO();
 		Estudiante estudiante = estudianteDAO.seleccionarEstudiante(c.get(1).toString());
 		
-		mat1.setEstudiante(estudiante);
-		//como hacer esto
-		mat1.setFecha(c.get(2).toString());
+		SimpleDateFormat formato = new SimpleDateFormat("d/MMM/y");
+		Date fecha = (Date) formato.parse(c.get(4).toString());
 		
-		mat1.setPagado(Boolean.parseBoolean(c.get(3).toString()));
-		mat1.setTitulacion(c.get(4).toString());
-		mat1.setCualificacion(c.get(5).toString());
+		CursoPropioDAO cursoDAO = new CursoPropioDAO();
+		CursoPropio curso = cursoDAO.seleccionarCurso(Integer.parseInt(c.get(2).toString()));
+		
+		ModoPago tipopago = null;
+		tipopago.valueOf(c.get(3).toString());
+		
+		mat1.setIdMatricula(Integer.parseInt(c.get(0).toString()));
+		mat1.setEstudiante(estudiante);
+		mat1.setFecha(fecha);
+		mat1.setTipoPago(tipopago);
+		mat1.setPagado(Boolean.parseBoolean(c.get(5).toString()));
+		
 		gestor.desconectarBD();
 		
 		return mat1;

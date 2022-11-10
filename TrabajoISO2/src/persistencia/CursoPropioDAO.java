@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +22,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		GestorBD agente = GestorBD.getAgente();
 		
 		/*
-		String pattern = "yyyy-mm-dd";
+		String pattern = "d/MMM/y";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String fechaInicio = simpleDateFormat.format(curso.getFechaInicio());
 		String fechaFin = simpleDateFormat.format(curso.getFechaFin());
-		System.out.println(fechaInicio);
-		System.out.println(fechaFin);
 		*/
 		// TODO Insertar fechas
 		resultado = agente.insert("insert into cursospropios (idcentro, iddirector, idsecretario, "
@@ -43,22 +42,51 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param curso
+	 * @throws ParseException 
 	 */
-	public CursoPropio seleccionarCurso(int curso) {
+	public CursoPropio seleccionarCurso(int curso) throws ParseException {
 		GestorBD agente = GestorBD.getAgente();
 		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = GestorBD.getAgente();
 		List<Object> cursoListado = gestor.select("select * from cursospropios where idcurso = "+curso);
 		List<Object> c = (List<Object>) cursoListado.get(0);
+		
 		CursoPropio curso1 = new CursoPropio();
-		curso1.setId(Integer.parseInt(c.get(0).toString()));
+		
 		CentroDAO centroDAO = new CentroDAO();
 		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
-	
+		
+		ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();
+		ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());
+		
+		ProfesorDAO secretarioDAO = new ProfesorDAO();
+		Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
+		
+		EstadoCurso estado = null;
+		estado.valueOf(c.get(4).toString());
+		
+		TipoCurso tipo = null;
+		tipo.valueOf(c.get(5).toString());
+		
+		SimpleDateFormat formato = new SimpleDateFormat("d/MMM/y");
+		Date fechainicio = (Date) formato.parse(c.get(8).toString());
+		Date fechafin = (Date) formato.parse(c.get(9).toString());
+		
+		curso1.setId(Integer.parseInt(c.get(0).toString()));
 		curso1.setCentro(centro);
-		//hacer completas todas las clases DAO
-		curso1.setDirector(null);
+		curso1.setDirector(profeUCLM);
+		curso1.setSecretario(secretario);
+		curso1.setEstado(estado);
+		curso1.setTipo(tipo);
+		curso1.setNombre(c.get(6).toString());
+		curso1.setECTS(Integer.parseInt(c.get(7).toString()));
+		curso1.setFechaInicio(fechainicio);
+		curso1.setFechaFin(fechafin);
+		curso1.setTasaMatricula(Double.parseDouble(c.get(10).toString()));
+		curso1.setEdicion(Integer.parseInt(c.get(11).toString()));
+		//setMatriculas y setMaterias faltan
+		
 		gestor.desconectarBD();
 		return curso1;
 	}

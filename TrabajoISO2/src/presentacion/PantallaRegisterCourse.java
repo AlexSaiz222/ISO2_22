@@ -212,6 +212,7 @@ public class PantallaRegisterCourse extends JFrame {
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
 					ProfesorUCLM profesorUCLM = new ProfesorUCLM();
 					profesorUCLM.setDni("11111111B");
+					
 					curso.setDirector(profesorUCLM);
 					curso.setSecretario(profesores.get(secretaryBox.getSelectedIndex()));
 					curso.setEstado(EstadoCurso.PROPUESTO); // Al crear el curso, el estado es PROPUESTO
@@ -222,8 +223,11 @@ public class PantallaRegisterCourse extends JFrame {
 					curso.setFechaFin(EndDateField.getDate());
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
+					
 					CursoPropioDAO cursoDAO = new CursoPropioDAO();
-					int resultado = cursoDAO.crearNuevoCurso(curso);
+					
+					int resultado = cursoDAO.crearCurso(curso);
+					
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
 					}
@@ -234,8 +238,5 @@ public class PantallaRegisterCourse extends JFrame {
 			}
 		});
 		contentPane.add(EditBtn);
-		
-		
-		
 	}
 }

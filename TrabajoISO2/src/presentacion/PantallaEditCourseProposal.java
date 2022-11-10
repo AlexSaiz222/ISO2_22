@@ -231,7 +231,7 @@ public class PantallaEditCourseProposal extends JFrame {
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
 					CursoPropioDAO cursoDAO = new CursoPropioDAO();
-					int resultado = cursoDAO.crearNuevoCurso(curso);
+					int resultado = cursoDAO.crearCurso(curso);
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
 					}

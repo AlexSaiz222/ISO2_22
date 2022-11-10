@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import negocio.entities.CategoriaProfesor;
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
 import negocio.entities.Profesor;
 
 public class ProfesorDAO {
@@ -29,7 +31,7 @@ public class ProfesorDAO {
 		return profesores;
 	}
 	
-	public Profesor listarProfesor(String dni) {
+	public Profesor seleccionarProfesor(String dni) {
 		GestorBD gestor = GestorBD.getAgente();
 		List<Object> profesorListado = gestor.select("select * from profesores where dni='"+dni+"'");
 		List<Object> c = (List<Object>) profesorListado.get(0);
@@ -43,4 +45,39 @@ public class ProfesorDAO {
 		return profesor;
 	}
 
+	/**
+	 * 
+	 * @param profesor
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 */
+
+	public int crearProfesor(Profesor profesor) {
+		int resultado = -1;
+		GestorBD agente = GestorBD.getAgente();
+		
+		resultado = agente.insert("insert into profesores (dni,nombre,apellidos,doctor) "
+				+ "values ('"+profesor.getDni()+"','"+profesor.getNombre()+"',"
+				+ "'"+profesor.getApellidos()+"',"+profesor.isDoctor()+")");
+		
+		agente.desconectarBD();
+		return resultado;
+	}
+
+	/**
+	 * 
+	 * @param profesor
+	 */
+	public int editarProfesor(Profesor profesor) {
+		int resultado = -1;
+	GestorBD agente = GestorBD.getAgente();
+
+	resultado = agente.update("update profesores "
+			+ "set( dni = '"+ profesor.getDni()+"',"
+					+ "nombre='"+profesor.getNombre()
+			+ "',apellidos ='"+profesor.getApellidos()+"', "
+					+ "doctor = "+profesor.isDoctor()+")");
+	
+	agente.desconectarBD();
+	return resultado;
+	}
 }

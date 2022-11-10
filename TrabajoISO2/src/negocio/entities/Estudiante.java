@@ -10,6 +10,7 @@ public class Estudiante {
 	private String apellidos;
 	private String titulacion;
 	private String cualificacion;
+	private String psswd;
 	private int idEstudiante;
 	
 	public Estudiante() {
@@ -17,7 +18,7 @@ public class Estudiante {
 	}
 	
 	public Estudiante(Collection<Matricula> matriculas, String dni, String nombre, String apellidos, String titulacion,
-			String cualificacion, int idEstudiante) {
+			String cualificacion, int idEstudiante, String password) {
 		super();
 		this.matriculas = matriculas;
 		this.dni = dni;
@@ -26,6 +27,7 @@ public class Estudiante {
 		this.titulacion = titulacion;
 		this.cualificacion = cualificacion;
 		this.setIdEstudiante(idEstudiante);
+		this.psswd = password;
 	}
 
 	public Collection<Matricula> getMatriculas() {
@@ -82,6 +84,14 @@ public class Estudiante {
 
 	public void setIdEstudiante(int idEstudiante) {
 		this.idEstudiante = idEstudiante;
+	}
+
+	public String getPsswd() {
+		return psswd;
+	}
+
+	public void setPsswd(String psswd) {
+		this.psswd = psswd;
 	}
 	
 }

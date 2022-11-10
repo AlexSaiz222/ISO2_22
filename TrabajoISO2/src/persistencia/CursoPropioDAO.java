@@ -16,7 +16,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
 	 */
 
-	public int crearNuevoCurso(CursoPropio curso) {
+	public int crearCurso(CursoPropio curso) {
 		int resultado = -1;
 		GestorBD agente = GestorBD.getAgente();
 		
@@ -44,16 +44,19 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param curso
 	 */
-	public CursoPropio seleccionarCurso(CursoPropio curso) {
+	public CursoPropio seleccionarCurso(int curso) {
 		GestorBD agente = GestorBD.getAgente();
 		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = GestorBD.getAgente();
-		List<Object> cursoListado = gestor.select("select * from cursospropios where idcurso = "+curso.getId());
+		List<Object> cursoListado = gestor.select("select * from cursospropios where idcurso = "+curso);
 		List<Object> c = (List<Object>) cursoListado.get(0);
 		CursoPropio curso1 = new CursoPropio();
 		curso1.setId(Integer.parseInt(c.get(0).toString()));
-		curso1.setCentro(Integer.parseInt(c.get(1).toString()));
+		CentroDAO centroDAO = new CentroDAO();
+		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
+	
+		curso1.setCentro(centro);
 		//hacer completas todas las clases DAO
 		curso1.setDirector(null);
 		gestor.desconectarBD();

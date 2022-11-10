@@ -6,6 +6,7 @@ import java.util.List;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
+import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
 import negocio.entities.TipoCurso;
 
@@ -13,11 +14,11 @@ public class MatriculaDAO extends AbstractEntityDAO{
 
 	/**
 	 * 
-	 * @param curso
+	 * @param matricula
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
 	 */
 
-	public int crearNuevaMatricula(Matricula matricula) {
+	public int crearMatricula(Matricula matricula) {
 		int resultado = -1;
 		GestorBD agente = GestorBD.getAgente();
 		
@@ -32,16 +33,33 @@ public class MatriculaDAO extends AbstractEntityDAO{
 
 	/**
 	 * 
-	 * @param curso
+	 * @param matricula
 	 */
-	public List<Object> seleccionarMatricula(Matricula matricula) {
+	public Matricula seleccionarMatricula(int matricula) {
 		GestorBD agente = GestorBD.getAgente();
 		List<Object>  resultado = new ArrayList<Object>();
+				
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> matriculaListado = gestor.select("select * from matriculas where idmatricula = "+matricula);
+		List<Object> c = (List<Object>) matriculaListado.get(0);
 		
-		resultado = agente.select("select * from matriculas where idmatricula = "+matricula.getIdMatricula());
-		agente.desconectarBD();
+		Matricula mat1 = new Matricula();
 		
-		return resultado;
+		mat1.setIdMatricula(Integer.parseInt(c.get(0).toString()));
+		
+		EstudianteDAO estudianteDAO = new EstudianteDAO();
+		Estudiante estudiante = estudianteDAO.seleccionarEstudiante(c.get(1).toString());
+		
+		mat1.setEstudiante(estudiante);
+		//como hacer esto
+		mat1.setFecha(c.get(2).toString());
+		
+		mat1.setPagado(Boolean.parseBoolean(c.get(3).toString()));
+		mat1.setTitulacion(c.get(4).toString());
+		mat1.setCualificacion(c.get(5).toString());
+		gestor.desconectarBD();
+		
+		return mat1;
 	}
 
 	/**

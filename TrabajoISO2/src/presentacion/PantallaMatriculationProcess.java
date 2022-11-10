@@ -127,13 +127,18 @@ public class PantallaMatriculationProcess extends JFrame {
 					//Se ha puesto un ejemplo hasta que se implemente dicho login
 					Estudiante est = new Estudiante();
 					est.setIdEstudiante(4);
+					
 					Matricula mat = new Matricula();
+					
 					mat.setTitulo(cursos.get(NameField.getSelectedIndex()));
 					mat.setPagado(false);
 					mat.setEstudiante(est);
 					mat.setFecha((Date) DateField.getDate());
+					
 					MatriculaDAO matDAO = new MatriculaDAO();
+					
 					int resultado = matDAO.crearMatricula(mat);
+					
 					if(resultado == 0) {
 						resultadoField.setText("Successfully enroll in this course");
 						PantallaPagar PP1 = new PantallaPagar();
@@ -151,9 +156,31 @@ public class PantallaMatriculationProcess extends JFrame {
 		JButton btnPayLater = new JButton("Pay later");
 		btnPayLater.setForeground(Color.BLACK);
 		btnPayLater.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PantallaMatriculacion M2 = new PantallaMatriculacion();
-				M2.setVisible(true);
+			public void actionPerformed(ActionEvent arg0) {try {
+				// anyadir el estudiante, que es el usuario que estaría logueado
+				//Se ha puesto un ejemplo hasta que se implemente dicho login
+				Estudiante est = new Estudiante();
+				est.setIdEstudiante(4);
+				
+				Matricula mat = new Matricula();
+				
+				mat.setTitulo(cursos.get(NameField.getSelectedIndex()));
+				mat.setPagado(false);
+				mat.setEstudiante(est);
+				mat.setFecha((Date) DateField.getDate());
+				
+				MatriculaDAO matDAO = new MatriculaDAO();
+				
+				int resultado = matDAO.crearMatricula(mat);
+				
+				if(resultado == 0) {
+					resultadoField.setText("Successfully enroll in this course");
+					PantallaMatriculacion PM1 = new PantallaMatriculacion();
+					PM1.setVisible(true);
+				}
+			}catch(Exception e) {
+				resultadoField.setText("An error has ocurred, please, try again");
+			}
 			}
 		});
 		btnPayLater.setBackground(Color.LIGHT_GRAY);

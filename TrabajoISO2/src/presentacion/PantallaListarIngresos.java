@@ -1,21 +1,25 @@
 package presentacion;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 
-public class PantallaStatusCourse extends JFrame {
+public class PantallaListarIngresos extends JFrame {
 
 	private JPanel contentPane;
 
@@ -26,7 +30,7 @@ public class PantallaStatusCourse extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaStatusCourse frame = new PantallaStatusCourse();
+					PantallaListarIngresos frame = new PantallaListarIngresos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +42,7 @@ public class PantallaStatusCourse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaStatusCourse() {
+	public PantallaListarIngresos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -47,10 +51,10 @@ public class PantallaStatusCourse extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel CheckTxt = new JLabel("Check course status");
-		CheckTxt.setFont(new Font("Tahoma", Font.BOLD, 23));
-		CheckTxt.setBounds(23, 11, 270, 39);
-		contentPane.add(CheckTxt);
+		JLabel ChooseAnOption = new JLabel("Listar ingresos");
+		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
+		ChooseAnOption.setBounds(23, 11, 270, 39);
+		contentPane.add(ChooseAnOption);
 		
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
@@ -72,31 +76,40 @@ public class PantallaStatusCourse extends JFrame {
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel lblNewLabel = new JLabel("Start Date");
-		lblNewLabel.setBounds(23, 83, 77, 14);
-		contentPane.add(lblNewLabel);
+		JLabel TypeTxt = new JLabel("Tipo de curso");
+		TypeTxt.setBounds(23, 89, 89, 14);
+		contentPane.add(TypeTxt);
 		
-		JLabel lblNewLabel_1 = new JLabel("End Date");
-		lblNewLabel_1.setBounds(23, 108, 56, 14);
-		contentPane.add(lblNewLabel_1);
+		JList TypeList = new JList();
+		TypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		TypeList.setBounds(134, 88, 134, 154);
+		contentPane.add(TypeList);
+		
+		JLabel StartTxt = new JLabel("Fecha Inicio");
+		StartTxt.setBounds(23, 250, 72, 14);
+		contentPane.add(StartTxt);
+		
+		JLabel EndTxt = new JLabel("Fecha Fin");
+		EndTxt.setBounds(23, 276, 72, 14);
+		contentPane.add(EndTxt);
+		
+		JButton IncomesBtn = new JButton("Listar Ingresos");
+		IncomesBtn.setForeground(Color.BLACK);
+		IncomesBtn.setBackground(Color.LIGHT_GRAY);
+		IncomesBtn.setBounds(23, 301, 245, 64);
+		contentPane.add(IncomesBtn);
+		
+		JTextArea PlotIncomes = new JTextArea();
+		PlotIncomes.setBounds(403, 89, 205, 201);
+		contentPane.add(PlotIncomes);
 		
 		JDateChooser StartDateField = new JDateChooser();
-		StartDateField.setBounds(121, 83, 153, 20);
+		StartDateField.setBounds(134, 250, 134, 20);
 		contentPane.add(StartDateField);
 		
-		JDateChooser EndDate = new JDateChooser();
-		EndDate.setBounds(121, 108, 153, 20);
-		contentPane.add(EndDate);
+		JDateChooser EndDateField = new JDateChooser();
+		EndDateField.setBounds(134, 276, 134, 20);
+		contentPane.add(EndDateField);
 		
-		JTextArea Plot = new JTextArea();
-		Plot.setBounds(377, 81, 228, 192);
-		contentPane.add(Plot);
-		
-		JButton ListBttn = new JButton("See Course status");
-		ListBttn.setForeground(Color.BLACK);
-		ListBttn.setBackground(Color.LIGHT_GRAY);
-		ListBttn.setBounds(23, 148, 251, 57);
-		contentPane.add(ListBttn);
 	}
-
 }

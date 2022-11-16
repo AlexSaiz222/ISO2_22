@@ -12,15 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import java.awt.Color;
 
-public class PantallaCardPayment extends JFrame {
+public class PantallaTransferencia extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField NumberField;
 	private JTextField OwnerField;
-	private JTextField SecretNumberField;
+	private JTextField IBANField;
+	private JTextField BankField;
 
 	/**
 	 * Launch the application.
@@ -29,7 +28,7 @@ public class PantallaCardPayment extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaCardPayment frame = new PantallaCardPayment();
+					PantallaTransferencia frame = new PantallaTransferencia();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +40,7 @@ public class PantallaCardPayment extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaCardPayment() {
+	public PantallaTransferencia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -70,54 +69,47 @@ public class PantallaCardPayment extends JFrame {
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
 		
-		JLabel lblPayment = new JLabel("Payment by credit card");
+		JLabel lblPayment = new JLabel("Pago por transferencia");
 		lblPayment.setFont(new Font("Tahoma", Font.BOLD, 23));
 		lblPayment.setBounds(34, 11, 270, 39);
 		contentPane.add(lblPayment);
 		
-		NumberField = new JTextField();
-		NumberField.setBounds(112, 152, 148, 20);
-		contentPane.add(NumberField);
-		NumberField.setColumns(10);
-		
-		JLabel NumberTxt = new JLabel("Number");
-		NumberTxt.setBounds(25, 155, 77, 14);
-		contentPane.add(NumberTxt);
-		
-		JLabel OwnerTxt = new JLabel("Owner");
-		OwnerTxt.setBounds(25, 180, 46, 14);
-		contentPane.add(OwnerTxt);
+		JLabel lblNewLabel = new JLabel("Nombre Porpietario");
+		lblNewLabel.setBounds(35, 89, 119, 14);
+		contentPane.add(lblNewLabel);
 		
 		OwnerField = new JTextField();
-		OwnerField.setColumns(10);
-		OwnerField.setBounds(112, 177, 148, 20);
+		OwnerField.setBounds(164, 86, 192, 20);
 		contentPane.add(OwnerField);
+		OwnerField.setColumns(10);
 		
-		JLabel SecretTxt = new JLabel("Secret number");
-		SecretTxt.setBounds(24, 205, 89, 14);
-		contentPane.add(SecretTxt);
+		IBANField = new JTextField();
+		IBANField.setBounds(164, 117, 192, 20);
+		contentPane.add(IBANField);
+		IBANField.setColumns(10);
 		
-		SecretNumberField = new JTextField();
-		SecretNumberField.setBounds(112, 202, 148, 20);
-		contentPane.add(SecretNumberField);
-		SecretNumberField.setColumns(10);
+		JLabel IBANtxt = new JLabel("IBAN");
+		IBANtxt.setBounds(34, 120, 46, 14);
+		contentPane.add(IBANtxt);
 		
-		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
-		UCLM_letters.setBounds(358, 79, 241, 213);
-		contentPane.add(UCLM_letters);
+		JLabel BnkTxt = new JLabel("Direccion bancaria");
+		BnkTxt.setBounds(34, 145, 127, 14);
+		contentPane.add(BnkTxt);
 		
-		JLabel CourseTxt = new JLabel("Tuition");
-		CourseTxt.setBounds(25, 103, 46, 14);
-		contentPane.add(CourseTxt);
+		BankField = new JTextField();
+		BankField.setBounds(164, 148, 192, 20);
+		contentPane.add(BankField);
+		BankField.setColumns(10);
 		
-		JList TuitionList = new JList();
-		TuitionList.setBounds(112, 102, 148, 39);
-		contentPane.add(TuitionList);
-		
-		JButton PayBtn = new JButton("Pay now!");
+		JButton PayBtn = new JButton("Pagar!");
 		PayBtn.setForeground(Color.BLACK);
 		PayBtn.setBackground(Color.LIGHT_GRAY);
-		PayBtn.setBounds(25, 233, 235, 59);
+		PayBtn.setBounds(34, 188, 320, 46);
 		contentPane.add(PayBtn);
+		
+		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
+		UCLM_letters.setBounds(405, 79, 241, 213);
+		contentPane.add(UCLM_letters);
 	}
+
 }

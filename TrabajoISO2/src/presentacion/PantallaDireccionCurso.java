@@ -50,42 +50,42 @@ public class PantallaDireccionCurso extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton EditBtn = new JButton("Edit a course proposal");
+		JButton EditBtn = new JButton("Editar una propuesta de un curso");
 		EditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaEditCourseProposal E1 = new PantallaEditCourseProposal();
+				PantallaEditarPropuestaCurso E1 = new PantallaEditarPropuestaCurso();
 				E1.setVisible(true);
 			}
 		});
 		EditBtn.setBackground(Color.LIGHT_GRAY);
 		EditBtn.setForeground(Color.BLACK);
-		EditBtn.setBounds(36, 126, 200, 53);
+		EditBtn.setBounds(36, 126, 270, 53);
 		contentPane.add(EditBtn);
 		
-		JLabel ChooseAnOption = new JLabel("Choose an option");
+		JLabel ChooseAnOption = new JLabel("Escoja una opcion");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(234, 21, 270, 39);
 		contentPane.add(ChooseAnOption);
 		
 		JLabel EditInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
-		EditInfo.setToolTipText("Edit a existing course");
+		EditInfo.setToolTipText("Editar un curso existente");
 		EditInfo.setBounds(257, 142, 23, 20);
 		contentPane.add(EditInfo);
 		
-		JButton RegisterCourse = new JButton("Register a course");
+		JButton RegisterCourse = new JButton("Registrar un curso");
 		RegisterCourse.setForeground(Color.BLACK);
 		RegisterCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaRegisterCourse R1 = new PantallaRegisterCourse();
+				PantallaRegistrarCurso R1 = new PantallaRegistrarCurso();
 				R1.setVisible(true);
 			}
 		});
 		RegisterCourse.setBackground(Color.LIGHT_GRAY);
-		RegisterCourse.setBounds(36, 242, 200, 53);
+		RegisterCourse.setBounds(36, 242, 270, 53);
 		contentPane.add(RegisterCourse);
 		
 		JLabel RegisterInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
-		RegisterInfo.setToolTipText("Register an approved course");
+		RegisterInfo.setToolTipText("Registrar un curso aprobado");
 		RegisterInfo.setBounds(257, 255, 23, 20);
 		contentPane.add(RegisterInfo);
 		

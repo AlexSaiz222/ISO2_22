@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,13 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextArea;
-import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
-public class PantallaListEditions extends JFrame {
+import com.toedter.calendar.JDateChooser;
+
+public class PantallaEstadosCurso extends JFrame {
 
 	private JPanel contentPane;
 
@@ -26,7 +26,7 @@ public class PantallaListEditions extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaListEditions frame = new PantallaListEditions();
+					PantallaEstadosCurso frame = new PantallaEstadosCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class PantallaListEditions extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaListEditions() {
+	public PantallaEstadosCurso() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -47,10 +47,10 @@ public class PantallaListEditions extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel ChooseAnOption = new JLabel("List Course Editions");
-		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
-		ChooseAnOption.setBounds(23, 11, 270, 39);
-		contentPane.add(ChooseAnOption);
+		JLabel CheckTxt = new JLabel("Ver el estado de un curso");
+		CheckTxt.setFont(new Font("Tahoma", Font.BOLD, 23));
+		CheckTxt.setBounds(23, 11, 339, 39);
+		contentPane.add(CheckTxt);
 		
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
@@ -72,11 +72,11 @@ public class PantallaListEditions extends JFrame {
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel lblNewLabel = new JLabel("Start Date");
+		JLabel lblNewLabel = new JLabel("Fecha Inicio");
 		lblNewLabel.setBounds(23, 83, 77, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("End Date");
+		JLabel lblNewLabel_1 = new JLabel("Fecha Fin");
 		lblNewLabel_1.setBounds(23, 108, 56, 14);
 		contentPane.add(lblNewLabel_1);
 		
@@ -92,10 +92,11 @@ public class PantallaListEditions extends JFrame {
 		Plot.setBounds(377, 81, 228, 192);
 		contentPane.add(Plot);
 		
-		JButton ListBttn = new JButton("See Course Editions");
+		JButton ListBttn = new JButton("Ver Estado");
 		ListBttn.setForeground(Color.BLACK);
 		ListBttn.setBackground(Color.LIGHT_GRAY);
 		ListBttn.setBounds(23, 148, 251, 57);
 		contentPane.add(ListBttn);
 	}
+
 }

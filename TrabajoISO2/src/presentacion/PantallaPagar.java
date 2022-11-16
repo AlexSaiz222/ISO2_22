@@ -65,39 +65,45 @@ public class PantallaPagar extends JFrame {
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
 		
-		JLabel lblPayment = new JLabel("Payment");
+		JLabel lblPayment = new JLabel("Pago");
 		lblPayment.setFont(new Font("Tahoma", Font.BOLD, 23));
 		lblPayment.setBounds(10, 15, 270, 39);
 		contentPane.add(lblPayment);
 		
-		JLabel lblPleaseSelectAn = new JLabel("Please, select an option");
+		JLabel lblPleaseSelectAn = new JLabel("Por favor, escoja una opcion");
 		lblPleaseSelectAn.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblPleaseSelectAn.setBounds(43, 54, 270, 39);
+		lblPleaseSelectAn.setBounds(43, 54, 391, 39);
 		contentPane.add(lblPleaseSelectAn);
 		
 		JLabel Payment = new JLabel(new ImageIcon("./images/metodosPago.png"));
 		Payment.setBounds(150, 162, 379, 168);
 		contentPane.add(Payment);
 		
-		JButton CardBtn = new JButton("Card payment");
+		JButton CardBtn = new JButton("Pago con tarjeta");
 		CardBtn.setForeground(Color.BLACK);
 		CardBtn.setBackground(Color.LIGHT_GRAY);
+		CardBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PantallaPagoTarjeta PT1 = new PantallaPagoTarjeta();
+				PT1.setVisible(true);
+			}
+		});
 		CardBtn.setBounds(104, 104, 131, 47);
 		contentPane.add(CardBtn);
 		
-		JButton TransferBtn = new JButton("Wire transfer");
+		JButton TransferBtn = new JButton("Pago por transferencia");
 		TransferBtn.setForeground(Color.BLACK);
 		TransferBtn.setBackground(Color.LIGHT_GRAY);
 		TransferBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaTransfer T1 = new PantallaTransfer();
+				PantallaTransferencia T1 = new PantallaTransferencia();
 				T1.setVisible(true);
 			}
 		});
-		TransferBtn.setBounds(432, 104, 112, 47);
+		TransferBtn.setBounds(419, 104, 167, 47);
 		contentPane.add(TransferBtn);
 		
-		JLabel orTxt = new JLabel("or");
+		JLabel orTxt = new JLabel("o");
 		orTxt.setBounds(316, 120, 46, 14);
 		contentPane.add(orTxt);
 	}

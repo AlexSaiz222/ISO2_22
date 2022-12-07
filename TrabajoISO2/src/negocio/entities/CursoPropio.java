@@ -58,8 +58,8 @@ public class CursoPropio {
 		return idcentro;
 	}
 
-	public void setCentro(int centro) {
-		this.idcentro = centro;
+	public void setCentro(Centro centro) {
+		this.idcentro = centro.getIdCentro();
 	}
 
 	public ProfesorUCLM getDirector() {

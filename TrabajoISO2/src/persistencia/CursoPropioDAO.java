@@ -53,8 +53,9 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		List<Object> c = (List<Object>) cursoListado.get(0);
 		CursoPropio curso1 = new CursoPropio();
 		curso1.setId(Integer.parseInt(c.get(0).toString()));
-		curso1.setCentro(Integer.parseInt(c.get(1).toString()));
-		//hacer completas todas las clases DAO
+		CentroDAO centroDAO = new CentroDAO();
+		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
+		curso1.setCentro(centro);
 		curso1.setDirector(null);
 		gestor.desconectarBD();
 		return curso1;

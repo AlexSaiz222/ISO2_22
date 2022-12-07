@@ -47,7 +47,7 @@ public class PantallaMatriculacion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel ChooseAnOption = new JLabel("Choose an option");
+		JLabel ChooseAnOption = new JLabel("Escoja una opcion");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(225, 11, 270, 39);
 		contentPane.add(ChooseAnOption);
@@ -62,11 +62,11 @@ public class PantallaMatriculacion extends JFrame {
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
 		
-		JButton MatriculateBtn = new JButton("Matriculate");
+		JButton MatriculateBtn = new JButton("Matricularse");
 		MatriculateBtn.setForeground(Color.BLACK);
 		MatriculateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaMatriculationProcess M1 = new PantallaMatriculationProcess();
+				PantallaProcesoMatriculacion M1 = new PantallaProcesoMatriculacion();
 				M1.setVisible(true);
 			}
 		});
@@ -75,11 +75,11 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(MatriculateBtn);
 		
 		JLabel EditInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
-		EditInfo.setToolTipText("Matriculate for an existing course");
+		EditInfo.setToolTipText("Matricularse de un curso existente");
 		EditInfo.setBounds(253, 134, 23, 20);
 		contentPane.add(EditInfo);
 		
-		JButton btnPay = new JButton("Pay a tuition");
+		JButton btnPay = new JButton("Pagar una matricula");
 		btnPay.setForeground(Color.BLACK);
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -92,7 +92,7 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(btnPay);
 		
 		JLabel RegisterInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
-		RegisterInfo.setToolTipText("Debit card or transfer");
+		RegisterInfo.setToolTipText("Tarjeta o transferencia");
 		RegisterInfo.setBounds(253, 247, 23, 20);
 		contentPane.add(RegisterInfo);
 		

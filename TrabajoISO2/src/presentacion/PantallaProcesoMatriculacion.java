@@ -28,7 +28,7 @@ import persistencia.MatriculaDAO;
 
 import javax.swing.JComboBox;
 
-public class PantallaMatriculationProcess extends JFrame {
+public class PantallaProcesoMatriculacion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField resultadoField;
@@ -40,7 +40,7 @@ public class PantallaMatriculationProcess extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaMatriculationProcess frame = new PantallaMatriculationProcess();
+					PantallaProcesoMatriculacion frame = new PantallaProcesoMatriculacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class PantallaMatriculationProcess extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaMatriculationProcess() {
+	public PantallaProcesoMatriculacion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -81,35 +81,29 @@ public class PantallaMatriculationProcess extends JFrame {
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel Title = new JLabel("Matriculate");
+		JLabel Title = new JLabel("Matricularse de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
 		Title.setBounds(10, 15, 270, 39);
 		contentPane.add(Title);
 		
-		JLabel SelectInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
-		SelectInfo.setText("");
-		SelectInfo.setToolTipText("Select an existing course");
-		SelectInfo.setBounds(274, 80, 23, 20);
-		contentPane.add(SelectInfo);
-		
-		JLabel NameTxt = new JLabel("Name");
-		NameTxt.setBounds(34, 86, 43, 14);
+		JLabel NameTxt = new JLabel("Nombre");
+		NameTxt.setBounds(34, 86, 62, 14);
 		contentPane.add(NameTxt);
 		
 		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		UCLM_letters.setBounds(359, 123, 241, 213);
 		contentPane.add(UCLM_letters);
 		
-		JLabel DateTxt = new JLabel("Date");
+		JLabel DateTxt = new JLabel("Fecha");
 		DateTxt.setBounds(34, 123, 46, 14);
 		contentPane.add(DateTxt);
 		
 		JDateChooser DateField = new JDateChooser();
-		DateField.setBounds(70, 117, 191, 20);
+		DateField.setBounds(106, 117, 191, 20);
 		contentPane.add(DateField);
 		
 		JComboBox<String> NameField = new JComboBox<String>();
-		NameField.setBounds(70, 83, 191, 23);
+		NameField.setBounds(106, 82, 191, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();
 		EstadoCurso Estado= EstadoCurso.VALIDADO;
@@ -118,7 +112,7 @@ public class PantallaMatriculationProcess extends JFrame {
 			NameField.addItem(c.getNombre());
 		}
 		
-		JButton MatriculationBttn = new JButton("Pass to payment");
+		JButton MatriculationBttn = new JButton("Pagar matricula");
 		MatriculationBttn.setForeground(Color.BLACK);
 		MatriculationBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -127,37 +121,64 @@ public class PantallaMatriculationProcess extends JFrame {
 					//Se ha puesto un ejemplo hasta que se implemente dicho login
 					Estudiante est = new Estudiante();
 					est.setIdEstudiante(4);
+					
 					Matricula mat = new Matricula();
+					
 					mat.setTitulo(cursos.get(NameField.getSelectedIndex()));
 					mat.setPagado(false);
 					mat.setEstudiante(est);
 					mat.setFecha((Date) DateField.getDate());
+					
 					MatriculaDAO matDAO = new MatriculaDAO();
-					int resultado = matDAO.crearNuevaMatricula(mat);
+					
+					int resultado = matDAO.crearMatricula(mat);
+					
 					if(resultado == 0) {
-						resultadoField.setText("Successfully enroll in this course");
+						resultadoField.setText("Matriculado en curso correctamente");
 						PantallaPagar PP1 = new PantallaPagar();
 						PP1.setVisible(true);
 					}
 				}catch(Exception e) {
-					resultadoField.setText("An error has ocurred, please, try again");
+					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo mas tarde");
 				}
 			}
 		});
 		MatriculationBttn.setBackground(Color.LIGHT_GRAY);
-		MatriculationBttn.setBounds(34, 160, 227, 67);
+		MatriculationBttn.setBounds(34, 160, 263, 67);
 		contentPane.add(MatriculationBttn);
 		
-		JButton btnPayLater = new JButton("Pay later");
+		JButton btnPayLater = new JButton("Pagar mas tarde");
 		btnPayLater.setForeground(Color.BLACK);
 		btnPayLater.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PantallaMatriculacion M2 = new PantallaMatriculacion();
-				M2.setVisible(true);
+			public void actionPerformed(ActionEvent arg0) {try {
+				// anyadir el estudiante, que es el usuario que estaría logueado
+				//Se ha puesto un ejemplo hasta que se implemente dicho login
+				Estudiante est = new Estudiante();
+				est.setIdEstudiante(4);
+				
+				Matricula mat = new Matricula();
+				
+				mat.setTitulo(cursos.get(NameField.getSelectedIndex()));
+				mat.setPagado(false);
+				mat.setEstudiante(est);
+				mat.setFecha((Date) DateField.getDate());
+				
+				MatriculaDAO matDAO = new MatriculaDAO();
+				
+				int resultado = matDAO.crearMatricula(mat);
+				
+				if(resultado == 0) {
+					resultadoField.setText("Matriculado en curso correctamente");
+					PantallaMatriculacion PM1 = new PantallaMatriculacion();
+					PM1.setVisible(true);
+				}
+			}catch(Exception e) {
+				resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo mas tarde");
+			}
 			}
 		});
 		btnPayLater.setBackground(Color.LIGHT_GRAY);
-		btnPayLater.setBounds(34, 244, 227, 67);
+		btnPayLater.setBounds(34, 244, 263, 67);
 		contentPane.add(btnPayLater);
 		
 		resultadoField = new JTextField();

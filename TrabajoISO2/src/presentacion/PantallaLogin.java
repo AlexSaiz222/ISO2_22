@@ -64,7 +64,7 @@ public class PantallaLogin extends JFrame {
 		UCLM_Image.setBounds(544, 304, 123, 70);
 		contentPane.add(UCLM_Image);
 		
-		JLabel PsswdText = new JLabel("Password:");
+		JLabel PsswdText = new JLabel("Contraseña:");
 		PsswdText.setBounds(229, 150, 70, 39);
 		contentPane.add(PsswdText);
 		
@@ -75,20 +75,20 @@ public class PantallaLogin extends JFrame {
 		contentPane.add(UsrField);
 		UsrField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Welcome to the Universidad De Castilla La Mancha");
+		JLabel lblNewLabel = new JLabel("Bienvenido a la Universidad De Castilla La Mancha");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setBounds(59, 22, 566, 31);
 		contentPane.add(lblNewLabel);
 		
 		//Aqui hay que poner un controlador para que, sabiendo el tipo de inicio de sesion, se abra una pantalla u otra
-		JButton btnNewButton = new JButton("Sign in");
+		JButton btnNewButton = new JButton("Iniciar sesion");
 		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBounds(212, 199, 225, 61);
 		contentPane.add(btnNewButton);
 		
 		JLabel dni_info = new JLabel(new ImageIcon("./images/ayuda.png"));
-		dni_info.setToolTipText("f.e 03435754P");
+		dni_info.setToolTipText("p.e 03435754P");
 		dni_info.setBounds(452, 119, 23, 20);
 		contentPane.add(dni_info);
 		

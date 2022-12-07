@@ -4,22 +4,18 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JTextArea;
+import java.awt.Color;
 
-public class PantallaCheckIncomes extends JFrame {
+public class PantallaListarEdiciones extends JFrame {
 
 	private JPanel contentPane;
 
@@ -30,7 +26,7 @@ public class PantallaCheckIncomes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaCheckIncomes frame = new PantallaCheckIncomes();
+					PantallaListarEdiciones frame = new PantallaListarEdiciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +38,7 @@ public class PantallaCheckIncomes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaCheckIncomes() {
+	public PantallaListarEdiciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -51,7 +47,7 @@ public class PantallaCheckIncomes extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel ChooseAnOption = new JLabel("Check incomes");
+		JLabel ChooseAnOption = new JLabel("Listar Ediciones de un Curso");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(23, 11, 270, 39);
 		contentPane.add(ChooseAnOption);
@@ -76,40 +72,30 @@ public class PantallaCheckIncomes extends JFrame {
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel TypeTxt = new JLabel("Type of course");
-		TypeTxt.setBounds(23, 89, 89, 14);
-		contentPane.add(TypeTxt);
+		JLabel lblNewLabel = new JLabel("Fecha Inicio");
+		lblNewLabel.setBounds(23, 83, 77, 14);
+		contentPane.add(lblNewLabel);
 		
-		JList TypeList = new JList();
-		TypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		TypeList.setBounds(134, 88, 134, 154);
-		contentPane.add(TypeList);
-		
-		JLabel StartTxt = new JLabel("Start Date");
-		StartTxt.setBounds(23, 250, 72, 14);
-		contentPane.add(StartTxt);
-		
-		JLabel EndTxt = new JLabel("End Date");
-		EndTxt.setBounds(23, 276, 72, 14);
-		contentPane.add(EndTxt);
-		
-		JButton IncomesBtn = new JButton("See incomes");
-		IncomesBtn.setForeground(Color.BLACK);
-		IncomesBtn.setBackground(Color.LIGHT_GRAY);
-		IncomesBtn.setBounds(23, 301, 245, 64);
-		contentPane.add(IncomesBtn);
-		
-		JTextArea PlotIncomes = new JTextArea();
-		PlotIncomes.setBounds(403, 89, 205, 201);
-		contentPane.add(PlotIncomes);
+		JLabel lblNewLabel_1 = new JLabel("Fecha Fin");
+		lblNewLabel_1.setBounds(23, 108, 56, 14);
+		contentPane.add(lblNewLabel_1);
 		
 		JDateChooser StartDateField = new JDateChooser();
-		StartDateField.setBounds(134, 250, 134, 20);
+		StartDateField.setBounds(121, 83, 153, 20);
 		contentPane.add(StartDateField);
 		
-		JDateChooser EndDateField = new JDateChooser();
-		EndDateField.setBounds(134, 276, 134, 20);
-		contentPane.add(EndDateField);
+		JDateChooser EndDate = new JDateChooser();
+		EndDate.setBounds(121, 108, 153, 20);
+		contentPane.add(EndDate);
 		
+		JTextArea Plot = new JTextArea();
+		Plot.setBounds(377, 81, 228, 192);
+		contentPane.add(Plot);
+		
+		JButton ListBttn = new JButton("Ver ediciones");
+		ListBttn.setForeground(Color.BLACK);
+		ListBttn.setBackground(Color.LIGHT_GRAY);
+		ListBttn.setBounds(23, 148, 251, 57);
+		contentPane.add(ListBttn);
 	}
 }

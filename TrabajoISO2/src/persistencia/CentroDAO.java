@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import negocio.entities.Centro;
+import negocio.entities.Matricula;
 
-public class CentroDAO {
+public class CentroDAO extends AbstractEntityDAO{
 	
 	public List<Centro> listarCentros() {
 		List<Centro> centros = new ArrayList<Centro>();
@@ -37,6 +38,41 @@ public class CentroDAO {
 		
 		gestor.desconectarBD();
 		return centro;
+	}
+	
+	/**
+	 * 
+	 * @param centro
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 */
+
+	public int crearCentro(Centro centro) {
+		int resultado = -1;
+		GestorBD agente = GestorBD.getAgente();
+		
+		// TODO 
+		resultado = agente.insert("insert into centros (idcentro,nombre,localizacion) "
+				+ "values ("+centro.getIdCentro()+",'"+centro.getNombre()+","+centro.getLocalizacion()+")");
+		
+		agente.desconectarBD();
+		return resultado;
+	}
+
+	/**
+	 * 
+	 * @param centro
+	 */
+	public int editarCentro(Centro centro) {
+		int resultado = -1;
+	GestorBD agente = GestorBD.getAgente();
+
+	resultado = agente.update("update centros "
+			+ "set( idcentro = "+ centro.getIdCentro()
+			+ ",localizacion ='"+centro.getLocalizacion()
+			+ ", nombre ="+centro.getNombre()+")");
+	
+	agente.desconectarBD();
+	return resultado;
 	}
 
 }

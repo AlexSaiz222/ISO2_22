@@ -21,6 +21,10 @@ public class Materia {
 		this.fechaFin = fechaFin;
 	}
 	
+	public Materia() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Profesor getResponsable() {
 		return responsable;
 	}

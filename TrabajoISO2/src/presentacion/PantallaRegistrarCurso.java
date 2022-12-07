@@ -34,7 +34,7 @@ import persistencia.ProfesorUCLMDAO;
 
 import javax.swing.JComboBox;
 
-public class PantallaRegisterCourse extends JFrame {
+public class PantallaRegistrarCurso extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameField;
@@ -50,7 +50,7 @@ public class PantallaRegisterCourse extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaRegisterCourse frame = new PantallaRegisterCourse();
+					PantallaRegistrarCurso frame = new PantallaRegistrarCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class PantallaRegisterCourse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaRegisterCourse() {
+	public PantallaRegistrarCurso() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -71,9 +71,9 @@ public class PantallaRegisterCourse extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel Title = new JLabel("Register a course proposal");
+		JLabel Title = new JLabel("Registrar una propuesta de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
-		Title.setBounds(192, 11, 315, 39);
+		Title.setBounds(63, 11, 497, 39);
 		contentPane.add(Title);
 		
 		JButton LogOutBttn = new JButton("Log out");
@@ -96,28 +96,28 @@ public class PantallaRegisterCourse extends JFrame {
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel Name = new JLabel("Name");
-		Name.setBounds(82, 94, 35, 14);
+		JLabel Name = new JLabel("Nombre");
+		Name.setBounds(60, 94, 57, 14);
 		contentPane.add(Name);
 		
 		JLabel ETCStxt = new JLabel("ETCS");
-		ETCStxt.setBounds(82, 119, 35, 14);
+		ETCStxt.setBounds(60, 119, 57, 14);
 		contentPane.add(ETCStxt);
 		
-		JLabel StarDateTxt = new JLabel("Start Date");
-		StarDateTxt.setBounds(82, 145, 57, 14);
+		JLabel StarDateTxt = new JLabel("Fecha Inicio");
+		StarDateTxt.setBounds(60, 145, 79, 14);
 		contentPane.add(StarDateTxt);
 		
-		JLabel EndDateTxt = new JLabel("End Date");
-		EndDateTxt.setBounds(82, 176, 57, 14);
+		JLabel EndDateTxt = new JLabel("Fecha Fin");
+		EndDateTxt.setBounds(60, 176, 79, 14);
 		contentPane.add(EndDateTxt);
 		
-		JLabel FeeTxt = new JLabel("Tuition fee");
-		FeeTxt.setBounds(82, 207, 80, 14);
+		JLabel FeeTxt = new JLabel("Tasa");
+		FeeTxt.setBounds(60, 207, 102, 14);
 		contentPane.add(FeeTxt);
 		
-		JLabel EditionTxt = new JLabel("Edition");
-		EditionTxt.setBounds(82, 232, 46, 14);
+		JLabel EditionTxt = new JLabel("Edicion");
+		EditionTxt.setBounds(60, 232, 68, 14);
 		contentPane.add(EditionTxt);
 		
 		JLabel UCLM_Image = new JLabel(new ImageIcon("./images/uclm.png"));
@@ -153,8 +153,8 @@ public class PantallaRegisterCourse extends JFrame {
 		EndDateField.setBounds(170, 176, 159, 20);
 		contentPane.add(EndDateField);
 		
-		JLabel CenterTxt = new JLabel("Center");
-		CenterTxt.setBounds(82, 256, 46, 22);
+		JLabel CenterTxt = new JLabel("Centro");
+		CenterTxt.setBounds(60, 256, 68, 22);
 		contentPane.add(CenterTxt);
 		
 		JComboBox centerBox = new JComboBox();
@@ -167,8 +167,8 @@ public class PantallaRegisterCourse extends JFrame {
 			centerBox.addItem(c.getNombre()+" - "+c.getLocalizacion());
 		}
 		
-		JLabel secretaryTxt = new JLabel("Secretary");
-		secretaryTxt.setBounds(82, 287, 80, 22);
+		JLabel secretaryTxt = new JLabel("Secretario");
+		secretaryTxt.setBounds(60, 287, 102, 22);
 		contentPane.add(secretaryTxt);
 		
 		JComboBox secretaryBox = new JComboBox();
@@ -181,8 +181,8 @@ public class PantallaRegisterCourse extends JFrame {
 			secretaryBox.addItem(p.getNombre()+" "+p.getApellidos());
 		}
 		
-		JLabel typeTxt = new JLabel("Type");
-		typeTxt.setBounds(82, 321, 46, 22);
+		JLabel typeTxt = new JLabel("Tipo");
+		typeTxt.setBounds(60, 321, 68, 22);
 		contentPane.add(typeTxt);
 		
 		JComboBox typeBox = new JComboBox();
@@ -199,7 +199,7 @@ public class PantallaRegisterCourse extends JFrame {
 		contentPane.add(resultadoField);
 		resultadoField.setColumns(10);
 		
-		JButton EditBtn = new JButton("Register course proposal");
+		JButton EditBtn = new JButton("Registrar propuesta");
 		EditBtn.setBackground(new Color(50, 205, 50));
 		EditBtn.setBounds(412, 308, 247, 39);
 		EditBtn.addActionListener(new ActionListener() {
@@ -208,10 +208,11 @@ public class PantallaRegisterCourse extends JFrame {
 				try {
 					CursoPropio curso = new CursoPropio();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
-					// A√±adir el director, que es el usuario que estar√° logueado
+					// AÒadir el director, que es el usuario que estar· logueado
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
 					ProfesorUCLM profesorUCLM = new ProfesorUCLM();
 					profesorUCLM.setDni("11111111B");
+					
 					curso.setDirector(profesorUCLM);
 					curso.setSecretario(profesores.get(secretaryBox.getSelectedIndex()));
 					curso.setEstado(EstadoCurso.PROPUESTO); // Al crear el curso, el estado es PROPUESTO
@@ -222,8 +223,11 @@ public class PantallaRegisterCourse extends JFrame {
 					curso.setFechaFin(EndDateField.getDate());
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
+					
 					CursoPropioDAO cursoDAO = new CursoPropioDAO();
-					int resultado = cursoDAO.crearNuevoCurso(curso);
+					
+					int resultado = cursoDAO.crearCurso(curso);
+					
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
 					}
@@ -234,8 +238,5 @@ public class PantallaRegisterCourse extends JFrame {
 			}
 		});
 		contentPane.add(EditBtn);
-		
-		
-		
 	}
 }

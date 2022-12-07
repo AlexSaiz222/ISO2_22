@@ -26,7 +26,7 @@ public class CentroDAO {
 		return centros;
 	}
 	
-	public Centro listarCentro(int idCentro) {
+	public Centro seleccionarCentro(int idCentro) {
 		GestorBD gestor = GestorBD.getAgente();
 		List<Object> centroListado = gestor.select("select * from centros where idcentro="+idCentro);
 		List<Object> c = (List<Object>) centroListado.get(0);

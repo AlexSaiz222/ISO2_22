@@ -215,8 +215,9 @@ public class PantallaEditCourseProposal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					CursoPropio curso = new CursoPropio();
+					CentroDAO centroDAO = new CentroDAO();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
-					// AÃ±adir el director, que es el usuario que estarÃ¡ logueado
+					// Añadir el director, que es el usuario que estará logueado
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
 					ProfesorUCLM profesorUCLM = new ProfesorUCLM();
 					profesorUCLM.setDni("11111111B");

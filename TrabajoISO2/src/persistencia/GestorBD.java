@@ -95,8 +95,7 @@ public class GestorBD {
 
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		desconectarBD();
 		return resultado;
@@ -105,6 +104,9 @@ public class GestorBD {
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * *  0 si se ha insertado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int insert(String sql) {
 		conectarBD();
@@ -115,11 +117,15 @@ public class GestorBD {
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
-		if(res == 1)
+		
+		if(res==0)	// Si devuelve 0, es que no se ha insertado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha insertado 1 fila --> Correcto
 			res = 0;
+		
 		desconectarBD();
 		return res;
 	}
@@ -127,19 +133,59 @@ public class GestorBD {
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * *  0 si se ha actualizado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int update(String sql) {
-		// TODO - implement GestorBD.update
-		throw new UnsupportedOperationException();
+		conectarBD();
+		PreparedStatement stmt;
+		int res = -1;
+		try {
+			stmt = mBD.prepareStatement(sql);
+			res = stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if(res==0)	// Si devuelve 0, es que no se ha actualizado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha actualizado 1 fila --> Correcto
+			res = 0;
+		
+		desconectarBD();
+		return res;
 	}
 
 	/**
 	 * 
 	 * @param sql
+	 * @return res
+	 * * *  0 si se ha eliminado correctamente
+	 * * -1 si se produce un error
 	 */
 	public int delete(String sql) {
-		// TODO - implement GestorBD.delete
-		throw new UnsupportedOperationException();
+		conectarBD();
+		PreparedStatement stmt;
+		int res = -1;
+		try {
+			stmt = mBD.prepareStatement(sql);
+			res = stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if(res==0)	// Si devuelve 0, es que no se ha eliminado ninguna fila --> Incorrecto
+			res=-1;
+		
+		if(res == 1) // Se ha eliminado 1 fila --> Correcto
+			res = 0;
+		
+		desconectarBD();
+		return res;
 	}
 	
 	private static void crearBaseDatosSinoExiste() {
@@ -165,9 +211,9 @@ public class GestorBD {
 			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
 			pstmt.setString(1, "00000000A");
 			pstmt.setString(2, "Pepe");
-			pstmt.setString(3, "Pérez");
+			pstmt.setString(3, "Perez");
 			pstmt.setString(4, "PepePerez");
-			pstmt.setString(5, "Ingeniería Informática");
+			pstmt.setString(5, "Ingenieria Informatica");
 			pstmt.setString(6, "Ingeniero SW");
 			pstmt.executeUpdate();
 						
@@ -191,14 +237,14 @@ public class GestorBD {
 			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "11111111B");
 			pstmt.setString(2, "Jaime");
-			pstmt.setString(3, "García");
+			pstmt.setString(3, "Garcia");
 			pstmt.setBoolean(4, true);
 			pstmt.executeUpdate();
 			
 			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "22222222C");
 			pstmt.setString(2, "Alberto");
-			pstmt.setString(3, "Sánchez");
+			pstmt.setString(3, "Sanchez");
 			pstmt.setBoolean(4, false);
 			pstmt.executeUpdate();
 			
@@ -227,10 +273,18 @@ public class GestorBD {
 			pstmt.executeUpdate();
 			
 			// Crear la tabla cursosPropios
-			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idCentro int not null, "
-					+ "idDirector varchar(10) not null, idSecretario varchar(10) not null, "
-					+ "estado varchar(30) not null, tipo varchar(30) not null, "
-					+ "nombre varchar(50) not null, ECTS int not null, fechaInicio date, fechaFin date, tasaMatricula double, edicion int, "
+			createSQL = "create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "
+					+ "idCentro int not null, "
+					+ "idDirector varchar(10) not null, "
+					+ "idSecretario varchar(10) not null, "
+					+ "estado varchar(30) not null, "
+					+ "tipo varchar(30) not null, "
+					+ "nombre varchar(50) not null, "
+					+ "ECTS int not null, "
+					+ "fechaInicio date, "
+					+ "fechaFin date, "
+					+ "tasaMatricula double, "
+					+ "edicion int, "
 					+ "primary key (idCursoPropio), foreign key (idCentro) references centros(idCentro), "
 					+ "foreign key (idDirector) references profesoresUCLM(dni), "
 					+ "foreign key (idSecretario) references profesoresUCLM(dni))";

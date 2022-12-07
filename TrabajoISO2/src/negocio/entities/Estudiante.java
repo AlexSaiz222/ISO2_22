@@ -10,9 +10,14 @@ public class Estudiante {
 	private String apellidos;
 	private String titulacion;
 	private String cualificacion;
+	private int idEstudiante;
+	
+	public Estudiante() {
+		
+	}
 	
 	public Estudiante(Collection<Matricula> matriculas, String dni, String nombre, String apellidos, String titulacion,
-			String cualificacion) {
+			String cualificacion, int idEstudiante) {
 		super();
 		this.matriculas = matriculas;
 		this.dni = dni;
@@ -20,6 +25,7 @@ public class Estudiante {
 		this.apellidos = apellidos;
 		this.titulacion = titulacion;
 		this.cualificacion = cualificacion;
+		this.setIdEstudiante(idEstudiante);
 	}
 
 	public Collection<Matricula> getMatriculas() {
@@ -68,6 +74,14 @@ public class Estudiante {
 
 	public void setCualificacion(String cualificacion) {
 		this.cualificacion = cualificacion;
+	}
+
+	public int getIdEstudiante() {
+		return idEstudiante;
+	}
+
+	public void setIdEstudiante(int idEstudiante) {
+		this.idEstudiante = idEstudiante;
 	}
 	
 }

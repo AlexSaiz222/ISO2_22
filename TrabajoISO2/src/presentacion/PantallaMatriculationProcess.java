@@ -3,6 +3,8 @@ package presentacion;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,9 +19,19 @@ import javax.swing.Icon;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Estudiante;
+import negocio.entities.Matricula;
+import persistencia.CursoPropioDAO;
+import persistencia.MatriculaDAO;
+
+import javax.swing.JComboBox;
+
 public class PantallaMatriculationProcess extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField resultadoField;
 
 	/**
 	 * Launch the application.
@@ -77,39 +89,82 @@ public class PantallaMatriculationProcess extends JFrame {
 		JLabel SelectInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
 		SelectInfo.setText("");
 		SelectInfo.setToolTipText("Select an existing course");
-		SelectInfo.setBounds(253, 80, 23, 20);
+		SelectInfo.setBounds(274, 80, 23, 20);
 		contentPane.add(SelectInfo);
 		
 		JLabel NameTxt = new JLabel("Name");
 		NameTxt.setBounds(34, 86, 43, 14);
 		contentPane.add(NameTxt);
 		
-		JList NameList = new JList();
-		NameList.setBounds(87, 83, 156, 160);
-		contentPane.add(NameList);
+		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
+		UCLM_letters.setBounds(359, 123, 241, 213);
+		contentPane.add(UCLM_letters);
+		
+		JLabel DateTxt = new JLabel("Date");
+		DateTxt.setBounds(34, 123, 46, 14);
+		contentPane.add(DateTxt);
+		
+		JDateChooser DateField = new JDateChooser();
+		DateField.setBounds(70, 117, 191, 20);
+		contentPane.add(DateField);
+		
+		JComboBox<String> NameField = new JComboBox<String>();
+		NameField.setBounds(70, 83, 191, 23);
+		contentPane.add(NameField);
+		NameField.removeAllItems();
+		EstadoCurso Estado= EstadoCurso.VALIDADO;
+		List<CursoPropio> cursos = CursoPropioDAO.listarCursosPropiosPorEstado(Estado);
+		for(CursoPropio c: cursos) {
+			NameField.addItem(c.getNombre());
+		}
 		
 		JButton MatriculationBttn = new JButton("Pass to payment");
 		MatriculationBttn.setForeground(Color.BLACK);
 		MatriculationBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaPagar PP1 = new PantallaPagar();
-				PP1.setVisible(true);
+				try {
+					// anyadir el estudiante, que es el usuario que estaría logueado
+					//Se ha puesto un ejemplo hasta que se implemente dicho login
+					Estudiante est = new Estudiante();
+					est.setIdEstudiante(4);
+					Matricula mat = new Matricula();
+					mat.setTitulo(cursos.get(NameField.getSelectedIndex()));
+					mat.setPagado(false);
+					mat.setEstudiante(est);
+					mat.setFecha((Date) DateField.getDate());
+					MatriculaDAO matDAO = new MatriculaDAO();
+					int resultado = matDAO.crearNuevaMatricula(mat);
+					if(resultado == 0) {
+						resultadoField.setText("Successfully enroll in this course");
+						PantallaPagar PP1 = new PantallaPagar();
+						PP1.setVisible(true);
+					}
+				}catch(Exception e) {
+					resultadoField.setText("An error has ocurred, please, try again");
+				}
 			}
 		});
 		MatriculationBttn.setBackground(Color.LIGHT_GRAY);
-		MatriculationBttn.setBounds(34, 282, 209, 67);
+		MatriculationBttn.setBounds(34, 160, 227, 67);
 		contentPane.add(MatriculationBttn);
 		
-		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
-		UCLM_letters.setBounds(358, 79, 241, 213);
-		contentPane.add(UCLM_letters);
+		JButton btnPayLater = new JButton("Pay later");
+		btnPayLater.setForeground(Color.BLACK);
+		btnPayLater.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PantallaMatriculacion M2 = new PantallaMatriculacion();
+				M2.setVisible(true);
+			}
+		});
+		btnPayLater.setBackground(Color.LIGHT_GRAY);
+		btnPayLater.setBounds(34, 244, 227, 67);
+		contentPane.add(btnPayLater);
 		
-		JLabel DateTxt = new JLabel("Date");
-		DateTxt.setBounds(31, 257, 46, 14);
-		contentPane.add(DateTxt);
+		resultadoField = new JTextField();
+		resultadoField.setEnabled(false);
+		resultadoField.setColumns(10);
+		resultadoField.setBounds(316, 83, 303, 23);
+		contentPane.add(resultadoField);
 		
-		JDateChooser DateField = new JDateChooser();
-		DateField.setBounds(87, 251, 156, 20);
-		contentPane.add(DateField);
 	}
 }

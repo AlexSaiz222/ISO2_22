@@ -21,6 +21,10 @@ public class Matricula {
 		this.pagado = pagado;
 	}
 	
+	public Matricula() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdMatricula() {
 		return idMatricula;
 	}
@@ -68,6 +72,4 @@ public class Matricula {
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
-
-
 }

@@ -31,10 +31,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		// TODO Insertar fechas
 		resultado = agente.insert("insert into cursospropios (idcentro, iddirector, idsecretario, "
 				+ "estado, tipo, nombre, ects, tasamatricula, edicion) "
-				+ "values ("+curso.getCentro().getIdCentro()+",'"+curso.getDirector().getDni()+"',"
+				+ "values ("+curso.getCentro()+",'"+curso.getDirector().getDni()+"',"
 				+ "'"+curso.getSecretario().getDni()+"','"+curso.getEstado()+"',"
 				+ "'"+curso.getTipo()+"','"+curso.getNombre()+"',"+curso.getECTS()+","
-				+ curso.getTasaMatricula()+","+curso.getECTS()+")");
+				+ curso.getTasaMatricula()+","+curso.getEdicion()+")");
 		
 		agente.desconectarBD();
 		return resultado;
@@ -45,17 +45,38 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param curso
 	 */
 	public CursoPropio seleccionarCurso(CursoPropio curso) {
-		// TODO - implement CursoPropioDAO.seleccionarCurso
-		throw new UnsupportedOperationException();
+		GestorBD agente = GestorBD.getAgente();
+		List<Object>  resultado = new ArrayList<Object>();
+				
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> cursoListado = gestor.select("select * from cursospropios where idcurso = "+curso.getId());
+		List<Object> c = (List<Object>) cursoListado.get(0);
+		CursoPropio curso1 = new CursoPropio();
+		curso1.setId(Integer.parseInt(c.get(0).toString()));
+		CentroDAO centroDAO = new CentroDAO();
+		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
+		curso1.setCentro(centro);
+		curso1.setDirector(null);
+		gestor.desconectarBD();
+		return curso1;
 	}
 
 	/**
 	 * 
 	 * @param curso
 	 */
-	public CursoPropio editarCurso(CursoPropio curso) {
-		// TODO - implement CursoPropioDAO.editarCurso
-		throw new UnsupportedOperationException();
+	public int editarCurso(CursoPropio curso) {
+		int resultado = -1;
+	GestorBD agente = GestorBD.getAgente();
+
+	resultado = agente.update("update cursospropios "
+			+ "set( idcentro = "+ curso.getCentro()+",iddirector="+curso.getDirector().getDni()
+			+ ",idsecretario ="+curso.getSecretario().getDni()+", estado = "+curso.getEstado()
+			+ ", tipo ="+curso.getTipo()+", nombre ="+curso.getNombre()+", ects = "+curso.getECTS()
+			+ ", tasamatricula = " +curso.getTasaMatricula()+", edicion ="+curso.getEdicion()+")");
+	
+	agente.desconectarBD();
+	return resultado;
 	}
 
 	/**
@@ -65,8 +86,24 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param fechaFin
 	 */
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado, Date fechaInicio, Date fechaFin) {
-		// TODO - implement CursoPropioDAO.listarCursosPorEstado
-		throw new UnsupportedOperationException();
+		// TODO Auto-generated method stub
+		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
+        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+        GestorBD gestor = GestorBD.getAgente();
+
+        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'"
+        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
+
+        for(int i=0; i<cursosListados.size(); i++) {
+            CursoPropio cursoPropio = new CursoPropio();
+            List<Object> t = (List<Object>) cursosListados.get(i);
+            cursoPropio.setNombre(t.get(1).toString());
+
+            cursos.add(cursoPropio);
+        }
+
+        gestor.desconectarBD();
+        return cursos;
 	}
 
 	/**
@@ -85,9 +122,25 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param fechaInicio
 	 * @param fechaFin
 	 */
-	public void listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
-		// TODO - implement CursoPropioDAO.listarEdicionesCursos
-		throw new UnsupportedOperationException();
+	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
+		// TODO Auto-generated method stub
+        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+        GestorBD gestor = GestorBD.getAgente();
+
+        List<Object> cursosListados = gestor.select("select * from cursospropios where "
+        		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
+        
+
+        for(int i=0; i<cursosListados.size(); i++) {
+            CursoPropio cursoPropio = new CursoPropio();
+            List<Object> t = (List<Object>) cursosListados.get(i);
+            cursoPropio.setNombre(t.get(1).toString());
+
+            cursos.add(cursoPropio);
+        }
+
+        gestor.desconectarBD();
+        return cursos;
 	}
 	
 	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
@@ -95,7 +148,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = GestorBD.getAgente();
 
-        List<Object> cursosListados = gestor.select("select * from cursosPropios where estado='"+estado+"'");
+        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
 
         for(int i=0; i<cursosListados.size(); i++) {
             CursoPropio cursoPropio = new CursoPropio();

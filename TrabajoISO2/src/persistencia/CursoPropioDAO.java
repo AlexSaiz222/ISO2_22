@@ -136,7 +136,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
         return cursos;
 	}
 
-	/**
+	/**m
 	 * 
 	 * @param tipo
 	 * @param fechaInicio

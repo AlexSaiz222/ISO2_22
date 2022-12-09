@@ -3,6 +3,14 @@
   <groupId>TrabajoISO2</groupId>
   <artifactId>TrabajoISO2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+    <properties>
+  		<sonar.projectKey>ISO2keysonar</sonar.projectKey>
+		<sonar.organization>alexsaiz222</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>816207ad5d171d36ff93391a6db448d1cae4f60a</sonar.login>
+	</properties>
+	
   <dependencies>
   
   <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j -->

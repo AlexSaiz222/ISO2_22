@@ -303,6 +303,9 @@ public class GestorBD {
 					+ "primary key (idMateria), foreign key (responsable) references profesores(dni))";
 			stmt.execute(createSQL);
 
+			//Crear tabla pagos 
+			//parametros fecha compra y precio
+			//createSQL =
 			// Guardar cambios en la BD
 			mBD.commit();
 

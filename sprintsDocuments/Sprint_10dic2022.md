@@ -25,5 +25,5 @@
         -Ir avanzando en la implementación de algunos casos de prueba.
     
 
-![Planificación del Sprint de la semana del 10/12 al 17/12](../sprintsImages/sprint_10dic2022_tablero.png)
-![Planificación del Sprint de la semana del 10/12 al 17/12](../sprintsImages/sprint_10dic2022_lista.png)
+![Planificación del Sprint de la semana del 10/12 al 17/12](../sprintsImages/Sprint_10dic2022_lista.png)
+![Planificación del Sprint de la semana del 10/12 al 17/12](../sprintsImages/Sprint_10dic2022_tablero.png)

@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.sql.Date;
+import negocio.controllers.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,23 +118,8 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 */
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado, Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
-		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = GestorBD.getAgente();
-
-        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'"
-        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
-
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
-
-            cursos.add(cursoPropio);
-        }
-
-        gestor.desconectarBD();
-        return cursos;
+		GestorConsultas gConsultas = new GestorConsultas();
+        return gConsultas.consultarEstadoCursos(estado, fechaInicio, fechaFin);
 	}
 
 	/**m
@@ -142,9 +128,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param fechaInicio
 	 * @param fechaFin
 	 */
-	public double listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
+	public List<Double> listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement CursoPropioDAO.listarIngresos
-		throw new UnsupportedOperationException();
+		GestorConsultas gConsultas = new GestorConsultas();
+		return gConsultas.consultarIngresos(tipo,fechaInicio,fechaFin);
 	}
 
 	/**
@@ -154,42 +141,14 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 */
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
 		// TODO Auto-generated method stub
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = GestorBD.getAgente();
-
-        List<Object> cursosListados = gestor.select("select * from cursospropios where "
-        		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
-        
-
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
-
-            cursos.add(cursoPropio);
-        }
-
-        gestor.desconectarBD();
-        return cursos;
+        GestorConsultas gConsultas = new GestorConsultas();
+        return gConsultas.listarEdicionesCursos(fechaInicio, fechaFin);
 	}
 	
 	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
         // TODO Auto-generated method stub
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = GestorBD.getAgente();
-
-        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
-
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
-
-            cursos.add(cursoPropio);
-        }
-
-        gestor.desconectarBD();
-        return cursos;
+		GestorConsultas gConsultas = new GestorConsultas();
+        return GestorConsultas.listarCursosPropiosPorEstado(estado);
     }
 
 }

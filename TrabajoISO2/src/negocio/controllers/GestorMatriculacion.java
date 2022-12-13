@@ -1,6 +1,14 @@
-package negocio.controllers;
+ package negocio.controllers;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import negocio.entities.*;
+import persistencia.CursoPropioDAO;
+import persistencia.GestorBD;
+import persistencia.MatriculaDAO;
 
 public class GestorMatriculacion {
 
@@ -11,7 +19,30 @@ public class GestorMatriculacion {
 	 */
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarMatriculacion
-		throw new UnsupportedOperationException();
+		
+		GestorBD agente = GestorBD.getAgente();
+		List<Object>  resultado = new ArrayList<Object>();
+				
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
+				+ "' and idCursoPropio = "+curso.getId());
+		
+		MatriculaDAO matriculaDAO = new MatriculaDAO();
+		Matricula matricula = new Matricula();
+		
+		CursoPropio cursoPropio = new CursoPropio();
+		List<Object> t = (List<Object>) matriculaListado.get(0);
+		try {
+			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		Collection<Matricula> mCollection = estudiante.getMatriculas();
+		mCollection.add(matricula);
+		estudiante.setMatriculas(mCollection);
+		
 	}
 
 	/**
@@ -21,7 +52,31 @@ public class GestorMatriculacion {
 	 */
 	public void realizarPagoMatricula(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarPagoMatricula
-		throw new UnsupportedOperationException();
+		GestorBD agente = GestorBD.getAgente();
+		List<Object>  resultado = new ArrayList<Object>();
+				
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
+				+ "' and idCursoPropio = "+curso.getId());
+		
+		MatriculaDAO matriculaDAO = new MatriculaDAO();
+		Matricula matricula = new Matricula();
+		
+		CursoPropio cursoPropio = new CursoPropio();
+		List<Object> t = (List<Object>) matriculaListado.get(0);
+		try {
+			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(matricula.getTipoPago() == ModoPago.TARJETA_CREDITO) {
+			realizarPagoTarjeta(matricula);
+		}else if (matricula.getTipoPago() == ModoPago.TRANSFERENCIA) {
+			realizarPagoTransferencia(matricula);
+		}
+		
 	}
 
 	/**
@@ -29,9 +84,10 @@ public class GestorMatriculacion {
 	 * @param curso
 	 * @param estudiante
 	 */
-	private void realizarPagoTarjeta(CursoPropio curso, Estudiante estudiante) {
+	private void realizarPagoTarjeta(Matricula matricula) {
 		// TODO - implement GestorMatriculacion.realizarPagoTarjeta
-		throw new UnsupportedOperationException();
+		matricula.setPagado(true);
+		
 	}
 
 	/**
@@ -39,14 +95,15 @@ public class GestorMatriculacion {
 	 * @param curso
 	 * @param estudiante
 	 */
-	private void realizarPagoTransferencia(CursoPropio curso, Estudiante estudiante) {
+	private void realizarPagoTransferencia(Matricula matricula) {
 		// TODO - implement GestorMatriculacion.realizarPagoTransferencia
-		throw new UnsupportedOperationException();
+		matricula.setPagado(true);
 	}
 
 	private void operation() {
 		// TODO - implement GestorMatriculacion.operation
 		throw new UnsupportedOperationException();
+		//esta seria la operacion de coger la cantidad de dinero de la matricula (entiendo yo)
 	}
 
 }

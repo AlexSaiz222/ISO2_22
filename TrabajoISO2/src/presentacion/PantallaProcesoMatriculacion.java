@@ -19,6 +19,7 @@ import javax.swing.Icon;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import negocio.controllers.GestorMatriculacion;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 import negocio.entities.Estudiante;
@@ -134,6 +135,9 @@ public class PantallaProcesoMatriculacion extends JFrame {
 					int resultado = matDAO.crearMatricula(mat);
 					
 					if(resultado == 0) {
+						GestorMatriculacion gMatriculacion = new GestorMatriculacion();
+						//aqui se meteria el método para matricularse
+						//gMatriculacion.realizarMatriculacion(null, est);
 						resultadoField.setText("Matriculado en curso correctamente");
 						PantallaPagar PP1 = new PantallaPagar();
 						PP1.setVisible(true);

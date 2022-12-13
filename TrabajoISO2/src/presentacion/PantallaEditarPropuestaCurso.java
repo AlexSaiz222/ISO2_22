@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import com.toedter.calendar.JDateChooser;
 
+import negocio.controllers.GestorPropuestasCursos;
 import negocio.entities.Centro;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -230,8 +231,8 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 					curso.setFechaFin(EndDateField.getDate());
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
-					CursoPropioDAO cursoDAO = new CursoPropioDAO();
-					int resultado = cursoDAO.crearCurso(curso);
+					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
+					int resultado = gestorPropuestasCursos.editarPropuestaCurso(curso);
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
 					}

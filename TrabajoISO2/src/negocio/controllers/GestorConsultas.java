@@ -1,9 +1,13 @@
 package negocio.controllers;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import negocio.entities.*;
+import persistencia.CursoPropioDAO;
+import persistencia.GestorBD;
 
 public class GestorConsultas {
 
@@ -13,9 +17,32 @@ public class GestorConsultas {
 	 * @param fechaInicio
 	 * @param fechaFin
 	 */
-	public List<CursoPropio> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
+	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarIngresos
-		throw new UnsupportedOperationException();
+		 List<Double> cursos = new ArrayList<Double>();
+	        GestorBD gestor = GestorBD.getAgente();
+
+	        List<Object> cursosListados = gestor.select("select * from cursospropios where tipo='"+tipo+"'"
+	        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
+
+	        for(int i=0; i<cursosListados.size(); i++) {
+	        	CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();
+	            CursoPropio cursoPropio = new CursoPropio();
+	            List<Object> t = (List<Object>) cursosListados.get(i);
+	            cursoPropio.setNombre(t.get(1).toString());
+	            try {
+					cursoPropio = cursoPropioDAO.seleccionarCurso((int) t.get(0));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            //habria que saber como poner un precio a la matricula, en este caso, he puesto 1250 euros
+	            //habria que poner cursos.add(cursoPropio.getPrecioMatricula)
+	            cursos.add(1250.99);
+	        }
+
+	        gestor.desconectarBD();
+	        return cursos;
 	}
 
 	/**
@@ -26,7 +53,22 @@ public class GestorConsultas {
 	 */
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarEstadoCursos
-		throw new UnsupportedOperationException();
+		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+	        GestorBD gestor = GestorBD.getAgente();
+
+	        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estadoCurso+"'"
+	        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
+
+	        for(int i=0; i<cursosListados.size(); i++) {
+	            CursoPropio cursoPropio = new CursoPropio();
+	            List<Object> t = (List<Object>) cursosListados.get(i);
+	            cursoPropio.setNombre(t.get(1).toString());
+
+	            cursos.add(cursoPropio);
+	        }
+
+	        gestor.desconectarBD();
+	        return cursos;
 	}
 
 	/**
@@ -36,7 +78,41 @@ public class GestorConsultas {
 	 */
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.listarEdicionesCursos
-		throw new UnsupportedOperationException();
-	}
+		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+	        GestorBD gestor = GestorBD.getAgente();
 
+	        List<Object> cursosListados = gestor.select("select * from cursospropios where "
+	        		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
+	        
+
+	        for(int i=0; i<cursosListados.size(); i++) {
+	            CursoPropio cursoPropio = new CursoPropio();
+	            List<Object> t = (List<Object>) cursosListados.get(i);
+	            cursoPropio.setNombre(t.get(1).toString());
+
+	            cursos.add(cursoPropio);
+	        }
+
+	        gestor.desconectarBD();
+	        return cursos;
+	}
+	
+	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
+        // TODO Auto-generated method stub
+        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+        GestorBD gestor = GestorBD.getAgente();
+
+        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
+
+        for(int i=0; i<cursosListados.size(); i++) {
+            CursoPropio cursoPropio = new CursoPropio();
+            List<Object> t = (List<Object>) cursosListados.get(i);
+            cursoPropio.setNombre(t.get(1).toString());
+
+            cursos.add(cursoPropio);
+        }
+
+        gestor.desconectarBD();
+        return cursos;
+    }
 }

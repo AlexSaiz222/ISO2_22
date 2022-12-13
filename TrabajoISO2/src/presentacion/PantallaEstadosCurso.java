@@ -93,6 +93,10 @@ public class PantallaEstadosCurso extends JFrame {
 		contentPane.add(Plot);
 		
 		JButton ListBttn = new JButton("Ver Estado");
+		ListBttn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		ListBttn.setForeground(Color.BLACK);
 		ListBttn.setBackground(Color.LIGHT_GRAY);
 		ListBttn.setBounds(23, 148, 251, 57);

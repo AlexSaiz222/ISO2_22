@@ -19,6 +19,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 
+import negocio.entities.TipoCurso;
+
 public class PantallaListarIngresos extends JFrame {
 
 	private JPanel contentPane;
@@ -80,11 +82,6 @@ public class PantallaListarIngresos extends JFrame {
 		TypeTxt.setBounds(23, 89, 89, 14);
 		contentPane.add(TypeTxt);
 		
-		JList TypeList = new JList();
-		TypeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		TypeList.setBounds(134, 88, 134, 154);
-		contentPane.add(TypeList);
-		
 		JLabel StartTxt = new JLabel("Fecha Inicio");
 		StartTxt.setBounds(23, 250, 72, 14);
 		contentPane.add(StartTxt);
@@ -110,6 +107,14 @@ public class PantallaListarIngresos extends JFrame {
 		JDateChooser EndDateField = new JDateChooser();
 		EndDateField.setBounds(134, 276, 134, 20);
 		contentPane.add(EndDateField);
+		
+		JComboBox typeBox = new JComboBox();
+		typeBox.setBounds(122, 89, 146, 21);
+		contentPane.add(typeBox);
+		typeBox.removeAllItems();
+		for(TipoCurso t: TipoCurso.values()) {
+			typeBox.addItem(t);
+		}
 		
 	}
 }

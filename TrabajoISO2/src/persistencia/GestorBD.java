@@ -14,30 +14,22 @@ import org.apache.derby.jdbc.EmbeddedDriver;
 
 public class GestorBD {
 	
-	protected static GestorBD instancia = null;
-	protected static Connection mBD;
+	protected Connection mBD;
 	private final static String DRIVER ="jdbc:derby";
 	private final static String CONNECTION_STRING ="jdbc:derby:db_proyecto_iso2;create=true";
 	private final static String DBNAME ="db_proyecto_iso2";
 	private final static String DBUSER ="admin";
 	private final static String DBPASS ="admin";
 	
-	private GestorBD() {
+	public GestorBD() {
 		conectarBD();
 	}
-	
-	public static GestorBD getAgente() {
-		if (instancia == null) {
-            instancia = new GestorBD();
-        }
-		return instancia;
-	}
 
-	public static void conectarBD() {
+	public void conectarBD() {
 		Driver derbyEmbeddedDriver = new EmbeddedDriver();
 		try {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			mBD = DriverManager.getConnection(DRIVER+":"+DBNAME, DBUSER, DBPASS);
+			this.mBD = DriverManager.getConnection(DRIVER+":"+DBNAME, DBUSER, DBPASS);
 		} catch (SQLException e) {
 			// Si no esta creada la base de datos, la crea y se conecta
 			if (((e.getErrorCode() == 40000) && ("XJ004".equals(e.getSQLState())))) {
@@ -54,7 +46,7 @@ public class GestorBD {
 	public void desconectarBD() {
 		try {
 			DriverManager.getConnection("jdbc:derby:;shutdown=true");
-			mBD.close();
+			this.mBD.close();
 		} catch (SQLException ex) {
 			if (((ex.getErrorCode() == 50000) && ("XJ015".equals(ex.getSQLState())))) {
 				System.out.println("Derby shut down normally");
@@ -72,11 +64,10 @@ public class GestorBD {
 	 */
 	public List<Object> select(String sql) {
 		List<Object> resultado = new ArrayList<Object>();
-		conectarBD();
 		Statement stmt;
 		ResultSet rs = null;
 		try {
-			stmt = mBD.createStatement();
+			stmt = this.mBD.createStatement();
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -103,22 +94,21 @@ public class GestorBD {
 
 	/**
 	 * 
-	 * @param sql
+	 * @param pstmt
 	 * @return res
 	 * *  0 si se ha insertado correctamente
 	 * * -1 si se produce un error
 	 */
-	public int insert(String sql) {
-		conectarBD();
-		PreparedStatement stmt;
+	public int insert(PreparedStatement pstmt) {
 		int res = -1;
 		try {
-			stmt = mBD.prepareStatement(sql);
-			res = stmt.executeUpdate();
-			stmt.close();
+			res = pstmt.executeUpdate();
+			pstmt.close();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Insert: "+e.getMessage());
 		}
+		
+		System.out.println(res);
 		
 		if(res==0)	// Si devuelve 0, es que no se ha insertado ninguna fila --> Incorrecto
 			res=-1;
@@ -142,7 +132,7 @@ public class GestorBD {
 		PreparedStatement stmt;
 		int res = -1;
 		try {
-			stmt = mBD.prepareStatement(sql);
+			stmt = this.mBD.prepareStatement(sql);
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -171,7 +161,7 @@ public class GestorBD {
 		PreparedStatement stmt;
 		int res = -1;
 		try {
-			stmt = mBD.prepareStatement(sql);
+			stmt = this.mBD.prepareStatement(sql);
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -188,7 +178,7 @@ public class GestorBD {
 		return res;
 	}
 	
-	private static void crearBaseDatosSinoExiste() {
+	private void crearBaseDatosSinoExiste() {
 		System.out.println("Creando base de datos...");
 		PreparedStatement pstmt;
 		Statement stmt;
@@ -200,15 +190,15 @@ public class GestorBD {
 			// Crear la conexion y la BBDD
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);
-			mBD.setAutoCommit(false);
-			stmt = mBD.createStatement();
+			this.mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);
+			this.mBD.setAutoCommit(false);
+			stmt = this.mBD.createStatement();
 			
 			// Crear la tabla estudiantes
 			stmt.execute(createSQL);
 
 			// Datos iniciales de estudiantes
-			pstmt = mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
 			pstmt.setString(1, "00000000A");
 			pstmt.setString(2, "Pepe");
 			pstmt.setString(3, "Perez");
@@ -223,7 +213,7 @@ public class GestorBD {
 			stmt.execute(createSQL);
 			
 			// Datos iniciales de centros
-			pstmt = mBD.prepareStatement("insert into centros (nombre, localizacion) VALUES (?,?)");
+			pstmt = this.mBD.prepareStatement("insert into centros (nombre, localizacion) VALUES (?,?)");
 			pstmt.setString(1, "Facultad de Ciencias Sociales");
 			pstmt.setString(2, "Talavera de la Reina");
 			pstmt.executeUpdate();
@@ -234,14 +224,14 @@ public class GestorBD {
 			stmt.execute(createSQL);
 			
 			// Datos iniciales de profesores
-			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "11111111B");
 			pstmt.setString(2, "Jaime");
 			pstmt.setString(3, "Garcia");
 			pstmt.setBoolean(4, true);
 			pstmt.executeUpdate();
 			
-			pstmt = mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
 			pstmt.setString(1, "22222222C");
 			pstmt.setString(2, "Alberto");
 			pstmt.setString(3, "Sanchez");
@@ -260,13 +250,13 @@ public class GestorBD {
 			stmt.execute(createSQL);
 			
 			// Datos iniciales de profesoresUCLM
-			pstmt = mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
 			pstmt.setString(1, "11111111B");
 			pstmt.setInt(2, 1);
 			pstmt.setString(3, "CATEDRATICO");
 			pstmt.executeUpdate();
 			
-			pstmt = mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)");
 			pstmt.setString(1, "22222222C");
 			pstmt.setInt(2, 1);
 			pstmt.setString(3, "TITULAR_UNIVERSIDAD");
@@ -303,8 +293,11 @@ public class GestorBD {
 					+ "primary key (idMateria), foreign key (responsable) references profesores(dni))";
 			stmt.execute(createSQL);
 
+			//Crear tabla pagos 
+			//parametros fecha compra y precio
+			//createSQL =
 			// Guardar cambios en la BD
-			mBD.commit();
+			this.mBD.commit();
 
 		} catch (SQLException e) {
 			System.out.println(e.getErrorCode());

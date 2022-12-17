@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,14 +22,31 @@ public class MateriaDAO extends AbstractEntityDAO {
 
 	public int crearMatricula(Materia materia) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		// TODO 
-		resultado = agente.insert("insert into materias (idMateria,responsable, nombre , horas , fechaInicio , fechaFin) "
-				+ "values ("+materia.getIdMateria()+",'"+materia.getResponsable()+"','"+materia.getNombre()
-				+"',"+materia.getHoras()+","+materia.getFechaInicio()+","+materia.getFechaFin()+")");
+		// Formateo de las fechas para la inserción en la BD
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		Date fechaInicio = Date.valueOf(simpleDateFormat.format(materia.getFechaInicio()));
+		Date fechaFin = Date.valueOf(simpleDateFormat.format(materia.getFechaFin()));
 		
-		agente.desconectarBD();
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into materias (responsable, nombre , horas , fechaInicio , fechaFin) "
+					+ "values (?,?,?,?,?)");
+			pstmt.setString(2, materia.getResponsable().getNombre());
+			pstmt.setString(3, materia.getNombre());
+			pstmt.setDouble(4, materia.getHoras());
+			pstmt.setDate(8, fechaInicio);
+			pstmt.setDate(9, fechaFin);
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("MateriaDAO: "+e.getMessage());
+		}
+		
 		return resultado;
 	}
 
@@ -37,10 +56,10 @@ public class MateriaDAO extends AbstractEntityDAO {
 	 * @throws ParseException 
 	 */
 	public Materia seleccionarMatricula(int materia) throws ParseException {
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> materiaListado = gestor.select("select * from materias where idMateria = "+materia);
 		List<Object> c = (List<Object>) materiaListado.get(0);
 		
@@ -71,7 +90,7 @@ public class MateriaDAO extends AbstractEntityDAO {
 	 */
 	public int editarMateria(Materia materia) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+	GestorBD agente = new GestorBD();
 
 	resultado = agente.update("update materias "
 			+ "set( idMateria = "+ materia.getIdMateria()+","

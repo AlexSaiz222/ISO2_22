@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class ProfesorDAO {
 	
 	public List<Profesor> listarProfesores() {
 		List<Profesor> profesores = new ArrayList<Profesor>();
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		
 		List<Object> profesoresListados = gestor.select("select * from profesores");
 		
@@ -27,12 +29,11 @@ public class ProfesorDAO {
 			profesores.add(profesor);
 		}
 		
-		gestor.desconectarBD();
 		return profesores;
 	}
 	
 	public Profesor seleccionarProfesor(String dni) {
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> profesorListado = gestor.select("select * from profesores where dni='"+dni+"'");
 		List<Object> c = (List<Object>) profesorListado.get(0);
 		Profesor profesor = new Profesor(
@@ -53,13 +54,24 @@ public class ProfesorDAO {
 
 	public int crearProfesor(Profesor profesor) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		resultado = agente.insert("insert into profesores (dni,nombre,apellidos,doctor) "
-				+ "values ('"+profesor.getDni()+"','"+profesor.getNombre()+"',"
-				+ "'"+profesor.getApellidos()+"',"+profesor.isDoctor()+")");
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) "
+					+ "values (?,?,?,?)");
+			pstmt.setString(1, profesor.getDni());
+			pstmt.setString(2, profesor.getNombre());
+			pstmt.setString(3, profesor.getApellidos());
+			pstmt.setBoolean(4, profesor.isDoctor());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("ProfesorDAO: "+e.getMessage());
+		}
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 
@@ -69,15 +81,15 @@ public class ProfesorDAO {
 	 */
 	public int editarProfesor(Profesor profesor) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
-
-	resultado = agente.update("update profesores "
-			+ "set( dni = '"+ profesor.getDni()+"',"
-					+ "nombre='"+profesor.getNombre()
-			+ "',apellidos ='"+profesor.getApellidos()+"', "
-					+ "doctor = "+profesor.isDoctor()+")");
+		GestorBD agente = new GestorBD();
 	
-	agente.desconectarBD();
-	return resultado;
+		resultado = agente.update("update profesores "
+				+ "set( dni = '"+ profesor.getDni()+"',"
+						+ "nombre='"+profesor.getNombre()
+				+ "',apellidos ='"+profesor.getApellidos()+"', "
+						+ "doctor = "+profesor.isDoctor()+")");
+		
+		agente.desconectarBD();
+		return resultado;
 	}
 }

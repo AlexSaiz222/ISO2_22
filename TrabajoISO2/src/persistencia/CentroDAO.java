@@ -1,5 +1,8 @@
 package persistencia;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +13,7 @@ public class CentroDAO extends AbstractEntityDAO{
 	
 	public List<Centro> listarCentros() {
 		List<Centro> centros = new ArrayList<Centro>();
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		
 		List<Object> centrosListados = gestor.select("select * from centros");
 		
@@ -23,12 +26,11 @@ public class CentroDAO extends AbstractEntityDAO{
 			centros.add(centro);
 		}
 		
-		gestor.desconectarBD();
 		return centros;
 	}
 	
 	public Centro seleccionarCentro(int idCentro) {
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> centroListado = gestor.select("select * from centros where idcentro="+idCentro);
 		List<Object> c = (List<Object>) centroListado.get(0);
 		Centro centro = new Centro(
@@ -48,11 +50,22 @@ public class CentroDAO extends AbstractEntityDAO{
 
 	public int crearCentro(Centro centro) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		// TODO 
-		resultado = agente.insert("insert into centros (idcentro,nombre,localizacion) "
-				+ "values ("+centro.getIdCentro()+",'"+centro.getNombre()+","+centro.getLocalizacion()+")");
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into centros (idcentro, nombre, localizacion) "
+					+ "values (?,?,?)");
+			pstmt.setInt(1, centro.getIdCentro());
+			pstmt.setString(2, centro.getNombre());
+			pstmt.setString(3, centro.getLocalizacion());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("DAO: "+e.getMessage());
+		}
 		
 		agente.desconectarBD();
 		return resultado;
@@ -64,15 +77,15 @@ public class CentroDAO extends AbstractEntityDAO{
 	 */
 	public int editarCentro(Centro centro) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 
-	resultado = agente.update("update centros "
-			+ "set( idcentro = "+ centro.getIdCentro()
-			+ ",localizacion ='"+centro.getLocalizacion()
-			+ ", nombre ="+centro.getNombre()+")");
-	
-	agente.desconectarBD();
-	return resultado;
+		resultado = agente.update("update centros "
+				+ "set( idcentro = "+ centro.getIdCentro()
+				+ ",localizacion ='"+centro.getLocalizacion()
+				+ ", nombre ="+centro.getNombre()+")");
+		
+		agente.desconectarBD();
+		return resultado;
 	}
 
 }

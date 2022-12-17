@@ -87,6 +87,7 @@ public class PantallaTransferencia extends JFrame {
 		IBANField.setBounds(164, 117, 192, 20);
 		contentPane.add(IBANField);
 		IBANField.setColumns(10);
+		//meter un label de fecha de compra
 		
 		JLabel IBANtxt = new JLabel("IBAN");
 		IBANtxt.setBounds(34, 120, 46, 14);

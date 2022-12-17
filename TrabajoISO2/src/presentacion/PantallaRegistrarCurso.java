@@ -208,7 +208,7 @@ public class PantallaRegistrarCurso extends JFrame {
 				try {
 					CursoPropio curso = new CursoPropio();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
-					// Añadir el director, que es el usuario que estará logueado
+					// TODO Anyadir el director, que es el usuario que este logueado
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
 					ProfesorUCLM profesorUCLM = new ProfesorUCLM();
 					profesorUCLM.setDni("11111111B");
@@ -228,8 +228,12 @@ public class PantallaRegistrarCurso extends JFrame {
 					
 					int resultado = cursoDAO.crearCurso(curso);
 					
+					System.out.println("Resultado Interfaz: "+resultado);
+					
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
+					} else {
+						resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");
 					}
 				} catch (Exception e) {
 					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");

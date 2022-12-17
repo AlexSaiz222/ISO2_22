@@ -1,31 +1,27 @@
 package negocio.controllers;
 
 import negocio.entities.*;
+import persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
-	/*
-	public CursoPropio realizarPropuestaCurso() {
+	
+	public int realizarPropuestaCurso(CursoPropio curso) {
 		
-		 CursoPropio curso = new CursoPropio(
-		 
-				null, 1, "11111111B", 
-				null, null, null, 
-				null, null, 0, 
-				null, 0, null, 
-				null, 0, 0
-				);
-		
-		return curso;
+		CursoPropioDAO cursoDAO = new CursoPropioDAO();
+		int resultado = cursoDAO.crearCurso(curso);
+		return resultado;
 		
 	}
-	*/
+	
 	/**
 	 * 
 	 * @param curso
 	 */
-	public void editarPropuestaCurso(CursoPropio curso) {
+	public int editarPropuestaCurso(CursoPropio curso) {
 		// TODO - implement GestorPropuestasCursos.editarPropuestaCurso
-		throw new UnsupportedOperationException();
+		CursoPropioDAO cursoDAO = new CursoPropioDAO();
+		int resultado = cursoDAO.editarCurso(curso);
+		return resultado;
 	}
 
 	/**

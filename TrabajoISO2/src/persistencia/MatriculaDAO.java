@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,14 +25,30 @@ public class MatriculaDAO extends AbstractEntityDAO{
 
 	public int crearMatricula(Matricula matricula) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		// TODO 
-		resultado = agente.insert("insert into matriculas (idmatriculas,idestudiante,idcursopropio,tipopago,fecha,pagado) "
-				+ "values ("+matricula.getIdMatricula()+",'"+matricula.getEstudiante().getIdEstudiante()+",'"+matricula.getTitulo().getId()
-				+",'"+matricula.getTipoPago()+"',"+matricula.getFecha()+","+matricula.isPagado()+")");
+		// Formateo de la fecha para la inserción en la BD
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		Date fecha = Date.valueOf(simpleDateFormat.format(matricula.getFecha()));
 		
-		agente.desconectarBD();
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into matriculas (idestudiante, idcursopropio, tipopago, fecha, pagado) "
+					+ "values (?,?,?,?,?,?)");
+			pstmt.setString(1, matricula.getEstudiante().getDni());
+			pstmt.setInt(2, matricula.getTitulo().getId());
+			pstmt.setString(3, matricula.getTipoPago().name());
+			pstmt.setDate(4, fecha);
+			pstmt.setBoolean(5, matricula.isPagado());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("MatriculaDAO: "+e.getMessage());
+		}
+		
 		return resultado;
 	}
 
@@ -40,10 +58,10 @@ public class MatriculaDAO extends AbstractEntityDAO{
 	 * @throws ParseException 
 	 */
 	public Matricula seleccionarMatricula(int matricula) throws ParseException {
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where idmatricula = "+matricula);
 		List<Object> c = (List<Object>) matriculaListado.get(0);
 		
@@ -78,7 +96,7 @@ public class MatriculaDAO extends AbstractEntityDAO{
 	 */
 	public int editarMatricula(Matricula matricula) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+	GestorBD agente = new GestorBD();
 
 	resultado = agente.update("update matriculas "
 			+ "set( idestudiante = "+ matricula.getEstudiante().getIdEstudiante()+",idcursopropio="+matricula.getTitulo().getId()

@@ -36,7 +36,7 @@ public class PantallaLogin extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -71,7 +71,7 @@ public class PantallaLogin extends JFrame {
 		UCLM_Image.setBounds(544, 304, 123, 70);
 		contentPane.add(UCLM_Image);
 		
-		JLabel PsswdText = new JLabel("Contraseña:");
+		JLabel PsswdText = new JLabel("Contraseï¿½a:");
 		PsswdText.setBounds(229, 150, 70, 39);
 		contentPane.add(PsswdText);
 		
@@ -111,22 +111,22 @@ public class PantallaLogin extends JFrame {
 						PantallaMatriculacion pantallamatricula = new PantallaMatriculacion();
 						EstudianteDAO ed1 = new EstudianteDAO();
 						
-						//ACCIÓN DEL BOTÓN DE ACCESO - COMPLETAR
-						//1º comprobar si el usuario es correcto
-						//si no es correcto --> lanzar excepción o mensaje de error
+						//ACCIï¿½N DEL BOTï¿½N DE ACCESO - COMPLETAR
+						//1ï¿½ comprobar si el usuario es correcto
+						//si no es correcto --> lanzar excepciï¿½n o mensaje de error
 						
-						//¿es un alumno? --> pantalla realizar matrícula
+						//ï¿½es un alumno? --> pantalla realizar matrï¿½cula
 						if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
 							Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
 							if(e1.getPsswd().compareTo(psswdString)==0) {
 								pantallamatricula.setVisible(true);
 							}
 						}
-						//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+						//ï¿½es personal vicerrectorado? --> pantalla evaluar propuesta curso
 						
-						//¿es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
+						//ï¿½es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
 						
-						//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+						//ï¿½es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
 						
 					}
 				});

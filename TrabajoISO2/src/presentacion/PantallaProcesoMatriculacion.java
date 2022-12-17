@@ -84,7 +84,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		
 		JLabel Title = new JLabel("Matricularse de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
-		Title.setBounds(10, 15, 270, 39);
+		Title.setBounds(10, 15, 520, 39);
 		contentPane.add(Title);
 		
 		JLabel NameTxt = new JLabel("Nombre");
@@ -118,7 +118,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		MatriculationBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					// anyadir el estudiante, que es el usuario que estaría logueado
+					// anyadir el estudiante, que es el usuario que estarï¿½a logueado
 					//Se ha puesto un ejemplo hasta que se implemente dicho login
 					Estudiante est = new Estudiante();
 					est.setIdEstudiante(4);
@@ -136,7 +136,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 					
 					if(resultado == 0) {
 						GestorMatriculacion gMatriculacion = new GestorMatriculacion();
-						//aqui se meteria el método para matricularse
+						//aqui se meteria el mï¿½todo para matricularse
 						//gMatriculacion.realizarMatriculacion(null, est);
 						resultadoField.setText("Matriculado en curso correctamente");
 						PantallaPagar PP1 = new PantallaPagar();
@@ -155,7 +155,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		btnPayLater.setForeground(Color.BLACK);
 		btnPayLater.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {try {
-				// anyadir el estudiante, que es el usuario que estaría logueado
+				// anyadir el estudiante, que es el usuario que estarï¿½a logueado
 				//Se ha puesto un ejemplo hasta que se implemente dicho login
 				Estudiante est = new Estudiante();
 				est.setIdEstudiante(4);

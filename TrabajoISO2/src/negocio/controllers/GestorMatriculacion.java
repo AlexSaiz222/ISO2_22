@@ -20,10 +20,10 @@ public class GestorMatriculacion {
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarMatriculacion
 		
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
 				+ "' and idCursoPropio = "+curso.getId());
 		
@@ -52,10 +52,10 @@ public class GestorMatriculacion {
 	 */
 	public void realizarPagoMatricula(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarPagoMatricula
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
 				+ "' and idCursoPropio = "+curso.getId());
 		
@@ -98,12 +98,6 @@ public class GestorMatriculacion {
 	private void realizarPagoTransferencia(Matricula matricula) {
 		// TODO - implement GestorMatriculacion.realizarPagoTransferencia
 		matricula.setPagado(true);
-	}
-
-	private void operation() {
-		// TODO - implement GestorMatriculacion.operation
-		throw new UnsupportedOperationException();
-		//esta seria la operacion de coger la cantidad de dinero de la matricula (entiendo yo)
 	}
 
 }

@@ -20,7 +20,7 @@ public class GestorConsultas {
 	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarIngresos
 		 List<Double> cursos = new ArrayList<Double>();
-	        GestorBD gestor = GestorBD.getAgente();
+	        GestorBD gestor = new GestorBD();
 
 	        List<Object> cursosListados = gestor.select("select * from cursospropios where tipo='"+tipo+"'"
 	        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
@@ -54,7 +54,7 @@ public class GestorConsultas {
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarEstadoCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-	        GestorBD gestor = GestorBD.getAgente();
+	        GestorBD gestor = new GestorBD();
 
 	        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estadoCurso+"'"
 	        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
@@ -79,7 +79,7 @@ public class GestorConsultas {
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.listarEdicionesCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-	        GestorBD gestor = GestorBD.getAgente();
+	        GestorBD gestor = new GestorBD();
 
 	        List<Object> cursosListados = gestor.select("select * from cursospropios where "
 	        		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
@@ -100,7 +100,7 @@ public class GestorConsultas {
 	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
         // TODO Auto-generated method stub
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = GestorBD.getAgente();
+        GestorBD gestor = new GestorBD();
 
         List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
 

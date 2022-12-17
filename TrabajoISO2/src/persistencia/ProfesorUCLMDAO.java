@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	
 	public List<ProfesorUCLM> listarProfesoresUCLM() {
 		List<ProfesorUCLM> profesoresUCLM = new ArrayList<ProfesorUCLM>();
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		
 		List<Object> profesoresUCLMListados = gestor.select("select * from profesoresUCLM");
 		CentroDAO centroDAO = new CentroDAO();
@@ -34,7 +36,6 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 			profesoresUCLM.add(profesorUCLM);
 		}
 		
-		gestor.desconectarBD();
 		return profesoresUCLM;
 	}
 
@@ -46,13 +47,23 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 
 	public int crearProfesorUCLM(ProfesorUCLM profeUCLM) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		resultado = agente.insert("insert into profesoresUCLM (dni, centroAdscripcion, categoria) "
-				+ "values ('"+profeUCLM.getDni()+"',"+profeUCLM.getCentroAdscripcion().getIdCentro()+","
-				+ "'"+profeUCLM.getCategoria()+")");
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) "
+					+ "values (?,?,?)");
+			pstmt.setString(1, profeUCLM.getDni());
+			pstmt.setInt(2, profeUCLM.getCentroAdscripcion().getIdCentro());
+			pstmt.setString(3, profeUCLM.getCategoria().name());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("ProfesorUCLMDAO: "+e.getMessage());
+		}
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 
@@ -61,10 +72,10 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	 * @param profeUCLM
 	 */
 	public ProfesorUCLM seleccionarProfesorUCLM(String profeUCLM) {
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> profeUCLMListado = gestor.select("select * from profesoresUCLM where dni = "+profeUCLM);
 		List<Object> c = (List<Object>) profeUCLMListado.get(0);
 		
@@ -93,7 +104,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	 */
 	public int editarProfesorUCLM(ProfesorUCLM profesorUCLM) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+	GestorBD agente = new GestorBD();
 
 	resultado = agente.update("update profesoresUCLM "
 			+ "set( dni = '"+ profesorUCLM.getDni()+"',centroAdscripcion='"+profesorUCLM.getCentroAdscripcion().getIdCentro()

@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +11,26 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	
 	public int crearEstudiante(Estudiante estudiante) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		resultado = agente.insert("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) "
-				+ "values ('"+estudiante.getDni()+"','"+estudiante.getNombre()+"',"
-				+ "'"+estudiante.getApellidos()+"','"+estudiante.getPsswd()+"','"+estudiante.getTitulacion()+"','"+estudiante.getCualificacion()+"','"+")");
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, "
+					+ "PASSWORD, TITULACION, CUALIFICACION) values (?,?,?,?,?,?)");
+			pstmt.setString(1, estudiante.getDni());
+			pstmt.setString(2, estudiante.getNombre());
+			pstmt.setString(3, estudiante.getApellidos());
+			pstmt.setString(4, estudiante.getPsswd());
+			pstmt.setString(5, estudiante.getTitulacion());
+			pstmt.setString(6, estudiante.getCualificacion());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("EstudianteDAO: "+e.getMessage());
+		}
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 
@@ -24,10 +39,10 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	 * @param estudiante
 	 */
 	public Estudiante seleccionarEstudiante(String estudiante) {
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 			
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> estudianteListado = gestor.select("select * from ESTUDIANTES where dni = "+estudiante);
 		List<Object> c = (List<Object>) estudianteListado.get(0);
 		
@@ -50,7 +65,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	 */
 	public int editarEstudiante(Estudiante estudiante) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+	GestorBD agente = new GestorBD();
 
 	resultado = agente.update("update estudiantes "
 			+ "set( dni = '"+ estudiante.getDni()+"',nombre='"+estudiante.getNombre()

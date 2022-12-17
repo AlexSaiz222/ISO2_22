@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +24,22 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 
 	public int crearProfesorExterno(ProfesorExterno profeExterno) {
 		int resultado = -1;
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		
-		resultado = agente.insert("insert into profesoresExternos (dni ,titulacion) "
-				+ "values ('"+profeExterno.getDni()+"','"+profeExterno.getTitulacion()+"')");
+		PreparedStatement pstmt;
+		try {
+			pstmt = agente.mBD.prepareStatement("insert into profesoresExternos (dni ,titulacion) "
+					+ "values (?,?)");
+			pstmt.setString(1, profeExterno.getDni());
+			pstmt.setString(2, profeExterno.getTitulacion());
+			
+			resultado = agente.insert(pstmt);
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("ProfesorExternoDAO: "+e.getMessage());
+		}
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 
@@ -36,10 +48,10 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 	 * @param profeExterno
 	 */
 	public ProfesorExterno seleccionarProfesorExterno(String profeExterno) {
-		GestorBD agente = GestorBD.getAgente();
+		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
-		GestorBD gestor = GestorBD.getAgente();
+		GestorBD gestor = new GestorBD();
 		List<Object> profeExternoListado = gestor.select("select * from profesoresExternos where dni = "+profeExterno);
 		List<Object> c = (List<Object>) profeExternoListado.get(0);
 		
@@ -68,7 +80,7 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 	 */
 	public int editarProfesorExterno(ProfesorExterno profeExterno) {
 		int resultado = -1;
-	GestorBD agente = GestorBD.getAgente();
+	GestorBD agente = new GestorBD();
 
 	resultado = agente.update("update profesoresExternos "
 			+ "set( dni = '"+ profeExterno.getDni()+"',titulacion='"+profeExterno.getTitulacion()

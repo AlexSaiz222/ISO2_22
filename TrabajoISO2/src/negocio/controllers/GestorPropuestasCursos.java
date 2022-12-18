@@ -9,6 +9,7 @@ public class GestorPropuestasCursos {
 		
 		CursoPropioDAO cursoDAO = new CursoPropioDAO();
 		int resultado = cursoDAO.crearCurso(curso);
+		
 		return resultado;
 		
 	}

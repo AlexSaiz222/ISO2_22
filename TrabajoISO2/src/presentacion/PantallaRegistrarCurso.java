@@ -21,6 +21,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import com.toedter.calendar.JDateChooser;
 
+import negocio.controllers.GestorPropuestasCursos;
 import negocio.entities.Centro;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -224,9 +225,8 @@ public class PantallaRegistrarCurso extends JFrame {
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
 					
-					CursoPropioDAO cursoDAO = new CursoPropioDAO();
-					
-					int resultado = cursoDAO.crearCurso(curso);
+					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
+					int resultado = gestorPropuestasCursos.realizarPropuestaCurso(curso);
 					
 					System.out.println("Resultado Interfaz: "+resultado);
 					

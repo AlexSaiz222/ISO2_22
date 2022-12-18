@@ -36,5 +36,20 @@ public class ProfesorUCLMDAO {
 		gestor.desconectarBD();
 		return profesoresUCLM;
 	}
+	
+	public ProfesorUCLM listarProfesoresUCLM(String dni) {
+		
+		GestorBD gestor = GestorBD.getAgente();
+		List<Object> profesoresUCLMListados = gestor.select("select * from profesoresUCLM where dni='"+dni+"'");
+		List<Object> c = (List<Object>) profesoresUCLMListado.get(0);
+		ProfesorUCLM profesor = new ProfesorUCLM(
+				c.get(0).toString(),
+				c.get(1).toString(),
+				c.get(2).toString(),
+				Boolean.getBoolean(c.get(3).toString()));
+		
+		gestor.desconectarBD();
+		return profesor;
+	}
 
 }

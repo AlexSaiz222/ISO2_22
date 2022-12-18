@@ -94,7 +94,11 @@ public class GestorBD {
 
 	/**
 	 * 
+<<<<<<< HEAD
 	 * @param pstmt
+=======
+	 * @param sql
+>>>>>>> refs/heads/master
 	 * @return res
 	 * *  0 si se ha insertado correctamente
 	 * * -1 si se produce un error
@@ -107,8 +111,6 @@ public class GestorBD {
 		} catch (SQLException e) {
 			System.out.println("Insert: "+e.getMessage());
 		}
-		
-		System.out.println(res);
 		
 		if(res==0)	// Si devuelve 0, es que no se ha insertado ninguna fila --> Incorrecto
 			res=-1;

@@ -15,7 +15,7 @@ import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
 import negocio.entities.TipoCurso;
 
-public class MatriculaDAO extends AbstractEntityDAO{
+public class MatriculaDAO {
 
 	/**
 	 * 
@@ -59,10 +59,7 @@ public class MatriculaDAO extends AbstractEntityDAO{
 	 */
 	public Matricula seleccionarMatricula(int matricula) throws ParseException {
 		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
-				
-		GestorBD gestor = new GestorBD();
-		List<Object> matriculaListado = gestor.select("select * from matriculas where idmatricula = "+matricula);
+		List<Object> matriculaListado = agente.select("select * from matriculas where idmatricula = "+matricula);
 		List<Object> c = (List<Object>) matriculaListado.get(0);
 		
 		Matricula mat1 = new Matricula();
@@ -85,8 +82,6 @@ public class MatriculaDAO extends AbstractEntityDAO{
 		mat1.setTipoPago(tipopago);
 		mat1.setPagado(Boolean.parseBoolean(c.get(5).toString()));
 		
-		gestor.desconectarBD();
-		
 		return mat1;
 	}
 
@@ -96,15 +91,14 @@ public class MatriculaDAO extends AbstractEntityDAO{
 	 */
 	public int editarMatricula(Matricula matricula) {
 		int resultado = -1;
-	GestorBD agente = new GestorBD();
-
-	resultado = agente.update("update matriculas "
-			+ "set( idestudiante = "+ matricula.getEstudiante().getIdEstudiante()+",idcursopropio="+matricula.getTitulo().getId()
-			+ ",tipopago ='"+matricula.getTipoPago()+"', fecha = "+matricula.getFecha()
-			+ ", pagado ="+matricula.getTipoPago()+")");
+		GestorBD agente = new GestorBD();
 	
-	agente.desconectarBD();
-	return resultado;
+		resultado = agente.update("update matriculas "
+				+ "set( idestudiante = "+ matricula.getEstudiante().getIdEstudiante()+",idcursopropio="+matricula.getTitulo().getId()
+				+ ",tipopago ='"+matricula.getTipoPago()+"', fecha = "+matricula.getFecha()
+				+ ", pagado ="+matricula.getTipoPago()+")");
+		
+		return resultado;
 	}
 
 }

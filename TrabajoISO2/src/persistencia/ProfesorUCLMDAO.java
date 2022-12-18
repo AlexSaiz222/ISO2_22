@@ -38,6 +38,26 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 		
 		return profesoresUCLM;
 	}
+	
+	// TODO Crear constructor vacío y añadir los atributos
+	/*
+	public ProfesorUCLM listarProfesoresUCLM(String dni) {
+		
+		GestorBD gestor = new GestorBD();
+		List<Object> profesoresUCLMListados = gestor.select("select * from profesoresUCLM where dni='"+dni+"'");
+		List<Object> c = (List<Object>) profesoresUCLMListados.get(0);
+		
+		
+		ProfesorUCLM profesor = new ProfesorUCLM(
+				c.get(0).toString(),
+				c.get(1).toString(),
+				c.get(2).toString(),
+				Boolean.getBoolean(c.get(3).toString()));
+		
+		
+		return profesor;
+	}
+	*/
 
 	/**
 	 * 
@@ -104,13 +124,13 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	 */
 	public int editarProfesorUCLM(ProfesorUCLM profesorUCLM) {
 		int resultado = -1;
-	GestorBD agente = new GestorBD();
-
-	resultado = agente.update("update profesoresUCLM "
-			+ "set( dni = '"+ profesorUCLM.getDni()+"',centroAdscripcion='"+profesorUCLM.getCentroAdscripcion().getIdCentro()
-			+ "',categoria ="+profesorUCLM.getCategoria()+")");
+		GestorBD agente = new GestorBD();
 	
-	agente.desconectarBD();
-	return resultado;
+		resultado = agente.update("update profesoresUCLM "
+				+ "set( dni = '"+ profesorUCLM.getDni()+"',centroAdscripcion='"+profesorUCLM.getCentroAdscripcion().getIdCentro()
+				+ "',categoria ="+profesorUCLM.getCategoria()+")");
+		
+		agente.desconectarBD();
+		return resultado;
 	}
 }

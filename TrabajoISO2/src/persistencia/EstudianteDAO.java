@@ -69,14 +69,14 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	 */
 	public int editarEstudiante(Estudiante estudiante) {
 		int resultado = -1;
-	GestorBD agente = new GestorBD();
-
-	resultado = agente.update("update estudiantes "
-			+ "set( dni = '"+ estudiante.getDni()+"',nombre='"+estudiante.getNombre()
-			+ "',apellidos = '"+estudiante.getApellidos()+"', password = '"+estudiante.getPsswd()
-			+ "', titulacion ='"+estudiante.getTitulacion()+"', cualificacion ='"+estudiante.getCualificacion()+"')");
+		GestorBD agente = new GestorBD();
 	
-	agente.desconectarBD();
-	return resultado;
+		resultado = agente.update("update estudiantes "
+				+ "set( dni = '"+ estudiante.getDni()+"',nombre='"+estudiante.getNombre()
+				+ "',apellidos = '"+estudiante.getApellidos()+"', password = '"+estudiante.getPsswd()
+				+ "', titulacion ='"+estudiante.getTitulacion()+"', cualificacion ='"+estudiante.getCualificacion()+"')");
+		
+		agente.desconectarBD();
+		return resultado;
 	}
 }

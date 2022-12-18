@@ -69,7 +69,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		
 		JLabel Title = new JLabel("Editar una propuesta de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
-		Title.setBounds(223, 11, 268, 39);
+		Title.setBounds(60, 11, 431, 39);
 		contentPane.add(Title);
 		
 		JButton LogOutBttn = new JButton("Log out");

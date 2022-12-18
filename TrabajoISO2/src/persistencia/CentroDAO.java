@@ -9,7 +9,7 @@ import java.util.List;
 import negocio.entities.Centro;
 import negocio.entities.Matricula;
 
-public class CentroDAO extends AbstractEntityDAO{
+public class CentroDAO {
 	
 	public List<Centro> listarCentros() {
 		List<Centro> centros = new ArrayList<Centro>();

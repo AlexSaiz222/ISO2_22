@@ -9,8 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import negocio.entities.Estudiante;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
 import persistencia.EstudianteDAO;
 import persistencia.GestorBD;
+import persistencia.ProfesorUCLMDAO;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -98,7 +101,7 @@ public class Login extends JFrame {
 		textField_userName.setColumns(10);
 		String nombreUsuario = textField_userName.getText();
 		
-		JLabel lbl_password = new JLabel("Contraseña");
+		JLabel lbl_password = new JLabel("Contraseï¿½a");
 		lbl_password.setFont(new Font("Arial", Font.BOLD, 12));
 		GridBagConstraints gbc_lbl_password = new GridBagConstraints();
 		gbc_lbl_password.insets = new Insets(0, 0, 5, 5);
@@ -108,38 +111,42 @@ public class Login extends JFrame {
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Arial", Font.PLAIN, 11));
-		passwordField.setToolTipText("Insertar aqui la contraseña");
+		passwordField.setToolTipText("Insertar aqui la contraseï¿½a");
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 5;
 		contentPane.add(passwordField, gbc_passwordField);
-		String contraseña = passwordField.getText();
+		String contrasena = new String(passwordField.getPassword());
 		
 		btn_access = new JButton("Acceso");
 		btn_access.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaMatriculacion pantallamatricula = new PantallaMatriculacion();
 				EstudianteDAO ed1 = new EstudianteDAO();
+				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();
 				
-				//ACCIÓN DEL BOTÓN DE ACCESO - COMPLETAR
-				//1º comprobar si el usuario es correcto
-				//si no es correcto --> lanzar excepción o mensaje de error
+				//ACCIï¿½N DEL BOTï¿½N DE ACCESO - COMPLETAR
+				//1ï¿½ comprobar si el usuario es correcto
+				//si no es correcto --> lanzar excepciï¿½n o mensaje de error
 				
-				//¿es un alumno? --> pantalla realizar matrícula
-				if(ed1.listarEstudiante(nombreUsuario) != null) {
-					Estudiante e1 = ed1.listarEstudiante(nombreUsuario);
-					if(e1.getPassword().compareTo(contraseña)==0) {
+				//ï¿½es un alumno? --> pantalla realizar matrï¿½cula
+				if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
+					Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
+					if(e1.getPsswd().compareTo(contrasena) == 0) {
 						pantallamatricula.setVisible(true);
 					}
 				}
-				//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+				//ï¿½es personal vicerrectorado? --> pantalla evaluar propuesta curso
 				
-				//¿es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
+				//ï¿½es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
 				
-				//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
-				
+				//ï¿½es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+					//ï¿½es profesor de la UCLM? 
+				if(pf1.listarProfesorUCLM(nombreUsuario) != null) {
+					
+				}
 				
 			}
 		});

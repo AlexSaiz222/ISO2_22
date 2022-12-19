@@ -27,7 +27,7 @@ public class MatriculaDAO {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		// Formateo de la fecha para la inserción en la BD
+		// Formateo de la fecha para la insercion en la BD
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		Date fecha = Date.valueOf(simpleDateFormat.format(matricula.getFecha()));

@@ -100,9 +100,4 @@ public class PantallaMatriculacion extends JFrame {
 		UCLM_letters.setBounds(385, 88, 241, 213);
 		contentPane.add(UCLM_letters);
 	}
-
-	public void realizarMatriculacion() {
-		// TODO - implement PantallaMatriculacion.realizarMatriculacion
-		throw new UnsupportedOperationException();
-	}
 }

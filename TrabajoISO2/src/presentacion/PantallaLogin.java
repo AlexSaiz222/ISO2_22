@@ -45,7 +45,7 @@ public class PantallaLogin extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField textField_userName;
 	private JButton btn_access;
-	private String usuarioLogeado;
+	private Estudiante estudianteLogeado;
 
 	/**
 	 * Launch the application.
@@ -138,7 +138,7 @@ public class PantallaLogin extends JFrame {
 						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
 						if(e1.getPassword().compareTo(contrasena)==0) {
 							pantallamatricula.setVisible(true);
-							usuarioLogeado=nombreUsuario;
+							estudianteLogeado=e1;
 						}
 					}else {
 						//si no es alumno, vicerrector o jefe de gabinete
@@ -178,8 +178,8 @@ public class PantallaLogin extends JFrame {
 		//IMPLEMENTAR
 	}
 	
-	public String getUsuarioLogeado(){	
-		return usuarioLogeado;
+	public Estudiante getEstudianteLogeado(){	
+		return estudianteLogeado;
 	}
 	
 	

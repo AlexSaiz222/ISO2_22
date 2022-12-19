@@ -87,7 +87,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		Title.setBounds(10, 15, 520, 39);
 		contentPane.add(Title);
 		
-		JLabel NameTxt = new JLabel("Nombre");
+		JLabel NameTxt = new JLabel("Nombre del curso");
 		NameTxt.setBounds(34, 86, 62, 14);
 		contentPane.add(NameTxt);
 		

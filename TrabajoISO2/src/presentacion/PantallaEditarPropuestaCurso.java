@@ -29,6 +29,8 @@ import negocio.entities.TipoCurso;
 import persistencia.CentroDAO;
 import persistencia.CursoPropioDAO;
 import persistencia.ProfesorDAO;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class PantallaEditarPropuestaCurso extends JFrame {
 
@@ -148,6 +150,12 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		CenterTxt.setBounds(60, 257, 46, 22);
 		contentPane.add(CenterTxt);
 		
+		resultadoField = new JTextField();
+		resultadoField.setEnabled(false);
+		resultadoField.setBounds(356, 205, 303, 23);
+		contentPane.add(resultadoField);
+		resultadoField.setColumns(10);
+		
 		JComboBox centerBox = new JComboBox();
 		centerBox.setBounds(170, 257, 409, 21);
 		contentPane.add(centerBox);
@@ -184,29 +192,46 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 			typeBox.addItem(t);
 		}
 		
+		CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();
 		JComboBox NameField = new JComboBox();
+		NameField.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				CursoPropio cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
+				if(cursoSeleccionado.getId() == -1) {
+					resultadoField.setText("Ha ocurrido un error al obtener los datos");
+				} else {
+					ETCSField.setText(cursoSeleccionado.getECTS()+"");
+					FeeField.setText(cursoSeleccionado.getTasaMatricula()+"");
+					StartDateField.setDate(cursoSeleccionado.getFechaInicio());
+					EndDateField.setDate(cursoSeleccionado.getFechaFin());
+					EditionField.setText(cursoSeleccionado.getEdicion()+"");
+					centerBox.addItem(cursoSeleccionado.getCentro()+"");
+					secretaryBox.addItem(cursoSeleccionado.getSecretario());
+					typeBox.addItem(cursoSeleccionado.getTipo());
+				}
+			}
+		});
 		NameField.setBounds(170, 90, 252, 21);
 		contentPane.add(NameField);
 		NameField.removeAllItems();
-		EstadoCurso Estado= EstadoCurso.PROPUESTO;
-		List<CursoPropio> cursos = CursoPropioDAO.listarCursosPropiosPorEstado(Estado);
-		for(CursoPropio c: cursos) {
-			NameField.addItem(c.getNombre());
-			ETCSField.setText(c.getECTS()+"");
-			FeeField.setText(c.getTasaMatricula()+"");
-			StartDateField.setDate(c.getFechaInicio());
-			EndDateField.setDate(c.getFechaFin());
-			EditionField.setText(c.getEdicion()+"");
-			centerBox.addItem(c.getCentro()+"");
-			secretaryBox.addItem(c.getSecretario());
-			typeBox.addItem(c.getTipo());
+		EstadoCurso estado = EstadoCurso.PROPUESTO;
+		List<CursoPropio> cursos = cursoPropioDAO.listarCursosPorEstado(estado);
+		if(cursos.size() == 0) {
+			resultadoField.setText("No hay cursos propuestos");
+		} else {
+			for(CursoPropio c: cursos) {
+				NameField.addItem(c.getId()+" - "+c.getNombre());
+				ETCSField.setText(c.getECTS()+"");
+				FeeField.setText(c.getTasaMatricula()+"");
+				StartDateField.setDate(c.getFechaInicio());
+				EndDateField.setDate(c.getFechaFin());
+				EditionField.setText(c.getEdicion()+"");
+				centerBox.addItem(c.getCentro()+"");
+				secretaryBox.addItem(c.getSecretario());
+				typeBox.addItem(c.getTipo());
+			}
 		}
 		
-		resultadoField = new JTextField();
-		resultadoField.setEnabled(false);
-		resultadoField.setBounds(356, 205, 303, 23);
-		contentPane.add(resultadoField);
-		resultadoField.setColumns(10);
 		
 		JButton EditBtn = new JButton("Editar propuesta");
 		EditBtn.setBackground(new Color(50, 205, 50));

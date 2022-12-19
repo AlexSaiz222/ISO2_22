@@ -91,8 +91,9 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		contentPane.add(NameField);
 		NameField.removeAllItems();
 		
-		EstadoCurso Estado= EstadoCurso.PROPUESTO;
-		List<CursoPropio> cursos = CursoPropioDAO.listarCursosPropiosPorEstado(Estado);
+		CursoPropioDAO cursoDAO = new CursoPropioDAO();
+		EstadoCurso estado = EstadoCurso.PROPUESTO;
+		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
 		
 		for(CursoPropio c: cursos) {
 			NameField.addItem(c.getNombre());
@@ -106,14 +107,13 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		RejectBtn.setBackground(Color.RED);
 		RejectBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CursoPropioDAO cursoDAO = new CursoPropioDAO();
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					//g.rechazarCurso(curso);
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -130,7 +130,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					g.altaCursoAprobado(curso);
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

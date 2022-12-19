@@ -32,7 +32,7 @@ public class GestorConsultas {
 	            cursoPropio.setNombre(t.get(1).toString());
 	            try {
 					cursoPropio = cursoPropioDAO.seleccionarCurso((int) t.get(0));
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

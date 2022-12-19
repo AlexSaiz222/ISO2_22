@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.awt.Window.Type;
 import java.util.*;
 
 public class Estudiante {
@@ -11,13 +12,14 @@ public class Estudiante {
 	private String titulacion;
 	private String cualificacion;
 	private int idEstudiante;
+	private char[] password;
 	
 	public Estudiante() {
 		
 	}
 	
-	public Estudiante(Collection<Matricula> matriculas, String dni, String nombre, String apellidos, String titulacion,
-			String cualificacion, int idEstudiante) {
+	public Estudiante(String dni, String nombre, String apellidos, String titulacion,
+			String cualificacion, int idEstudiante, Collection<Matricula> matriculas, char[] password) {
 		super();
 		this.matriculas = matriculas;
 		this.dni = dni;
@@ -26,6 +28,7 @@ public class Estudiante {
 		this.titulacion = titulacion;
 		this.cualificacion = cualificacion;
 		this.setIdEstudiante(idEstudiante);
+		this.password=password;
 	}
 
 	public Collection<Matricula> getMatriculas() {
@@ -82,6 +85,10 @@ public class Estudiante {
 
 	public void setIdEstudiante(int idEstudiante) {
 		this.idEstudiante = idEstudiante;
+	}
+
+	public char[] getPassword() {
+		return password;
 	}
 	
 }

@@ -6,17 +6,19 @@ public class Profesor {
 	private String nombre;
 	private String apellidos;
 	private boolean doctor;
+	private char[] password;
 	
 	public Profesor() {
 		
 	}
 	
-	public Profesor(String dni, String nombre, String apellidos, boolean doctor) {
+	public Profesor(String dni, String nombre, String apellidos, boolean doctor, char[] password) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.doctor = doctor;
+		this.password = password;
 	}
 
 	public String getDni() {
@@ -51,5 +53,13 @@ public class Profesor {
 		this.doctor = doctor;
 	}
 
+	public char[] getPassword() {
+		return password;
+	}
+
+	public void setPassword(char[] password1) {
+		this.password = password1;
+	}
+	
 	
 }

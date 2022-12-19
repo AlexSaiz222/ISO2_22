@@ -26,6 +26,7 @@ public class ProfesorUCLMDAO {
 			profesorUCLM.setCategoria(CategoriaProfesor.valueOf(c.get(2).toString()));
 			
 			Profesor profesor = profesorDAO.listarProfesor(profesorUCLM.getDni());
+			profesorUCLM.setPassword(profesor.getPassword());
 			profesorUCLM.setNombre(profesor.getNombre());
 			profesorUCLM.setApellidos(profesor.getApellidos());
 			profesorUCLM.setDoctor(profesor.isDoctor());
@@ -37,7 +38,7 @@ public class ProfesorUCLMDAO {
 		return profesoresUCLM;
 	}
 	
-	public ProfesorUCLM listarProfesoresUCLM(String dni) {
+	public ProfesorUCLM seleccionarProfesorUCLM(String dni) {
 		
 		GestorBD gestor = GestorBD.getAgente();
 		List<Object> profesoresUCLMListados = gestor.select("select * from profesoresUCLM where dni='"+dni+"'");
@@ -47,6 +48,7 @@ public class ProfesorUCLMDAO {
 				c.get(1).toString(),
 				c.get(2).toString(),
 				Boolean.getBoolean(c.get(3).toString()));
+				(c.get(4).toString());
 		
 		gestor.desconectarBD();
 		return profesor;

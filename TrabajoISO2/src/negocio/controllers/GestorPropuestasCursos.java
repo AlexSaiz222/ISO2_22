@@ -3,9 +3,9 @@ package negocio.controllers;
 import negocio.entities.*;
 
 public class GestorPropuestasCursos {
-	/*
+	
 	public CursoPropio realizarPropuestaCurso() {
-		
+		/*
 		 CursoPropio curso = new CursoPropio(
 		 
 				null, 1, "11111111B", 
@@ -14,11 +14,11 @@ public class GestorPropuestasCursos {
 				null, 0, null, 
 				null, 0, 0
 				);
-		
-		return curso;
+		*/
+		return null;
 		
 	}
-	*/
+	
 	/**
 	 * 
 	 * @param curso

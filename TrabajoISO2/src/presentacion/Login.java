@@ -118,7 +118,8 @@ public class Login extends JFrame {
 		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 5;
 		contentPane.add(passwordField, gbc_passwordField);
-		String contraseña = passwordField.getText();
+		@SuppressWarnings("deprecation")
+		char[] contraseña = passwordField.getPassword();
 		
 		btn_access = new JButton("Acceso");
 		btn_access.addActionListener(new ActionListener() {
@@ -132,21 +133,33 @@ public class Login extends JFrame {
 				//si no es correcto --> lanzar excepción o mensaje de error
 				
 				//¿es un alumno? --> pantalla realizar matrícula
-				if(ed1.listarEstudiante(nombreUsuario) != null) {
-					Estudiante e1 = ed1.listarEstudiante(nombreUsuario);
-					if(e1.getPassword().compareTo(contraseña)==0) {
-						pantallamatricula.setVisible(true);
+				try {
+					if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
+						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
+						if(e1.getPassword().equals(contraseña)==true) {
+							pantallamatricula.setVisible(true);
+						}
+					}else {
+						//si no es alumno, será director de curso, vicerrector o jefe de gabinete
+						//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+						//¿es profesor de la UCLM? 
+							if(pf1.listarProfesoresUCLM(nombreUsuario) != null) {
+								ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);
+								if(p1.getPassword().equals(contraseña)==true) {
+									
+								}
+							}
+						
 					}
-				}
+					}catch (Exception exception1) {
+						System.out.println("El usuario no se encuentra registrado en la base de datos.");
+					}
+				
 				//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
 				
 				//¿es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
 				
-				//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
-					//¿es profesor de la UCLM? 
-				if(pf1.listarProfesoresUCLM(nombreUsuario) != null) {
-					
-				}
+				
 				
 			}
 		});

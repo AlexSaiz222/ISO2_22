@@ -29,7 +29,7 @@ public class GestorMatriculacion {
 	 * @param curso
 	 * @param estudiante
 	 */
-	private void realizarPagoTarjeta(CursoPropio curso, Estudiante estudiante) {
+	public void realizarPagoTarjeta(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarPagoTarjeta
 		throw new UnsupportedOperationException();
 	}
@@ -39,12 +39,12 @@ public class GestorMatriculacion {
 	 * @param curso
 	 * @param estudiante
 	 */
-	private void realizarPagoTransferencia(CursoPropio curso, Estudiante estudiante) {
+	public void realizarPagoTransferencia(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarPagoTransferencia
 		throw new UnsupportedOperationException();
 	}
 
-	private void operation() {
+	public void operacionMatriculacion() {
 		// TODO - implement GestorMatriculacion.operation
 		throw new UnsupportedOperationException();
 	}

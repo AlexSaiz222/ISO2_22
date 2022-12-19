@@ -11,7 +11,7 @@ public class Estudiante {
 	private String apellidos;
 	private String titulacion;
 	private String cualificacion;
-	private String psswd;
+	private String password;
 	private int idEstudiante;
 	
 	public Estudiante() {
@@ -28,7 +28,7 @@ public class Estudiante {
 		this.titulacion = titulacion;
 		this.cualificacion = cualificacion;
 		this.setIdEstudiante(idEstudiante);
-		this.psswd = password;
+		this.password = password;
 	}
 
 	public Collection<Matricula> getMatriculas() {
@@ -88,11 +88,31 @@ public class Estudiante {
 	}
 
 	public String getPassword() {
-		return psswd;
+		return password;
 	}
 
 	public void setPassword(String psswd) {
-		this.psswd = psswd;
+		this.password = psswd;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, cualificacion, dni, idEstudiante, matriculas, nombre, password, titulacion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estudiante other = (Estudiante) obj;
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(cualificacion, other.cualificacion)
+				&& Objects.equals(dni, other.dni) && idEstudiante == other.idEstudiante
+				&& Objects.equals(matriculas, other.matriculas) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(password, other.password) && Objects.equals(titulacion, other.titulacion);
 	}
 
 	

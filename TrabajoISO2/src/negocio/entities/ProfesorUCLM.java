@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.util.Objects;
+
 public class ProfesorUCLM extends Profesor {
 
 	private Centro centroAdscripcion;
@@ -30,6 +32,26 @@ public class ProfesorUCLM extends Profesor {
 
 	public void setCategoria(CategoriaProfesor categoria) {
 		this.categoria = categoria;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(categoria, centroAdscripcion);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProfesorUCLM other = (ProfesorUCLM) obj;
+		return categoria == other.categoria && Objects.equals(centroAdscripcion, other.centroAdscripcion);
 	}
 	
 }

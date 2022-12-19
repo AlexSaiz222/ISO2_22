@@ -62,5 +62,24 @@ public class Centro {
 		this.localizacion = localizacion;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(cursoPropios, idCentro, localizacion, nombre, plantilla);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Centro other = (Centro) obj;
+		return Objects.equals(cursoPropios, other.cursoPropios) && idCentro == other.idCentro
+				&& Objects.equals(localizacion, other.localizacion) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(plantilla, other.plantilla);
+	}
+
 	
 }

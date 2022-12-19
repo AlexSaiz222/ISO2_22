@@ -1,6 +1,7 @@
 package negocio.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Materia {
 
@@ -63,6 +64,26 @@ public class Materia {
 	}
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaFin, fechaInicio, horas, idMateria, nombre, responsable);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Materia other = (Materia) obj;
+		return Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
+				&& Double.doubleToLongBits(horas) == Double.doubleToLongBits(other.horas)
+				&& idMateria == other.idMateria && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(responsable, other.responsable);
 	}
 
 	

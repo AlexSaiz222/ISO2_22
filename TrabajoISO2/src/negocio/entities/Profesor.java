@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.util.Objects;
+
 public class Profesor {
 
 	private String dni;
@@ -59,6 +61,25 @@ public class Profesor {
 
 	public void setDoctor(boolean doctor) {
 		this.esDoctor = doctor;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, dni, esDoctor, nombre, password);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Profesor other = (Profesor) obj;
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(dni, other.dni)
+				&& esDoctor == other.esDoctor && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(password, other.password);
 	}
 
 	

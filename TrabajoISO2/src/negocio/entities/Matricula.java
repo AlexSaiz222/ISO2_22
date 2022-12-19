@@ -72,4 +72,5 @@ public class Matricula {
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
+	
 }

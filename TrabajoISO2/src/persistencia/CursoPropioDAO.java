@@ -24,7 +24,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		// Formateo de las fechas para la inserción en la BD
+		// Formateo de las fechas para la insercion en la BD
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));

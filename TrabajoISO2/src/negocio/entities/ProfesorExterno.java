@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.util.Objects;
+
 public class ProfesorExterno extends Profesor {
 
 	private String titulacion;
@@ -19,6 +21,26 @@ public class ProfesorExterno extends Profesor {
 
 	public void setTitulacion(String titulacion) {
 		this.titulacion = titulacion;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(titulacion);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProfesorExterno other = (ProfesorExterno) obj;
+		return Objects.equals(titulacion, other.titulacion);
 	}
 	
 	

@@ -2,16 +2,16 @@ package negocio.entities;
 
 public class ProfesorUCLM extends Profesor {
 
-	Centro centroAdscripcion;
-	CategoriaProfesor categoria;
+	private Centro centroAdscripcion;
+	private CategoriaProfesor categoria;
 	
 	public ProfesorUCLM() {
 		
 	}
 	
-	public ProfesorUCLM(String dni, String nombre, String apellidos, boolean doctor, Centro centroAdscripcion,
+	public ProfesorUCLM(String dni, String nombre, String apellidos, String password, boolean esDoctor, Centro centroAdscripcion,
 			CategoriaProfesor categoria) {
-		super(dni, nombre, apellidos, doctor);
+		super(dni, nombre, apellidos, password, esDoctor);
 		this.centroAdscripcion = centroAdscripcion;
 		this.categoria = categoria;
 	}

@@ -35,7 +35,6 @@ public class GestorMatriculacion {
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         

@@ -31,6 +31,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 			Profesor profesor = profesorDAO.seleccionarProfesor(profesorUCLM.getDni());
 			profesorUCLM.setNombre(profesor.getNombre());
 			profesorUCLM.setApellidos(profesor.getApellidos());
+			profesorUCLM.setPassword(profesor.getPassword());
 			profesorUCLM.setDoctor(profesor.isDoctor());
 			
 			profesoresUCLM.add(profesorUCLM);
@@ -52,6 +53,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 				profesorObtenido.getDni(),
 				profesorObtenido.getNombre(),
 				profesorObtenido.getApellidos(),
+				profesorObtenido.getPassword(),
 				profesorObtenido.isDoctor(),
 				centroDAO.seleccionarCentro(Integer.parseInt(profesorUCLM.get(0).toString())),
 				CategoriaProfesor.valueOf(profesorUCLM.get(1).toString()));
@@ -110,6 +112,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 		profe1.setCentroAdscripcion(centro);
 		profe1.setDni(c.get(0).toString());
 		profe1.setApellidos(profesor.getApellidos());
+		profe1.setPassword(profesor.getPassword());
 		profe1.setDoctor(profesor.isDoctor());
 		profe1.setCategoria(profe1.getCategoria());
 		profe1.setNombre(profesor.getNombre());

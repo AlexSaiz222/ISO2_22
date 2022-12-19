@@ -2,41 +2,55 @@ package presentacion;
 
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import negocio.entities.Estudiante;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
 import persistencia.EstudianteDAO;
 import persistencia.GestorBD;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import persistencia.ProfesorUCLMDAO;
+
+import java.awt.GridBagLayout;
+import java.awt.Image;
 
 import javax.swing.JLabel;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import java.awt.GridBagConstraints;
+import java.awt.Font;
+import java.awt.Insets;
 import javax.swing.JPasswordField;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Window.Type;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.awt.Toolkit;
+import javax.swing.JButton;
+import java.awt.TextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PantallaLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField UsrField;
-	private JPasswordField PsswdField;
+	private JPasswordField passwordField;
+	private JTextField textField_userName;
+	private JButton btn_access;
+	private String usuarioLogeado;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		GestorBD gestor = new GestorBD();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -53,102 +67,121 @@ public class PantallaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaLogin() {
+		
+		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 685, 415);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[] {50, 50, 50, 50, 50, 50, 50, 50};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 33, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel UserText = new JLabel("DNI:");
-		UserText.setBounds(229, 110, 70, 39);
-		contentPane.add(UserText);
+		JLabel lbl_userName = new JLabel("Nombre de usuario");
+		lbl_userName.setFont(new Font("Arial", Font.BOLD, 12));
+		GridBagConstraints gbc_lbl_userName = new GridBagConstraints();
+		gbc_lbl_userName.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_userName.gridx = 3;
+		gbc_lbl_userName.gridy = 2;
+		contentPane.add(lbl_userName, gbc_lbl_userName);
 		
-		JLabel UCLM_Image = new JLabel(new ImageIcon("./images/uclm.png"));
-		UCLM_Image.setBackground(SystemColor.activeCaptionText);
-		UCLM_Image.setBounds(544, 304, 123, 70);
-		contentPane.add(UCLM_Image);
+		textField_userName = new JTextField();
+		textField_userName.setToolTipText("Insertar aqui el nombre de usuario");
+		textField_userName.setFont(new Font("Arial", Font.PLAIN, 11));
+		GridBagConstraints gbc_textField_userName = new GridBagConstraints();
+		gbc_textField_userName.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_userName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_userName.gridx = 3;
+		gbc_textField_userName.gridy = 3;
+		contentPane.add(textField_userName, gbc_textField_userName);
+		textField_userName.setColumns(10);
+		String nombreUsuario = textField_userName.getText();
 		
-		JLabel PsswdText = new JLabel("Contraseï¿½a:");
-		PsswdText.setBounds(229, 150, 70, 39);
-		contentPane.add(PsswdText);
+		JLabel lbl_password = new JLabel("Contraseï¿½a");
+		lbl_password.setFont(new Font("Arial", Font.BOLD, 12));
+		GridBagConstraints gbc_lbl_password = new GridBagConstraints();
+		gbc_lbl_password.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_password.gridx = 3;
+		gbc_lbl_password.gridy = 4;
+		contentPane.add(lbl_password, gbc_lbl_password);
 		
-		UsrField = new JTextField();
-		UsrField.setBackground(Color.LIGHT_GRAY);
-		UsrField.setForeground(SystemColor.infoText);
-		UsrField.setBounds(309, 119, 133, 20);
-		contentPane.add(UsrField);
-		UsrField.setColumns(10);
-		String nombreUsuario = UsrField.getName();
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Arial", Font.PLAIN, 11));
+		passwordField.setToolTipText("Insertar aqui la contraseï¿½a");
+		GridBagConstraints gbc_passwordField = new GridBagConstraints();
+		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.gridx = 3;
+		gbc_passwordField.gridy = 5;
+		contentPane.add(passwordField, gbc_passwordField);
+		String contrasena = new String(passwordField.getPassword());
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido a la Universidad De Castilla La Mancha");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(59, 22, 566, 31);
-		contentPane.add(lblNewLabel);
-		
-		JLabel dni_info = new JLabel(new ImageIcon("./images/ayuda.png"));
-		dni_info.setToolTipText("p.e 03435754P");
-		dni_info.setBounds(452, 119, 23, 20);
-		contentPane.add(dni_info);
-		
-		PsswdField = new JPasswordField();
-		PsswdField.setEchoChar('*');
-		PsswdField.setBackground(Color.LIGHT_GRAY);
-		PsswdField.setBounds(309, 159, 133, 20);
-		contentPane.add(PsswdField);
-		String psswdString = PsswdField.getName();
-		
-		//Aqui hay que poner un controlador para que, sabiendo el tipo de inicio de sesion, se abra una pantalla u otra
-				JButton loginBtn = new JButton("Iniciar sesion");
-				loginBtn.setBackground(new Color(0, 0, 0));
-				loginBtn.setForeground(new Color(255, 255, 255));
-				loginBtn.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						PantallaMatriculacion pantallamatricula = new PantallaMatriculacion();
-						EstudianteDAO ed1 = new EstudianteDAO();
-						
-						//ACCIï¿½N DEL BOTï¿½N DE ACCESO - COMPLETAR
-						//1ï¿½ comprobar si el usuario es correcto
-						//si no es correcto --> lanzar excepciï¿½n o mensaje de error
-						
-						//ï¿½es un alumno? --> pantalla realizar matrï¿½cula
-						if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
-							Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
-							if(e1.getPsswd().compareTo(psswdString)==0) {
-								pantallamatricula.setVisible(true);
-							}
+		btn_access = new JButton("Acceso");
+		btn_access.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaMatriculacion pantallamatricula = new PantallaMatriculacion();
+				PantallaDireccionCurso pantallaDireccionEdicion = new PantallaDireccionCurso();
+				EstudianteDAO ed1 = new EstudianteDAO();
+				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();
+				
+				//1 comprobar si el usuario es correcto
+				//si no es correcto --> lanzar excepcion o mensaje de error
+				
+				//¿es un alumno? --> pantalla realizar matricula
+				try {
+					if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
+						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
+						if(e1.getPassword().compareTo(contrasena)==0) {
+							pantallamatricula.setVisible(true);
+							usuarioLogeado=nombreUsuario;
 						}
-						//ï¿½es personal vicerrectorado? --> pantalla evaluar propuesta curso
-						
-						//ï¿½es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
-						
-						//ï¿½es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+					}else {
+						//si no es alumno, vicerrector o jefe de gabinete
+						//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+						//¿es profesor de la UCLM? 
+							if(pf1.listarProfesorUCLM(nombreUsuario) != null) {
+								ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);
+								if(p1.getPassword().compareTo(contrasena)==0) {
+									//Sí es un profesor de la UCLM --> sí es director
+									pantallaDireccionEdicion.setVisible(true);	
+								}
+							}else if(
+									//personal vicerrectorado/jefe de gabinete
+									){
+								//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+							}
+							//¿es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
+
 						
 					}
-				});
-				loginBtn.setBackground(new Color(192, 192, 192));
-				loginBtn.setFont(new Font("Arial", Font.BOLD, 12));
-				GridBagConstraints gbc_btn_access = new GridBagConstraints();
-				gbc_btn_access.insets = new Insets(0, 0, 5, 5);
-				gbc_btn_access.gridx = 3;
-				gbc_btn_access.gridy = 6;
-				contentPane.add(loginBtn, gbc_btn_access);
-				loginBtn.setBounds(212, 199, 225, 61);
-				contentPane.add(loginBtn);
-		
+					}catch (Exception exception1) {
+						System.out.println("El usuario no se encuentra registrado en la base de datos.");
+					}
+				
+			}
+		});
+		btn_access.setBackground(new Color(192, 192, 192));
+		btn_access.setFont(new Font("Arial", Font.BOLD, 12));
+		GridBagConstraints gbc_btn_access = new GridBagConstraints();
+		gbc_btn_access.insets = new Insets(0, 0, 5, 5);
+		gbc_btn_access.gridx = 3;
+		gbc_btn_access.gridy = 6;
+		contentPane.add(btn_access, gbc_btn_access);
 	}
 	
-	public void login() {
-		// TODO - implement PantallaLogin.login
-		throw new UnsupportedOperationException();
-	}
-
 	public void logout() {
-		// TODO - implement PantallaLogin.logout
-		throw new UnsupportedOperationException();
+		//IMPLEMENTAR
 	}
+	
+	public String getUsuarioLogeado(){	
+		return usuarioLogeado;
+	}
+	
+	
+
 }

@@ -40,7 +40,8 @@ public class ProfesorDAO {
 				c.get(0).toString(),
 				c.get(1).toString(),
 				c.get(2).toString(),
-				Boolean.getBoolean(c.get(3).toString()));
+				c.get(3).toString(),
+				Boolean.getBoolean(c.get(4).toString()));
 		
 		gestor.desconectarBD();
 		return profesor;

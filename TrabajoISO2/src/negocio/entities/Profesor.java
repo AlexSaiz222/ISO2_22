@@ -5,18 +5,20 @@ public class Profesor {
 	private String dni;
 	private String nombre;
 	private String apellidos;
-	private boolean doctor;
+	private boolean esDoctor;
+	private String password;
 	
 	public Profesor() {
 		
 	}
 	
-	public Profesor(String dni, String nombre, String apellidos, boolean doctor) {
+	public Profesor(String dni, String nombre, String apellidos, String password, boolean doctor) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.doctor = doctor;
+		this.password = password;
+		this.esDoctor = doctor;
 	}
 
 	public String getDni() {
@@ -43,12 +45,20 @@ public class Profesor {
 		this.apellidos = apellidos;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public boolean isDoctor() {
-		return doctor;
+		return esDoctor;
 	}
 
 	public void setDoctor(boolean doctor) {
-		this.doctor = doctor;
+		this.esDoctor = doctor;
 	}
 
 	

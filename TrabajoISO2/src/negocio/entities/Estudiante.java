@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.awt.Window.Type;
 import java.util.*;
 
 public class Estudiante {
@@ -86,12 +87,13 @@ public class Estudiante {
 		this.idEstudiante = idEstudiante;
 	}
 
-	public String getPsswd() {
+	public String getPassword() {
 		return psswd;
 	}
 
-	public void setPsswd(String psswd) {
+	public void setPassword(String psswd) {
 		this.psswd = psswd;
 	}
+
 	
 }

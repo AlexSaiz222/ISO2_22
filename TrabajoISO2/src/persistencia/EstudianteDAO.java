@@ -20,7 +20,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 			pstmt.setString(1, estudiante.getDni());
 			pstmt.setString(2, estudiante.getNombre());
 			pstmt.setString(3, estudiante.getApellidos());
-			pstmt.setString(4, estudiante.getPsswd());
+			pstmt.setString(4, estudiante.getPassword());
 			pstmt.setString(5, estudiante.getTitulacion());
 			pstmt.setString(6, estudiante.getCualificacion());
 			
@@ -54,7 +54,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 		student1.setDni(c.get(0).toString());
 		student1.setNombre(c.get(1).toString());
 		student1.setApellidos(c.get(2).toString());
-		student1.setPsswd(c.get(3).toString());
+		student1.setPassword(c.get(3).toString());
 		student1.setTitulacion(c.get(4).toString());
 		student1.setCualificacion(c.get(5).toString());
 		
@@ -73,7 +73,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	
 		resultado = agente.update("update estudiantes "
 				+ "set( dni = '"+ estudiante.getDni()+"',nombre='"+estudiante.getNombre()
-				+ "',apellidos = '"+estudiante.getApellidos()+"', password = '"+estudiante.getPsswd()
+				+ "',apellidos = '"+estudiante.getApellidos()+"', password = '"+estudiante.getPassword()
 				+ "', titulacion ='"+estudiante.getTitulacion()+"', cualificacion ='"+estudiante.getCualificacion()+"')");
 		
 		agente.desconectarBD();

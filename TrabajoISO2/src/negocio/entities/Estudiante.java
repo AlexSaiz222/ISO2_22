@@ -18,17 +18,17 @@ public class Estudiante {
 		
 	}
 	
-	public Estudiante(String dni, String nombre, String apellidos, String titulacion,
-			String cualificacion, int idEstudiante, Collection<Matricula> matriculas, char[] password) {
+	public Estudiante(String dni, String nombre, String apellidos, char[] password, String titulacion,
+			String cualificacion, int idEstudiante, Collection<Matricula> matriculas) {
 		super();
 		this.matriculas = matriculas;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.password=password;
 		this.titulacion = titulacion;
 		this.cualificacion = cualificacion;
 		this.setIdEstudiante(idEstudiante);
-		this.password=password;
 	}
 
 	public Collection<Matricula> getMatriculas() {

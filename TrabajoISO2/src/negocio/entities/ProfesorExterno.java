@@ -8,8 +8,8 @@ public class ProfesorExterno extends Profesor {
 		
 	}
 
-	public ProfesorExterno(String dni, String nombre, String apellidos, boolean doctor, String titulacion) {
-		super(dni, nombre, apellidos, doctor);
+	public ProfesorExterno(String dni, String nombre, String apellidos, char[] password, boolean doctor, String titulacion) {
+		super(dni, nombre, apellidos, password, doctor);
 		this.titulacion = titulacion;
 	}
 

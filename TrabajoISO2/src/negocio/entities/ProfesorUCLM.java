@@ -12,9 +12,9 @@ public class ProfesorUCLM extends Profesor {
 		
 	}
 	
-	public ProfesorUCLM(String dni, String nombre, String apellidos, boolean doctor, char[] password, Centro centroAdscripcion,
+	public ProfesorUCLM(String dni, String nombre, String apellidos, char[] password, boolean doctor,  Centro centroAdscripcion,
 			CategoriaProfesor categoria) {
-		super(dni, nombre, apellidos, doctor, password);
+		super(dni, nombre, apellidos, password, doctor);
 		this.centroAdscripcion = centroAdscripcion;
 		this.categoria = categoria;
 	}

@@ -12,7 +12,7 @@ public class Profesor {
 		
 	}
 	
-	public Profesor(String dni, String nombre, String apellidos, boolean doctor, char[] password) {
+	public Profesor(String dni, String nombre, String apellidos, char[] password, boolean doctor) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;

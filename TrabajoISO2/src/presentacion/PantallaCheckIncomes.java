@@ -51,32 +51,32 @@ public class PantallaCheckIncomes extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel ChooseAnOption = new JLabel("Check incomes");
+		JLabel ChooseAnOption = new JLabel("Ingresos");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(23, 11, 270, 39);
 		contentPane.add(ChooseAnOption);
 		
-		JButton LogOutBttn = new JButton("Log out");
+		JButton LogOutBttn = new JButton("Cerrar sesi\u00F3n");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PantallaLogin L1 = new PantallaLogin();
 				L1.setVisible(true);
 			}
 		});
-		LogOutBttn.setBounds(570, 11, 89, 23);
+		LogOutBttn.setBounds(562, 11, 97, 23);
 		contentPane.add(LogOutBttn);
 		
-		JButton GoBackBttn = new JButton("Go back");
+		JButton GoBackBttn = new JButton("Atr\u00E1s");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PantallaEmpleadosVicerrectorado v1 = new PantallaEmpleadosVicerrectorado();
 				v1.setVisible(true);
 			}
 		});
-		GoBackBttn.setBounds(570, 45, 89, 23);
+		GoBackBttn.setBounds(562, 45, 97, 23);
 		contentPane.add(GoBackBttn);
 		
-		JLabel TypeTxt = new JLabel("Type of course");
+		JLabel TypeTxt = new JLabel("Tipo de curso");
 		TypeTxt.setBounds(23, 89, 89, 14);
 		contentPane.add(TypeTxt);
 		
@@ -85,15 +85,15 @@ public class PantallaCheckIncomes extends JFrame {
 		TypeList.setBounds(134, 88, 134, 154);
 		contentPane.add(TypeList);
 		
-		JLabel StartTxt = new JLabel("Start Date");
-		StartTxt.setBounds(23, 250, 72, 14);
+		JLabel StartTxt = new JLabel("Fecha de inicio");
+		StartTxt.setBounds(23, 250, 89, 14);
 		contentPane.add(StartTxt);
 		
-		JLabel EndTxt = new JLabel("End Date");
+		JLabel EndTxt = new JLabel("Fecha de fin");
 		EndTxt.setBounds(23, 276, 72, 14);
 		contentPane.add(EndTxt);
 		
-		JButton IncomesBtn = new JButton("See incomes");
+		JButton IncomesBtn = new JButton("Ver ingresos");
 		IncomesBtn.setForeground(Color.BLACK);
 		IncomesBtn.setBackground(Color.LIGHT_GRAY);
 		IncomesBtn.setBounds(23, 301, 245, 64);

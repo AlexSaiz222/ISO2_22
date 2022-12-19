@@ -1,7 +1,5 @@
 package negocio.entities;
 
-import java.awt.Window.Type;
-
 public class ProfesorUCLM extends Profesor {
 
 	Centro centroAdscripcion;

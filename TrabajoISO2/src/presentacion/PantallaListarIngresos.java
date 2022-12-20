@@ -71,7 +71,7 @@ public class PantallaListarIngresos extends JFrame {
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaEmpleadosVicerrectorado v1 = new PantallaEmpleadosVicerrectorado();
+				PantallaJefeVicerrectorado v1 = new PantallaJefeVicerrectorado();
 				v1.setVisible(true);
 			}
 		});

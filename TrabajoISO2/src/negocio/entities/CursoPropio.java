@@ -166,5 +166,30 @@ public class CursoPropio {
 		this.edicion = edicion;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(ECTS, cursoPropioDao, director, edicion, estado, fechaFin, fechaInicio, id, idcentro,
+				materias, matriculas, nombre, secretario, tasaMatricula, tipo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CursoPropio other = (CursoPropio) obj;
+		return ECTS == other.ECTS && Objects.equals(cursoPropioDao, other.cursoPropioDao)
+				&& Objects.equals(director, other.director) && edicion == other.edicion && estado == other.estado
+				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
+				&& id == other.id && idcentro == other.idcentro && Objects.equals(materias, other.materias)
+				&& Objects.equals(matriculas, other.matriculas) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(secretario, other.secretario)
+				&& Double.doubleToLongBits(tasaMatricula) == Double.doubleToLongBits(other.tasaMatricula)
+				&& tipo == other.tipo;
+	}
+
 	
 }

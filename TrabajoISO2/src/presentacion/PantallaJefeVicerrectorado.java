@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class PantallaEmpleadosVicerrectorado extends JFrame {
+public class PantallaJefeVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaEmpleadosVicerrectorado frame = new PantallaEmpleadosVicerrectorado();
+					PantallaJefeVicerrectorado frame = new PantallaJefeVicerrectorado();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaEmpleadosVicerrectorado() {
+	public PantallaJefeVicerrectorado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -101,8 +101,5 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		contentPane.add(StatusBtn);
 	}
 
-	public void evaluarCurso() {
-		// TODO - implement PantallaEmpleadosVicerrectorado.evaluarCurso
-		throw new UnsupportedOperationException();
-	}
+	
 }

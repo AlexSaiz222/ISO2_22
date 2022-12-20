@@ -222,22 +222,24 @@ public class GestorBD {
 			
 			// Crear la tabla profesores
 			createSQL = "create table profesores (dni varchar(10) not null, nombre varchar(50) not null, "
-					+ "apellidos varchar(50) not null, doctor boolean, primary key (dni))";
+					+ "apellidos varchar(50) not null,password varchar(50) doctor boolean, primary key (dni))";
 			stmt.execute(createSQL);
 			
 			// Datos iniciales de profesores
-			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, password, doctor) VALUES (?,?,?,?,?)");
 			pstmt.setString(1, "11111111B");
 			pstmt.setString(2, "Jaime");
 			pstmt.setString(3, "Garcia");
-			pstmt.setBoolean(4, true);
+			pstmt.setString(4, "JaimeGarcia");
+			pstmt.setBoolean(5, true);
 			pstmt.executeUpdate();
 			
-			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) VALUES (?,?,?,?)");
+			pstmt = this.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, password, doctor) VALUES (?,?,?,?,?)");
 			pstmt.setString(1, "22222222C");
 			pstmt.setString(2, "Alberto");
 			pstmt.setString(3, "Sanchez");
-			pstmt.setBoolean(4, false);
+			pstmt.setString(4, "AlbertoSanchez");
+			pstmt.setBoolean(5, false);
 			pstmt.executeUpdate();
 			
 			// Crear la tabla profesoresExternos
@@ -294,9 +296,13 @@ public class GestorBD {
 					+ "nombre varchar(50) not null, horas double not null, fechaInicio date, fechaFin date, "
 					+ "primary key (idMateria), foreign key (responsable) references profesores(dni))";
 			stmt.execute(createSQL);
+			
+			// Crear la tabla Pers.Vic
+			createSQL = "create table vicerrectorado (dni varchar(50) not null, "
+					+ "nombre varchar(50) not null, apellidos varchar(50) not null, password varchar(50) not null, jefe boolean "
+					+ "primary key (dni))";
+			stmt.execute(createSQL);
 
-			//Crear tabla pagos 
-			//parametros fecha compra y precio
 			//createSQL =
 			// Guardar cambios en la BD
 			this.mBD.commit();

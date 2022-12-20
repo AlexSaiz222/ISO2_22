@@ -1,6 +1,7 @@
 package negocio.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Matricula {
 
@@ -71,6 +72,25 @@ public class Matricula {
 
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(estudiante, fecha, idMatricula, pagado, tipoPago, titulo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		return Objects.equals(estudiante, other.estudiante) && Objects.equals(fecha, other.fecha)
+				&& idMatricula == other.idMatricula && pagado == other.pagado && tipoPago == other.tipoPago
+				&& Objects.equals(titulo, other.titulo);
 	}
 	
 }

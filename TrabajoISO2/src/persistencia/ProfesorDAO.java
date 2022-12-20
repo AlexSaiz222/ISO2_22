@@ -24,7 +24,8 @@ public class ProfesorDAO {
 			profesor.setDni(c.get(0).toString());
 			profesor.setNombre(c.get(1).toString());
 			profesor.setApellidos(c.get(2).toString());
-			profesor.setDoctor(Boolean.getBoolean(c.get(3).toString()));
+			profesor.setPassword(c.get(3).toString());
+			profesor.setDoctor(Boolean.getBoolean(c.get(4).toString()));
 			
 			profesores.add(profesor);
 		}
@@ -59,12 +60,13 @@ public class ProfesorDAO {
 		
 		PreparedStatement pstmt;
 		try {
-			pstmt = agente.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos, doctor) "
-					+ "values (?,?,?,?)");
+			pstmt = agente.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos,password, doctor) "
+					+ "values (?,?,?,?,?)");
 			pstmt.setString(1, profesor.getDni());
 			pstmt.setString(2, profesor.getNombre());
 			pstmt.setString(3, profesor.getApellidos());
-			pstmt.setBoolean(4, profesor.isDoctor());
+			pstmt.setString(4, profesor.getPassword());
+			pstmt.setBoolean(5, profesor.isDoctor());
 			
 			resultado = agente.insert(pstmt);
 			pstmt.close();
@@ -87,7 +89,8 @@ public class ProfesorDAO {
 		resultado = agente.update("update profesores "
 				+ "set( dni = '"+ profesor.getDni()+"',"
 						+ "nombre='"+profesor.getNombre()
-				+ "',apellidos ='"+profesor.getApellidos()+"', "
+				+ "',apellidos ='"+profesor.getApellidos()
+				+"'password ='"+profesor.getNombre()+profesor.getApellidos()+"', "
 						+ "doctor = "+profesor.isDoctor()+")");
 		
 		agente.desconectarBD();

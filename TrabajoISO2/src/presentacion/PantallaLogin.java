@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import negocio.entities.Estudiante;
+import negocio.entities.PersonalVicerrectorado;
 import negocio.entities.Profesor;
 import negocio.entities.ProfesorUCLM;
 import persistencia.EstudianteDAO;
 import persistencia.GestorBD;
+import persistencia.PersonalVicerrectoradoDAO;
 import persistencia.ProfesorUCLMDAO;
 
 import java.awt.GridBagLayout;
@@ -128,6 +130,7 @@ public class PantallaLogin extends JFrame {
 				PantallaDireccionCurso pantallaDireccionEdicion = new PantallaDireccionCurso();
 				EstudianteDAO ed1 = new EstudianteDAO();
 				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();
+				PersonalVicerrectoradoDAO pv1 = new PersonalVicerrectoradoDAO();
 				
 				//1 comprobar si el usuario es correcto
 				//si no es correcto --> lanzar excepcion o mensaje de error
@@ -150,17 +153,23 @@ public class PantallaLogin extends JFrame {
 									//Sí es un profesor de la UCLM --> sí es director
 									pantallaDireccionEdicion.setVisible(true);	
 								}
-							}else if(
-									//personal vicerrectorado/jefe de gabinete
-									){
+							}else if(pv1.seleccionarProfesor(nombreUsuario) != null){//personal vicerrectorado/jefe de gabinete
 								//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+								PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
+								if(personalVicerrectorado.getPassword().compareTo(contrasena)==0) {
+									if(personalVicerrectorado.isJefe()==true) {
+										PantallaJefeVicerrectorado pjfGabineteVicerrectorado = new PantallaJefeVicerrectorado();
+										pjfGabineteVicerrectorado.setVisible(true);
+									}else {
+										PantallaEvaluarPropuesta pfGabineteVicerrectorado = new PantallaEvaluarPropuesta();
+										pfGabineteVicerrectorado.setVisible(true);
+									}
+									
+								}
 							}
-							//¿es Jefe Gabinete vicerrectorado? --> pantalla Realizar consulta cursos
-
-						
 					}
 					}catch (Exception exception1) {
-						System.out.println("El usuario no se encuentra registrado en la base de datos.");
+						System.out.println("El usuario no se encuentra en la base de datos.");
 					}
 				
 			}

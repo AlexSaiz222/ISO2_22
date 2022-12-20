@@ -22,7 +22,7 @@ import negocio.entities.EstadoCurso;
 import negocio.controllers.GestorPropuestasCursos;
 import persistencia.CursoPropioDAO;
 
-public class PantallaJefeGabineteVicerrectorado extends JFrame {
+public class PantallaEvaluarPropuesta extends JFrame {
 
 	private JPanel contentPane;
 
@@ -33,7 +33,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();
+					PantallaEvaluarPropuesta frame = new PantallaEvaluarPropuesta();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaJefeGabineteVicerrectorado() {
+	public PantallaEvaluarPropuesta() {
 		
 		GestorPropuestasCursos g = new GestorPropuestasCursos();
 		

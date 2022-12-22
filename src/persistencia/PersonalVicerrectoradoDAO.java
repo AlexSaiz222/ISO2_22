@@ -26,9 +26,10 @@ public class PersonalVicerrectoradoDAO {
 	 * 
 	 * @param profesor
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearVicerrectorado(PersonalVicerrectorado vicerrectorado) {
+	public int crearVicerrectorado(PersonalVicerrectorado vicerrectorado) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
@@ -47,12 +48,8 @@ public class PersonalVicerrectoradoDAO {
 		} catch (SQLException e) {
 			System.out.println("PersonalVicerrectoradorDAO: "+e.getMessage());
 		} finally {
-			try {
-				if(!pstmt.isClosed())
-					pstmt.close();
-			} catch (SQLException e) {
-				System.out.println("PersonalVicerrectoradoDAO: "+e.getMessage());
-			}
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;

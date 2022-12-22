@@ -92,7 +92,8 @@ public class PantallaEvaluarPropuesta extends JFrame {
 		NameField.removeAllItems();
 		
 		EstadoCurso Estado= EstadoCurso.PROPUESTO;
-		List<CursoPropio> cursos = CursoPropioDAO.listarCursosPropiosPorEstado(Estado);
+		CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoPropioDAO.listarCursosPorEstado(Estado);
 		
 		for(CursoPropio c: cursos) {
 			NameField.addItem(c.getNombre());
@@ -113,7 +114,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 					//g.rechazarCurso(curso);
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -130,7 +131,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					g.altaCursoAprobado(curso);
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

@@ -35,6 +35,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 	private JTextField resultadoField;
 	private JComboBox<String> NameField;
 	private JDateChooser DateField;
+	private List<CursoPropio> cursos;
 
 	/**
 	 * Launch the application.
@@ -111,7 +112,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		NameField.removeAllItems();
 		CursoPropioDAO cursoDAO = new CursoPropioDAO();
 		EstadoCurso estado = EstadoCurso.VALIDADO;
-		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
+		cursos = cursoDAO.listarCursosPorEstado(estado);
 		for(CursoPropio c: cursos) {
 			NameField.addItem(c.getNombre());
 		}

@@ -43,7 +43,7 @@ public class PantallaRegistrarCurso extends JFrame {
 	private JTextField FeeField;
 	private JTextField EditionField;
 	private JTextField resultadoField;
-	private JComboBox typeBox;
+	private JComboBox<TipoCurso> typeBox;
 	private JComboBox secretaryBox;
 	private JDateChooser StartDateField;
 	private JDateChooser EndDateField;
@@ -53,6 +53,8 @@ public class PantallaRegistrarCurso extends JFrame {
 	private List<Profesor> profesores;
 	private CursoPropio curso;
 	private ProfesorUCLM profesorUCLM;
+	private JComboBox centerBox;
+	
 
 	/**
 	 * Launch the application.
@@ -168,7 +170,7 @@ public class PantallaRegistrarCurso extends JFrame {
 		CenterTxt.setBounds(60, 256, 68, 22);
 		contentPane.add(CenterTxt);
 		
-		JComboBox centerBox = new JComboBox();
+		centerBox = new JComboBox();
 		centerBox.setBounds(170, 257, 409, 21);
 		contentPane.add(centerBox);
 		centerBox.removeAllItems();
@@ -182,7 +184,7 @@ public class PantallaRegistrarCurso extends JFrame {
 		secretaryTxt.setBounds(60, 287, 102, 22);
 		contentPane.add(secretaryTxt);
 		
-		JComboBox secretaryBox = new JComboBox();
+		secretaryBox = new JComboBox();
 		secretaryBox.setBounds(170, 288, 214, 21);
 		contentPane.add(secretaryBox);
 		secretaryBox.removeAllItems();
@@ -196,7 +198,7 @@ public class PantallaRegistrarCurso extends JFrame {
 		typeTxt.setBounds(60, 321, 68, 22);
 		contentPane.add(typeTxt);
 		
-		JComboBox typeBox = new JComboBox();
+		typeBox = new JComboBox();
 		typeBox.setBounds(170, 319, 214, 21);
 		contentPane.add(typeBox);
 		typeBox.removeAllItems();

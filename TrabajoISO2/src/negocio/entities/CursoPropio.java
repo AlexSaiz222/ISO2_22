@@ -6,7 +6,7 @@ import persistencia.*;
 public class CursoPropio {
 
 	Collection<Matricula> matriculas;
-	int idcentro;
+	Centro centro;
 	ProfesorUCLM director;
 	Profesor secretario;
 	Collection<Materia> materias;
@@ -25,12 +25,12 @@ public class CursoPropio {
 		
 	}
 	
-	public CursoPropio(Collection<Matricula> matriculas, int centro, ProfesorUCLM director, Profesor secretario,
+	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, Profesor secretario,
 			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, int id,
 			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
 		super();
 		this.matriculas = matriculas;
-		this.idcentro = centro;
+		this.centro = centro;
 		this.director = director;
 		this.secretario = secretario;
 		this.materias = materias;
@@ -54,12 +54,12 @@ public class CursoPropio {
 		this.matriculas = matriculas;
 	}
 
-	public int getCentro() {
-		return idcentro;
+	public Centro getCentro() {
+		return centro;
 	}
 
 	public void setCentro(Centro centro) {
-		this.idcentro = centro.getIdCentro();
+		this.centro = centro;
 	}
 
 	public ProfesorUCLM getDirector() {
@@ -168,7 +168,7 @@ public class CursoPropio {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ECTS, cursoPropioDao, director, edicion, estado, fechaFin, fechaInicio, id, idcentro,
+		return Objects.hash(ECTS, cursoPropioDao, director, edicion, estado, fechaFin, fechaInicio, id, centro,
 				materias, matriculas, nombre, secretario, tasaMatricula, tipo);
 	}
 
@@ -184,7 +184,7 @@ public class CursoPropio {
 		return ECTS == other.ECTS && Objects.equals(cursoPropioDao, other.cursoPropioDao)
 				&& Objects.equals(director, other.director) && edicion == other.edicion && estado == other.estado
 				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
-				&& id == other.id && idcentro == other.idcentro && Objects.equals(materias, other.materias)
+				&& id == other.id && centro == other.centro && Objects.equals(materias, other.materias)
 				&& Objects.equals(matriculas, other.matriculas) && Objects.equals(nombre, other.nombre)
 				&& Objects.equals(secretario, other.secretario)
 				&& Double.doubleToLongBits(tasaMatricula) == Double.doubleToLongBits(other.tasaMatricula)

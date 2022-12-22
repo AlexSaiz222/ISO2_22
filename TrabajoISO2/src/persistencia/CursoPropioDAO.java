@@ -62,48 +62,60 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param curso
 	 * @throws ParseException 
 	 */
-	public CursoPropio seleccionarCurso(int curso) throws ParseException {
+	public CursoPropio seleccionarCurso(int curso) {
 		GestorBD agente = new GestorBD();
-		List<Object> cursoListado = agente.select("select * from cursospropios where idcurso = "+curso);
-		List<Object> c = (List<Object>) cursoListado.get(0);
-		
 		CursoPropio curso1 = new CursoPropio();
+		List<Object> cursoListado = agente.select("select * from cursospropios where idcursopropio="+curso);
 		
-		CentroDAO centroDAO = new CentroDAO();
-		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
-		
-		ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();
-		ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());
-		
-		ProfesorDAO secretarioDAO = new ProfesorDAO();
-		Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
-		
-		EstadoCurso estado = null;
-		estado.valueOf(c.get(4).toString());
-		
-		TipoCurso tipo = null;
-		tipo.valueOf(c.get(5).toString());
-		
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		Date fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());
-		Date fechafin = (Date) simpleDateFormat.parse(c.get(9).toString());
-		
-		curso1.setId(Integer.parseInt(c.get(0).toString()));
-		curso1.setCentro(centro);
-		curso1.setDirector(profeUCLM);
-		curso1.setSecretario(secretario);
-		curso1.setEstado(estado);
-		curso1.setTipo(tipo);
-		curso1.setNombre(c.get(6).toString());
-		curso1.setECTS(Integer.parseInt(c.get(7).toString()));
-		curso1.setFechaInicio(fechainicio);
-		curso1.setFechaFin(fechafin);
-		curso1.setTasaMatricula(Double.parseDouble(c.get(10).toString()));
-		curso1.setEdicion(Integer.parseInt(c.get(11).toString()));
-		//setMatriculas y setMaterias faltan
+		if(cursoListado.size() == 1) {
+			List<Object> c = (List<Object>) cursoListado.get(0);
+			
+			System.out.println(c);
+			
+			CentroDAO centroDAO = new CentroDAO();
+			Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
+			
+			ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();
+			ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());
+			
+			ProfesorDAO secretarioDAO = new ProfesorDAO();
+			Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
+			
+			EstadoCurso estado = null;
+			estado.valueOf(c.get(4).toString());
+			
+			TipoCurso tipo = null;
+			tipo.valueOf(c.get(5).toString());
+			
+			String pattern = "yyyy-MM-dd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			Date fechainicio = null, fechafin = null;
+			try {
+				fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());
+				fechafin = (Date) simpleDateFormat.parse(c.get(9).toString());
+			} catch (ParseException e) {
+				System.out.println("CursoPropioDAO: "+e.getMessage());
+			}
+			
+			curso1.setId(Integer.parseInt(c.get(0).toString()));
+			curso1.setCentro(centro);
+			curso1.setDirector(profeUCLM);
+			curso1.setSecretario(secretario);
+			curso1.setEstado(estado);
+			curso1.setTipo(tipo);
+			curso1.setNombre(c.get(6).toString());
+			curso1.setECTS(Integer.parseInt(c.get(7).toString()));
+			curso1.setFechaInicio(fechainicio);
+			curso1.setFechaFin(fechafin);
+			curso1.setTasaMatricula(Double.parseDouble(c.get(10).toString()));
+			curso1.setEdicion(Integer.parseInt(c.get(11).toString()));
+			//setMatriculas y setMaterias faltan
+		} else {
+			curso1.setId(-1);
+		}
 		
 		return curso1;
+		
 	}
 
 	/**
@@ -129,19 +141,18 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param fechaInicio
 	 * @param fechaFin
 	 */
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado, Date fechaInicio, Date fechaFin) {
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) {
 		// TODO Auto-generated method stub
 		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = new GestorBD();
 
-        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'"
-        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
-
+        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
         for(int i=0; i<cursosListados.size(); i++) {
             CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
+            List<Object> curso = (List<Object>) cursosListados.get(i);
+            cursoPropio.setId(Integer.parseInt(curso.get(0).toString()));
+            cursoPropio.setNombre(curso.get(6).toString());
 
             cursos.add(cursoPropio);
         }
@@ -173,24 +184,6 @@ public class CursoPropioDAO extends AbstractEntityDAO {
         List<Object> cursosListados = gestor.select("select * from cursospropios where "
         		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
         
-
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
-
-            cursos.add(cursoPropio);
-        }
-
-        return cursos;
-	}
-	
-	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
-        // TODO Auto-generated method stub
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = new GestorBD();
-
-        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
 
         for(int i=0; i<cursosListados.size(); i++) {
             CursoPropio cursoPropio = new CursoPropio();

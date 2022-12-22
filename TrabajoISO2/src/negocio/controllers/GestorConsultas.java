@@ -11,6 +11,12 @@ import persistencia.GestorBD;
 
 public class GestorConsultas {
 
+	/**
+	 * 
+	 * @param tipo
+	 * @param fechaInicio
+	 * @param fechaFin
+	 */
 	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarIngresos
 		 List<Double> cursos = new ArrayList<Double>();
@@ -26,7 +32,7 @@ public class GestorConsultas {
 	            cursoPropio.setNombre(t.get(1).toString());
 	            try {
 					cursoPropio = cursoPropioDAO.seleccionarCurso((int) t.get(0));
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	            //habria que saber como poner un precio a la matricula, en este caso, he puesto 1250 euros
@@ -38,6 +44,12 @@ public class GestorConsultas {
 	        return cursos;
 	}
 
+	/**
+	 * 
+	 * @param estadoCurso
+	 * @param fechaInicio
+	 * @param fechaFin
+	 */
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.consultarEstadoCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
@@ -58,6 +70,11 @@ public class GestorConsultas {
 	        return cursos;
 	}
 
+	/**
+	 * 
+	 * @param fechaInicio
+	 * @param fechaFin
+	 */
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
 		// TODO - implement GestorConsultas.listarEdicionesCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();

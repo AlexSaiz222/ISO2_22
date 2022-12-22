@@ -107,8 +107,9 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		NameField.setBounds(106, 82, 191, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();
-		EstadoCurso Estado= EstadoCurso.VALIDADO;
-		List<CursoPropio> cursos = CursoPropioDAO.listarCursosPropiosPorEstado(Estado);
+		CursoPropioDAO cursoDAO = new CursoPropioDAO();
+		EstadoCurso estado = EstadoCurso.VALIDADO;
+		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
 		for(CursoPropio c: cursos) {
 			NameField.addItem(c.getNombre());
 		}

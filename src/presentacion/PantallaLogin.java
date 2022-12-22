@@ -48,6 +48,9 @@ public class PantallaLogin extends JFrame {
 	private JTextField textField_userName;
 	private JButton btn_access;
 	private Estudiante estudianteLogeado;
+	private String nombreUsuario;
+	private String contrasena;
+	
 
 	/**
 	 * Launch the application.
@@ -102,7 +105,7 @@ public class PantallaLogin extends JFrame {
 		gbc_textField_userName.gridy = 3;
 		contentPane.add(textField_userName, gbc_textField_userName);
 		textField_userName.setColumns(10);
-		String nombreUsuario = textField_userName.getText();
+		nombreUsuario = textField_userName.getText();
 		
 		JLabel lbl_password = new JLabel("Contrase�a");
 		lbl_password.setFont(new Font("Arial", Font.BOLD, 12));
@@ -121,7 +124,7 @@ public class PantallaLogin extends JFrame {
 		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 5;
 		contentPane.add(passwordField, gbc_passwordField);
-		String contrasena = new String(passwordField.getPassword());
+		contrasena = new String(passwordField.getPassword());
 		
 		btn_access = new JButton("Acceso");
 		btn_access.addActionListener(new ActionListener() {

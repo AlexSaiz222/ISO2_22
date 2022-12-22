@@ -209,8 +209,7 @@ public class PantallaRegistrarCurso extends JFrame {
 		resultadoField.setBounds(356, 205, 303, 23);
 		contentPane.add(resultadoField);
 		resultadoField.setColumns(10);
-		curso = new CursoPropio();
-		profesorUCLM = new ProfesorUCLM();
+
 		JButton EditBtn = new JButton("Registrar propuesta");
 		EditBtn.setBackground(new Color(50, 205, 50));
 		EditBtn.setBounds(412, 308, 247, 39);
@@ -218,7 +217,8 @@ public class PantallaRegistrarCurso extends JFrame {
 		
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					
+					profesorUCLM = new ProfesorUCLM();
+					curso = new CursoPropio();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
 					// TODO Anyadir el director, que es el usuario que este logueado
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login

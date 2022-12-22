@@ -135,7 +135,7 @@ public class PantallaLogin extends JFrame {
 				//1 comprobar si el usuario es correcto
 				//si no es correcto --> lanzar excepcion o mensaje de error
 				
-				//¿es un alumno? --> pantalla realizar matricula
+				//Â¿es un alumno? --> pantalla realizar matricula
 				try {
 					if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
 						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
@@ -145,16 +145,16 @@ public class PantallaLogin extends JFrame {
 						}
 					}else {
 						//si no es alumno, vicerrector o jefe de gabinete
-						//¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
-						//¿es profesor de la UCLM? 
+						//Â¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla visualizar propuesta curso
+						//Â¿es profesor de la UCLM? 
 							if(pf1.listarProfesorUCLM(nombreUsuario) != null) {
 								ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);
 								if(p1.getPassword().compareTo(contrasena)==0) {
-									//Sí es un profesor de la UCLM --> sí es director
+									//Si es un profesor de la UCLM --> si es director
 									pantallaDireccionEdicion.setVisible(true);	
 								}
 							}else if(pv1.seleccionarProfesor(nombreUsuario) != null){//personal vicerrectorado/jefe de gabinete
-								//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+								//Â¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
 								PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
 								if(personalVicerrectorado.getPassword().compareTo(contrasena)==0) {
 									if(personalVicerrectorado.isJefe()==true) {

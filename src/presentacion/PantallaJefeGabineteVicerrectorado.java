@@ -26,7 +26,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
 	private CursoPropioDAO cursoDAO = new CursoPropioDAO();
-	private JComboBox<String> NameField = new JComboBox<String>();
+	private JComboBox<String> NameField;
 	private GestorPropuestasCursos g = new GestorPropuestasCursos();
 
 	/**
@@ -87,6 +87,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		Name.setBounds(43, 94, 58, 14);
 		contentPane.add(Name);
 		
+		NameField = new JComboBox<String>();
 		NameField.setBounds(102, 90, 256, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();

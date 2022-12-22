@@ -43,6 +43,14 @@ public class PantallaRegistrarCurso extends JFrame {
 	private JTextField FeeField;
 	private JTextField EditionField;
 	private JTextField resultadoField;
+	private JComboBox typeBox;
+	private JComboBox secretaryBox;
+	private JDateChooser StartDateField;
+	private JDateChooser EndDateField;
+	private CentroDAO centroDAO;
+	private List<Centro> centros;
+	private ProfesorDAO profesorDAO;
+	private List<Profesor> profesores;
 
 	/**
 	 * Launch the application.
@@ -146,11 +154,11 @@ public class PantallaRegistrarCurso extends JFrame {
 		EditionField.setBounds(170, 229, 159, 20);
 		contentPane.add(EditionField);
 		
-		JDateChooser StartDateField = new JDateChooser();
+		StartDateField = new JDateChooser();
 		StartDateField.setBounds(170, 145, 159, 20);
 		contentPane.add(StartDateField);
 		
-		JDateChooser EndDateField = new JDateChooser();
+		EndDateField = new JDateChooser();
 		EndDateField.setBounds(170, 176, 159, 20);
 		contentPane.add(EndDateField);
 		
@@ -162,8 +170,8 @@ public class PantallaRegistrarCurso extends JFrame {
 		centerBox.setBounds(170, 257, 409, 21);
 		contentPane.add(centerBox);
 		centerBox.removeAllItems();
-		CentroDAO centroDAO = new CentroDAO();
-		List<Centro> centros = centroDAO.listarCentros();
+		centroDAO = new CentroDAO();
+		centros = centroDAO.listarCentros();
 		for(Centro c: centros) {
 			centerBox.addItem(c.getNombre()+" - "+c.getLocalizacion());
 		}
@@ -176,8 +184,8 @@ public class PantallaRegistrarCurso extends JFrame {
 		secretaryBox.setBounds(170, 288, 214, 21);
 		contentPane.add(secretaryBox);
 		secretaryBox.removeAllItems();
-		ProfesorDAO profesorDAO = new ProfesorDAO();
-		List<Profesor> profesores = profesorDAO.listarProfesores();
+		profesorDAO = new ProfesorDAO();
+		profesores = profesorDAO.listarProfesores();
 		for(Profesor p: profesores) {
 			secretaryBox.addItem(p.getNombre()+" "+p.getApellidos());
 		}

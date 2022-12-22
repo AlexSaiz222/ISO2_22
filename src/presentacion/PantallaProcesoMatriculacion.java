@@ -33,6 +33,8 @@ public class PantallaProcesoMatriculacion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField resultadoField;
+	private JComboBox<String> NameField;
+	private JDateChooser DateField;
 
 	/**
 	 * Launch the application.
@@ -99,11 +101,11 @@ public class PantallaProcesoMatriculacion extends JFrame {
 		DateTxt.setBounds(34, 123, 46, 14);
 		contentPane.add(DateTxt);
 		
-		JDateChooser DateField = new JDateChooser();
+		DateField = new JDateChooser();
 		DateField.setBounds(106, 117, 191, 20);
 		contentPane.add(DateField);
 		
-		JComboBox<String> NameField = new JComboBox<String>();
+		NameField = new JComboBox<String>();
 		NameField.setBounds(106, 82, 191, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();

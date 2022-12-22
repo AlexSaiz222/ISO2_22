@@ -25,6 +25,8 @@ import persistencia.CursoPropioDAO;
 public class PantallaEvaluarPropuesta extends JFrame {
 
 	private JPanel contentPane;
+	private JComboBox<String> NameField;
+	private GestorPropuestasCursos g;
 
 	/**
 	 * Launch the application.
@@ -47,7 +49,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 	 */
 	public PantallaEvaluarPropuesta() {
 		
-		GestorPropuestasCursos g = new GestorPropuestasCursos();
+		g = new GestorPropuestasCursos();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
@@ -86,7 +88,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 		Name.setBounds(43, 94, 58, 14);
 		contentPane.add(Name);
 		
-		JComboBox<String> NameField = new JComboBox<String>();
+		NameField = new JComboBox<String>();
 		NameField.setBounds(102, 90, 256, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();

@@ -173,7 +173,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		contentPane.add(centerBox);
 		centerBox.removeAllItems();
 		CentroDAO centroDAO = new CentroDAO();
-		List<Centro> centros = centroDAO.listarCentros();
+		centros = centroDAO.listarCentros();
 		for(Centro c: centros) {
 			centerBox.addItem(c.getNombre()+" - "+c.getLocalizacion());
 		}

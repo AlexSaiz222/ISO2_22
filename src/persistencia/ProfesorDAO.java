@@ -44,7 +44,6 @@ public class ProfesorDAO {
 				c.get(3).toString(),
 				Boolean.getBoolean(c.get(4).toString()));
 		
-		gestor.desconectarBD();
 		return profesor;
 	}
 
@@ -52,13 +51,14 @@ public class ProfesorDAO {
 	 * 
 	 * @param profesor
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearProfesor(Profesor profesor) {
+	public int crearProfesor(Profesor profesor) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into profesores (dni, nombre, apellidos,password, doctor) "
 					+ "values (?,?,?,?,?)");
@@ -69,10 +69,12 @@ public class ProfesorDAO {
 			pstmt.setBoolean(5, profesor.isDoctor());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("ProfesorDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -93,7 +95,6 @@ public class ProfesorDAO {
 				+"'password ='"+profesor.getNombre()+profesor.getApellidos()+"', "
 						+ "doctor = "+profesor.isDoctor()+")");
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 }

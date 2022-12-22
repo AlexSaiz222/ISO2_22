@@ -93,12 +93,7 @@ public class GestorBD {
 	}
 
 	/**
-	 * 
-<<<<<<< HEAD
 	 * @param pstmt
-=======
-	 * @param sql
->>>>>>> refs/heads/master
 	 * @return res
 	 * *  0 si se ha insertado correctamente
 	 * * -1 si se produce un error

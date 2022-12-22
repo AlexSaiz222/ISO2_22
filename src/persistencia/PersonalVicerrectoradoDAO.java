@@ -19,7 +19,6 @@ public class PersonalVicerrectoradoDAO {
 				c.get(3).toString(),
 				Boolean.getBoolean(c.get(4).toString()));
 		
-		gestor.desconectarBD();
 		return vicerrectorado;
 	}
 
@@ -33,7 +32,7 @@ public class PersonalVicerrectoradoDAO {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into vicerrectorado (dni, nombre, password, apellidos, doctor) "
 					+ "values (?,?,?,?,?)");
@@ -44,10 +43,16 @@ public class PersonalVicerrectoradoDAO {
 			pstmt.setBoolean(5, vicerrectorado.isJefe());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("PersonalVicerrectoradorDAO: "+e.getMessage());
+		} finally {
+			try {
+				if(!pstmt.isClosed())
+					pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("PersonalVicerrectoradoDAO: "+e.getMessage());
+			}
 		}
 		
 		return resultado;

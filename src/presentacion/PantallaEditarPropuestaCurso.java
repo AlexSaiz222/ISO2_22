@@ -40,7 +40,19 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 	private JTextField EditionField;
 	private JTextField ETCSField;
 	private JTextField resultadoField;
-
+	private CursoPropioDAO cursoPropioDAO;
+	private JComboBox NameField;
+	private JDateChooser StartDateField;
+	private JDateChooser EndDateField;
+	private JComboBox centerBox;
+	private JComboBox secretaryBox;
+	private JComboBox typeBox;
+	private List<Centro> centros;
+	private List<CursoPropio> cursos;
+	private List<Profesor> profesores;
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -138,11 +150,11 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		EditionField.setBounds(170, 229, 159, 20);
 		contentPane.add(EditionField);
 		
-		JDateChooser StartDateField = new JDateChooser();
+		StartDateField = new JDateChooser();
 		StartDateField.setBounds(170, 145, 159, 20);
 		contentPane.add(StartDateField);
 		
-		JDateChooser EndDateField = new JDateChooser();
+		EndDateField = new JDateChooser();
 		EndDateField.setBounds(170, 176, 159, 20);
 		contentPane.add(EndDateField);
 		
@@ -156,7 +168,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		contentPane.add(resultadoField);
 		resultadoField.setColumns(10);
 		
-		JComboBox centerBox = new JComboBox();
+		centerBox = new JComboBox();
 		centerBox.setBounds(170, 257, 409, 21);
 		contentPane.add(centerBox);
 		centerBox.removeAllItems();
@@ -170,12 +182,12 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		secretaryTxt.setBounds(60, 287, 80, 22);
 		contentPane.add(secretaryTxt);
 		
-		JComboBox secretaryBox = new JComboBox();
+		secretaryBox = new JComboBox();
 		secretaryBox.setBounds(170, 288, 214, 21);
 		contentPane.add(secretaryBox);
 		secretaryBox.removeAllItems();
 		ProfesorDAO profesorDAO = new ProfesorDAO();
-		List<Profesor> profesores = profesorDAO.listarProfesores();
+		profesores = profesorDAO.listarProfesores();
 		for(Profesor p: profesores) {
 			secretaryBox.addItem(p.getNombre()+" "+p.getApellidos());
 		}
@@ -184,7 +196,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		typeTxt.setBounds(60, 316, 46, 22);
 		contentPane.add(typeTxt);
 		
-		JComboBox typeBox = new JComboBox();
+		typeBox = new JComboBox();
 		typeBox.setBounds(170, 319, 214, 21);
 		contentPane.add(typeBox);
 		typeBox.removeAllItems();
@@ -192,8 +204,8 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 			typeBox.addItem(t);
 		}
 		
-		CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();
-		JComboBox NameField = new JComboBox();
+		cursoPropioDAO = new CursoPropioDAO();
+		NameField = new JComboBox();
 		NameField.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				CursoPropio cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
@@ -215,7 +227,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		contentPane.add(NameField);
 		NameField.removeAllItems();
 		EstadoCurso estado = EstadoCurso.PROPUESTO;
-		List<CursoPropio> cursos = cursoPropioDAO.listarCursosPorEstado(estado);
+		cursos = cursoPropioDAO.listarCursosPorEstado(estado);
 		if(cursos.size() == 0) {
 			resultadoField.setText("No hay cursos propuestos");
 		} else {

@@ -38,7 +38,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 					PantallaEvaluarPropuesta frame = new PantallaEvaluarPropuesta();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("PantallaEvaluarPropuesta: "+e.getMessage());
 				}
 			}
 		});
@@ -117,7 +117,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("PantallaEvaluarPropuesta: "+e.getMessage());
 				}
 			}
 		});
@@ -134,7 +134,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					g.altaCursoAprobado(curso);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("PantallaEvaluarPropuesta: "+e.getMessage());
 				}
 			}
 		});

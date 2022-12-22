@@ -27,7 +27,7 @@ public class PantallaJefeVicerrectorado extends JFrame {
 					PantallaJefeVicerrectorado frame = new PantallaJefeVicerrectorado();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("PantallaJefeVicerrectorado: "+e.getMessage());
 				}
 			}
 		});

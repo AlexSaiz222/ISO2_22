@@ -303,9 +303,10 @@ public class GestorBD {
 					+ "primary key (dni))";
 			stmt.execute(createSQL);
 
-			//createSQL =
 			// Guardar cambios en la BD
 			this.mBD.commit();
+			
+			pstmt.close();
 
 		} catch (SQLException e) {
 			System.out.println(e.getErrorCode());

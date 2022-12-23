@@ -5,4 +5,4 @@ bin
 derby.log
 src/negocio/controllers/PruebasCursos.java
 TrabajoISO2/*
-.dbeaver/*
+/.dbeaver

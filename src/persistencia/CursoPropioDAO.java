@@ -34,7 +34,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into cursospropios (idcentro, iddirector, idsecretario, "
 					+ "estado, tipo, nombre, ects, fechaInicio, fechaFin, tasamatricula, edicion) values (?,?,?,?,?,?,?,?,?,?,?)");
-			pstmt.setInt(1, curso.getId());
+			pstmt.setInt(1, curso.getCentro().getIdCentro());
 			pstmt.setString(2, curso.getDirector().getDni());
 			pstmt.setString(3, curso.getSecretario().getDni());
 			pstmt.setString(4, curso.getEstado().name());

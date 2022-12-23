@@ -46,7 +46,8 @@ public class GestorBD {
 	public void desconectarBD() {
 		try {
 			DriverManager.getConnection("jdbc:derby:;shutdown=true");
-			this.mBD.close();
+			if(!this.mBD.isClosed())
+				this.mBD.close();
 		} catch (SQLException ex) {
 			if (((ex.getErrorCode() == 50000) && ("XJ015".equals(ex.getSQLState())))) {
 				System.out.println("Derby shut down normally");
@@ -217,7 +218,7 @@ public class GestorBD {
 			
 			// Crear la tabla profesores
 			createSQL = "create table profesores (dni varchar(10) not null, nombre varchar(50) not null, "
-					+ "apellidos varchar(50) not null,password varchar(50) doctor boolean, primary key (dni))";
+					+ "apellidos varchar(50) not null, password varchar(50), doctor boolean, primary key (dni))";
 			stmt.execute(createSQL);
 			
 			// Datos iniciales de profesores
@@ -294,14 +295,12 @@ public class GestorBD {
 			
 			// Crear la tabla Pers.Vic
 			createSQL = "create table vicerrectorado (dni varchar(50) not null, "
-					+ "nombre varchar(50) not null, apellidos varchar(50) not null, password varchar(50) not null, jefe boolean "
+					+ "nombre varchar(50) not null, apellidos varchar(50) not null, password varchar(50) not null, jefe boolean, "
 					+ "primary key (dni))";
 			stmt.execute(createSQL);
 
 			// Guardar cambios en la BD
 			this.mBD.commit();
-			
-			pstmt.close();
 
 		} catch (SQLException e) {
 			System.out.println(e.getErrorCode());
@@ -309,16 +308,7 @@ public class GestorBD {
 			System.out.println(e.getMessage());
 		}
 
-		try {
-			DriverManager.getConnection("jdbc:derby:;shutdown=true");
-		} catch (SQLException ex) {
-			if (((ex.getErrorCode() == 50000) && ("XJ015".equals(ex.getSQLState())))) {
-				System.out.println("Derby shut down normally");
-			} else {
-				System.err.println("Derby did not shut down normally");
-				System.err.println(ex.getMessage());
-			}
-		}
+		desconectarBD();
 		
 	}
 

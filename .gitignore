@@ -1,8 +1,4 @@
-bin
-/target/
+/target
 /derby.log
 /db_proyecto_iso2
-derby.log
-src/negocio/controllers/PruebasCursos.java
-TrabajoISO2/*
 /.dbeaver

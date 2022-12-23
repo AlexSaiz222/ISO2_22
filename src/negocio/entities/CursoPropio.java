@@ -26,7 +26,7 @@ public class CursoPropio {
 	}
 	
 	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, Profesor secretario,
-			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, CursoPropioDAO cursoPropioDao, int id,
+			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, int id,
 			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
 		super();
 		this.matriculas = matriculas;
@@ -36,7 +36,7 @@ public class CursoPropio {
 		this.materias = materias;
 		this.estado = estado;
 		this.tipo = tipo;
-		this.cursoPropioDao = cursoPropioDao;
+		this.cursoPropioDao = new CursoPropioDAO();
 		this.id = id;
 		this.nombre = nombre;
 		this.ECTS = eCTS;

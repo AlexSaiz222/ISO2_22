@@ -7,8 +7,8 @@ public class GestorPropuestasCursos {
 	
 	public int realizarPropuestaCurso(CursoPropio curso) {
 		
-		CursoPropioDAO cursoDAO = new CursoPropioDAO();
-		int resultado = cursoDAO.crearCurso(curso);
+		curso.setCursoPropioDao(new CursoPropioDAO());
+		int resultado = curso.getCursoPropioDao().crearCurso(curso);
 		
 		return resultado;
 		

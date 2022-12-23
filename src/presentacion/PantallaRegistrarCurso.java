@@ -224,7 +224,6 @@ public class PantallaRegistrarCurso extends JFrame {
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
 					// TODO Anyadir el director, que es el usuario que este logueado
 					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
-				
 					profesorUCLM.setDni("11111111B");
 					
 					curso.setDirector(profesorUCLM);

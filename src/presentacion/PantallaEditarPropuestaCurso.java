@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
 import com.toedter.calendar.JDateChooser;
 
 import negocio.controllers.GestorPropuestasCursos;

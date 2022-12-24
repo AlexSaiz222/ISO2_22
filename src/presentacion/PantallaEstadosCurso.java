@@ -18,6 +18,7 @@ import com.toedter.calendar.JDateChooser;
 public class PantallaEstadosCurso extends JFrame {
 
 	private JPanel contentPane;
+	private PantallaJefeVicerrectorado v1;
 
 	/**
 	 * Launch the application.
@@ -65,7 +66,7 @@ public class PantallaEstadosCurso extends JFrame {
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaJefeVicerrectorado v1 = new PantallaJefeVicerrectorado();
+				v1 = new PantallaJefeVicerrectorado();
 				v1.setVisible(true);
 			}
 		});

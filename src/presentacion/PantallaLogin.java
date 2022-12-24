@@ -2,42 +2,28 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import negocio.entities.Estudiante;
 import negocio.entities.PersonalVicerrectorado;
-import negocio.entities.Profesor;
 import negocio.entities.ProfesorUCLM;
 import persistencia.EstudianteDAO;
-import persistencia.GestorBD;
 import persistencia.PersonalVicerrectoradoDAO;
 import persistencia.ProfesorUCLMDAO;
 
 import java.awt.GridBagLayout;
-import java.awt.Image;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Window.Type;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.awt.Toolkit;
 import javax.swing.JButton;
-import java.awt.TextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

@@ -4,6 +4,7 @@
   <artifactId>TrabajoISO2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <!-- Sonar -->
 	<properties>
 		  <sonar.organization>alexsaiz222</sonar.organization>
 		  <sonar.host.url>https://sonarcloud.io</sonar.host.url>

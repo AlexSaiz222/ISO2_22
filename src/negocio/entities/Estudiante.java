@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.awt.Window.Type;
 import java.util.*;
 
 public class Estudiante {

@@ -77,8 +77,7 @@ public class MatriculaDAO {
 		CursoPropioDAO cursoDAO = new CursoPropioDAO();
 		CursoPropio curso = cursoDAO.seleccionarCurso(Integer.parseInt(c.get(2).toString()));
 		
-		ModoPago tipopago = null;
-		tipopago.valueOf(c.get(3).toString());
+		ModoPago tipopago = ModoPago.valueOf(c.get(3).toString());
 		
 		mat1.setIdMatricula(Integer.parseInt(c.get(0).toString()));
 		mat1.setEstudiante(estudiante);

@@ -54,16 +54,18 @@ public class PantallaDireccionCurso extends JFrame {
 		JButton EditBtn = new JButton("Editar una propuesta de un curso");
 		EditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaEditarPropuestaCurso E1 = null;
+				PantallaEditarPropuestaCurso E1;
 				try {
 					E1 = new PantallaEditarPropuestaCurso();
+					E1.setVisible(true);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.toString());
 				}
-				E1.setVisible(true);
+
 			}
 		});
+
 		EditBtn.setBackground(Color.LIGHT_GRAY);
 		EditBtn.setForeground(Color.BLACK);
 		EditBtn.setBounds(36, 126, 270, 53);
@@ -83,14 +85,15 @@ public class PantallaDireccionCurso extends JFrame {
 		RegisterCourse.setForeground(Color.BLACK);
 		RegisterCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaRegistrarCurso R1 = null;
+
 				try {
-					R1 = new PantallaRegistrarCurso();
+					PantallaRegistrarCurso R1 = new PantallaRegistrarCurso();
+					R1.setVisible(true);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.toString());
 				}
-				R1.setVisible(true);
+
 			}
 		});
 		RegisterCourse.setBackground(Color.LIGHT_GRAY);

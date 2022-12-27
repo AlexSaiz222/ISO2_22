@@ -85,11 +85,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 			ProfesorDAO secretarioDAO = new ProfesorDAO();
 			Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
 			
-			EstadoCurso estado = null;
-			estado.valueOf(c.get(4).toString());
+			EstadoCurso estado = EstadoCurso.valueOf(c.get(4).toString());
 			
-			TipoCurso tipo = null;
-			tipo.valueOf(c.get(5).toString());
+			TipoCurso tipo = TipoCurso.valueOf(c.get(5).toString());
+			
 			
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

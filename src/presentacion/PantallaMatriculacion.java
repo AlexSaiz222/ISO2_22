@@ -67,16 +67,18 @@ public class PantallaMatriculacion extends JFrame {
 		MatriculateBtn.setForeground(Color.BLACK);
 		MatriculateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaProcesoMatriculacion M1 = null;
+
 				try {
-					M1 = new PantallaProcesoMatriculacion();
+					PantallaProcesoMatriculacion M1 = new PantallaProcesoMatriculacion();
+					M1.setVisible(true);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.toString());
 				}
-				M1.setVisible(true);
+
 			}
 		});
+		
 		MatriculateBtn.setBackground(Color.LIGHT_GRAY);
 		MatriculateBtn.setBounds(32, 118, 200, 53);
 		contentPane.add(MatriculateBtn);

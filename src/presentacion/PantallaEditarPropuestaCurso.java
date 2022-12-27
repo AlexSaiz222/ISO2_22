@@ -210,24 +210,24 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		NameField = new JComboBox();
 		NameField.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				CursoPropio cursoSeleccionado = null;
 				try {
-					cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
+					CursoPropio cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
+					
+					if(cursoSeleccionado.getId() == -1) {
+						resultadoField.setText("Ha ocurrido un error al obtener los datos");
+					} else {
+						ETCSField.setText(cursoSeleccionado.getECTS()+"");
+						FeeField.setText(cursoSeleccionado.getTasaMatricula()+"");
+						StartDateField.setDate(cursoSeleccionado.getFechaInicio());
+						EndDateField.setDate(cursoSeleccionado.getFechaFin());
+						EditionField.setText(cursoSeleccionado.getEdicion()+"");
+						centerBox.addItem(cursoSeleccionado.getCentro()+"");
+						secretaryBox.addItem(cursoSeleccionado.getSecretario());
+						typeBox.addItem(cursoSeleccionado.getTipo());
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					System.out.println(e1.toString());
-				}
-				if(cursoSeleccionado.getId() == -1) {
-					resultadoField.setText("Ha ocurrido un error al obtener los datos");
-				} else {
-					ETCSField.setText(cursoSeleccionado.getECTS()+"");
-					FeeField.setText(cursoSeleccionado.getTasaMatricula()+"");
-					StartDateField.setDate(cursoSeleccionado.getFechaInicio());
-					EndDateField.setDate(cursoSeleccionado.getFechaFin());
-					EditionField.setText(cursoSeleccionado.getEdicion()+"");
-					centerBox.addItem(cursoSeleccionado.getCentro()+"");
-					secretaryBox.addItem(cursoSeleccionado.getSecretario());
-					typeBox.addItem(cursoSeleccionado.getTipo());
 				}
 			}
 		});

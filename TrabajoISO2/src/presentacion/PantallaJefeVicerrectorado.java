@@ -44,22 +44,22 @@ public class PantallaJefeVicerrectorado extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel ChooseAnOption = new JLabel("Escoja una opcion");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(32, 21, 270, 39);
 		contentPane.add(ChooseAnOption);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
-		
+
 		JButton IncomesBttn = new JButton("Ver ingresos");
 		IncomesBttn.setForeground(Color.BLACK);
 		IncomesBttn.addActionListener(new ActionListener() {
@@ -71,7 +71,7 @@ public class PantallaJefeVicerrectorado extends JFrame {
 		IncomesBttn.setBackground(Color.LIGHT_GRAY);
 		IncomesBttn.setBounds(32, 88, 230, 53);
 		contentPane.add(IncomesBttn);
-		
+
 		JButton CourseBtn = new JButton("Listar ediciones");
 		CourseBtn.setForeground(Color.BLACK);
 		CourseBtn.addActionListener(new ActionListener() {
@@ -83,11 +83,11 @@ public class PantallaJefeVicerrectorado extends JFrame {
 		CourseBtn.setBackground(Color.LIGHT_GRAY);
 		CourseBtn.setBounds(32, 162, 230, 53);
 		contentPane.add(CourseBtn);
-		
+
 		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		UCLM_letters.setBounds(387, 77, 241, 213);
 		contentPane.add(UCLM_letters);
-		
+
 		JButton StatusBtn = new JButton("Ver el estado de un curso");
 		StatusBtn.setForeground(Color.BLACK);
 		StatusBtn.setBackground(Color.LIGHT_GRAY);
@@ -101,5 +101,5 @@ public class PantallaJefeVicerrectorado extends JFrame {
 		contentPane.add(StatusBtn);
 	}
 
-	
+
 }

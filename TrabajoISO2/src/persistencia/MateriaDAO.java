@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import negocio.entities.Materia;
 import negocio.entities.Profesor;
@@ -49,11 +48,6 @@ public class MateriaDAO extends AbstractEntityDAO<Object> {
 		return resultado;
 	}
 
-	/**
-	 * 
-	 * @param materia
-	 * @throws ParseException 
-	 */
 	public Materia seleccionarMatricula(int materia) throws ParseException {
 			
 		GestorBD gestor = new GestorBD();
@@ -81,10 +75,6 @@ public class MateriaDAO extends AbstractEntityDAO<Object> {
 		return mat1;
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
 	public int editarMateria(Materia materia) {
 		int resultado = -1;
 	GestorBD agente = new GestorBD();

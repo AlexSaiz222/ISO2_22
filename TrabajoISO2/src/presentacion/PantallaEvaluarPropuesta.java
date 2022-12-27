@@ -42,9 +42,9 @@ public class PantallaEvaluarPropuesta extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaEvaluarPropuesta() {
-		
+
 		GestorPropuestasCursos g = new GestorPropuestasCursos();
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -52,22 +52,22 @@ public class PantallaEvaluarPropuesta extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel Title = new JLabel("Evaluar propuesta de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
 		Title.setBounds(170, 11, 315, 39);
 		contentPane.add(Title);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
-		
+
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -77,28 +77,28 @@ public class PantallaEvaluarPropuesta extends JFrame {
 		});
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
-		
+
 		JLabel Name = new JLabel("Nombre");
 		Name.setBounds(43, 94, 58, 14);
 		contentPane.add(Name);
-		
+
 		JComboBox<String> NameField = new JComboBox<String>();
 		NameField.setBounds(102, 90, 256, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();
-		
+
 		EstadoCurso Estado= EstadoCurso.PROPUESTO;
 		CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoPropioDAO.listarCursosPorEstado(Estado);
-		
+
 		for(CursoPropio c: cursos) {
 			NameField.addItem(c.getNombre());
 		}
-		
+
 		JLabel Photo = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		Photo.setBounds(422, 94, 196, 184);
 		contentPane.add(Photo);
-		
+
 		JButton RejectBtn = new JButton("Rechazar propuesta");
 		RejectBtn.setBackground(Color.RED);
 		RejectBtn.addActionListener(new ActionListener() {

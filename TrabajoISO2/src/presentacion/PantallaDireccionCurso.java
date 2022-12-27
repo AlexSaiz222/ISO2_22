@@ -47,7 +47,7 @@ public class PantallaDireccionCurso extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton EditBtn = new JButton("Editar una propuesta de un curso");
 		EditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -59,17 +59,17 @@ public class PantallaDireccionCurso extends JFrame {
 		EditBtn.setForeground(Color.BLACK);
 		EditBtn.setBounds(36, 126, 270, 53);
 		contentPane.add(EditBtn);
-		
+
 		JLabel ChooseAnOption = new JLabel("Escoja una opcion");
 		ChooseAnOption.setFont(new Font("Tahoma", Font.BOLD, 23));
 		ChooseAnOption.setBounds(234, 21, 270, 39);
 		contentPane.add(ChooseAnOption);
-		
+
 		JLabel EditInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
 		EditInfo.setToolTipText("Editar un curso existente");
 		EditInfo.setBounds(257, 142, 23, 20);
 		contentPane.add(EditInfo);
-		
+
 		JButton RegisterCourse = new JButton("Registrar un curso");
 		RegisterCourse.setForeground(Color.BLACK);
 		RegisterCourse.addActionListener(new ActionListener() {
@@ -81,22 +81,22 @@ public class PantallaDireccionCurso extends JFrame {
 		RegisterCourse.setBackground(Color.LIGHT_GRAY);
 		RegisterCourse.setBounds(36, 242, 270, 53);
 		contentPane.add(RegisterCourse);
-		
+
 		JLabel RegisterInfo = new JLabel(new ImageIcon("./images/ayuda.png"));
 		RegisterInfo.setToolTipText("Registrar un curso aprobado");
 		RegisterInfo.setBounds(257, 255, 23, 20);
 		contentPane.add(RegisterInfo);
-		
-		
+
+
 		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		UCLM_letters.setBounds(389, 96, 241, 213);
 		contentPane.add(UCLM_letters);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);

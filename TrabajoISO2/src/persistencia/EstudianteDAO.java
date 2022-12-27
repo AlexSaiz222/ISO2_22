@@ -11,7 +11,6 @@ public class EstudianteDAO extends AbstractEntityDAO<Object> {
 	public int crearEstudiante(Estudiante estudiante) {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
-		
 		PreparedStatement pstmt;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, "
@@ -33,10 +32,6 @@ public class EstudianteDAO extends AbstractEntityDAO<Object> {
 		return resultado;
 	}
 
-	/**
-	 * 
-	 * @param estudiante
-	 */
 	public Estudiante seleccionarEstudiante(String dni) {
 		
 		GestorBD gestor = new GestorBD();
@@ -60,10 +55,6 @@ public class EstudianteDAO extends AbstractEntityDAO<Object> {
 		return student1;
 	}
 
-	/**
-	 * 
-	 * @param estudiante
-	 */
 	public int editarEstudiante(Estudiante estudiante) {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();

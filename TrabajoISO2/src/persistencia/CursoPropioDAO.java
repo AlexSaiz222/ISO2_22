@@ -67,24 +67,17 @@ public class CursoPropioDAO extends AbstractEntityDAO<Object> {
 		
 		if(cursoListado.size() == 1) {
 			List<Object> c = (List<Object>) cursoListado.get(0);
-			
 			System.out.println(c);
-			
 			CentroDAO centroDAO = new CentroDAO();
 			Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
-			
 			ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();
 			ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());
-			
 			ProfesorDAO secretarioDAO = new ProfesorDAO();
 			Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
-			
 			EstadoCurso estado = null;
 			estado.valueOf(c.get(4).toString());
-			
 			TipoCurso tipo = null;
 			tipo.valueOf(c.get(5).toString());
-			
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 			Date fechainicio = null, fechafin = null;
@@ -94,7 +87,6 @@ public class CursoPropioDAO extends AbstractEntityDAO<Object> {
 			} catch (ParseException e) {
 				System.out.println("CursoPropioDAO: "+e.getMessage());
 			}
-			
 			curso1.setId(Integer.parseInt(c.get(0).toString()));
 			curso1.setCentro(centro);
 			curso1.setDirector(profeUCLM);
@@ -116,10 +108,6 @@ public class CursoPropioDAO extends AbstractEntityDAO<Object> {
 		
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
 	public int editarCurso(CursoPropio curso) {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
@@ -133,15 +121,8 @@ public class CursoPropioDAO extends AbstractEntityDAO<Object> {
 		return resultado;
 	}
 
-	/**
-	 * 
-	 * @param estado
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) {
-		// TODO Auto-generated method stub
-		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
+		//mirar si las variables de las columans de la tabla Cursospropios estan correctamente
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = new GestorBD();
 
@@ -151,31 +132,17 @@ public class CursoPropioDAO extends AbstractEntityDAO<Object> {
             List<Object> curso = (List<Object>) cursosListados.get(i);
             cursoPropio.setId(Integer.parseInt(curso.get(0).toString()));
             cursoPropio.setNombre(curso.get(6).toString());
-
             cursos.add(cursoPropio);
         }
-
         return cursos;
 	}
 
-	/**m
-	 * 
-	 * @param tipo
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
 	public List<Double> listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
-		// TODO - implement CursoPropioDAO.listarIngresos
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
+	
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
-		// TODO Auto-generated method stub
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = new GestorBD();
 

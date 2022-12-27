@@ -29,6 +29,7 @@ public class PantallaLogin extends JFrame {
 	private JTextField textField_userName;
 	private JButton btn_access;
 	private Estudiante estudianteLogeado;
+	private ProfesorUCLM directorLogeado;
 
 	/**
 	 * Launch the application.
@@ -113,9 +114,6 @@ public class PantallaLogin extends JFrame {
 				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();
 				PersonalVicerrectoradoDAO pv1 = new PersonalVicerrectoradoDAO();
 				
-				//1 comprobar si el usuario es correcto
-				//si no es correcto --> lanzar excepcion o mensaje de error
-				
 				//¿es un alumno? --> pantalla realizar matricula
 				try {
 					if(ed1.seleccionarEstudiante(nombreUsuario) != null) {
@@ -132,7 +130,8 @@ public class PantallaLogin extends JFrame {
 								ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);
 								if(p1.getPassword().compareTo(contrasena)==0) {
 									//Sí es un profesor de la UCLM --> sí es director
-									pantallaDireccionEdicion.setVisible(true);	
+									pantallaDireccionEdicion.setVisible(true);
+									directorLogeado=p1;
 								}
 							}else if(pv1.seleccionarVicerrectorado(nombreUsuario) != null){//personal vicerrectorado/jefe de gabinete
 								//¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
@@ -152,7 +151,6 @@ public class PantallaLogin extends JFrame {
 					}catch (Exception exception1) {
 						System.out.println("El usuario no se encuentra en la base de datos.");
 					}
-				
 			}
 		});
 		btn_access.setBackground(new Color(192, 192, 192));
@@ -165,13 +163,27 @@ public class PantallaLogin extends JFrame {
 	}
 	
 	public void logout() {
-		//IMPLEMENTAR
+		PantallaLogin P1 = new PantallaLogin();
+		P1.setVisible(true);
+		P1.borrarEstudianteLogeado();
+		P1.borrarDirectorLogeado();
 	}
 	
 	public Estudiante getEstudianteLogeado(){	
 		return estudianteLogeado;
 	}
 	
+	public void borrarEstudianteLogeado() {
+		estudianteLogeado=null;
+	}
+	
+	public ProfesorUCLM getDirectorLogeado() {
+		return directorLogeado;
+	}
+	
+	public void borrarDirectorLogeado() {
+		directorLogeado=null;
+	}
 	
 
 }

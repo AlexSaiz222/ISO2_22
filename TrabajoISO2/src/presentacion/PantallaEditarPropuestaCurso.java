@@ -57,6 +57,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaEditarPropuestaCurso() {
+		PantallaLogin pantLogin = new PantallaLogin();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -73,8 +74,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
@@ -237,11 +237,9 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					CursoPropio curso = new CursoPropio();
+					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
-					// Añadir el director, que es el usuario que estará logueado
-					// Por defecto, pondremos el primero de la lista de profesoresUCLM hasta que se implemente el login
-					ProfesorUCLM profesorUCLM = new ProfesorUCLM();
-					profesorUCLM.setDni("11111111B");
+					ProfesorUCLM profesorUCLM = pantLogin.getDirectorLogeado();
 					curso.setDirector(profesorUCLM);
 					curso.setSecretario(profesores.get(secretaryBox.getSelectedIndex()));
 					curso.setEstado(EstadoCurso.PROPUESTO); // Al crear el curso, el estado es PROPUESTO
@@ -252,7 +250,6 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 					curso.setFechaFin(EndDateField.getDate());
 					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
-					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
 					int resultado = gestorPropuestasCursos.editarPropuestaCurso(curso);
 					if(resultado == 0) {
 						resultadoField.setText("Curso propuesto correctamente");
@@ -260,18 +257,13 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 				} catch (Exception e) {
 					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");
 				}
-
 			}
 		});
 		
 		contentPane.add(EditBtn);
-		
 		ETCSField = new JTextField();
 		ETCSField.setBounds(170, 116, 159, 20);
 		contentPane.add(ETCSField);
 		ETCSField.setColumns(10);
-		
-		
-		
 	}
 }

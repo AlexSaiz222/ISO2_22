@@ -42,6 +42,7 @@ public class PantallaPagoTarjeta extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaPagoTarjeta() {
+		PantallaLogin pantLogin = new PantallaLogin();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -49,7 +50,7 @@ public class PantallaPagoTarjeta extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -59,61 +60,60 @@ public class PantallaPagoTarjeta extends JFrame {
 		});
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin P1 = new PantallaLogin();
-				P1.setVisible(true);
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
-		
+
 		JLabel lblPayment = new JLabel("Pago mediante tarjeta de credito");
 		lblPayment.setFont(new Font("Tahoma", Font.BOLD, 23));
 		lblPayment.setBounds(34, 11, 270, 39);
 		contentPane.add(lblPayment);
-		
+
 		NumberField = new JTextField();
 		NumberField.setBounds(156, 152, 148, 20);
 		contentPane.add(NumberField);
 		NumberField.setColumns(10);
-		
+
 		JLabel NumberTxt = new JLabel("Numero de la tarjeta");
 		NumberTxt.setBounds(25, 155, 121, 14);
 		contentPane.add(NumberTxt);
-		
+
 		JLabel OwnerTxt = new JLabel("Propietario");
 		OwnerTxt.setBounds(25, 180, 88, 14);
 		contentPane.add(OwnerTxt);
-		
+
 		OwnerField = new JTextField();
 		OwnerField.setColumns(10);
 		OwnerField.setBounds(156, 177, 148, 20);
 		contentPane.add(OwnerField);
-		
+
 		JLabel SecretTxt = new JLabel("Numero Secreto");
 		SecretTxt.setBounds(24, 205, 122, 14);
 		contentPane.add(SecretTxt);
-		
+
 		SecretNumberField = new JTextField();
 		SecretNumberField.setBounds(156, 202, 148, 20);
 		contentPane.add(SecretNumberField);
 		SecretNumberField.setColumns(10);
-		
+
 		JLabel UCLM_letters = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		UCLM_letters.setBounds(381, 79, 241, 213);
 		contentPane.add(UCLM_letters);
-		
+
 		JLabel CourseTxt = new JLabel("Matricula");
 		CourseTxt.setBounds(25, 103, 107, 14);
 		contentPane.add(CourseTxt);
-		
+
 		JList MatriculaList = new JList();
 		MatriculaList.setBounds(156, 102, 148, 39);
 		contentPane.add(MatriculaList);
-		
+
 		JButton PayBtn = new JButton("Pagar ya!");
 		PayBtn.setForeground(Color.BLACK);
 		PayBtn.setBackground(Color.LIGHT_GRAY);

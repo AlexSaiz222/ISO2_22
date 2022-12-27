@@ -8,7 +8,7 @@ import negocio.entities.PersonalVicerrectorado;
 import negocio.entities.Profesor;
 
 public class PersonalVicerrectoradoDAO {
-	public PersonalVicerrectorado seleccionarProfesor(String dni) {
+	public PersonalVicerrectorado seleccionarVicerrectorado(String dni) {
 		GestorBD gestor = new GestorBD();
 		List<Object> vicListado = gestor.select("select * from vicerrectorado where dni='"+dni+"'");
 		List<Object> c = (List<Object>) vicListado.get(0);

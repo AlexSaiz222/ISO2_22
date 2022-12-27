@@ -75,12 +75,13 @@ public class GestorBD {
 			while (rs.next()) {
 				List<Object> v = new ArrayList<Object>();
 				int i = 1;
-				while (true) {
+				boolean j=true;
+				while (j) {
 					try {
 						v.add(rs.getObject(i));
 						i++;
 					} catch (SQLException e) {
-						break;
+						j=false;
 					}
 				}
 				resultado.add(v);

@@ -33,7 +33,7 @@ public class PantallaDireccionCurso extends JFrame {
 					PantallaDireccionCurso frame = new PantallaDireccionCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});
@@ -59,7 +59,7 @@ public class PantallaDireccionCurso extends JFrame {
 					E1 = new PantallaEditarPropuestaCurso();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 				E1.setVisible(true);
 			}

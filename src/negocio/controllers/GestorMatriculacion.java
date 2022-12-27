@@ -35,7 +35,7 @@ public class GestorMatriculacion {
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
         
 		Collection<Matricula> mCollection = estudiante.getMatriculas();
@@ -66,7 +66,7 @@ public class GestorMatriculacion {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 		
 		if(matricula.getTipoPago() == ModoPago.TARJETA_CREDITO) {

@@ -35,7 +35,7 @@ public class GestorConsultas {
 	            try {
 					cursoPropio = cursoPropioDAO.seleccionarCurso((int) t.get(0));
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 	            //habria que saber como poner un precio a la matricula, en este caso, he puesto 1250 euros
 	            //habria que poner cursos.add(cursoPropio.getPrecioMatricula)

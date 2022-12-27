@@ -192,7 +192,7 @@ public class GestorBD {
 	
 	private void crearBaseDatosSinoExiste() throws SQLException {
 		System.out.println("Creando base de datos...");
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		String createSQL = "create table estudiantes (dni varchar(10) not null, "
 				+ "nombre varchar(50) not null, apellidos varchar(50) not null, "
@@ -323,6 +323,8 @@ public class GestorBD {
 		} finally {
 			if(stmt != null)
 				stmt.close();
+			if(pstmt != null)
+			pstmt.close();
 		}
 
 		desconectarBD();

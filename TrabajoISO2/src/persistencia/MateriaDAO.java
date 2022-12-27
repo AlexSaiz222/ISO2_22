@@ -7,12 +7,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import negocio.entities.Materia;
 import negocio.entities.Profesor;
 
 
-public class MateriaDAO extends AbstractEntityDAO {
+public class MateriaDAO extends AbstractEntityDAO<Object> {
 
 	/**
 	 * 
@@ -56,9 +55,7 @@ public class MateriaDAO extends AbstractEntityDAO {
 	 * @throws ParseException 
 	 */
 	public Materia seleccionarMatricula(int materia) throws ParseException {
-		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
-				
+			
 		GestorBD gestor = new GestorBD();
 		List<Object> materiaListado = gestor.select("select * from materias where idMateria = "+materia);
 		List<Object> c = (List<Object>) materiaListado.get(0);

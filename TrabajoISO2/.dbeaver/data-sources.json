@@ -1,4 +1,29 @@
 {
 	"folders": {},
-	"connections": {}
+	"connections": {
+		"derby-1855389d812-6f503d8b72e6e126": {
+			"provider": "generic",
+			"driver": "derby",
+			"name": "db_proyecto_iso2",
+			"save-password": true,
+			"configuration": {
+				"database": "C:\\Users\\berme\\eclipse-workspace\\GitHub\\ISO2_22\\TrabajoISO2\\db_proyecto_iso2",
+				"url": "jdbc:derby:C:\\Users\\berme\\eclipse-workspace\\GitHub\\ISO2_22\\TrabajoISO2\\db_proyecto_iso2",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
 }

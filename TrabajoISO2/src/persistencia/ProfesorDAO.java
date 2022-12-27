@@ -4,10 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import negocio.entities.CategoriaProfesor;
-import negocio.entities.Centro;
-import negocio.entities.CursoPropio;
 import negocio.entities.Profesor;
 
 public class ProfesorDAO {

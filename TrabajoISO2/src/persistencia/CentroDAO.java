@@ -1,13 +1,10 @@
 package persistencia;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import negocio.entities.Centro;
-import negocio.entities.Matricula;
 
 public class CentroDAO {
 	

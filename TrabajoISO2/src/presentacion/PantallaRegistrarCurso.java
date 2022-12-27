@@ -5,10 +5,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,11 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
-import javax.swing.JList;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import com.toedter.calendar.JDateChooser;
-
 import negocio.controllers.GestorPropuestasCursos;
 import negocio.entities.Centro;
 import negocio.entities.CursoPropio;
@@ -29,10 +23,7 @@ import negocio.entities.Profesor;
 import negocio.entities.ProfesorUCLM;
 import negocio.entities.TipoCurso;
 import persistencia.CentroDAO;
-import persistencia.CursoPropioDAO;
 import persistencia.ProfesorDAO;
-import persistencia.ProfesorUCLMDAO;
-
 import javax.swing.JComboBox;
 
 public class PantallaRegistrarCurso extends JFrame {

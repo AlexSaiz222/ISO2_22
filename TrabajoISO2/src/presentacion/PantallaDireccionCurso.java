@@ -10,8 +10,6 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.SystemColor;
-import javax.swing.Icon;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;

@@ -2,12 +2,11 @@ package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import negocio.entities.Estudiante;
 
-public class EstudianteDAO extends AbstractEntityDAO {
+public class EstudianteDAO extends AbstractEntityDAO<Object> {
 	
 	public int crearEstudiante(Estudiante estudiante) {
 		int resultado = -1;
@@ -39,9 +38,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	 * @param estudiante
 	 */
 	public Estudiante seleccionarEstudiante(String dni) {
-		GestorBD agente = new GestorBD();
-		List<Object> resultado = new ArrayList<Object>();
-			
+		
 		GestorBD gestor = new GestorBD();
 		List<Object> estudianteListado = gestor.select("select * from ESTUDIANTES where dni = "+dni);
 		List<Object> c = (List<Object>) estudianteListado.get(0);

@@ -4,17 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import negocio.entities.Centro;
 import negocio.entities.Profesor;
 import negocio.entities.ProfesorExterno;
-import negocio.entities.ProfesorUCLM;
-import persistencia.AbstractEntityDAO;
-import persistencia.CentroDAO;
-import persistencia.GestorBD;
-import persistencia.ProfesorDAO;
 
-public class ProfesorExternoDAO extends AbstractEntityDAO {
+
+public class ProfesorExternoDAO extends AbstractEntityDAO<Object> {
 
 	/**
 	 * 
@@ -48,8 +43,6 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 	 * @param profeExterno
 	 */
 	public ProfesorExterno seleccionarProfesorExterno(String profeExterno) {
-		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = new GestorBD();
 		List<Object> profeExternoListado = gestor.select("select * from profesoresExternos where dni = "+profeExterno);

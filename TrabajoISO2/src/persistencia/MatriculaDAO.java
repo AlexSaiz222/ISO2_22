@@ -5,15 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-
 import negocio.entities.CursoPropio;
-import negocio.entities.EstadoCurso;
 import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
-import negocio.entities.TipoCurso;
 
 public class MatriculaDAO {
 

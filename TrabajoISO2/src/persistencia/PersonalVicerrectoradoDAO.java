@@ -3,9 +3,7 @@ package persistencia;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
 import negocio.entities.PersonalVicerrectorado;
-import negocio.entities.Profesor;
 
 public class PersonalVicerrectoradoDAO {
 	public PersonalVicerrectorado seleccionarVicerrectorado(String dni) {

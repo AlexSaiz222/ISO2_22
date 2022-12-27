@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class PantallaMatriculacion extends JFrame {

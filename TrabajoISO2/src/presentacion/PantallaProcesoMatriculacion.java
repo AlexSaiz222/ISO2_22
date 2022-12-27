@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,12 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JList;
 import java.awt.Color;
-import javax.swing.Icon;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
-
 import negocio.controllers.GestorMatriculacion;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -26,7 +22,6 @@ import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
 import persistencia.CursoPropioDAO;
 import persistencia.MatriculaDAO;
-
 import javax.swing.JComboBox;
 
 public class PantallaProcesoMatriculacion extends JFrame {

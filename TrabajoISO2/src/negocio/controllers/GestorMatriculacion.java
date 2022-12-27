@@ -1,12 +1,9 @@
  package negocio.controllers;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import negocio.entities.*;
-import persistencia.CursoPropioDAO;
 import persistencia.GestorBD;
 import persistencia.MatriculaDAO;
 
@@ -18,11 +15,7 @@ public class GestorMatriculacion {
 	 * @param estudiante
 	 */
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) {
-		// TODO - implement GestorMatriculacion.realizarMatriculacion
 		
-		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
-				
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
 				+ "' and idCursoPropio = "+curso.getId());
@@ -50,9 +43,6 @@ public class GestorMatriculacion {
 	 * @param estudiante
 	 */
 	public void realizarPagoMatricula(CursoPropio curso, Estudiante estudiante) {
-		// TODO - implement GestorMatriculacion.realizarPagoMatricula
-		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
@@ -66,7 +56,6 @@ public class GestorMatriculacion {
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

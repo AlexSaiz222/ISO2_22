@@ -2,8 +2,6 @@ package persistencia;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
-
-import negocio.controllers.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +10,7 @@ import java.util.List;
 
 import negocio.entities.*;
 
-public class CursoPropioDAO extends AbstractEntityDAO {
+public class CursoPropioDAO extends AbstractEntityDAO<Object> {
 
 	/**
 	 * 

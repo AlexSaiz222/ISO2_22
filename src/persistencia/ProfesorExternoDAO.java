@@ -57,17 +57,14 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 		
 		ProfesorDAO profeDAO = new ProfesorDAO();
 		Profesor profesor = profeDAO.seleccionarProfesor(c.get(0).toString());
-		
-		CentroDAO centroDAO = new CentroDAO();
-		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
-		
+				
 		ProfesorExterno profe1 = new ProfesorExterno();
 		
 		profe1.setDni(c.get(0).toString());
 		profe1.setApellidos(profesor.getApellidos());
 		profe1.setPassword(profesor.getPassword());
 		profe1.setDoctor(profesor.isDoctor());
-		profe1.setTitulacion(profeExterno);;
+		profe1.setTitulacion(c.get(1).toString());;
 		profe1.setNombre(profesor.getNombre());
 		
 		gestor.desconectarBD();

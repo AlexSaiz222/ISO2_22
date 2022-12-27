@@ -77,6 +77,7 @@ public class MatriculaDAO {
 		tipopago.valueOf(c.get(3).toString());
 		
 		mat1.setIdMatricula(Integer.parseInt(c.get(0).toString()));
+		mat1.setTitulo(curso);
 		mat1.setEstudiante(estudiante);
 		mat1.setFecha(fecha);
 		mat1.setTipoPago(tipopago);

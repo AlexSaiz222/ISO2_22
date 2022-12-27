@@ -20,28 +20,7 @@ public class GestorPropuestasCursos {
 	 */
 	public int realizarPropuestaCurso(CursoPropio curso) {
 		int resultado = 0;
-		
-		System.out.println("Entra al gestor");
-		
-		if(curso.getNombre().equals("") || curso.getNombre().length()>50)
-			resultado = 1;
-		else
-			if(curso.getECTS()<=0)
-				resultado = 2;
-			else
-				if(curso.getFechaInicio() == null)
-					resultado = 3;
-				else
-					if(curso.getFechaFin() == null || 
-						curso.getFechaFin().compareTo(curso.getFechaInicio())==-1 || 
-						curso.getFechaFin().compareTo(curso.getFechaInicio())==0)
-						resultado = 4;
-					else
-						if(curso.getTasaMatricula()<=0)
-							resultado = 5;
-						else
-							if(curso.getEdicion()<=0)
-								resultado = 6;
+		resultado =comprobacioncurso(curso);
 			
 		if(resultado == 0) {
 			curso.setCursoPropioDao(new CursoPropioDAO());
@@ -58,27 +37,44 @@ public class GestorPropuestasCursos {
 	 */
 	public int editarPropuestaCurso(CursoPropio curso) {
 		// TODO - implement GestorPropuestasCursos.editarPropuestaCurso
-		CursoPropioDAO cursoDAO = new CursoPropioDAO();
-		int resultado = cursoDAO.editarCurso(curso);
+		int resultado = 0;
+		resultado =comprobacioncurso(curso);
+			
+		if(resultado == 0) {
+			curso.setCursoPropioDao(new CursoPropioDAO());
+			resultado = curso.getCursoPropioDao().editarCurso(curso);
+		}
+		
 		return resultado;
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
-	public EstadoCurso evaluarPropuesta(CursoPropio curso) {
-		// TODO - implement GestorPropuestasCursos.evaluarPropuesta
-		throw new UnsupportedOperationException();
-	}
+	public int comprobacioncurso(CursoPropio curso) {
+		int resultado = 0;
 
-	/**
-	 * 
-	 * @param curso
-	 */
-	public void altaCursoAprobado(CursoPropio curso) {
-		// TODO - implement GestorPropuestasCursos.altaCursoAprobado
-		throw new UnsupportedOperationException();
+		System.out.println("Entra al gestor");
+
+		if(curso.getNombre().equals("") || curso.getNombre().length()>50)
+			resultado = 1;
+		else
+			if(curso.getECTS()<=0)
+				resultado = 2;
+			else
+				if(curso.getFechaInicio() == null)
+					resultado = 3;
+				else
+					if(curso.getFechaFin() == null || 
+					curso.getFechaFin().compareTo(curso.getFechaInicio())==-1 || 
+					curso.getFechaFin().compareTo(curso.getFechaInicio())==0)
+						resultado = 4;
+					else
+						if(curso.getTasaMatricula()<=0)
+							resultado = 5;
+						else
+							if(curso.getEdicion()<=0)
+								resultado = 6;
+		return resultado;
+		
 	}
+	
 
 }

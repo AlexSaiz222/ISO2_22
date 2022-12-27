@@ -18,9 +18,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param curso
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearCurso(CursoPropio curso) {
+	public int crearCurso(CursoPropio curso) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
@@ -30,7 +31,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));
 		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into cursospropios (idcentro, iddirector, idsecretario, "
 					+ "estado, tipo, nombre, ects, fechaInicio, fechaFin, tasamatricula, edicion) values (?,?,?,?,?,?,?,?,?,?,?)");
@@ -47,10 +48,12 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 			pstmt.setInt(11, curso.getEdicion());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("CursoPropioDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -60,9 +63,10 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param curso
+	 * @throws SQLException 
 	 * @throws ParseException 
 	 */
-	public CursoPropio seleccionarCurso(int curso) {
+	public CursoPropio seleccionarCurso(int curso) throws SQLException {
 		GestorBD agente = new GestorBD();
 		CursoPropio curso1 = new CursoPropio();
 		List<Object> cursoListado = agente.select("select * from cursospropios where idcursopropio="+curso);
@@ -121,8 +125,9 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param curso
+	 * @throws SQLException 
 	 */
-	public int editarCurso(CursoPropio curso) {
+	public int editarCurso(CursoPropio curso) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 	
@@ -140,8 +145,9 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param estado
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws SQLException 
 	 */
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) {
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException {
 		// TODO Auto-generated method stub
 		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
@@ -175,8 +181,9 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws SQLException 
 	 */
-	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
+	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO Auto-generated method stub
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = new GestorBD();

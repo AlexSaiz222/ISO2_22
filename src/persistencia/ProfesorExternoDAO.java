@@ -20,13 +20,14 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 	 * 
 	 * @param profeExterno
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearProfesorExterno(ProfesorExterno profeExterno) {
+	public int crearProfesorExterno(ProfesorExterno profeExterno) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into profesoresExternos (dni ,titulacion) "
 					+ "values (?,?)");
@@ -38,6 +39,9 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("ProfesorExternoDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -46,11 +50,10 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param profeExterno
+	 * @throws SQLException 
 	 */
-	public ProfesorExterno seleccionarProfesorExterno(String profeExterno) {
-		GestorBD agente = new GestorBD();
+	public ProfesorExterno seleccionarProfesorExterno(String profeExterno) throws SQLException {
 		List<Object>  resultado = new ArrayList<Object>();
-				
 		GestorBD gestor = new GestorBD();
 		List<Object> profeExternoListado = gestor.select("select * from profesoresExternos where dni = "+profeExterno);
 		List<Object> c = (List<Object>) profeExternoListado.get(0);
@@ -70,16 +73,15 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 		profe1.setTitulacion(profeExterno);;
 		profe1.setNombre(profesor.getNombre());
 		
-		gestor.desconectarBD();
-		
 		return profe1;
 	}
 
 	/**
 	 * 
 	 * @param profeExterno
+	 * @throws SQLException 
 	 */
-	public int editarProfesorExterno(ProfesorExterno profeExterno) {
+	public int editarProfesorExterno(ProfesorExterno profeExterno) throws SQLException {
 		int resultado = -1;
 	GestorBD agente = new GestorBD();
 
@@ -87,7 +89,6 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 			+ "set( dni = '"+ profeExterno.getDni()+"',titulacion='"+profeExterno.getTitulacion()
 			+ "')");
 	
-	agente.desconectarBD();
 	return resultado;
 	}
 }

@@ -12,7 +12,7 @@ import negocio.entities.Profesor;
 
 public class ProfesorDAO {
 	
-	public List<Profesor> listarProfesores() {
+	public List<Profesor> listarProfesores() throws SQLException {
 		List<Profesor> profesores = new ArrayList<Profesor>();
 		GestorBD gestor = new GestorBD();
 		
@@ -33,7 +33,7 @@ public class ProfesorDAO {
 		return profesores;
 	}
 	
-	public Profesor seleccionarProfesor(String dni) {
+	public Profesor seleccionarProfesor(String dni) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> profesorListado = gestor.select("select * from profesores where dni='"+dni+"'");
 		List<Object> c = (List<Object>) profesorListado.get(0);
@@ -83,8 +83,9 @@ public class ProfesorDAO {
 	/**
 	 * 
 	 * @param profesor
+	 * @throws SQLException 
 	 */
-	public int editarProfesor(Profesor profesor) {
+	public int editarProfesor(Profesor profesor) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 	

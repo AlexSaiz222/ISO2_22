@@ -11,7 +11,7 @@ import negocio.entities.Matricula;
 
 public class CentroDAO {
 	
-	public List<Centro> listarCentros() {
+	public List<Centro> listarCentros() throws SQLException {
 		List<Centro> centros = new ArrayList<Centro>();
 		GestorBD gestor = new GestorBD();
 		
@@ -29,7 +29,7 @@ public class CentroDAO {
 		return centros;
 	}
 	
-	public Centro seleccionarCentro(int idCentro) {
+	public Centro seleccionarCentro(int idCentro) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> centroListado = gestor.select("select * from centros where idcentro="+idCentro);
 		List<Object> c = (List<Object>) centroListado.get(0);
@@ -46,13 +46,14 @@ public class CentroDAO {
 	 * 
 	 * @param centro
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearCentro(Centro centro) {
+	public int crearCentro(Centro centro) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into centros (idcentro, nombre, localizacion) "
 					+ "values (?,?,?)");
@@ -61,10 +62,12 @@ public class CentroDAO {
 			pstmt.setString(3, centro.getLocalizacion());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("DAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		agente.desconectarBD();
@@ -74,8 +77,9 @@ public class CentroDAO {
 	/**
 	 * 
 	 * @param centro
+	 * @throws SQLException 
 	 */
-	public int editarCentro(Centro centro) {
+	public int editarCentro(Centro centro) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 

@@ -21,11 +21,11 @@ public class GestorBD {
 	private final static String DBUSER ="admin";
 	private final static String DBPASS ="admin";
 	
-	public GestorBD() {
+	public GestorBD() throws SQLException {
 		conectarBD();
 	}
 
-	public void conectarBD() {
+	public void conectarBD() throws SQLException {
 		Driver derbyEmbeddedDriver = new EmbeddedDriver();
 		try {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
@@ -62,10 +62,11 @@ public class GestorBD {
 	 * 
 	 * @param sql
 	 * @return 
+	 * @throws SQLException 
 	 */
-	public List<Object> select(String sql) {
+	public List<Object> select(String sql) throws SQLException {
 		List<Object> resultado = new ArrayList<Object>();
-		Statement stmt;
+		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = this.mBD.createStatement();
@@ -88,7 +89,11 @@ public class GestorBD {
 			stmt.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(stmt != null)
+				stmt.close();
 		}
+		
 		desconectarBD();
 		return resultado;
 	}
@@ -124,10 +129,11 @@ public class GestorBD {
 	 * @return res
 	 * *  0 si se ha actualizado correctamente
 	 * * -1 si se produce un error
+	 * @throws SQLException 
 	 */
-	public int update(String sql) {
+	public int update(String sql) throws SQLException {
 		conectarBD();
-		PreparedStatement stmt;
+		PreparedStatement stmt = null;
 		int res = -1;
 		try {
 			stmt = this.mBD.prepareStatement(sql);
@@ -135,6 +141,9 @@ public class GestorBD {
 			stmt.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(stmt != null)
+				stmt.close();
 		}
 		
 		if(res==0)	// Si devuelve 0, es que no se ha actualizado ninguna fila --> Incorrecto
@@ -153,10 +162,11 @@ public class GestorBD {
 	 * @return res
 	 * * *  0 si se ha eliminado correctamente
 	 * * -1 si se produce un error
+	 * @throws SQLException 
 	 */
-	public int delete(String sql) {
+	public int delete(String sql) throws SQLException {
 		conectarBD();
-		PreparedStatement stmt;
+		PreparedStatement stmt = null;
 		int res = -1;
 		try {
 			stmt = this.mBD.prepareStatement(sql);
@@ -164,6 +174,9 @@ public class GestorBD {
 			stmt.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(stmt != null)
+				stmt.close();
 		}
 		
 		if(res==0)	// Si devuelve 0, es que no se ha eliminado ninguna fila --> Incorrecto
@@ -176,10 +189,10 @@ public class GestorBD {
 		return res;
 	}
 	
-	private void crearBaseDatosSinoExiste() {
+	private void crearBaseDatosSinoExiste() throws SQLException {
 		System.out.println("Creando base de datos...");
 		PreparedStatement pstmt;
-		Statement stmt;
+		Statement stmt = null;
 		String createSQL = "create table estudiantes (dni varchar(10) not null, "
 				+ "nombre varchar(50) not null, apellidos varchar(50) not null, "
 				+ "password varchar(50), titulacion varchar(50), cualificacion varchar(50), primary key (dni))";
@@ -306,6 +319,9 @@ public class GestorBD {
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getSQLState());
 			System.out.println(e.getMessage());
+		} finally {
+			if(stmt != null)
+				stmt.close();
 		}
 
 		desconectarBD();

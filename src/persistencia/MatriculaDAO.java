@@ -21,9 +21,10 @@ public class MatriculaDAO {
 	 * 
 	 * @param matricula
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearMatricula(Matricula matricula) {
+	public int crearMatricula(Matricula matricula) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
@@ -32,7 +33,7 @@ public class MatriculaDAO {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		Date fecha = Date.valueOf(simpleDateFormat.format(matricula.getFecha()));
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into matriculas (idestudiante, idcursopropio, tipopago, fecha, pagado) "
 					+ "values (?,?,?,?,?,?)");
@@ -43,10 +44,12 @@ public class MatriculaDAO {
 			pstmt.setBoolean(5, matricula.isPagado());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("MatriculaDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -56,8 +59,9 @@ public class MatriculaDAO {
 	 * 
 	 * @param matricula
 	 * @throws ParseException 
+	 * @throws SQLException 
 	 */
-	public Matricula seleccionarMatricula(int matricula) throws ParseException {
+	public Matricula seleccionarMatricula(int matricula) throws ParseException, SQLException {
 		GestorBD agente = new GestorBD();
 		List<Object> matriculaListado = agente.select("select * from matriculas where idmatricula = "+matricula);
 		List<Object> c = (List<Object>) matriculaListado.get(0);
@@ -88,8 +92,9 @@ public class MatriculaDAO {
 	/**
 	 * 
 	 * @param curso
+	 * @throws SQLException 
 	 */
-	public int editarMatricula(Matricula matricula) {
+	public int editarMatricula(Matricula matricula) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 	

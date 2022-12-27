@@ -18,9 +18,10 @@ public class MateriaDAO extends AbstractEntityDAO {
 	 * 
 	 * @param materia
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearMatricula(Materia materia) {
+	public int crearMatricula(Materia materia) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
@@ -30,7 +31,7 @@ public class MateriaDAO extends AbstractEntityDAO {
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(materia.getFechaInicio()));
 		Date fechaFin = Date.valueOf(simpleDateFormat.format(materia.getFechaFin()));
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into materias (responsable, nombre , horas , fechaInicio , fechaFin) "
 					+ "values (?,?,?,?,?)");
@@ -41,10 +42,12 @@ public class MateriaDAO extends AbstractEntityDAO {
 			pstmt.setDate(9, fechaFin);
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("MateriaDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -54,13 +57,12 @@ public class MateriaDAO extends AbstractEntityDAO {
 	 * 
 	 * @param materia
 	 * @throws ParseException 
+	 * @throws SQLException 
 	 */
-	public Materia seleccionarMatricula(int materia) throws ParseException {
+	public Materia seleccionarMatricula(int materia) throws ParseException, SQLException {
 		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
-				
-		GestorBD gestor = new GestorBD();
-		List<Object> materiaListado = gestor.select("select * from materias where idMateria = "+materia);
+		List<Object> materiaListado = agente.select("select * from materias where idMateria = "+materia);
 		List<Object> c = (List<Object>) materiaListado.get(0);
 		
 		Materia mat1 = new Materia();
@@ -79,16 +81,15 @@ public class MateriaDAO extends AbstractEntityDAO {
 		mat1.setNombre(c.get(2).toString());
 		mat1.setResponsable(responsable);
 		
-		gestor.desconectarBD();
-		
 		return mat1;
 	}
 
 	/**
 	 * 
 	 * @param curso
+	 * @throws SQLException 
 	 */
-	public int editarMateria(Materia materia) {
+	public int editarMateria(Materia materia) throws SQLException {
 		int resultado = -1;
 	GestorBD agente = new GestorBD();
 
@@ -100,7 +101,6 @@ public class MateriaDAO extends AbstractEntityDAO {
 			+ ", fechaInicio ="+materia.getFechaInicio()
 			+ ", fechaFin ="+materia.getFechaFin()+")");
 	
-	agente.desconectarBD();
 	return resultado;
 	}
 

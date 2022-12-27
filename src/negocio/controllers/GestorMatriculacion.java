@@ -1,5 +1,6 @@
  package negocio.controllers;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,11 +17,10 @@ public class GestorMatriculacion {
 	 * 
 	 * @param curso
 	 * @param estudiante
+	 * @throws SQLException 
 	 */
-	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) {
+	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) throws SQLException {
 		// TODO - implement GestorMatriculacion.realizarMatriculacion
-		
-		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = new GestorBD();
@@ -48,12 +48,11 @@ public class GestorMatriculacion {
 	 * 
 	 * @param curso
 	 * @param estudiante
+	 * @throws SQLException 
 	 */
-	public void realizarPagoMatricula(CursoPropio curso, Estudiante estudiante) {
+	public void realizarPagoMatricula(CursoPropio curso, Estudiante estudiante) throws SQLException {
 		// TODO - implement GestorMatriculacion.realizarPagoMatricula
-		GestorBD agente = new GestorBD();
 		List<Object>  resultado = new ArrayList<Object>();
-				
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
 				+ "' and idCursoPropio = "+curso.getId());

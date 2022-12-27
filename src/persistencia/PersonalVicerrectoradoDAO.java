@@ -8,7 +8,7 @@ import negocio.entities.PersonalVicerrectorado;
 import negocio.entities.Profesor;
 
 public class PersonalVicerrectoradoDAO {
-	public PersonalVicerrectorado seleccionarProfesor(String dni) {
+	public PersonalVicerrectorado seleccionarProfesor(String dni) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> vicListado = gestor.select("select * from vicerrectorado where dni='"+dni+"'");
 		List<Object> c = (List<Object>) vicListado.get(0);
@@ -58,12 +58,12 @@ public class PersonalVicerrectoradoDAO {
 	/**
 	 * 
 	 * @param vicerrectorado
+	 * @throws SQLException 
 	 */
-	public int editarVicerrecotrado(PersonalVicerrectorado vicerrectorado) {
+	public int editarVicerrecotrado(PersonalVicerrectorado vicerrectorado) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-	
 		resultado = agente.update("update vicerrectorado "
 				+ "set( dni = '"+ vicerrectorado.getDni()+"',"
 						+ "nombre='"+vicerrectorado.getNombre()
@@ -71,7 +71,6 @@ public class PersonalVicerrectoradoDAO {
 				+"'password ='"+vicerrectorado.getNombre()+vicerrectorado.getApellidos()+"', "
 						+ "jefe = "+vicerrectorado.isJefe()+")");
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 }

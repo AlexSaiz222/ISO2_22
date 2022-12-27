@@ -1,11 +1,13 @@
 package negocio.controllers;
 
+import java.sql.SQLException;
+
 import negocio.entities.*;
 import persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
 	
-	public int realizarPropuestaCurso(CursoPropio curso) {
+	public int realizarPropuestaCurso(CursoPropio curso) throws SQLException {
 		
 		curso.setCursoPropioDao(new CursoPropioDAO());
 		int resultado = curso.getCursoPropioDao().crearCurso(curso);
@@ -17,8 +19,9 @@ public class GestorPropuestasCursos {
 	/**
 	 * 
 	 * @param curso
+	 * @throws SQLException 
 	 */
-	public int editarPropuestaCurso(CursoPropio curso) {
+	public int editarPropuestaCurso(CursoPropio curso) throws SQLException {
 		// TODO - implement GestorPropuestasCursos.editarPropuestaCurso
 		CursoPropioDAO cursoDAO = new CursoPropioDAO();
 		int resultado = cursoDAO.editarCurso(curso);

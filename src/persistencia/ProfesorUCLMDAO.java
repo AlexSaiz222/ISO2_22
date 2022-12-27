@@ -13,7 +13,7 @@ import negocio.entities.ProfesorUCLM;
 
 public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	
-	public List<ProfesorUCLM> listarProfesoresUCLM() {
+	public List<ProfesorUCLM> listarProfesoresUCLM() throws SQLException {
 		List<ProfesorUCLM> profesoresUCLM = new ArrayList<ProfesorUCLM>();
 		GestorBD gestor = new GestorBD();
 		
@@ -40,7 +40,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 		return profesoresUCLM;
 	}
 	
-	public ProfesorUCLM listarProfesorUCLM(String dni) {
+	public ProfesorUCLM listarProfesorUCLM(String dni) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> profesorUCLMListado = gestor.select("select * from profesoresUCLM where dni='"+dni+"'");
 		List<Object> profesorUCLM = (List<Object>) profesorUCLMListado.get(0);
@@ -65,9 +65,10 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	 * 
 	 * @param profeUCLM
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException 
 	 */
 
-	public int crearProfesorUCLM(ProfesorUCLM profeUCLM) {
+	public int crearProfesorUCLM(ProfesorUCLM profeUCLM) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
@@ -92,11 +93,10 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	/**
 	 * 
 	 * @param profeUCLM
+	 * @throws SQLException 
 	 */
-	public ProfesorUCLM seleccionarProfesorUCLM(String profeUCLM) {
-		GestorBD agente = new GestorBD();
+	public ProfesorUCLM seleccionarProfesorUCLM(String profeUCLM) throws SQLException {
 		List<Object>  resultado = new ArrayList<Object>();
-				
 		GestorBD gestor = new GestorBD();
 		List<Object> profeUCLMListado = gestor.select("select * from profesoresUCLM where dni = "+profeUCLM);
 		List<Object> c = (List<Object>) profeUCLMListado.get(0);
@@ -124,8 +124,9 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 	/**
 	 * 
 	 * @param profesorUCLM
+	 * @throws SQLException 
 	 */
-	public int editarProfesorUCLM(ProfesorUCLM profesorUCLM) {
+	public int editarProfesorUCLM(ProfesorUCLM profesorUCLM) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 	
@@ -133,7 +134,6 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 				+ "set( dni = '"+ profesorUCLM.getDni()+"',centroAdscripcion='"+profesorUCLM.getCentroAdscripcion().getIdCentro()
 				+ "',categoria ="+profesorUCLM.getCategoria()+")");
 		
-		agente.desconectarBD();
 		return resultado;
 	}
 }

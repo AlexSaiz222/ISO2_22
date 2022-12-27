@@ -9,11 +9,11 @@ import negocio.entities.Estudiante;
 
 public class EstudianteDAO extends AbstractEntityDAO {
 	
-	public int crearEstudiante(Estudiante estudiante) {
+	public int crearEstudiante(Estudiante estudiante) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, "
 					+ "PASSWORD, TITULACION, CUALIFICACION) values (?,?,?,?,?,?)");
@@ -25,10 +25,12 @@ public class EstudianteDAO extends AbstractEntityDAO {
 			pstmt.setString(6, estudiante.getCualificacion());
 			
 			resultado = agente.insert(pstmt);
-			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("EstudianteDAO: "+e.getMessage());
+		} finally {
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;
@@ -37,8 +39,9 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param estudiante
+	 * @throws SQLException 
 	 */
-	public Estudiante seleccionarEstudiante(String dni) {
+	public Estudiante seleccionarEstudiante(String dni) throws SQLException {
 		GestorBD agente = new GestorBD();
 		List<Object> resultado = new ArrayList<Object>();
 			
@@ -66,8 +69,9 @@ public class EstudianteDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param estudiante
+	 * @throws SQLException 
 	 */
-	public int editarEstudiante(Estudiante estudiante) {
+	public int editarEstudiante(Estudiante estudiante) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 	

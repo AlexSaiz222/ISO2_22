@@ -32,7 +32,7 @@ public class PantallaPagoTarjeta extends JFrame {
 					PantallaPagoTarjeta frame = new PantallaPagoTarjeta();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

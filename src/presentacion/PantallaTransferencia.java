@@ -31,7 +31,7 @@ public class PantallaTransferencia extends JFrame {
 					PantallaTransferencia frame = new PantallaTransferencia();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

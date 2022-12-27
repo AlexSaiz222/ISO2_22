@@ -29,7 +29,7 @@ public class PantallaEstadosCurso extends JFrame {
 					PantallaEstadosCurso frame = new PantallaEstadosCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

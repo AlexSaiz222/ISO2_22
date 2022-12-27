@@ -35,7 +35,7 @@ public class PantallaListarIngresos extends JFrame {
 					PantallaListarIngresos frame = new PantallaListarIngresos();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

@@ -88,7 +88,7 @@ public class PantallaDireccionCurso extends JFrame {
 					R1 = new PantallaRegistrarCurso();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 				R1.setVisible(true);
 			}

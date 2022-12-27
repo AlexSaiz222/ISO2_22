@@ -40,7 +40,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});
@@ -116,7 +116,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});
@@ -133,7 +133,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					g.altaCursoAprobado(curso);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

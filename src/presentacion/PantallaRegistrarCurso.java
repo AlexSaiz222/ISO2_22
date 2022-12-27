@@ -67,7 +67,7 @@ public class PantallaRegistrarCurso extends JFrame {
 					PantallaRegistrarCurso frame = new PantallaRegistrarCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

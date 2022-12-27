@@ -29,7 +29,7 @@ public class PantallaListarEdiciones extends JFrame {
 					PantallaListarEdiciones frame = new PantallaListarEdiciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

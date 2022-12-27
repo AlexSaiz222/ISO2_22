@@ -30,7 +30,7 @@ public class PantallaMatriculacion extends JFrame {
 					PantallaMatriculacion frame = new PantallaMatriculacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});
@@ -72,7 +72,7 @@ public class PantallaMatriculacion extends JFrame {
 					M1 = new PantallaProcesoMatriculacion();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 				M1.setVisible(true);
 			}

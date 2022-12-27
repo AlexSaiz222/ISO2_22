@@ -48,7 +48,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 					PantallaProcesoMatriculacion frame = new PantallaProcesoMatriculacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

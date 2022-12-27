@@ -64,7 +64,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 					PantallaEditarPropuestaCurso frame = new PantallaEditarPropuestaCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});
@@ -215,7 +215,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 					cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println(e1.toString());
 				}
 				if(cursoSeleccionado.getId() == -1) {
 					resultadoField.setText("Ha ocurrido un error al obtener los datos");

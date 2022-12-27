@@ -27,7 +27,7 @@ public class PantallaPagar extends JFrame {
 					PantallaPagar frame = new PantallaPagar();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println(e.toString());
 				}
 			}
 		});

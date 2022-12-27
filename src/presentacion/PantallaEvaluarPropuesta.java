@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -46,8 +47,9 @@ public class PantallaEvaluarPropuesta extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public PantallaEvaluarPropuesta() {
+	public PantallaEvaluarPropuesta() throws SQLException {
 		
 		g = new GestorPropuestasCursos();
 		

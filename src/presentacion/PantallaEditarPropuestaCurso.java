@@ -30,6 +30,7 @@ import persistencia.CentroDAO;
 import persistencia.CursoPropioDAO;
 import persistencia.ProfesorDAO;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.awt.event.ItemEvent;
 
 public class PantallaEditarPropuestaCurso extends JFrame {
@@ -71,8 +72,9 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public PantallaEditarPropuestaCurso() {
+	public PantallaEditarPropuestaCurso() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -208,7 +210,13 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 		NameField = new JComboBox();
 		NameField.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				CursoPropio cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
+				CursoPropio cursoSeleccionado = null;
+				try {
+					cursoSeleccionado = cursoPropioDAO.seleccionarCurso(NameField.getSelectedItem().toString().charAt(0));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if(cursoSeleccionado.getId() == -1) {
 					resultadoField.setText("Ha ocurrido un error al obtener los datos");
 				} else {

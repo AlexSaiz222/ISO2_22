@@ -1,6 +1,7 @@
 package negocio.controllers;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,9 @@ public class GestorConsultas {
 	 * @param tipo
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws SQLException 
 	 */
-	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
+	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO - implement GestorConsultas.consultarIngresos
 		 List<Double> cursos = new ArrayList<Double>();
 	        GestorBD gestor = new GestorBD();
@@ -49,8 +51,9 @@ public class GestorConsultas {
 	 * @param estadoCurso
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws SQLException 
 	 */
-	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) {
+	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO - implement GestorConsultas.consultarEstadoCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
 	        GestorBD gestor = new GestorBD();
@@ -74,8 +77,9 @@ public class GestorConsultas {
 	 * 
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws SQLException 
 	 */
-	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
+	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO - implement GestorConsultas.listarEdicionesCursos
 		 List<CursoPropio> cursos = new ArrayList<CursoPropio>();
 	        GestorBD gestor = new GestorBD();
@@ -96,7 +100,7 @@ public class GestorConsultas {
 	        return cursos;
 	}
 	
-	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) {
+	public static List<CursoPropio> listarCursosPropiosPorEstado(EstadoCurso estado) throws SQLException {
         List<CursoPropio> cursos = new ArrayList<CursoPropio>();
         GestorBD gestor = new GestorBD();
 

@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class PantallaDireccionCurso extends JFrame {
 
@@ -53,7 +54,13 @@ public class PantallaDireccionCurso extends JFrame {
 		JButton EditBtn = new JButton("Editar una propuesta de un curso");
 		EditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaEditarPropuestaCurso E1 = new PantallaEditarPropuestaCurso();
+				PantallaEditarPropuestaCurso E1 = null;
+				try {
+					E1 = new PantallaEditarPropuestaCurso();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				E1.setVisible(true);
 			}
 		});
@@ -76,7 +83,13 @@ public class PantallaDireccionCurso extends JFrame {
 		RegisterCourse.setForeground(Color.BLACK);
 		RegisterCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaRegistrarCurso R1 = new PantallaRegistrarCurso();
+				PantallaRegistrarCurso R1 = null;
+				try {
+					R1 = new PantallaRegistrarCurso();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				R1.setVisible(true);
 			}
 		});

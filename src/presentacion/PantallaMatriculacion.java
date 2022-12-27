@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -66,7 +67,13 @@ public class PantallaMatriculacion extends JFrame {
 		MatriculateBtn.setForeground(Color.BLACK);
 		MatriculateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaProcesoMatriculacion M1 = new PantallaProcesoMatriculacion();
+				PantallaProcesoMatriculacion M1 = null;
+				try {
+					M1 = new PantallaProcesoMatriculacion();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				M1.setVisible(true);
 			}
 		});

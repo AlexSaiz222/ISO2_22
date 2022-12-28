@@ -36,8 +36,8 @@ public class PantallaLogin extends JFrame implements Serializable {
 	private JPasswordField passwordField;
 	private JTextField textField_userName;
 	private JButton btn_access;
-	private Estudiante estudianteLogeado;
-	private ProfesorUCLM directorLogeado;
+	private transient Estudiante estudianteLogeado;
+	private transient ProfesorUCLM directorLogeado;
 	private String nombreUsuario;
 	private String contrasena;
 	private PantallaLogin pantLogin;

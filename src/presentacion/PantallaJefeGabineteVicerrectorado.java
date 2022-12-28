@@ -32,9 +32,9 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serial
 	 */
 	private static final long serialVersionUID = 3932249418747084027L;
 	private JPanel contentPane;
-	private CursoPropioDAO cursoDAO = new CursoPropioDAO();
+	private transient CursoPropioDAO cursoDAO = new CursoPropioDAO();
 	private JComboBox<String> NameField;
-	private GestorPropuestasCursos g = new GestorPropuestasCursos();
+	private transient GestorPropuestasCursos g = new GestorPropuestasCursos();
 	private PantallaLogin pantLogin;
 
 	/**

@@ -48,12 +48,12 @@ public class PantallaRegistrarCurso extends JFrame implements Serializable {
 	private JComboBox secretaryBox;
 	private JDateChooser StartDateField;
 	private JDateChooser EndDateField;
-	private CentroDAO centroDAO;
-	private List<Centro> centros;
-	private ProfesorDAO profesorDAO;
-	private List<Profesor> profesores;
-	private CursoPropio curso;
-	private ProfesorUCLM profesorUCLM;
+	private transient CentroDAO centroDAO;
+	private transient List<Centro> centros;
+	private transient ProfesorDAO profesorDAO;
+	private transient List<Profesor> profesores;
+	private transient CursoPropio curso;
+	private transient ProfesorUCLM profesorUCLM;
 	private JComboBox centerBox;
 	private PantallaLogin pantLogin;
 

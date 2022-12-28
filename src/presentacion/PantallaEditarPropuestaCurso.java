@@ -47,16 +47,16 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 	private JTextField EditionField;
 	private JTextField ETCSField;
 	private JTextField resultadoField;
-	private CursoPropioDAO cursoPropioDAO;
+	private transient CursoPropioDAO cursoPropioDAO;
 	private JComboBox NameField;
 	private JDateChooser StartDateField;
 	private JDateChooser EndDateField;
 	private JComboBox centerBox;
 	private JComboBox secretaryBox;
 	private JComboBox typeBox;
-	private List<Centro> centros;
-	private List<CursoPropio> cursos;
-	private List<Profesor> profesores;
+	private transient List<Centro> centros;
+	private transient List<CursoPropio> cursos;
+	private transient List<Profesor> profesores;
 	private PantallaLogin pantLogin;
 
 	/**

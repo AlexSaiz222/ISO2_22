@@ -31,7 +31,7 @@ public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 	private static final long serialVersionUID = -9055581577376883964L;
 	private JPanel contentPane;
 	private JComboBox<String> NameField;
-	private GestorPropuestasCursos g;
+	private transient GestorPropuestasCursos g;
 	private PantallaLogin pantLogin;
 
 	/**

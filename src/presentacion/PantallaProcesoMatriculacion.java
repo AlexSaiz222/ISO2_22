@@ -35,7 +35,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 	private JTextField resultadoField;
 	private JComboBox<String> NameField;
 	private JDateChooser DateField;
-	private List<CursoPropio> cursos;
+	private transient List<CursoPropio> cursos;
 	private PantallaLogin pantLogin;
 
 	/**

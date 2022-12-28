@@ -324,7 +324,7 @@ public class GestorBD {
 			if(stmt != null)
 				stmt.close();
 			if(pstmt != null)
-			pstmt.close();
+				pstmt.close();
 		}
 
 		desconectarBD();

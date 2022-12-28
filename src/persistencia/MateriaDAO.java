@@ -35,11 +35,11 @@ public class MateriaDAO extends AbstractEntityDAO {
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into materias (responsable, nombre , horas , fechaInicio , fechaFin) "
 					+ "values (?,?,?,?,?)");
-			pstmt.setString(2, materia.getResponsable().getNombre());
-			pstmt.setString(3, materia.getNombre());
-			pstmt.setDouble(4, materia.getHoras());
-			pstmt.setDate(8, fechaInicio);
-			pstmt.setDate(9, fechaFin);
+			pstmt.setString(1, materia.getResponsable().getNombre());
+			pstmt.setString(2, materia.getNombre());
+			pstmt.setDouble(3, materia.getHoras());
+			pstmt.setDate(4, fechaInicio);
+			pstmt.setDate(5, fechaFin);
 			
 			resultado = agente.insert(pstmt);
 			

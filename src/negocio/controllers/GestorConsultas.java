@@ -10,6 +10,7 @@ import negocio.entities.*;
 import persistencia.CursoPropioDAO;
 import persistencia.GestorBD;
 
+
 public class GestorConsultas {
 
 	/**
@@ -19,12 +20,14 @@ public class GestorConsultas {
 	 * @param fechaFin
 	 * @throws SQLException 
 	 */
+
+	
 	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO - implement GestorConsultas.consultarIngresos
 		 List<Double> cursos = new ArrayList<Double>();
 	        GestorBD gestor = new GestorBD();
 
-	        List<Object> cursosListados = gestor.select("select * from cursospropios where tipo='"+tipo+"'"
+	       List<Object> cursosListados = gestor.select("select * from cursospropios where tipo='"+tipo+"'"
 	        		+ "and fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
 
 	        for(int i=0; i<cursosListados.size(); i++) {
@@ -116,4 +119,5 @@ public class GestorConsultas {
         gestor.desconectarBD();
         return cursos;
     }
+	
 }

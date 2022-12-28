@@ -119,7 +119,7 @@ public class PantallaLogin extends JFrame {
 				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();
 				PersonalVicerrectoradoDAO pv1 = new PersonalVicerrectoradoDAO();
 
-				// ¿es un alumno? --> pantalla realizar matricula
+				// si es un alumno --> pantalla realizar matricula
 				try {
 					if (ed1.seleccionarEstudiante(nombreUsuario) != null) {
 						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
@@ -129,9 +129,9 @@ public class PantallaLogin extends JFrame {
 						}
 					} else {
 						// si no es alumno
-						// ¿es director curso? --> pantalla realizar/editar propuesta curso o pantalla
+						// si es director curso --> pantalla realizar/editar propuesta curso o pantalla
 						// visualizar propuesta curso
-						// ¿es profesor de la UCLM?
+						// es profesor de la UCLM
 						if (pf1.listarProfesorUCLM(nombreUsuario) != null) {
 							ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);
 							if (p1.getPassword().compareTo(contrasena) == 0) {
@@ -141,7 +141,7 @@ public class PantallaLogin extends JFrame {
 							}
 						} else if (pv1.seleccionarProfesor(nombreUsuario) != null) {// personal vicerrectorado/jefe de
 																					// gabinete
-							// ¿es personal vicerrectorado? --> pantalla evaluar propuesta curso
+							// si es personal vicerrectorado --> pantalla evaluar propuesta curso
 							PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
 							if (personalVicerrectorado.getPassword().compareTo(contrasena) == 0) {
 								if (personalVicerrectorado.isJefe() == true) {

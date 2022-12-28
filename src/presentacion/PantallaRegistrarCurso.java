@@ -49,6 +49,7 @@ public class PantallaRegistrarCurso extends JFrame {
 	private CursoPropio curso;
 	private ProfesorUCLM profesorUCLM;
 	private JComboBox centerBox;
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -72,7 +73,7 @@ public class PantallaRegistrarCurso extends JFrame {
 	 * @throws SQLException
 	 */
 	public PantallaRegistrarCurso() throws SQLException {
-		PantallaLogin pantLogin = new PantallaLogin();
+		pantLogin = new PantallaLogin();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();

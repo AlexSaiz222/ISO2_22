@@ -287,14 +287,14 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 				}
 
 			}
-			
+
 			public void propuestaCorrecta(int x) {
-				
+
 				if (x == 0) {
 					resultadoField.setText("Curso propuesto correctamente");
 				}
 			}
-			
+
 		});
 
 		contentPane.add(EditBtn);

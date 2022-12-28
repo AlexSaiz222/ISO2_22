@@ -1,6 +1,5 @@
 package presentacion;
 
-
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.awt.Color;
@@ -43,7 +42,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 	private String nombreUsuario;
 	private String contrasena;
 	private PantallaLogin pantLogin;
-	final String tipoLetra="Arial";
+	final String tipoLetra = "Arial";
 
 	/**
 	 * Launch the application.
@@ -131,11 +130,8 @@ public class PantallaLogin extends JFrame implements Serializable {
 				// si es un alumno --> pantalla realizar matricula
 				try {
 					if (ed1.seleccionarEstudiante(nombreUsuario) != null) {
-						Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
-						if (e1.getPassword().compareTo(contrasena) == 0) {
-							pantallamatricula.setVisible(true);
-							estudianteLogeado = e1;
-						}
+						estudianteSeleccionado(ed1);
+						pantallamatricula.setVisible(true);
 					} else {
 						// si no es alumno
 						// si es director curso --> pantalla realizar/editar propuesta curso o pantalla
@@ -192,7 +188,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 	public void borrarDirectorLogeado() {
 		directorLogeado = null;
 	}
-	
+
 	public void profesorSeleccionado(PersonalVicerrectoradoDAO pv1) throws SQLException {
 		PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
 		if (personalVicerrectorado.getPassword().compareTo(contrasena) == 0) {
@@ -207,4 +203,11 @@ public class PantallaLogin extends JFrame implements Serializable {
 		}
 	}
 
+	public void estudianteSeleccionado(EstudianteDAO ed1) throws SQLException {
+		Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);
+		if (e1.getPassword().compareTo(contrasena) == 0) {
+			estudianteLogeado = e1;
+		}
+
+	}
 }

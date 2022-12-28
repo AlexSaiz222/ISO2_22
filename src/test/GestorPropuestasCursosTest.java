@@ -3,7 +3,6 @@ package test;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -113,7 +112,6 @@ public class GestorPropuestasCursosTest {
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
 		this.resultadoEsperado = 4;
 		
-		System.out.println(curso.toString());
 		int resultado = gestor.realizarPropuestaCurso(curso);
 		Assert.assertTrue(resultado == this.resultadoEsperado);
 	}
@@ -229,13 +227,26 @@ public class GestorPropuestasCursosTest {
 		
 		int resultado = gestor.realizarPropuestaCurso(curso);
 		Assert.assertTrue(resultado == this.resultadoEsperado);
-		// TODO Eliminar el curso insertado
 		
 	}
-
-	@After
-	public void tearDown() throws Exception {
+	
+	/**
+	 * Caso de Prueba CP14
+	 */
+	@Test
+	public void editarPropuestaCursoCorrecta() {
+		this.curso.setId(this.curso.getCursoPropioDao().obtenerUltimoCurso());
+		this.curso.setNombre("Curso de Prueba");
+		this.curso.setECTS(6);
+		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
+		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());
+		this.curso.setTasaMatricula(250);
+		this.curso.setEdicion(3);
+		this.resultadoEsperado = 0;
 		
+		int resultado = gestor.editarPropuestaCurso(curso);
+		Assert.assertTrue(resultado == this.resultadoEsperado);
+		this.curso.getCursoPropioDao().eliminarUltimoCurso();
 	}
 
 }

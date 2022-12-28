@@ -120,8 +120,7 @@ public class GestorConsultas {
                  cursoPropio.setNombre(t.get(1).toString());
                  cursos.add(cursoPropio);
              }
-
-             gestor.desconectarBD();
+             
              return cursos;
         }else {
         	

@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import negocio.controllers.GestorConsultas;
+import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 
 public class GestorConsultasTest {
@@ -26,36 +28,36 @@ public class GestorConsultasTest {
 		Date fechaInicio = new Date(122,11,28); 
 		Date fechaFinDate = new Date(112,11,27); 
 
-		boolean resultado = gestorConsultas.ComprobarFechas(fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.listarEdicionesCursos(fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void fechaInicioIgualQueFechaFin() {
 		Date fechaInicio = new Date(122,11,29); 
 		Date fechaFinDate = new Date(122,11,29); 
 
-		boolean resultado = gestorConsultas.ComprobarFechas(fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.listarEdicionesCursos(fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void FechaInicioBienFechaFinNull() {
 		Date fechaInicio = new Date(122,7,24); 
 		Date fechaFinDate = null;
 
-		boolean resultado = gestorConsultas.ComprobarFechas(fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.listarEdicionesCursos(fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void FechaInicioNullFechaFinBien() {
 		Date fechaInicio = null; 
 		Date fechaFinDate = new Date(123,8,29);
 
-		boolean resultado = gestorConsultas.ComprobarFechas(fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.listarEdicionesCursos(fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void FechaInicioMenorFechaFin() {
@@ -72,9 +74,9 @@ public class GestorConsultasTest {
 		Date fechaInicio = new Date(119,4,24);
 		Date fechaFinDate = null;
 
-		boolean resultado = gestorConsultas.ComprobarEstadoCursoConFecha(estadoCurso,fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.consultarEstadoCursos(estadoCurso,fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoCORRECTOFechaInicioNullFechaFin() {
@@ -82,9 +84,9 @@ public class GestorConsultasTest {
 		Date fechaInicio = null;
 		Date fechaFinDate = new Date(120,4,5);
 
-		boolean resultado = gestorConsultas.ComprobarEstadoCursoConFecha(estadoCurso,fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.consultarEstadoCursos(estadoCurso,fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoCORRECTOFechaInicioMayorFechaFin() {
@@ -92,9 +94,9 @@ public class GestorConsultasTest {
 		Date fechaInicio = new Date(122,11,28);
 		Date fechaFinDate = new Date(122,11,27);
 
-		boolean resultado = gestorConsultas.ComprobarEstadoCursoConFecha(estadoCurso,fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.consultarEstadoCursos(estadoCurso,fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoCORRECTOFechaInicioIgualFechaFin() {
@@ -102,9 +104,9 @@ public class GestorConsultasTest {
 		Date fechaInicio = new Date(121,1,2);
 		Date fechaFinDate = new Date(121,1,2);
 
-		boolean resultado = gestorConsultas.ComprobarEstadoCursoConFecha(estadoCurso,fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.consultarEstadoCursos(estadoCurso,fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoNULLFechaInicioBienFechaFinBien() {
@@ -112,9 +114,9 @@ public class GestorConsultasTest {
 		Date fechaInicio = new Date(120,0,21);
 		Date fechaFinDate = new Date(120,1,22);
 
-		boolean resultado = gestorConsultas.ComprobarEstadoCursoConFecha(estadoCurso,fechaInicio, fechaFinDate);
+		List<CursoPropio> resultado = gestorConsultas.consultarEstadoCursos(estadoCurso,fechaInicio, fechaFinDate);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoBienFechaInicioBienFechaFinBien() {
@@ -130,20 +132,18 @@ public class GestorConsultasTest {
 	public void EstadoCursoNull() {
 		estadoCurso = null;
 
-		boolean resultado = gestorConsultas.ComprobarEstado(estadoCurso);
+		List<CursoPropio> resultado = gestorConsultas.listarCursosPropiosPorEstado(estadoCurso);
 
-		Assert.assertFalse(resultado);
+		Assert.assertNull(resultado);
 	}
 	@Test
 	public void EstadoCursoPropuesto() {
 		estadoCurso = EstadoCurso.PROPUESTO;
 
-		boolean resultado = gestorConsultas.ComprobarEstado(estadoCurso);
-
-		Assert.assertTrue(resultado);
-	}
-	@After
-	public void tearDown() throws Exception {
-
+		List<CursoPropio> resultado = gestorConsultas.listarCursosPropiosPorEstado(estadoCurso);
+		int numero_cursos = resultado.size();
+		int numero_cursos_esperados = 0;
+		
+		Assert.assertTrue(numero_cursos == numero_cursos_esperados);
 	}
 }

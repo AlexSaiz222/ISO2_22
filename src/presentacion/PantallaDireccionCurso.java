@@ -22,7 +22,6 @@ public class PantallaDireccionCurso extends JFrame {
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
 	private PantallaLogin pantLogin;
-	static int EXIT_ON_CLOSE;
 
 	/**
 	 * Launch the application.

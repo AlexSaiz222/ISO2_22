@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.WindowConstants;
 
 public class PantallaTransferencia extends JFrame {
 
@@ -43,7 +44,7 @@ public class PantallaTransferencia extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaTransferencia() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

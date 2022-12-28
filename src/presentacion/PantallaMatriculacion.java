@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
@@ -39,7 +40,7 @@ public class PantallaMatriculacion extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaMatriculacion() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

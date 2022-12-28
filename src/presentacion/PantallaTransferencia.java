@@ -20,6 +20,8 @@ public class PantallaTransferencia extends JFrame {
 	private JTextField OwnerField;
 	private JTextField IBANField;
 	private JTextField BankField;
+	private PantallaLogin pantLogin;
+
 
 	/**
 	 * Launch the application.
@@ -62,7 +64,7 @@ public class PantallaTransferencia extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin = new PantallaLogin();
 				pantLogin.logout();
 			}
 		});

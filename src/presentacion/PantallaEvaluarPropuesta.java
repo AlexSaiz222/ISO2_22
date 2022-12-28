@@ -26,6 +26,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 	private JPanel contentPane;
 	private JComboBox<String> NameField;
 	private GestorPropuestasCursos g;
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -67,7 +68,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin = new PantallaLogin();
 				pantLogin.logout();
 			}
 		});

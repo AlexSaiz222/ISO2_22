@@ -50,6 +50,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 	private List<Centro> centros;
 	private List<CursoPropio> cursos;
 	private List<Profesor> profesores;
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -73,7 +74,7 @@ public class PantallaEditarPropuestaCurso extends JFrame {
 	 * @throws SQLException
 	 */
 	public PantallaEditarPropuestaCurso() throws SQLException {
-		PantallaLogin pantLogin = new PantallaLogin();
+		pantLogin = new PantallaLogin();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();

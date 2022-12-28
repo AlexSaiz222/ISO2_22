@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 public class PantallaJefeVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
+	private PantallaLogin pantLogin;
+
 
 	/**
 	 * Launch the application.
@@ -53,7 +55,7 @@ public class PantallaJefeVicerrectorado extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin = new PantallaLogin();
 				pantLogin.logout();
 			}
 		});

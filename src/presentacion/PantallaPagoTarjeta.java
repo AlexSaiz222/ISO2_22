@@ -21,6 +21,7 @@ public class PantallaPagoTarjeta extends JFrame {
 	private JTextField NumberField;
 	private JTextField OwnerField;
 	private JTextField SecretNumberField;
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -63,7 +64,7 @@ public class PantallaPagoTarjeta extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin = new PantallaLogin();
 				pantLogin.logout();
 			}
 		});

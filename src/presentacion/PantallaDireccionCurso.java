@@ -20,6 +20,7 @@ public class PantallaDireccionCurso extends JFrame {
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -108,7 +109,7 @@ public class PantallaDireccionCurso extends JFrame {
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin = new PantallaLogin();
 				pantLogin.logout();
 			}
 		});

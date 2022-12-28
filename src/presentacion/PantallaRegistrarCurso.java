@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.io.Serializable;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -31,8 +32,12 @@ import negocio.entities.TipoCurso;
 import persistencia.CentroDAO;
 import persistencia.ProfesorDAO;
 
-public class PantallaRegistrarCurso extends JFrame {
+public class PantallaRegistrarCurso extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5906974317605751792L;
 	private JPanel contentPane;
 	private JTextField NameField;
 	private JTextField ETCSField;

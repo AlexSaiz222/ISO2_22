@@ -97,6 +97,7 @@ public class PantallaEstadosCurso extends JFrame {
 		JButton ListBttn = new JButton("Ver Estado");
 		ListBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				throw new UnsupportedOperationException(); 
 			}
 		});
 		ListBttn.setForeground(Color.BLACK);

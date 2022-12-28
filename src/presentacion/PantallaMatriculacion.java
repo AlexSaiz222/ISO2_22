@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.io.Serializable;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,8 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.WindowConstants;
 
-public class PantallaMatriculacion extends JFrame {
+public class PantallaMatriculacion extends JFrame implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8107811786715723766L;
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;
 

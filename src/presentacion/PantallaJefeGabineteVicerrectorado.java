@@ -1,5 +1,7 @@
 package presentacion;
 
+import java.io.Serializable;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -22,8 +24,13 @@ import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 import persistencia.CursoPropioDAO;
 
-public class PantallaJefeGabineteVicerrectorado extends JFrame {
+public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serializable {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3932249418747084027L;
 	private JPanel contentPane;
 	private CursoPropioDAO cursoDAO = new CursoPropioDAO();
 	private JComboBox<String> NameField;

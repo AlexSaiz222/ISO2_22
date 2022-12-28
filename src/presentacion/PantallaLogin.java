@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.io.Serializable;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -25,8 +26,12 @@ import persistencia.EstudianteDAO;
 import persistencia.PersonalVicerrectoradoDAO;
 import persistencia.ProfesorUCLMDAO;
 
-public class PantallaLogin extends JFrame {
+public class PantallaLogin extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4463273531768871291L;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textField_userName;

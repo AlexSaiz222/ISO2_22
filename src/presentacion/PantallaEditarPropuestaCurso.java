@@ -1,5 +1,7 @@
 package presentacion;
 
+import java.io.Serializable;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -34,8 +36,12 @@ import persistencia.CentroDAO;
 import persistencia.CursoPropioDAO;
 import persistencia.ProfesorDAO;
 
-public class PantallaEditarPropuestaCurso extends JFrame {
+public class PantallaEditarPropuestaCurso extends JFrame implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -185482206037375426L;
 	private JPanel contentPane;
 	private JTextField FeeField;
 	private JTextField EditionField;

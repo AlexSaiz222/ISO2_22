@@ -35,6 +35,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 	private JComboBox<String> NameField;
 	private JDateChooser DateField;
 	private List<CursoPropio> cursos;
+	private PantallaLogin pantLogin;
 
 	/**
 	 * Launch the application.
@@ -58,7 +59,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 	 * @throws SQLException
 	 */
 	public PantallaProcesoMatriculacion() throws SQLException {
-		PantallaLogin pantLogin = new PantallaLogin();
+		pantLogin = new PantallaLogin();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();

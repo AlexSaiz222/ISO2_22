@@ -72,7 +72,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
 		
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into profesoresUCLM (dni, centroAdscripcion, categoria) "
 					+ "values (?,?,?)");
@@ -85,6 +85,10 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO{
 			
 		} catch (SQLException e) {
 			System.out.println("ProfesorUCLMDAO: "+e.getMessage());
+		}finally {
+			
+			if(pstmt != null)
+				pstmt.close();
 		}
 		
 		return resultado;

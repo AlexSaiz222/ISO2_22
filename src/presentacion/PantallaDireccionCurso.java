@@ -132,7 +132,11 @@ public class PantallaDireccionCurso extends JFrame {
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 
-		public void actionPerformed(ActionEvent e) {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+		throw new UnsupportedOperationException(); 
+			
 		}
+
 	}
 }

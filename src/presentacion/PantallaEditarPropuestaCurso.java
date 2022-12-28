@@ -288,13 +288,6 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 
 			}
 
-			public void propuestaCorrecta(int x) {
-
-				if (x == 0) {
-					resultadoField.setText("Curso propuesto correctamente");
-				}
-			}
-
 		});
 
 		contentPane.add(EditBtn);
@@ -303,5 +296,12 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 		contentPane.add(ETCSField);
 		ETCSField.setColumns(10);
 
+	}
+	
+	public void propuestaCorrecta(int x) {
+
+		if (x == 0) {
+			resultadoField.setText("Curso propuesto correctamente");
+		}
 	}
 }

@@ -2,6 +2,7 @@ package presentacion;
 
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -150,17 +151,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 						} else if (pv1.seleccionarProfesor(nombreUsuario) != null) {// personal vicerrectorado/jefe de
 																					// gabinete
 							// si es personal vicerrectorado --> pantalla evaluar propuesta curso
-							PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
-							if (personalVicerrectorado.getPassword().compareTo(contrasena) == 0) {
-								if (personalVicerrectorado.isJefe() == true) {
-									PantallaJefeVicerrectorado pjfGabineteVicerrectorado = new PantallaJefeVicerrectorado();
-									pjfGabineteVicerrectorado.setVisible(true);
-								} else {
-									PantallaEvaluarPropuesta pfGabineteVicerrectorado = new PantallaEvaluarPropuesta();
-									pfGabineteVicerrectorado.setVisible(true);
-								}
-
-							}
+							profesorSeleccionado(pv1);
 						}
 					}
 				} catch (Exception exception1) {
@@ -168,6 +159,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 				}
 
 			}
+
 		});
 		btn_access.setBackground(new Color(192, 192, 192));
 		btn_access.setFont(new Font(tipoLetra, Font.BOLD, 12));
@@ -199,6 +191,20 @@ public class PantallaLogin extends JFrame implements Serializable {
 
 	public void borrarDirectorLogeado() {
 		directorLogeado = null;
+	}
+	
+	public void profesorSeleccionado(PersonalVicerrectoradoDAO pv1) throws SQLException {
+		PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);
+		if (personalVicerrectorado.getPassword().compareTo(contrasena) == 0) {
+			if (personalVicerrectorado.isJefe() == true) {
+				PantallaJefeVicerrectorado pjfGabineteVicerrectorado = new PantallaJefeVicerrectorado();
+				pjfGabineteVicerrectorado.setVisible(true);
+			} else {
+				PantallaEvaluarPropuesta pfGabineteVicerrectorado = new PantallaEvaluarPropuesta();
+				pfGabineteVicerrectorado.setVisible(true);
+			}
+
+		}
 	}
 
 }

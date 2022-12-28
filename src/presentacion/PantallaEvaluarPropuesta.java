@@ -132,7 +132,7 @@ public class PantallaEvaluarPropuesta extends JFrame {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					g.altaCursoAprobado(curso);
+					g.realizarPropuestaCurso(curso);
 				} catch (Exception e) {
 					System.out.println("PantallaEvaluarPropuesta: "+e.getMessage());
 				}

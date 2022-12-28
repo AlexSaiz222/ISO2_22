@@ -110,7 +110,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					//g.rechazarCurso(curso);
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {
@@ -129,7 +128,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					g.altaCursoAprobado(curso);
+					g.realizarPropuestaCurso(curso);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

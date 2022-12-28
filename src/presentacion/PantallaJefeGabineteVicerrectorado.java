@@ -129,7 +129,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					g.altaCursoAprobado(curso);
+					//g.altaCursoAprobado(curso);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -5,9 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.Profesor;
 
 public class ProfesorDAO {
+	private static Logger logJava = Logger.getLogger(ProfesorDAO.class);
 
 	public List<Profesor> listarProfesores() throws SQLException {
 		List<Profesor> profesores = new ArrayList<Profesor>();

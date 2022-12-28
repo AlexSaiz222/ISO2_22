@@ -7,11 +7,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.Materia;
 import negocio.entities.Profesor;
 
 public class MateriaDAO extends AbstractEntityDAO {
 
+	
+	private static Logger logJava = Logger.getLogger(MateriaDAO.class);
 	/**
 	 * 
 	 * @param materia

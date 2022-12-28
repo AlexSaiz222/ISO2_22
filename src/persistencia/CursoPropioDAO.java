@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.Centro;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -15,8 +17,10 @@ import negocio.entities.Profesor;
 import negocio.entities.ProfesorUCLM;
 import negocio.entities.TipoCurso;
 
+
 public class CursoPropioDAO extends AbstractEntityDAO {
 
+	private static Logger logJava = Logger.getLogger(CursoPropioDAO.class);
 	/**
 	 * 
 	 * @param curso
@@ -53,7 +57,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("CursoPropioDAO: " + e.getMessage());
+			logJava.fatal("LOG FATAL: "+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();
@@ -77,8 +81,6 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		if (cursoListado.size() == 1) {
 			List<Object> c = (List<Object>) cursoListado.get(0);
 
-			System.out.println(c);
-
 			CentroDAO centroDAO = new CentroDAO();
 			Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
 
@@ -99,7 +101,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 				fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());
 				fechafin = (Date) simpleDateFormat.parse(c.get(9).toString());
 			} catch (ParseException e) {
-				System.out.println("CursoPropioDAO: " + e.getMessage());
+				logJava.fatal("LOG FATAL: "+e.toString());
 			}
 
 			curso1.setId(Integer.parseInt(c.get(0).toString()));

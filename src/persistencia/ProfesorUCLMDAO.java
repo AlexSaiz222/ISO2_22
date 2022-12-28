@@ -5,12 +5,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.CategoriaProfesor;
 import negocio.entities.Centro;
 import negocio.entities.Profesor;
 import negocio.entities.ProfesorUCLM;
 
 public class ProfesorUCLMDAO extends AbstractEntityDAO {
+	
+	private static Logger logJava = Logger.getLogger(ProfesorUCLMDAO.class);
 
 	public List<ProfesorUCLM> listarProfesoresUCLM() throws SQLException {
 		List<ProfesorUCLM> profesoresUCLM = new ArrayList<ProfesorUCLM>();

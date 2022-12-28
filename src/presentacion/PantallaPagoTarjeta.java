@@ -14,9 +14,14 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 public class PantallaPagoTarjeta extends JFrame {
+	
+	private static Logger logJava = Logger.getLogger(PantallaPagoTarjeta.class);
 
 	private JPanel contentPane;
 	private JTextField NumberField;

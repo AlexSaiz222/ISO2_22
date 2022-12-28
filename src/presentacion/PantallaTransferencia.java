@@ -13,9 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 public class PantallaTransferencia extends JFrame {
+	
+	private static Logger logJava = Logger.getLogger(PantallaTransferencia.class);
 
 	private JPanel contentPane;
 	private JTextField OwnerField;

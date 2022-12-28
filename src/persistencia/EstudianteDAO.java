@@ -4,10 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.Estudiante;
 
 public class EstudianteDAO extends AbstractEntityDAO {
 
+	private static Logger logJava = Logger.getLogger(EstudianteDAO.class);
+	
 	public int crearEstudiante(Estudiante estudiante) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
@@ -26,7 +30,7 @@ public class EstudianteDAO extends AbstractEntityDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("EstudianteDAO: " + e.getMessage());
+			logJava.fatal("LOG FATAL: "+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

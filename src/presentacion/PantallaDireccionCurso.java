@@ -15,9 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import persistencia.ProfesorExternoDAO;
+
 import javax.swing.WindowConstants;
 
 public class PantallaDireccionCurso extends JFrame {
+	
+	private static Logger logJava = Logger.getLogger(PantallaDireccionCurso.class);
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();

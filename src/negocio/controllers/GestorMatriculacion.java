@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.CursoPropio;
 import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
@@ -14,6 +16,7 @@ import persistencia.MatriculaDAO;
 
 public class GestorMatriculacion {
 
+	private static Logger logJava = Logger.getLogger(GestorMatriculacion.class);
 	/**
 	 * 
 	 * @param curso
@@ -22,6 +25,7 @@ public class GestorMatriculacion {
 	 */
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) throws SQLException {
 
+		
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where " + "idEstudiante = '"
 				+ estudiante.getDni() + "' and idCursoPropio = " + curso.getId());
@@ -29,12 +33,11 @@ public class GestorMatriculacion {
 		MatriculaDAO matriculaDAO = new MatriculaDAO();
 		Matricula matricula = new Matricula();
 
-		CursoPropio cursoPropio = new CursoPropio();
 		List<Object> t = (List<Object>) matriculaListado.get(0);
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
-			System.out.println(e.toString());
+			logJava.fatal("LOG FATAL: "+e.toString());
 		}
 
 		Collection<Matricula> mCollection = estudiante.getMatriculas();
@@ -58,13 +61,11 @@ public class GestorMatriculacion {
 		MatriculaDAO matriculaDAO = new MatriculaDAO();
 		Matricula matricula = new Matricula();
 
-		CursoPropio cursoPropio = new CursoPropio();
 		List<Object> t = (List<Object>) matriculaListado.get(0);
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.toString());
+			logJava.fatal("LOG FATAL: "+e.toString());
 		}
 
 		if (matricula.getTipoPago() == ModoPago.TARJETA_CREDITO) {

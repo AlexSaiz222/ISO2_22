@@ -14,9 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame implements Serializable{
+	
+	private static Logger logJava = Logger.getLogger(PantallaMatriculacion.class);
 
 	/**
 	 * 

@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 import negocio.controllers.GestorPropuestasCursos;
@@ -24,6 +27,8 @@ import negocio.entities.EstadoCurso;
 import persistencia.CursoPropioDAO;
 
 public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
+	
+	private static Logger logJava = Logger.getLogger(PantallaEvaluarPropuesta.class);
 
 	/**
 	 * 

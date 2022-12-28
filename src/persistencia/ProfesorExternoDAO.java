@@ -4,11 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.Centro;
 import negocio.entities.Profesor;
 import negocio.entities.ProfesorExterno;
 
 public class ProfesorExternoDAO extends AbstractEntityDAO {
+	
+	private static Logger logJava = Logger.getLogger(ProfesorExternoDAO.class);
 
 	/**
 	 * 

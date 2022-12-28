@@ -4,9 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.PersonalVicerrectorado;
 
 public class PersonalVicerrectoradoDAO {
+	private static Logger logJava = Logger.getLogger(PersonalVicerrectoradoDAO.class);
 	public PersonalVicerrectorado seleccionarProfesor(String dni) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> vicListado = gestor.select("select * from vicerrectorado where dni='" + dni + "'");

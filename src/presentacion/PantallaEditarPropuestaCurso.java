@@ -21,6 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 import com.toedter.calendar.JDateChooser;
@@ -37,6 +40,8 @@ import persistencia.CursoPropioDAO;
 import persistencia.ProfesorDAO;
 
 public class PantallaEditarPropuestaCurso extends JFrame implements Serializable  {
+	
+	private static Logger logJava = Logger.getLogger(PantallaEditarPropuestaCurso.class);
 
 	/**
 	 * 

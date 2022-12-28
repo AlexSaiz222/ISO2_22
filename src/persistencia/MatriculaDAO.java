@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import negocio.entities.CursoPropio;
 import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
@@ -14,6 +16,8 @@ import negocio.entities.ModoPago;
 
 public class MatriculaDAO {
 
+	private static Logger logJava = Logger.getLogger(MatriculaDAO.class);
+	
 	/**
 	 * 
 	 * @param matricula

@@ -12,11 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 import com.toedter.calendar.JDateChooser;
 
 public class PantallaListarEdiciones extends JFrame {
+	
+	private static Logger logJava = Logger.getLogger(PantallaListarEdiciones.class);
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;

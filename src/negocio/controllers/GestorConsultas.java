@@ -1,5 +1,6 @@
 package negocio.controllers;
 
+import org.apache.log4j.Logger;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class GestorConsultas {
 	 * @param fechaFin
 	 * @throws SQLException
 	 */
+	private static Logger logJava = Logger.getLogger(GestorConsultas.class);
 
 	public List<Double> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) throws SQLException {
 		List<Double> cursos = new ArrayList<Double>();
@@ -34,13 +36,11 @@ public class GestorConsultas {
 			List<Object> t = (List<Object>) cursosListados.get(i);
 			cursoPropio.setNombre(t.get(1).toString());
 			try {
-				cursoPropio = cursoPropioDAO.seleccionarCurso((int) t.get(0));
+				cursoPropioDAO.seleccionarCurso((int) t.get(0));
 			} catch (Exception e) {
-				System.out.println(e.toString());
+				logJava.fatal("LOG FATAL: "+e.toString());
 			}
-			// habria que saber como poner un precio a la matricula, en este caso, he puesto
-			// 1250 euros
-			// habria que poner cursos.add(cursoPropio.getPrecioMatricula)
+
 			cursos.add(1250.99);
 		}
 

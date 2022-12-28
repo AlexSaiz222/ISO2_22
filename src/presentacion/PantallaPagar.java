@@ -12,9 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 public class PantallaPagar extends JFrame {
+	
+	private static Logger logJava = Logger.getLogger(PantallaPagar.class);
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;

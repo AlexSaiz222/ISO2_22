@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.WindowConstants;
 
 import negocio.entities.Estudiante;
@@ -28,6 +31,8 @@ import persistencia.PersonalVicerrectoradoDAO;
 import persistencia.ProfesorUCLMDAO;
 
 public class PantallaLogin extends JFrame implements Serializable {
+	
+	private static Logger logJava = Logger.getLogger(PantallaLogin.class);
 
 	/**
 	 * 

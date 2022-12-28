@@ -5,10 +5,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import negocio.controllers.GestorMatriculacion;
 import negocio.entities.Centro;
 
 public class CentroDAO {
 
+	private static Logger logJava = Logger.getLogger(CentroDAO.class);
+	
 	public List<Centro> listarCentros() throws SQLException {
 		List<Centro> centros = new ArrayList<Centro>();
 		GestorBD gestor = new GestorBD();
@@ -59,7 +64,7 @@ public class CentroDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("DAO: " + e.getMessage());
+			logJava.fatal("LOG FATAL: "+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

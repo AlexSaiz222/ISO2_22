@@ -1,5 +1,6 @@
 package presentacion;
 
+
 import java.io.Serializable;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -41,6 +42,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 	private String nombreUsuario;
 	private String contrasena;
 	private PantallaLogin pantLogin;
+	final String tipoLetra="Arial";
 
 	/**
 	 * Launch the application.
@@ -78,7 +80,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lbl_userName = new JLabel("Nombre de usuario");
-		lbl_userName.setFont(new Font("Arial", Font.BOLD, 12));
+		lbl_userName.setFont(new Font(tipoLetra, Font.BOLD, 12));
 		GridBagConstraints gbc_lbl_userName = new GridBagConstraints();
 		gbc_lbl_userName.insets = new Insets(0, 0, 5, 5);
 		gbc_lbl_userName.gridx = 3;
@@ -87,7 +89,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 
 		textField_userName = new JTextField();
 		textField_userName.setToolTipText("Insertar aqui el nombre de usuario");
-		textField_userName.setFont(new Font("Arial", Font.PLAIN, 11));
+		textField_userName.setFont(new Font("tipoLetra", Font.PLAIN, 11));
 		GridBagConstraints gbc_textField_userName = new GridBagConstraints();
 		gbc_textField_userName.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_userName.fill = GridBagConstraints.HORIZONTAL;
@@ -98,7 +100,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 		nombreUsuario = textField_userName.getText();
 
 		JLabel lbl_password = new JLabel("Contrasena");
-		lbl_password.setFont(new Font("Arial", Font.BOLD, 12));
+		lbl_password.setFont(new Font(tipoLetra, Font.BOLD, 12));
 		GridBagConstraints gbc_lbl_password = new GridBagConstraints();
 		gbc_lbl_password.insets = new Insets(0, 0, 5, 5);
 		gbc_lbl_password.gridx = 3;
@@ -106,7 +108,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 		contentPane.add(lbl_password, gbc_lbl_password);
 
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Arial", Font.PLAIN, 11));
+		passwordField.setFont(new Font(tipoLetra, Font.PLAIN, 11));
 		passwordField.setToolTipText("Insertar aqui la contrasena");
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
@@ -168,7 +170,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 			}
 		});
 		btn_access.setBackground(new Color(192, 192, 192));
-		btn_access.setFont(new Font("Arial", Font.BOLD, 12));
+		btn_access.setFont(new Font(tipoLetra, Font.BOLD, 12));
 		GridBagConstraints gbc_btn_access = new GridBagConstraints();
 		gbc_btn_access.insets = new Insets(0, 0, 5, 5);
 		gbc_btn_access.gridx = 3;

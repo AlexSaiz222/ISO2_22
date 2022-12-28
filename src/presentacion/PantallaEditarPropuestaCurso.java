@@ -281,14 +281,20 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 					curso.setEdicion(Integer.parseInt(EditionField.getText()));
 					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
 					int resultado = gestorPropuestasCursos.editarPropuestaCurso(curso);
-					if (resultado == 0) {
-						resultadoField.setText("Curso propuesto correctamente");
-					}
+					propuestaCorrecta(resultado);
 				} catch (Exception e) {
 					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");
 				}
 
 			}
+			
+			public void propuestaCorrecta(int x) {
+				
+				if (x == 0) {
+					resultadoField.setText("Curso propuesto correctamente");
+				}
+			}
+			
 		});
 
 		contentPane.add(EditBtn);

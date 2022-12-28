@@ -204,17 +204,27 @@ public class GestorBD {
 
 			// Crear la tabla estudiantes
 			stmt.execute(createSQL);
+			
+			try {
+				// Datos iniciales de estudiantes
+				pstmt = this.mBD.prepareStatement(
+						"insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
+				pstmt.setString(1, "00000000A");
+				pstmt.setString(2, "Pepe");
+				pstmt.setString(3, "Perez");
+				pstmt.setString(4, "PepePerez");
+				pstmt.setString(5, "Ingenieria Informatica");
+				pstmt.setString(6, "Ingeniero SW");
+				pstmt.executeUpdate();
 
-			// Datos iniciales de estudiantes
-			pstmt = this.mBD.prepareStatement(
-					"insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)");
-			pstmt.setString(1, "00000000A");
-			pstmt.setString(2, "Pepe");
-			pstmt.setString(3, "Perez");
-			pstmt.setString(4, "PepePerez");
-			pstmt.setString(5, "Ingenieria Informatica");
-			pstmt.setString(6, "Ingeniero SW");
-			pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println(e.getErrorCode());
+				System.out.println(e.getSQLState());
+				System.out.println(e.getMessage());
+			} finally {
+				if (pstmt != null)
+					pstmt.close();
+			}
 
 			// Crear la tabla centros
 			createSQL = "create table centros (idCentro int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), nombre varchar(50) not null, "

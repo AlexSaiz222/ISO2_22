@@ -5,12 +5,13 @@ import java.util.Objects;
 public class ProfesorExterno extends Profesor {
 
 	private String titulacion;
-	
+
 	public ProfesorExterno() {
-		
+
 	}
 
-	public ProfesorExterno(String dni, String nombre, String apellidos, String password, boolean esDoctor, String titulacion) {
+	public ProfesorExterno(String dni, String nombre, String apellidos, String password, boolean esDoctor,
+			String titulacion) {
 		super(dni, nombre, apellidos, password, esDoctor);
 		this.titulacion = titulacion;
 	}
@@ -42,7 +43,5 @@ public class ProfesorExterno extends Profesor {
 		ProfesorExterno other = (ProfesorExterno) obj;
 		return Objects.equals(titulacion, other.titulacion);
 	}
-	
-	
 
 }

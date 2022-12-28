@@ -9,11 +9,11 @@ public class Profesor {
 	private String apellidos;
 	private boolean esDoctor;
 	private String password;
-	
+
 	public Profesor() {
-		
+
 	}
-	
+
 	public Profesor(String dni, String nombre, String apellidos, String password, boolean doctor) {
 		super();
 		this.dni = dni;
@@ -82,5 +82,4 @@ public class Profesor {
 				&& Objects.equals(password, other.password);
 	}
 
-	
 }

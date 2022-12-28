@@ -11,8 +11,9 @@ public class Matricula {
 	ModoPago tipoPago;
 	private Date fecha;
 	private boolean pagado;
-	
-	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha, boolean pagado) {
+
+	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha,
+			boolean pagado) {
 		super();
 		this.idMatricula = idMatricula;
 		this.estudiante = estudiante;
@@ -21,7 +22,7 @@ public class Matricula {
 		this.fecha = fecha;
 		this.pagado = pagado;
 	}
-	
+
 	public Matricula() {
 		// TODO Auto-generated constructor stub
 	}
@@ -92,5 +93,5 @@ public class Matricula {
 				&& idMatricula == other.idMatricula && pagado == other.pagado && tipoPago == other.tipoPago
 				&& Objects.equals(titulo, other.titulo);
 	}
-	
+
 }

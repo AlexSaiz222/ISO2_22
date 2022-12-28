@@ -6,13 +6,13 @@ public class ProfesorUCLM extends Profesor {
 
 	private Centro centroAdscripcion;
 	private CategoriaProfesor categoria;
-	
+
 	public ProfesorUCLM() {
-		
+
 	}
-	
-	public ProfesorUCLM(String dni, String nombre, String apellidos, String password, boolean esDoctor, Centro centroAdscripcion,
-			CategoriaProfesor categoria) {
+
+	public ProfesorUCLM(String dni, String nombre, String apellidos, String password, boolean esDoctor,
+			Centro centroAdscripcion, CategoriaProfesor categoria) {
 		super(dni, nombre, apellidos, password, esDoctor);
 		this.centroAdscripcion = centroAdscripcion;
 		this.categoria = categoria;
@@ -53,5 +53,5 @@ public class ProfesorUCLM extends Profesor {
 		ProfesorUCLM other = (ProfesorUCLM) obj;
 		return categoria == other.categoria && Objects.equals(centroAdscripcion, other.centroAdscripcion);
 	}
-	
+
 }

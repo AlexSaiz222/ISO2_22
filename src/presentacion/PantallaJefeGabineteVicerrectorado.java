@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -14,13 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import negocio.controllers.GestorPropuestasCursos;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
-import negocio.controllers.GestorPropuestasCursos;
 import persistencia.CursoPropioDAO;
 
 public class PantallaJefeGabineteVicerrectorado extends JFrame {
@@ -48,10 +46,11 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public PantallaJefeGabineteVicerrectorado() throws SQLException {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 415);
 		contentPane = new JPanel();
@@ -59,22 +58,22 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel Title = new JLabel("Evaluar propuesta de un curso");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 23));
 		Title.setBounds(170, 11, 315, 39);
 		contentPane.add(Title);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
-		
+
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -84,27 +83,27 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		});
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
-		
+
 		JLabel Name = new JLabel("Nombre");
 		Name.setBounds(43, 94, 58, 14);
 		contentPane.add(Name);
-		
+
 		NameField = new JComboBox<String>();
 		NameField.setBounds(102, 90, 256, 23);
 		contentPane.add(NameField);
 		NameField.removeAllItems();
-		
+
 		EstadoCurso estado = EstadoCurso.PROPUESTO;
 		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
-		
-		for(CursoPropio c: cursos) {
+
+		for (CursoPropio c : cursos) {
 			NameField.addItem(c.getNombre());
 		}
-		
+
 		JLabel Photo = new JLabel(new ImageIcon("./images/lettersUCLM.png"));
 		Photo.setBounds(422, 94, 196, 184);
 		contentPane.add(Photo);
-		
+
 		JButton RejectBtn = new JButton("Rechazar propuesta");
 		RejectBtn.setBackground(Color.RED);
 		RejectBtn.addActionListener(new ActionListener() {
@@ -112,7 +111,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					//g.rechazarCurso(curso);
+					// g.rechazarCurso(curso);
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {

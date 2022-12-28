@@ -2,15 +2,18 @@ package persistencia;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
-
-import negocio.controllers.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import negocio.entities.*;
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
+import negocio.entities.TipoCurso;
 
 public class CursoPropioDAO extends AbstractEntityDAO {
 
@@ -18,19 +21,19 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param curso
 	 * @return resultado. 0 si correcto. -1 si incorrecto.
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 
 	public int crearCurso(CursoPropio curso) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
-		
+
 		// Formateo de las fechas para la insercion en la BD
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));
 		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));
-		
+
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = agente.mBD.prepareStatement("insert into cursospropios (idcentro, iddirector, idsecretario, "
@@ -46,50 +49,49 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 			pstmt.setDate(9, fechaFin);
 			pstmt.setDouble(10, curso.getTasaMatricula());
 			pstmt.setInt(11, curso.getEdicion());
-			
+
 			resultado = agente.insert(pstmt);
-			
+
 		} catch (SQLException e) {
-			System.out.println("CursoPropioDAO: "+e.getMessage());
+			System.out.println("CursoPropioDAO: " + e.getMessage());
 		} finally {
-			if(pstmt != null)
+			if (pstmt != null)
 				pstmt.close();
 		}
-		
+
 		return resultado;
-		
+
 	}
 
 	/**
 	 * 
 	 * @param curso
-	 * @throws SQLException 
-	 * @throws ParseException 
+	 * @throws SQLException
+	 * @throws ParseException
 	 */
 	public CursoPropio seleccionarCurso(int curso) throws SQLException {
 		GestorBD agente = new GestorBD();
 		CursoPropio curso1 = new CursoPropio();
-		List<Object> cursoListado = agente.select("select * from cursospropios where idcursopropio="+curso);
-		
-		if(cursoListado.size() == 1) {
+		List<Object> cursoListado = agente.select("select * from cursospropios where idcursopropio=" + curso);
+
+		if (cursoListado.size() == 1) {
 			List<Object> c = (List<Object>) cursoListado.get(0);
-			
+
 			System.out.println(c);
-			
+
 			CentroDAO centroDAO = new CentroDAO();
 			Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));
-			
+
 			ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();
 			ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());
-			
+
 			ProfesorDAO secretarioDAO = new ProfesorDAO();
 			Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());
-			
+
 			EstadoCurso estado = EstadoCurso.valueOf(c.get(4).toString());
-			
+
 			TipoCurso tipo = TipoCurso.valueOf(c.get(5).toString());
-			
-			
+
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 			Date fechainicio = null, fechafin = null;
@@ -97,9 +99,9 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 				fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());
 				fechafin = (Date) simpleDateFormat.parse(c.get(9).toString());
 			} catch (ParseException e) {
-				System.out.println("CursoPropioDAO: "+e.getMessage());
+				System.out.println("CursoPropioDAO: " + e.getMessage());
 			}
-			
+
 			curso1.setId(Integer.parseInt(c.get(0).toString()));
 			curso1.setCentro(centro);
 			curso1.setDirector(profeUCLM);
@@ -112,30 +114,30 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 			curso1.setFechaFin(fechafin);
 			curso1.setTasaMatricula(Double.parseDouble(c.get(10).toString()));
 			curso1.setEdicion(Integer.parseInt(c.get(11).toString()));
-			//setMatriculas y setMaterias faltan
+			// setMatriculas y setMaterias faltan
 		} else {
 			curso1.setId(-1);
 		}
-		
+
 		return curso1;
-		
+
 	}
 
 	/**
 	 * 
 	 * @param curso
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public int editarCurso(CursoPropio curso) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
-	
-		resultado = agente.update("update cursospropios "
-				+ "set( idcentro = "+ curso.getCentro()+",iddirector="+curso.getDirector().getDni()
-				+ ",idsecretario ="+curso.getSecretario().getDni()+", estado = "+curso.getEstado()
-				+ ", tipo ="+curso.getTipo()+", nombre ="+curso.getNombre()+", ects = "+curso.getECTS()
-				+ ", tasamatricula = " +curso.getTasaMatricula()+", edicion ="+curso.getEdicion()+")");
-		
+
+		resultado = agente.update("update cursospropios " + "set( idcentro = " + curso.getCentro() + ",iddirector="
+				+ curso.getDirector().getDni() + ",idsecretario =" + curso.getSecretario().getDni() + ", estado = "
+				+ curso.getEstado() + ", tipo =" + curso.getTipo() + ", nombre =" + curso.getNombre() + ", ects = "
+				+ curso.getECTS() + ", tasamatricula = " + curso.getTasaMatricula() + ", edicion =" + curso.getEdicion()
+				+ ")");
+
 		return resultado;
 	}
 
@@ -144,28 +146,30 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * @param estado
 	 * @param fechaInicio
 	 * @param fechaFin
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException {
 		// TODO Auto-generated method stub
-		//mirar si las variables de las columans de la tabla Cursospropios esta correctamente
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = new GestorBD();
+		// mirar si las variables de las columans de la tabla Cursospropios esta
+		// correctamente
+		List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+		GestorBD gestor = new GestorBD();
 
-        List<Object> cursosListados = gestor.select("select * from cursospropios where estado='"+estado+"'");
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> curso = (List<Object>) cursosListados.get(i);
-            cursoPropio.setId(Integer.parseInt(curso.get(0).toString()));
-            cursoPropio.setNombre(curso.get(6).toString());
+		List<Object> cursosListados = gestor.select("select * from cursospropios where estado='" + estado + "'");
+		for (int i = 0; i < cursosListados.size(); i++) {
+			CursoPropio cursoPropio = new CursoPropio();
+			List<Object> curso = (List<Object>) cursosListados.get(i);
+			cursoPropio.setId(Integer.parseInt(curso.get(0).toString()));
+			cursoPropio.setNombre(curso.get(6).toString());
 
-            cursos.add(cursoPropio);
-        }
+			cursos.add(cursoPropio);
+		}
 
-        return cursos;
+		return cursos;
 	}
 
-	/**m
+	/**
+	 * m
 	 * 
 	 * @param tipo
 	 * @param fechaInicio
@@ -180,26 +184,25 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	 * 
 	 * @param fechaInicio
 	 * @param fechaFin
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) throws SQLException {
 		// TODO Auto-generated method stub
-        List<CursoPropio> cursos = new ArrayList<CursoPropio>();
-        GestorBD gestor = new GestorBD();
+		List<CursoPropio> cursos = new ArrayList<CursoPropio>();
+		GestorBD gestor = new GestorBD();
 
-        List<Object> cursosListados = gestor.select("select * from cursospropios where "
-        		+ "fechainicio >="+fechaInicio+"and fechafin <="+fechaFin);
-        
+		List<Object> cursosListados = gestor.select(
+				"select * from cursospropios where " + "fechainicio >=" + fechaInicio + "and fechafin <=" + fechaFin);
 
-        for(int i=0; i<cursosListados.size(); i++) {
-            CursoPropio cursoPropio = new CursoPropio();
-            List<Object> t = (List<Object>) cursosListados.get(i);
-            cursoPropio.setNombre(t.get(1).toString());
+		for (int i = 0; i < cursosListados.size(); i++) {
+			CursoPropio cursoPropio = new CursoPropio();
+			List<Object> t = (List<Object>) cursosListados.get(i);
+			cursoPropio.setNombre(t.get(1).toString());
 
-            cursos.add(cursoPropio);
-        }
+			cursos.add(cursoPropio);
+		}
 
-        return cursos;
+		return cursos;
 	}
 
 }

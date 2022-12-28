@@ -204,7 +204,7 @@ public class GestorBD {
 
 			// Crear la tabla estudiantes
 			stmt.execute(createSQL);
-			
+
 			try {
 				// Datos iniciales de estudiantes
 				pstmt = this.mBD.prepareStatement(

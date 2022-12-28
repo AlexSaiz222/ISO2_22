@@ -23,9 +23,7 @@ public abstract class AbstractEntityDAO<E> {
 	 */
 	public int insert(E entity) {
 		int resultado = -1;
-		
-		
-		
+
 		return resultado;
 	}
 

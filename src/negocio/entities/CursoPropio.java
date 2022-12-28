@@ -1,7 +1,10 @@
 package negocio.entities;
 
-import java.util.*;
-import persistencia.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+
+import persistencia.CursoPropioDAO;
 
 public class CursoPropio {
 
@@ -20,14 +23,14 @@ public class CursoPropio {
 	private Date fechaFin;
 	private double tasaMatricula;
 	private int edicion;
-	
+
 	public CursoPropio() {
-		
+
 	}
-	
+
 	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, Profesor secretario,
-			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, int id,
-			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
+			Collection<Materia> materias, EstadoCurso estado, TipoCurso tipo, int id, String nombre, int eCTS,
+			Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
 		super();
 		this.matriculas = matriculas;
 		this.centro = centro;
@@ -191,5 +194,4 @@ public class CursoPropio {
 				&& tipo == other.tipo;
 	}
 
-	
 }

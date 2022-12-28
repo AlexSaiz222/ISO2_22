@@ -46,22 +46,22 @@ public class PantallaEstadosCurso extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel CheckTxt = new JLabel("Ver el estado de un curso");
 		CheckTxt.setFont(new Font("Tahoma", Font.BOLD, 23));
 		CheckTxt.setBounds(23, 11, 339, 39);
 		contentPane.add(CheckTxt);
-		
+
 		JButton LogOutBttn = new JButton("Log out");
 		LogOutBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PantallaLogin L1 = new PantallaLogin();
-				L1.setVisible(true);
+				PantallaLogin pantLogin = new PantallaLogin();
+				pantLogin.logout();
 			}
 		});
 		LogOutBttn.setBounds(570, 11, 89, 23);
 		contentPane.add(LogOutBttn);
-		
+
 		JButton GoBackBttn = new JButton("Go back");
 		GoBackBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -71,27 +71,27 @@ public class PantallaEstadosCurso extends JFrame {
 		});
 		GoBackBttn.setBounds(570, 45, 89, 23);
 		contentPane.add(GoBackBttn);
-		
+
 		JLabel lblNewLabel = new JLabel("Fecha Inicio");
 		lblNewLabel.setBounds(23, 83, 77, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Fecha Fin");
 		lblNewLabel_1.setBounds(23, 108, 56, 14);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JDateChooser StartDateField = new JDateChooser();
 		StartDateField.setBounds(121, 83, 153, 20);
 		contentPane.add(StartDateField);
-		
+
 		JDateChooser EndDate = new JDateChooser();
 		EndDate.setBounds(121, 108, 153, 20);
 		contentPane.add(EndDate);
-		
+
 		JTextArea Plot = new JTextArea();
 		Plot.setBounds(377, 81, 228, 192);
 		contentPane.add(Plot);
-		
+
 		JButton ListBttn = new JButton("Ver Estado");
 		ListBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

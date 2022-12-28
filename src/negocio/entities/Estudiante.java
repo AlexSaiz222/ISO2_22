@@ -1,7 +1,7 @@
 package negocio.entities;
 
-import java.awt.Window.Type;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
 
 public class Estudiante {
 
@@ -13,11 +13,11 @@ public class Estudiante {
 	private String cualificacion;
 	private String password;
 	private int idEstudiante;
-	
+
 	public Estudiante() {
-		
+
 	}
-	
+
 	public Estudiante(Collection<Matricula> matriculas, String dni, String nombre, String apellidos, String titulacion,
 			String cualificacion, int idEstudiante, String password) {
 		super();
@@ -115,5 +115,4 @@ public class Estudiante {
 				&& Objects.equals(password, other.password) && Objects.equals(titulacion, other.titulacion);
 	}
 
-	
 }

@@ -219,6 +219,27 @@ public class PantallaRegistrarCurso extends JFrame {
 		
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					int resultado = 0, ects = -1, edicion = -1;
+					double tasaMatricula = -1;
+					
+					try {
+						ects = Integer.parseInt(ETCSField.getText());
+					} catch (NumberFormatException e) {
+						resultado = 1;
+					}
+					
+					try {
+						tasaMatricula = Double.parseDouble(FeeField.getText());
+					} catch (Exception e) {
+						resultado = 5;
+					}
+					
+					try {
+						edicion = Integer.parseInt(EditionField.getText());
+					} catch (NumberFormatException e) {
+						resultado = 6;
+					}
+					
 					profesorUCLM = new ProfesorUCLM();
 					curso = new CursoPropio();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
@@ -231,21 +252,42 @@ public class PantallaRegistrarCurso extends JFrame {
 					curso.setEstado(EstadoCurso.PROPUESTO); // Al crear el curso, el estado es PROPUESTO
 					curso.setTipo(TipoCurso.valueOf(typeBox.getSelectedItem().toString()));
 					curso.setNombre(NameField.getText());
-					curso.setECTS(Integer.parseInt(ETCSField.getText()));
+					curso.setECTS(ects);
 					curso.setFechaInicio(StartDateField.getDate());
 					curso.setFechaFin(EndDateField.getDate());
-					curso.setTasaMatricula(Double.parseDouble(FeeField.getText()));
-					curso.setEdicion(Integer.parseInt(EditionField.getText()));
+					curso.setTasaMatricula(tasaMatricula);
+					curso.setEdicion(edicion);
 					
 					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
-					int resultado = gestorPropuestasCursos.realizarPropuestaCurso(curso);
+					resultado = gestorPropuestasCursos.realizarPropuestaCurso(curso);
 					
 					System.out.println("Resultado Interfaz: "+resultado);
 					
-					if(resultado == 0) {
-						resultadoField.setText("Curso propuesto correctamente");
-					} else {
-						resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");
+					switch(resultado) {
+						case -1:
+							resultadoField.setText("No se ha podido crear el curso");
+							break;
+						case 0:
+							resultadoField.setText("Curso propuesto correctamente");
+							break;
+						case 1:
+							resultadoField.setText("Nombre requerido");
+							break;
+						case 2:
+							resultadoField.setText("ECTS debe ser un número entero positivo");
+							break;
+						case 3:
+							resultadoField.setText("Fecha Inicio debe ser seleccionada");
+							break;
+						case 4:
+							resultadoField.setText("Fecha Fin debe ser seleccionada y mayor a Fecha Inicio");
+							break;
+						case 5:
+							resultadoField.setText("Tasa Matrícula debe ser un número positivo");
+							break;
+						case 6:
+							resultadoField.setText("Edición debe ser un número entero positivo");
+							break;
 					}
 				} catch (Exception e) {
 					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");

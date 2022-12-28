@@ -20,8 +20,6 @@ public class GestorMatriculacion {
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) {
 		// TODO - implement GestorMatriculacion.realizarMatriculacion
 		
-		GestorBD agente = new GestorBD();
-		List<Object>  resultado = new ArrayList<Object>();
 				
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where "+ "idEstudiante = '"+ estudiante.getDni()
@@ -30,7 +28,6 @@ public class GestorMatriculacion {
 		MatriculaDAO matriculaDAO = new MatriculaDAO();
 		Matricula matricula = new Matricula();
 		
-		CursoPropio cursoPropio = new CursoPropio();
 		List<Object> t = (List<Object>) matriculaListado.get(0);
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));
@@ -61,7 +58,6 @@ public class GestorMatriculacion {
 		MatriculaDAO matriculaDAO = new MatriculaDAO();
 		Matricula matricula = new Matricula();
 		
-		CursoPropio cursoPropio = new CursoPropio();
 		List<Object> t = (List<Object>) matriculaListado.get(0);
 		try {
 			matricula = matriculaDAO.seleccionarMatricula((int) t.get(0));

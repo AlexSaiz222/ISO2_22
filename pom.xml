@@ -48,8 +48,7 @@
 	<dependency>
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
-	    <version>4.13.2</version>
-	    <scope>test</scope>
+	    <version>4.12</version>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
@@ -72,9 +71,6 @@
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-surefire-report-plugin</artifactId>
 			<version>3.0.0-M5</version>
-			<configuration>
-				<skipEmptyReport>false</skipEmptyReport>
-			</configuration>
 		</plugin>
 		
 		<plugin>
@@ -86,7 +82,8 @@
   </reporting>
   
   <build>
-    <sourceDirectory>src</sourceDirectory>
+  	<sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src/test</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -106,6 +103,12 @@
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-site-plugin</artifactId>
 		<version>3.12.1</version>
+	  </plugin>
+	  
+	  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-report-plugin</artifactId>
+			<version>3.0.0-M5</version>
 	  </plugin>
 	  
 	  <plugin>
@@ -152,7 +155,7 @@
 									<limit implementation="org.jacoco.report.check.Limit">
 										<counter>COMPLEXITY</counter>
 										<value>COVEREDRATIO</value>
-										<minimum>0.60</minimum>
+										<minimum>0.15</minimum>
 									</limit>
 								</limits>
 							</rule>

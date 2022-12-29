@@ -10,5 +10,5 @@
     
     * Revisar los casos de uso que están en el apartado "in review".
 
-![Planificación del Sprint de la semana del 24/11 al 3/12](../sprintsImages/Sprint_24nov2022_lista.png)
-![Planificación del Sprint de la semana del 24/11 al 3/12](../sprintsImages/Sprint_24nov2022_tablero.png)
+![Planificación del Sprint de la semana del 24/11 al 3/12](../sprintImages/Sprint_24nov2022_lista.png)
+![Planificación del Sprint de la semana del 24/11 al 3/12](../sprintImages/Sprint_24nov2022_tablero.png)

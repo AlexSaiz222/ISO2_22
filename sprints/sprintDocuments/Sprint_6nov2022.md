@@ -10,5 +10,5 @@
 
     * Trabajar en el caso de uso "Login" y plantear el caso de uso "Realizar matrícula".
 
-![Planificación del Sprint de la semana del 06/11 al 13/11](../sprintsImages/sprint_06nov_tablero.png)
-![Planificación del Sprint de la semana del 06/11 al 13/11](../sprintsImages/sprint_06nov_lista.png)
+![Planificación del Sprint de la semana del 06/11 al 13/11](../sprintImages/sprint_06nov_tablero.png)
+![Planificación del Sprint de la semana del 06/11 al 13/11](../sprintImages/sprint_06nov_lista.png)

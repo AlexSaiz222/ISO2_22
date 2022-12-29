@@ -8,5 +8,5 @@
 
     * Trabajar en el caso de uso "Evaluar propuesta" y  el caso de uso "Abonar matrícula".
 
-![Planificación del Sprint de la semana del 16/11 al 23/11](../sprintsImages/Sprint_16nov2022_lista.png)
-![Planificación del Sprint de la semana del 16/11 al 23/11](../sprintsImages/Sprint_16nov2022_tablero.png)
+![Planificación del Sprint de la semana del 16/11 al 23/11](../sprintImages/Sprint_16nov2022_lista.png)
+![Planificación del Sprint de la semana del 16/11 al 23/11](../sprintImages/Sprint_16nov2022_tablero.png)

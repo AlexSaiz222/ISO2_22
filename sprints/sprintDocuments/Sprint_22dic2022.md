@@ -11,5 +11,5 @@
     
 * Revisión final del proyecto, análisis detallado de desperfectos y estructurar la presentación con el cliente.
 
-![Planificación del Sprint de la semana del 22/12 al 29/12](../sprintsImages/Sprint_22dic2022_lista.png)
-![Planificación del Sprint de la semana del 22/12 al 29/12](../sprintsImages/Sprint_22dic2022_tablero.png)
+![Planificación del Sprint de la semana del 22/12 al 29/12](../sprintImages/Sprint_22dic2022_lista.png)
+![Planificación del Sprint de la semana del 22/12 al 29/12](../sprintImages/Sprint_22dic2022_tablero.png)

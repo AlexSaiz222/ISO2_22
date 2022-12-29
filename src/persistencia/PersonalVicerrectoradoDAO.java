@@ -9,7 +9,10 @@ import org.apache.log4j.Logger;
 import negocio.entities.PersonalVicerrectorado;
 
 public class PersonalVicerrectoradoDAO {
+	
 	private static Logger logJava = Logger.getLogger(PersonalVicerrectoradoDAO.class);
+	private final String logFatal = "LOG FATAL: ";
+	
 	public PersonalVicerrectorado seleccionarProfesor(String dni) throws SQLException {
 		GestorBD gestor = new GestorBD();
 		List<Object> vicListado = gestor.select("select * from vicerrectorado where dni='" + dni + "'");
@@ -44,7 +47,7 @@ public class PersonalVicerrectoradoDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("PersonalVicerrectoradorDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

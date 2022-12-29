@@ -145,6 +145,6 @@ public class GestorConsultasTest {
 		int numero_cursos = resultado.size();
 		int numero_cursos_esperados = 0;
 		
-		Assert.assertTrue(numero_cursos == numero_cursos_esperados);
+		Assert.assertEquals(numero_cursos,numero_cursos_esperados);
 	}
 }

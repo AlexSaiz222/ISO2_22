@@ -33,6 +33,7 @@ import persistencia.ProfesorUCLMDAO;
 public class PantallaLogin extends JFrame implements Serializable {
 	
 	private static Logger logJava = Logger.getLogger(PantallaLogin.class);
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	/**
 	 * 
@@ -59,7 +60,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 					PantallaLogin frame = new PantallaLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -156,7 +157,7 @@ public class PantallaLogin extends JFrame implements Serializable {
 						}
 					}
 				} catch (Exception exception1) {
-					System.out.println("El usuario no se encuentra en la base de datos.");
+					logJava.fatal(LOGFATAL+exception1.toString());
 				}
 
 			}

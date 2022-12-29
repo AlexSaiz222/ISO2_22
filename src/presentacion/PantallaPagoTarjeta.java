@@ -22,6 +22,7 @@ import javax.swing.WindowConstants;
 public class PantallaPagoTarjeta extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaPagoTarjeta.class);
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private JTextField NumberField;
@@ -39,7 +40,7 @@ public class PantallaPagoTarjeta extends JFrame {
 					PantallaPagoTarjeta frame = new PantallaPagoTarjeta();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

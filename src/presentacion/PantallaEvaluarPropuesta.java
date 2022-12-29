@@ -29,6 +29,8 @@ import persistencia.CursoPropioDAO;
 public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 	
 	private static Logger logJava = Logger.getLogger(PantallaEvaluarPropuesta.class);
+	private final static String LOGFATAL = "LOG FATAL: ";
+	
 
 	/**
 	 * 
@@ -49,7 +51,7 @@ public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 					PantallaEvaluarPropuesta frame = new PantallaEvaluarPropuesta();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println("PantallaEvaluarPropuesta: " + e.getMessage());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -129,7 +131,7 @@ public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {
-					System.out.println("PantallaEvaluarPropuesta: " + e.getMessage());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -144,9 +146,8 @@ public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					//g.altaCursoAprobado(curso);
 				} catch (Exception e) {
-					System.out.println("PantallaEvaluarPropuesta: " + e.getMessage());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

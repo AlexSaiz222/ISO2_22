@@ -13,6 +13,7 @@ import negocio.entities.ProfesorExterno;
 public class ProfesorExternoDAO extends AbstractEntityDAO {
 	
 	private static Logger logJava = Logger.getLogger(ProfesorExternoDAO.class);
+	private final String logFatal = "LOG FATAL: ";
 
 	/**
 	 * 
@@ -35,7 +36,7 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 			pstmt.close();
 
 		} catch (SQLException e) {
-			System.out.println("ProfesorExternoDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

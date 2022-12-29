@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaListarEdiciones.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaListarEdiciones.java</span></div><h1>PantallaListarEdiciones.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import com.toedter.calendar.JDateChooser;
+
+public class PantallaListarEdiciones extends JFrame {
+	
+<span class="nc" id="L24">	private static Logger logJava = Logger.getLogger(PantallaListarEdiciones.class);</span>
+
+	private JPanel contentPane;
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L33">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L36">					PantallaListarEdiciones frame = new PantallaListarEdiciones();</span>
+<span class="nc" id="L37">					frame.setVisible(true);</span>
+<span class="nc" id="L38">				} catch (Exception e) {</span>
+<span class="nc" id="L39">					System.out.println(e.toString());</span>
+<span class="nc" id="L40">				}</span>
+<span class="nc" id="L41">			}</span>
+		});
+<span class="nc" id="L43">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L48">	public PantallaListarEdiciones() {</span>
+<span class="nc" id="L49">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L50">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L51">		contentPane = new JPanel();</span>
+<span class="nc" id="L52">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L54">		setContentPane(contentPane);</span>
+<span class="nc" id="L55">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L57">		JLabel ChooseAnOption = new JLabel(&quot;Listar Ediciones de un Curso&quot;);</span>
+<span class="nc" id="L58">		ChooseAnOption.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L59">		ChooseAnOption.setBounds(23, 11, 270, 39);</span>
+<span class="nc" id="L60">		contentPane.add(ChooseAnOption);</span>
+
+<span class="nc" id="L62">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L63">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L65">				pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L66">				pantLogin.logout();</span>
+<span class="nc" id="L67">			}</span>
+		});
+<span class="nc" id="L69">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L70">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L72">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L73">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L75">				PantallaJefeVicerrectorado v1 = new PantallaJefeVicerrectorado();</span>
+<span class="nc" id="L76">				v1.setVisible(true);</span>
+<span class="nc" id="L77">			}</span>
+		});
+<span class="nc" id="L79">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L80">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L82">		JLabel lblNewLabel = new JLabel(&quot;Fecha Inicio&quot;);</span>
+<span class="nc" id="L83">		lblNewLabel.setBounds(23, 83, 77, 14);</span>
+<span class="nc" id="L84">		contentPane.add(lblNewLabel);</span>
+
+<span class="nc" id="L86">		JLabel lblNewLabel_1 = new JLabel(&quot;Fecha Fin&quot;);</span>
+<span class="nc" id="L87">		lblNewLabel_1.setBounds(23, 108, 56, 14);</span>
+<span class="nc" id="L88">		contentPane.add(lblNewLabel_1);</span>
+
+<span class="nc" id="L90">		JDateChooser StartDateField = new JDateChooser();</span>
+<span class="nc" id="L91">		StartDateField.setBounds(121, 83, 153, 20);</span>
+<span class="nc" id="L92">		contentPane.add(StartDateField);</span>
+
+<span class="nc" id="L94">		JDateChooser EndDate = new JDateChooser();</span>
+<span class="nc" id="L95">		EndDate.setBounds(121, 108, 153, 20);</span>
+<span class="nc" id="L96">		contentPane.add(EndDate);</span>
+
+<span class="nc" id="L98">		JTextArea Plot = new JTextArea();</span>
+<span class="nc" id="L99">		Plot.setBounds(377, 81, 228, 192);</span>
+<span class="nc" id="L100">		contentPane.add(Plot);</span>
+
+<span class="nc" id="L102">		JButton ListBttn = new JButton(&quot;Ver ediciones&quot;);</span>
+<span class="nc" id="L103">		ListBttn.setForeground(Color.BLACK);</span>
+<span class="nc" id="L104">		ListBttn.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L105">		ListBttn.setBounds(23, 148, 251, 57);</span>
+<span class="nc" id="L106">		contentPane.add(ListBttn);</span>
+<span class="nc" id="L107">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaProcesoMatriculacion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaProcesoMatriculacion.java</span></div><h1>PantallaProcesoMatriculacion.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import com.toedter.calendar.JDateChooser;
+
+import negocio.controllers.GestorMatriculacion;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Estudiante;
+import negocio.entities.Matricula;
+import persistencia.CursoPropioDAO;
+import persistencia.MatriculaDAO;
+
+public class PantallaProcesoMatriculacion extends JFrame {
+	
+<span class="nc" id="L37">	private static Logger logJava = Logger.getLogger(PantallaProcesoMatriculacion.class);</span>
+
+	private JPanel contentPane;
+	private JTextField resultadoField;
+	private JComboBox&lt;String&gt; NameField;
+	private JDateChooser DateField;
+	private transient List&lt;CursoPropio&gt; cursos;
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L50">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L53">					PantallaProcesoMatriculacion frame = new PantallaProcesoMatriculacion();</span>
+<span class="nc" id="L54">					frame.setVisible(true);</span>
+<span class="nc" id="L55">				} catch (Exception e) {</span>
+<span class="nc" id="L56">					System.out.println(e.toString());</span>
+<span class="nc" id="L57">				}</span>
+<span class="nc" id="L58">			}</span>
+		});
+<span class="nc" id="L60">	}</span>
+
+	/**
+	 * Create the frame.
+	 * 
+	 * @throws SQLException
+	 */
+<span class="nc" id="L67">	public PantallaProcesoMatriculacion() throws SQLException {</span>
+<span class="nc" id="L68">		pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L69">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L70">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L71">		contentPane = new JPanel();</span>
+<span class="nc" id="L72">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L74">		setContentPane(contentPane);</span>
+<span class="nc" id="L75">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L77">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L78">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L80">				pantLogin.logout();</span>
+<span class="nc" id="L81">			}</span>
+		});
+<span class="nc" id="L83">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L84">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L86">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L87">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L89">				PantallaMatriculacion M1 = new PantallaMatriculacion();</span>
+<span class="nc" id="L90">				M1.setVisible(true);</span>
+<span class="nc" id="L91">			}</span>
+		});
+<span class="nc" id="L93">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L94">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L96">		JLabel Title = new JLabel(&quot;Matricularse de un curso&quot;);</span>
+<span class="nc" id="L97">		Title.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L98">		Title.setBounds(10, 15, 520, 39);</span>
+<span class="nc" id="L99">		contentPane.add(Title);</span>
+
+<span class="nc" id="L101">		JLabel NameTxt = new JLabel(&quot;Nombre del curso&quot;);</span>
+<span class="nc" id="L102">		NameTxt.setBounds(34, 86, 62, 14);</span>
+<span class="nc" id="L103">		contentPane.add(NameTxt);</span>
+
+<span class="nc" id="L105">		JLabel UCLM_letters = new JLabel(new ImageIcon(&quot;./images/lettersUCLM.png&quot;));</span>
+<span class="nc" id="L106">		UCLM_letters.setBounds(359, 123, 241, 213);</span>
+<span class="nc" id="L107">		contentPane.add(UCLM_letters);</span>
+
+<span class="nc" id="L109">		JLabel DateTxt = new JLabel(&quot;Fecha&quot;);</span>
+<span class="nc" id="L110">		DateTxt.setBounds(34, 123, 46, 14);</span>
+<span class="nc" id="L111">		contentPane.add(DateTxt);</span>
+
+<span class="nc" id="L113">		DateField = new JDateChooser();</span>
+<span class="nc" id="L114">		DateField.setBounds(106, 117, 191, 20);</span>
+<span class="nc" id="L115">		contentPane.add(DateField);</span>
+
+<span class="nc" id="L117">		NameField = new JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L118">		NameField.setBounds(106, 82, 191, 23);</span>
+<span class="nc" id="L119">		contentPane.add(NameField);</span>
+<span class="nc" id="L120">		NameField.removeAllItems();</span>
+<span class="nc" id="L121">		CursoPropioDAO cursoDAO = new CursoPropioDAO();</span>
+<span class="nc" id="L122">		EstadoCurso estado = EstadoCurso.VALIDADO;</span>
+<span class="nc" id="L123">		cursos = cursoDAO.listarCursosPorEstado(estado);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">		for (CursoPropio c : cursos) {</span>
+<span class="nc" id="L125">			NameField.addItem(c.getNombre());</span>
+<span class="nc" id="L126">		}</span>
+
+<span class="nc" id="L128">		JButton MatriculationBttn = new JButton(&quot;Pagar matricula&quot;);</span>
+<span class="nc" id="L129">		MatriculationBttn.setForeground(Color.BLACK);</span>
+<span class="nc" id="L130">		MatriculationBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+<span class="nc" id="L133">					Estudiante estudiante1 = pantLogin.getEstudianteLogeado();</span>
+
+<span class="nc" id="L135">					Matricula mat = new Matricula();</span>
+
+<span class="nc" id="L137">					mat.setTitulo(cursos.get(NameField.getSelectedIndex()));</span>
+<span class="nc" id="L138">					mat.setPagado(false);</span>
+<span class="nc" id="L139">					mat.setEstudiante(estudiante1);</span>
+<span class="nc" id="L140">					mat.setFecha((Date) DateField.getDate());</span>
+
+<span class="nc" id="L142">					MatriculaDAO matDAO = new MatriculaDAO();</span>
+
+<span class="nc" id="L144">					int resultado = matDAO.crearMatricula(mat);</span>
+
+<span class="nc bnc" id="L146" title="All 2 branches missed.">					if (resultado == 0) {</span>
+<span class="nc" id="L147">						GestorMatriculacion gMatriculacion = new GestorMatriculacion();</span>
+<span class="nc" id="L148">						gMatriculacion.realizarMatriculacion(cursos.get(NameField.getSelectedIndex()), estudiante1);</span>
+<span class="nc" id="L149">						resultadoField.setText(&quot;Matriculado en curso correctamente&quot;);</span>
+<span class="nc" id="L150">						PantallaPagar PP1 = new PantallaPagar();</span>
+<span class="nc" id="L151">						PP1.setVisible(true);</span>
+					}
+<span class="nc" id="L153">				} catch (Exception e) {</span>
+<span class="nc" id="L154">					resultadoField.setText(&quot;Ha ocurrido un error, vuelva a intentarlo mas tarde&quot;);</span>
+<span class="nc" id="L155">				}</span>
+<span class="nc" id="L156">			}</span>
+		});
+<span class="nc" id="L158">		MatriculationBttn.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L159">		MatriculationBttn.setBounds(34, 160, 263, 67);</span>
+<span class="nc" id="L160">		contentPane.add(MatriculationBttn);</span>
+
+<span class="nc" id="L162">		JButton btnPayLater = new JButton(&quot;Pagar mas tarde&quot;);</span>
+<span class="nc" id="L163">		btnPayLater.setForeground(Color.BLACK);</span>
+<span class="nc" id="L164">		btnPayLater.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+<span class="nc" id="L167">					Estudiante estudiante2 = pantLogin.getEstudianteLogeado();</span>
+
+<span class="nc" id="L169">					Matricula mat = new Matricula();</span>
+
+<span class="nc" id="L171">					mat.setTitulo(cursos.get(NameField.getSelectedIndex()));</span>
+<span class="nc" id="L172">					mat.setPagado(false);</span>
+<span class="nc" id="L173">					mat.setEstudiante(estudiante2);</span>
+<span class="nc" id="L174">					mat.setFecha((Date) DateField.getDate());</span>
+
+<span class="nc" id="L176">					MatriculaDAO matDAO = new MatriculaDAO();</span>
+
+<span class="nc" id="L178">					int resultado = matDAO.crearMatricula(mat);</span>
+
+<span class="nc bnc" id="L180" title="All 2 branches missed.">					if (resultado == 0) {</span>
+<span class="nc" id="L181">						resultadoField.setText(&quot;Matriculado en curso correctamente&quot;);</span>
+<span class="nc" id="L182">						PantallaMatriculacion PM1 = new PantallaMatriculacion();</span>
+<span class="nc" id="L183">						PM1.setVisible(true);</span>
+					}
+<span class="nc" id="L185">				} catch (Exception e) {</span>
+<span class="nc" id="L186">					resultadoField.setText(&quot;Ha ocurrido un error, vuelva a intentarlo mas tarde&quot;);</span>
+<span class="nc" id="L187">				}</span>
+<span class="nc" id="L188">			}</span>
+		});
+<span class="nc" id="L190">		btnPayLater.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L191">		btnPayLater.setBounds(34, 244, 263, 67);</span>
+<span class="nc" id="L192">		contentPane.add(btnPayLater);</span>
+
+<span class="nc" id="L194">		resultadoField = new JTextField();</span>
+<span class="nc" id="L195">		resultadoField.setEnabled(false);</span>
+<span class="nc" id="L196">		resultadoField.setColumns(10);</span>
+<span class="nc" id="L197">		resultadoField.setBounds(316, 83, 303, 23);</span>
+<span class="nc" id="L198">		contentPane.add(resultadoField);</span>
+
+<span class="nc" id="L200">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

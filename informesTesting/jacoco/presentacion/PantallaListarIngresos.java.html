@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaListarIngresos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaListarIngresos.java</span></div><h1>PantallaListarIngresos.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import com.toedter.calendar.JDateChooser;
+
+import negocio.entities.TipoCurso;
+
+public class PantallaListarIngresos extends JFrame {
+	
+<span class="nc" id="L27">	private static Logger logJava = Logger.getLogger(PantallaListarIngresos.class);</span>
+
+	private JPanel contentPane;
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L36">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L39">					PantallaListarIngresos frame = new PantallaListarIngresos();</span>
+<span class="nc" id="L40">					frame.setVisible(true);</span>
+<span class="nc" id="L41">				} catch (Exception e) {</span>
+<span class="nc" id="L42">					System.out.println(e.toString());</span>
+<span class="nc" id="L43">				}</span>
+<span class="nc" id="L44">			}</span>
+		});
+<span class="nc" id="L46">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L51">	public PantallaListarIngresos() {</span>
+<span class="nc" id="L52">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L53">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L54">		contentPane = new JPanel();</span>
+<span class="nc" id="L55">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L57">		setContentPane(contentPane);</span>
+<span class="nc" id="L58">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L60">		JLabel ChooseAnOption = new JLabel(&quot;Listar ingresos&quot;);</span>
+<span class="nc" id="L61">		ChooseAnOption.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L62">		ChooseAnOption.setBounds(23, 11, 270, 39);</span>
+<span class="nc" id="L63">		contentPane.add(ChooseAnOption);</span>
+
+<span class="nc" id="L65">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L66">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L68">				pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L69">				pantLogin.logout();</span>
+<span class="nc" id="L70">			}</span>
+		});
+<span class="nc" id="L72">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L73">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L75">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L76">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L78">				PantallaJefeVicerrectorado v1 = new PantallaJefeVicerrectorado();</span>
+<span class="nc" id="L79">				v1.setVisible(true);</span>
+<span class="nc" id="L80">			}</span>
+		});
+<span class="nc" id="L82">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L83">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L85">		JLabel TypeTxt = new JLabel(&quot;Tipo de curso&quot;);</span>
+<span class="nc" id="L86">		TypeTxt.setBounds(23, 89, 89, 14);</span>
+<span class="nc" id="L87">		contentPane.add(TypeTxt);</span>
+
+<span class="nc" id="L89">		JLabel StartTxt = new JLabel(&quot;Fecha Inicio&quot;);</span>
+<span class="nc" id="L90">		StartTxt.setBounds(23, 250, 72, 14);</span>
+<span class="nc" id="L91">		contentPane.add(StartTxt);</span>
+
+<span class="nc" id="L93">		JLabel EndTxt = new JLabel(&quot;Fecha Fin&quot;);</span>
+<span class="nc" id="L94">		EndTxt.setBounds(23, 276, 72, 14);</span>
+<span class="nc" id="L95">		contentPane.add(EndTxt);</span>
+
+<span class="nc" id="L97">		JButton IncomesBtn = new JButton(&quot;Listar Ingresos&quot;);</span>
+<span class="nc" id="L98">		IncomesBtn.setForeground(Color.BLACK);</span>
+<span class="nc" id="L99">		IncomesBtn.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L100">		IncomesBtn.setBounds(23, 301, 245, 64);</span>
+<span class="nc" id="L101">		contentPane.add(IncomesBtn);</span>
+
+<span class="nc" id="L103">		JTextArea PlotIncomes = new JTextArea();</span>
+<span class="nc" id="L104">		PlotIncomes.setBounds(403, 89, 205, 201);</span>
+<span class="nc" id="L105">		contentPane.add(PlotIncomes);</span>
+
+<span class="nc" id="L107">		JDateChooser StartDateField = new JDateChooser();</span>
+<span class="nc" id="L108">		StartDateField.setBounds(134, 250, 134, 20);</span>
+<span class="nc" id="L109">		contentPane.add(StartDateField);</span>
+
+<span class="nc" id="L111">		JDateChooser EndDateField = new JDateChooser();</span>
+<span class="nc" id="L112">		EndDateField.setBounds(134, 276, 134, 20);</span>
+<span class="nc" id="L113">		contentPane.add(EndDateField);</span>
+
+<span class="nc" id="L115">		JComboBox typeBox = new JComboBox();</span>
+<span class="nc" id="L116">		typeBox.setBounds(122, 89, 146, 21);</span>
+<span class="nc" id="L117">		contentPane.add(typeBox);</span>
+<span class="nc" id="L118">		typeBox.removeAllItems();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		for (TipoCurso t : TipoCurso.values()) {</span>
+<span class="nc" id="L120">			typeBox.addItem(t);</span>
+		}
+
+<span class="nc" id="L123">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

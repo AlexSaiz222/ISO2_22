@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaJefeGabineteVicerrectorado.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaJefeGabineteVicerrectorado.java</span></div><h1>PantallaJefeGabineteVicerrectorado.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.io.Serializable;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import negocio.controllers.GestorPropuestasCursos;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import persistencia.CursoPropioDAO;
+
+public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serializable {
+	
+<span class="nc" id="L32">	private static Logger logJava = Logger.getLogger(PantallaJefeGabineteVicerrectorado.class);</span>
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3932249418747084027L;
+	private JPanel contentPane;
+<span class="nc" id="L39">	private transient CursoPropioDAO cursoDAO = new CursoPropioDAO();</span>
+	private JComboBox&lt;String&gt; NameField;
+<span class="nc" id="L41">	private transient GestorPropuestasCursos g = new GestorPropuestasCursos();</span>
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L48">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L51">					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();</span>
+<span class="nc" id="L52">					frame.setVisible(true);</span>
+<span class="nc" id="L53">				} catch (Exception e) {</span>
+<span class="nc" id="L54">					System.out.println(e.toString());</span>
+<span class="nc" id="L55">				}</span>
+<span class="nc" id="L56">			}</span>
+		});
+<span class="nc" id="L58">	}</span>
+
+	/**
+	 * Create the frame.
+	 * 
+	 * @throws SQLException
+	 */
+<span class="nc" id="L65">	public PantallaJefeGabineteVicerrectorado() throws SQLException {</span>
+
+<span class="nc" id="L67">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L68">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L69">		contentPane = new JPanel();</span>
+<span class="nc" id="L70">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L72">		setContentPane(contentPane);</span>
+<span class="nc" id="L73">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L75">		JLabel Title = new JLabel(&quot;Evaluar propuesta de un curso&quot;);</span>
+<span class="nc" id="L76">		Title.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L77">		Title.setBounds(170, 11, 315, 39);</span>
+<span class="nc" id="L78">		contentPane.add(Title);</span>
+
+<span class="nc" id="L80">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L81">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L83">				pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L84">				pantLogin.logout();</span>
+<span class="nc" id="L85">			}</span>
+		});
+<span class="nc" id="L87">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L88">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L90">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L91">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L93">				PantallaDireccionCurso D1 = new PantallaDireccionCurso();</span>
+<span class="nc" id="L94">				D1.setVisible(true);</span>
+<span class="nc" id="L95">			}</span>
+		});
+<span class="nc" id="L97">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L98">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L100">		JLabel Name = new JLabel(&quot;Nombre&quot;);</span>
+<span class="nc" id="L101">		Name.setBounds(43, 94, 58, 14);</span>
+<span class="nc" id="L102">		contentPane.add(Name);</span>
+
+<span class="nc" id="L104">		NameField = new JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L105">		NameField.setBounds(102, 90, 256, 23);</span>
+<span class="nc" id="L106">		contentPane.add(NameField);</span>
+<span class="nc" id="L107">		NameField.removeAllItems();</span>
+
+<span class="nc" id="L109">		EstadoCurso estado = EstadoCurso.PROPUESTO;</span>
+<span class="nc" id="L110">		List&lt;CursoPropio&gt; cursos = cursoDAO.listarCursosPorEstado(estado);</span>
+
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		for (CursoPropio c : cursos) {</span>
+<span class="nc" id="L113">			NameField.addItem(c.getNombre());</span>
+<span class="nc" id="L114">		}</span>
+
+<span class="nc" id="L116">		JLabel Photo = new JLabel(new ImageIcon(&quot;./images/lettersUCLM.png&quot;));</span>
+<span class="nc" id="L117">		Photo.setBounds(422, 94, 196, 184);</span>
+<span class="nc" id="L118">		contentPane.add(Photo);</span>
+
+<span class="nc" id="L120">		JButton RejectBtn = new JButton(&quot;Rechazar propuesta&quot;);</span>
+<span class="nc" id="L121">		RejectBtn.setBackground(Color.RED);</span>
+<span class="nc" id="L122">		RejectBtn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L124">				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());</span>
+				try {
+<span class="nc" id="L126">					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);</span>
+					// g.rechazarCurso(curso);
+<span class="nc" id="L128">					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;</span>
+<span class="nc" id="L129">					curso.setEstado(rechazadoCurso);</span>
+<span class="nc" id="L130">				} catch (Exception e) {</span>
+<span class="nc" id="L131">					System.out.println(e.toString());</span>
+<span class="nc" id="L132">				}</span>
+<span class="nc" id="L133">			}</span>
+		});
+<span class="nc" id="L135">		RejectBtn.setBounds(207, 239, 151, 39);</span>
+<span class="nc" id="L136">		contentPane.add(RejectBtn);</span>
+
+<span class="nc" id="L138">		JButton ApproveBtn = new JButton(&quot;Aprobar propuesta&quot;);</span>
+<span class="nc" id="L139">		ApproveBtn.setBackground(new Color(50, 205, 50));</span>
+<span class="nc" id="L140">		ApproveBtn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L142">				CursoPropioDAO cursoDAO = new CursoPropioDAO();</span>
+<span class="nc" id="L143">				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());</span>
+				try {
+<span class="nc" id="L145">					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);</span>
+					//g.altaCursoAprobado(curso);
+<span class="nc" id="L147">				} catch (Exception e) {</span>
+<span class="nc" id="L148">					System.out.println(e.toString());</span>
+<span class="nc" id="L149">				}</span>
+<span class="nc" id="L150">			}</span>
+		});
+<span class="nc" id="L152">		ApproveBtn.setBounds(30, 239, 151, 39);</span>
+<span class="nc" id="L153">		contentPane.add(ApproveBtn);</span>
+<span class="nc" id="L154">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

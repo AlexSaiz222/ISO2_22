@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorPropuestasCursosTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">test</a> &gt; <span class="el_source">GestorPropuestasCursosTest.java</span></div><h1>GestorPropuestasCursosTest.java</h1><pre class="source lang-java linenums">package test;
+
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import negocio.controllers.GestorPropuestasCursos;
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
+import negocio.entities.TipoCurso;
+
+<span class="fc" id="L19">public class GestorPropuestasCursosTest {</span>
+	
+	private GestorPropuestasCursos gestor;
+	private CursoPropio curso;
+	private Centro centro;
+	private ProfesorUCLM director;
+	private Profesor secretario;
+	private EstadoCurso estado;
+	private TipoCurso tipo;
+	private int idCurso;
+	private int resultadoEsperado;
+
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L33">		this.gestor = new GestorPropuestasCursos();</span>
+<span class="fc" id="L34">		this.centro = new Centro();					this.centro.setIdCentro(1);</span>
+<span class="fc" id="L35">		this.director = new ProfesorUCLM();			this.director.setDni(&quot;11111111B&quot;);</span>
+<span class="fc" id="L36">		this.secretario = new Profesor();			this.secretario.setDni(&quot;11111111B&quot;);</span>
+<span class="fc" id="L37">		this.estado = EstadoCurso.PROPUESTO;</span>
+<span class="fc" id="L38">		this.tipo = TipoCurso.MASTER;</span>
+<span class="fc" id="L39">		this.idCurso = 0;</span>
+<span class="fc" id="L40">		curso = new CursoPropio(this.centro, this.director, this.secretario, this.estado, this.tipo, this.idCurso, </span>
+				&quot;&quot;, 0, null, null, 0.00, 0);
+<span class="fc" id="L42">	}</span>
+	
+	/**
+	 * Caso de Prueba CP1
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoConNombreVacio() throws SQLException {
+<span class="fc" id="L50">		this.resultadoEsperado = 1;</span>
+		
+<span class="fc" id="L52">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L54">	}</span>
+	
+	/**
+	 * Caso de Prueba CP2
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoConLongitudNombreMayor() throws SQLException {
+<span class="fc" id="L62">		this.curso.setNombre(&quot;Curso de Prueba perteneciente al centro de Talavera de la Reina&quot;);</span>
+<span class="fc" id="L63">		this.resultadoEsperado = 1;</span>
+		
+<span class="fc" id="L65">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L67">	}</span>
+	
+	/**
+	 * Caso de Prueba CP3
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoECTSNegativo() throws SQLException {
+<span class="fc" id="L75">		this.curso.setNombre(&quot;Curso de Prueba 2 perteneciente centro de Talavera&quot;);</span>
+<span class="fc" id="L76">		this.curso.setECTS(-5);</span>
+<span class="fc" id="L77">		this.resultadoEsperado = 2;</span>
+		
+<span class="fc" id="L79">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L81">	}</span>
+	
+	/**
+	 * Caso de Prueba CP4
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoECTSCero() throws SQLException {
+<span class="fc" id="L89">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L90">		this.curso.setECTS(0);</span>
+<span class="fc" id="L91">		this.resultadoEsperado = 2;</span>
+		
+<span class="fc" id="L93">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L95">	}</span>
+	
+	/**
+	 * Caso de Prueba CP5
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoFechaInicioNula() throws SQLException {
+<span class="fc" id="L103">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L104">		this.curso.setECTS(6);</span>
+<span class="fc" id="L105">		this.resultadoEsperado = 3;</span>
+		
+<span class="fc" id="L107">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L109">	}</span>
+	
+	/**
+	 * Caso de Prueba CP6
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoFechaFinNula() throws SQLException {
+<span class="fc" id="L117">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L118">		this.curso.setECTS(1000);</span>
+<span class="fc" id="L119">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L120">		this.resultadoEsperado = 4;</span>
+		
+<span class="fc" id="L122">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L124">	}</span>
+	
+	/**
+	 * Caso de Prueba CP7
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoFechaInicioMayorQueFechaFin() throws SQLException {
+<span class="fc" id="L132">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L133">		this.curso.setECTS(6);</span>
+<span class="fc" id="L134">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L135">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 22).getTime());</span>
+<span class="fc" id="L136">		this.resultadoEsperado = 4;</span>
+		
+<span class="fc" id="L138">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L140">	}</span>
+	
+	/**
+	 * Caso de Prueba CP8
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoFechaInicioIgualQueFechaFin() throws SQLException {
+<span class="fc" id="L148">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L149">		this.curso.setECTS(6);</span>
+<span class="fc" id="L150">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L151">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L152">		this.resultadoEsperado = 4;</span>
+		
+<span class="fc" id="L154">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L156">	}</span>
+	
+	/**
+	 * Caso de Prueba CP9
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoTasaMatriculaNegativa() throws SQLException {
+<span class="fc" id="L164">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L165">		this.curso.setECTS(6);</span>
+<span class="fc" id="L166">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L167">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L168">		this.curso.setTasaMatricula(-27.5);</span>
+<span class="fc" id="L169">		this.resultadoEsperado = 5;</span>
+		
+<span class="fc" id="L171">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L173">	}</span>
+	
+	/**
+	 * Caso de Prueba CP10
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoTasaMatriculaCero() throws SQLException {
+<span class="fc" id="L181">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L182">		this.curso.setECTS(6);</span>
+<span class="fc" id="L183">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L184">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L185">		this.curso.setTasaMatricula(0);</span>
+<span class="fc" id="L186">		this.resultadoEsperado = 5;</span>
+		
+<span class="fc" id="L188">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L190">	}</span>
+	
+	/**
+	 * Caso de Prueba CP11
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoEdicionNegativa() throws SQLException {
+<span class="fc" id="L198">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L199">		this.curso.setECTS(6);</span>
+<span class="fc" id="L200">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L201">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L202">		this.curso.setTasaMatricula(250);</span>
+<span class="fc" id="L203">		this.curso.setEdicion(-4);</span>
+<span class="fc" id="L204">		this.resultadoEsperado = 6;</span>
+		
+<span class="fc" id="L206">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L208">	}</span>
+	
+	/**
+	 * Caso de Prueba CP12
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoEdicionCero() throws SQLException {
+<span class="fc" id="L216">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L217">		this.curso.setECTS(6);</span>
+<span class="fc" id="L218">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L219">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L220">		this.curso.setTasaMatricula(250);</span>
+<span class="fc" id="L221">		this.curso.setEdicion(0);</span>
+<span class="fc" id="L222">		this.resultadoEsperado = 6;</span>
+		
+<span class="fc" id="L224">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L226">	}</span>
+	
+	/**
+	 * Caso de Prueba CP13
+	 * @throws SQLException 
+	 */
+	@Test
+	public void realizarPropuestaCursoCorrecta() throws SQLException {
+<span class="fc" id="L234">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L235">		this.curso.setECTS(6);</span>
+<span class="fc" id="L236">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L237">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L238">		this.curso.setTasaMatricula(250);</span>
+<span class="fc" id="L239">		this.curso.setEdicion(3);</span>
+<span class="fc" id="L240">		this.resultadoEsperado = 0;</span>
+		
+<span class="fc" id="L242">		int resultado = gestor.realizarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+		
+<span class="fc" id="L245">	}</span>
+	
+	/**
+	 * Caso de Prueba CP14
+	 * @throws SQLException 
+	 */
+	@Test
+	public void editarPropuestaCursoCorrecta() throws SQLException {
+<span class="fc" id="L253">		this.curso.setId(this.curso.getCursoPropioDao().obtenerUltimoCurso());</span>
+<span class="fc" id="L254">		this.curso.setNombre(&quot;Curso de Prueba&quot;);</span>
+<span class="fc" id="L255">		this.curso.setECTS(6);</span>
+<span class="fc" id="L256">		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());</span>
+<span class="fc" id="L257">		this.curso.setFechaFin(new GregorianCalendar(2022, Calendar.DECEMBER, 24).getTime());</span>
+<span class="fc" id="L258">		this.curso.setTasaMatricula(250);</span>
+<span class="fc" id="L259">		this.curso.setEdicion(3);</span>
+<span class="fc" id="L260">		this.resultadoEsperado = 0;</span>
+		
+<span class="fc" id="L262">		int resultado = gestor.editarPropuestaCurso(curso);</span>
+<span class="pc bpc" id="L263" title="1 of 2 branches missed.">		Assert.assertTrue(resultado == this.resultadoEsperado);</span>
+<span class="fc" id="L264">		this.curso.getCursoPropioDao().eliminarUltimoCurso();</span>
+<span class="fc" id="L265">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

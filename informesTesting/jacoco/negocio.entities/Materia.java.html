@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Materia.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">negocio.entities</a> &gt; <span class="el_source">Materia.java</span></div><h1>Materia.java</h1><pre class="source lang-java linenums">package negocio.entities;
+
+import java.sql.Date;
+import java.util.Objects;
+
+public class Materia {
+
+	Profesor responsable;
+	private int idMateria;
+	private String nombre;
+	private double horas;
+	private Date fechaInicio;
+	private Date fechaFin;
+
+	public Materia(Profesor responsable, int idMateria, String nombre, double horas, Date fechaInicio, Date fechaFin) {
+<span class="nc" id="L16">		super();</span>
+<span class="nc" id="L17">		this.responsable = responsable;</span>
+<span class="nc" id="L18">		this.idMateria = idMateria;</span>
+<span class="nc" id="L19">		this.nombre = nombre;</span>
+<span class="nc" id="L20">		this.horas = horas;</span>
+<span class="nc" id="L21">		this.fechaInicio = fechaInicio;</span>
+<span class="nc" id="L22">		this.fechaFin = fechaFin;</span>
+<span class="nc" id="L23">	}</span>
+
+<span class="nc" id="L25">	public Materia() {</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L27">	}</span>
+
+	public Profesor getResponsable() {
+<span class="nc" id="L30">		return responsable;</span>
+	}
+
+	public void setResponsable(Profesor responsable) {
+<span class="nc" id="L34">		this.responsable = responsable;</span>
+<span class="nc" id="L35">	}</span>
+
+	public int getIdMateria() {
+<span class="nc" id="L38">		return idMateria;</span>
+	}
+
+	public void setIdMateria(int idMateria) {
+<span class="nc" id="L42">		this.idMateria = idMateria;</span>
+<span class="nc" id="L43">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L46">		return nombre;</span>
+	}
+
+	public void setNombre(String nombre) {
+<span class="nc" id="L50">		this.nombre = nombre;</span>
+<span class="nc" id="L51">	}</span>
+
+	public double getHoras() {
+<span class="nc" id="L54">		return horas;</span>
+	}
+
+	public void setHoras(double horas) {
+<span class="nc" id="L58">		this.horas = horas;</span>
+<span class="nc" id="L59">	}</span>
+
+	public Date getFechaInicio() {
+<span class="nc" id="L62">		return fechaInicio;</span>
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+<span class="nc" id="L66">		this.fechaInicio = fechaInicio;</span>
+<span class="nc" id="L67">	}</span>
+
+	public Date getFechaFin() {
+<span class="nc" id="L70">		return fechaFin;</span>
+	}
+
+	public void setFechaFin(Date fechaFin) {
+<span class="nc" id="L74">		this.fechaFin = fechaFin;</span>
+<span class="nc" id="L75">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L79">		return Objects.hash(fechaFin, fechaInicio, horas, idMateria, nombre, responsable);</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L85">			return true;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L87">			return false;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L89">			return false;</span>
+<span class="nc" id="L90">		Materia other = (Materia) obj;</span>
+<span class="nc bnc" id="L91" title="All 4 branches missed.">		return Objects.equals(fechaFin, other.fechaFin) &amp;&amp; Objects.equals(fechaInicio, other.fechaInicio)</span>
+<span class="nc bnc" id="L92" title="All 4 branches missed.">				&amp;&amp; Double.doubleToLongBits(horas) == Double.doubleToLongBits(other.horas)</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">				&amp;&amp; idMateria == other.idMateria &amp;&amp; Objects.equals(nombre, other.nombre)</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">				&amp;&amp; Objects.equals(responsable, other.responsable);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

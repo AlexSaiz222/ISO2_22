@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorConsultas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">negocio.controllers</a> &gt; <span class="el_source">GestorConsultas.java</span></div><h1>GestorConsultas.java</h1><pre class="source lang-java linenums">package negocio.controllers;
+
+import org.apache.log4j.Logger;
+
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.TipoCurso;
+
+import persistencia.CursoPropioDAO;
+import persistencia.GestorBD;
+
+<span class="fc" id="L17">public class GestorConsultas {</span>
+
+<span class="fc" id="L19">	private static Logger logJava = Logger.getLogger(GestorConsultas.class);</span>
+	
+	/**
+	 * 
+	 * @param tipo
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @throws SQLException
+	 */
+	public List&lt;Double&gt; consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) throws SQLException {
+<span class="nc" id="L29">		List&lt;Double&gt; cursos = new ArrayList&lt;Double&gt;();</span>
+<span class="nc" id="L30">		GestorBD gestor = new GestorBD();</span>
+
+<span class="nc" id="L32">		List&lt;Object&gt; cursosListados = gestor.select(&quot;select * from cursospropios where tipo='&quot; + tipo + &quot;'&quot;</span>
+				+ &quot;and fechainicio &gt;=&quot; + fechaInicio + &quot;and fechafin &lt;=&quot; + fechaFin);
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		for (int i = 0; i &lt; cursosListados.size(); i++) {</span>
+<span class="nc" id="L36">			CursoPropioDAO cursoPropioDAO = new CursoPropioDAO();</span>
+<span class="nc" id="L37">			CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L38">			List&lt;Object&gt; t = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L39">			cursoPropio.setNombre(t.get(1).toString());</span>
+			try {
+<span class="nc" id="L41">				cursoPropioDAO.seleccionarCurso((int) t.get(0));</span>
+<span class="nc" id="L42">			} catch (Exception e) {</span>
+<span class="nc" id="L43">				logJava.fatal(&quot;LOG FATAL: &quot;+e.toString());</span>
+<span class="nc" id="L44">			}</span>
+
+<span class="nc" id="L46">			cursos.add(1250.99);</span>
+		}
+
+<span class="nc" id="L49">		return cursos;</span>
+	}
+
+	/**
+	 * 
+	 * @param estadoCurso
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @throws SQLException
+	 */
+	public List&lt;CursoPropio&gt; consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) throws SQLException {
+		// TODO - implement GestorConsultas.consultarEstadoCursos
+<span class="fc" id="L61">		List&lt;CursoPropio&gt; cursos = new ArrayList&lt;CursoPropio&gt;();</span>
+<span class="fc" id="L62">		GestorBD gestor = new GestorBD();</span>
+		
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		if(ComprobarEstadoCursoConFecha(estadoCurso, fechaInicio, fechaFin)==true) {</span>
+<span class="nc" id="L65">			List&lt;Object&gt; cursosListados = gestor.select(&quot;select * from cursospropios where estado='&quot;+estadoCurso+&quot;'&quot;</span>
+					+ &quot;and fechainicio &gt;=&quot;+fechaInicio+&quot;and fechafin &lt;=&quot;+fechaFin);
+
+<span class="nc bnc" id="L68" title="All 2 branches missed.">			for (int i = 0; i &lt; cursosListados.size(); i++) {</span>
+<span class="nc" id="L69">				CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L70">				List&lt;Object&gt; t = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L71">				cursoPropio.setNombre(t.get(1).toString());</span>
+<span class="nc" id="L72">				cursos.add(cursoPropio);</span>
+			}
+			
+<span class="nc" id="L75">			return cursos;</span>
+		}else {
+<span class="fc" id="L77">			return null;</span>
+		}
+		
+	}
+
+	/**
+	 * 
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @throws SQLException
+	 */
+	public List&lt;CursoPropio&gt; listarEdicionesCursos(Date fechaInicio, Date fechaFin) throws SQLException {
+		// TODO - implement GestorConsultas.listarEdicionesCursos
+<span class="fc" id="L90">		 List&lt;CursoPropio&gt; cursos = new ArrayList&lt;CursoPropio&gt;();</span>
+<span class="fc" id="L91">	        GestorBD gestor = new GestorBD();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">	        if (ComprobarFechas(fechaInicio, fechaFin) == true) {</span>
+<span class="nc" id="L93">	        	List&lt;Object&gt; cursosListados = gestor.select(&quot;select * from cursospropios where &quot;</span>
+		        		+ &quot;fechainicio &gt;=&quot;+fechaInicio+&quot;and fechafin &lt;=&quot;+fechaFin);
+
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		        for(int i=0; i&lt;cursosListados.size(); i++) {</span>
+<span class="nc" id="L97">		            CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L98">		            List&lt;Object&gt; t = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L99">		            cursoPropio.setNombre(t.get(1).toString());</span>
+<span class="nc" id="L100">		            cursos.add(cursoPropio);</span>
+		        }
+
+<span class="nc" id="L103">		        return cursos;</span>
+	        }else {
+<span class="fc" id="L105">	        	return null;</span>
+	        }
+	}
+	
+	public List&lt;CursoPropio&gt; listarCursosPropiosPorEstado(EstadoCurso estado) throws SQLException {
+<span class="fc" id="L110">        List&lt;CursoPropio&gt; cursos = new ArrayList&lt;CursoPropio&gt;();</span>
+<span class="fc" id="L111">        GestorBD gestor = new GestorBD();</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if(ComprobarEstado(estado)==true) {</span>
+<span class="fc" id="L113">        	 List&lt;Object&gt; cursosListados = gestor.select(&quot;select * from cursospropios where estado='&quot;+estado+&quot;'&quot;);</span>
+
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">             for(int i=0; i&lt;cursosListados.size(); i++) {</span>
+<span class="nc" id="L116">                 CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L117">                 List&lt;Object&gt; t = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L118">                 cursoPropio.setNombre(t.get(1).toString());</span>
+<span class="nc" id="L119">                 cursos.add(cursoPropio);</span>
+             }
+             
+<span class="fc" id="L122">             return cursos;</span>
+        }else {
+<span class="fc" id="L124">        	return null;</span>
+        }
+    }
+	
+	public boolean ComprobarFechas(Date FechaInicio, Date FechaFin) {
+<span class="fc" id="L129">		boolean bool = true;</span>
+		
+<span class="fc bfc" id="L131" title="All 4 branches covered.">		if (FechaFin == null || FechaInicio == null) {</span>
+<span class="fc" id="L132">			bool = false;</span>
+		}else {
+<span class="fc bfc" id="L134" title="All 4 branches covered.">			if (FechaFin.compareTo(FechaInicio)&lt;0 || FechaFin.compareTo(FechaInicio)==0){</span>
+<span class="fc" id="L135">				bool = false;</span>
+			}
+		}
+		
+<span class="fc" id="L139">		return bool;</span>
+	}
+	
+	public boolean ComprobarEstadoCursoConFecha(EstadoCurso estado,Date FechaInicio, Date FechaFin) {
+<span class="fc" id="L143">		boolean bool = true;</span>
+		
+<span class="fc bfc" id="L145" title="All 2 branches covered.">		if(estado==null) {</span>
+<span class="fc" id="L146">			bool=false;</span>
+		}else {
+<span class="fc bfc" id="L148" title="All 4 branches covered.">			if (FechaFin == null || FechaInicio == null) {</span>
+<span class="fc" id="L149">				bool = false;</span>
+			}else {
+<span class="fc bfc" id="L151" title="All 4 branches covered.">				if (FechaFin.compareTo(FechaInicio)&lt;0 || FechaFin.compareTo(FechaInicio)==0){</span>
+<span class="fc" id="L152">					bool = false;</span>
+				}
+			}
+		}
+
+<span class="fc" id="L157">		return bool;</span>
+	}
+	
+	public  boolean ComprobarEstado(EstadoCurso estado) {
+<span class="fc" id="L161">		boolean bool = true;</span>
+		
+<span class="fc bfc" id="L163" title="All 2 branches covered.">		if(estado==null ) {</span>
+<span class="fc" id="L164">			bool=false;</span>
+		}
+		
+<span class="fc" id="L167">		return bool;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

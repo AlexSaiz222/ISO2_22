@@ -1,0 +1,106 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+TrabajoISO2,negocio.entities,ModoPago,15,0,0,0,2,0,1,0,1,0
+TrabajoISO2,negocio.entities,Estudiante,201,0,22,0,48,0,31,0,20,0
+TrabajoISO2,negocio.entities,PersonalVicerrectorado,127,0,14,0,34,0,21,0,14,0
+TrabajoISO2,negocio.entities,Matricula,158,0,18,0,38,0,25,0,16,0
+TrabajoISO2,negocio.entities,Materia,162,0,18,0,40,0,25,0,16,0
+TrabajoISO2,negocio.entities,CategoriaProfesor,39,0,0,0,2,0,1,0,1,0
+TrabajoISO2,negocio.entities,EstadoCurso,0,39,0,0,0,2,0,1,0,1
+TrabajoISO2,negocio.entities,ProfesorExterno,68,0,6,0,20,0,9,0,6,0
+TrabajoISO2,negocio.entities,CursoPropio,370,111,36,0,55,42,33,21,15,21
+TrabajoISO2,negocio.entities,Centro,140,10,16,0,35,5,20,3,12,3
+TrabajoISO2,negocio.entities,Profesor,128,10,16,0,30,5,19,3,11,3
+TrabajoISO2,negocio.entities,ProfesorUCLM,89,3,10,0,22,2,12,1,7,1
+TrabajoISO2,negocio.entities,TipoCurso,0,45,0,0,0,2,0,1,0,1
+TrabajoISO2,test,GestorConsultasTest,1,305,1,1,0,74,1,15,0,15
+TrabajoISO2,test,GestorPropuestasCursosTest,14,628,14,14,0,120,14,16,0,16
+TrabajoISO2,presentacion,PantallaEstadosCurso.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEstadosCurso.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEstadosCurso.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEstadosCurso.new ActionListener() {...},10,0,0,0,2,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado.new Runnable() {...},24,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagoTarjeta.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaRegistrarCurso.new ActionListener() {...},11,0,0,0,3,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaRegistrarCurso.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaRegistrarCurso.new ActionListener() {...},231,0,9,0,53,0,10,0,2,0
+TrabajoISO2,presentacion,PantallaPagoTarjeta.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagoTarjeta.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaRegistrarCurso.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso.new ActionListener() {...},20,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaMatriculacion.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaMatriculacion.new ActionListener() {...},20,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso.new ActionListener() {...},20,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaMatriculacion.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaMatriculacion.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaRegistrarCurso,620,0,6,0,111,0,6,0,3,0
+TrabajoISO2,presentacion,PantallaMatriculacion,209,0,0,0,42,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion,317,0,2,0,63,0,4,0,3,0
+TrabajoISO2,presentacion,PantallaPagar.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagar.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagoTarjeta,298,0,0,0,58,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagar.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado.new ActionListener() {...},31,0,0,0,9,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagar.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado.new ActionListener() {...},28,0,0,0,8,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagar.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaListarEdiciones.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaListarEdiciones.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso,768,0,12,0,135,0,10,0,4,0
+TrabajoISO2,presentacion,PantallaListarEdiciones.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaPagar,227,0,0,0,45,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaListarIngresos.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaListarIngresos.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta,254,0,2,0,50,0,4,0,3,0
+TrabajoISO2,presentacion,PantallaListarIngresos.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta.new ActionListener() {...},35,0,0,0,8,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta.new ActionListener() {...},40,0,0,0,10,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEvaluarPropuesta.new Runnable() {...},24,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaJefeGabineteVicerrectorado,256,0,2,0,50,0,4,0,3,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion.new ActionListener() {...},11,0,0,0,3,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion.new ActionListener() {...},85,0,2,0,19,0,3,0,2,0
+TrabajoISO2,presentacion,PantallaProcesoMatriculacion.new ActionListener() {...},69,0,2,0,17,0,3,0,2,0
+TrabajoISO2,presentacion,PantallaEstadosCurso,217,0,0,0,44,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaLogin,530,0,6,0,87,0,13,0,10,0
+TrabajoISO2,presentacion,PantallaJefeVicerrectorado,193,0,0,0,40,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaLogin.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaLogin.new ActionListener() {...},84,0,8,0,20,0,6,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso,223,0,0,0,45,0,5,0,5,0
+TrabajoISO2,presentacion,PantallaListarIngresos,263,0,2,0,52,0,4,0,3,0
+TrabajoISO2,presentacion,PantallaTransferencia,267,0,0,0,52,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso.new ItemListener() {...},111,0,2,0,17,0,3,0,2,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaDireccionCurso.SwingAction,18,0,0,0,5,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso.new ActionListener() {...},111,0,0,0,21,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso.new ActionListener() {...},11,0,0,0,3,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaEditarPropuestaCurso.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaListarEdiciones,211,0,0,0,43,0,3,0,3,0
+TrabajoISO2,presentacion,PantallaTransferencia.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaTransferencia.new ActionListener() {...},18,0,0,0,4,0,2,0,2,0
+TrabajoISO2,presentacion,PantallaTransferencia.new ActionListener() {...},14,0,0,0,4,0,2,0,2,0
+TrabajoISO2,negocio.controllers,GestorConsultas,195,131,9,25,32,35,7,19,1,8
+TrabajoISO2,negocio.controllers,GestorPropuestasCursos,0,89,1,21,0,25,1,14,0,4
+TrabajoISO2,negocio.controllers,GestorMatriculacion,152,0,4,0,35,0,8,0,6,0
+TrabajoISO2,persistencia,GestorBD,624,178,31,15,131,71,22,10,1,8
+TrabajoISO2,persistencia,ProfesorUCLMDAO,322,0,4,0,68,0,9,0,7,0
+TrabajoISO2,persistencia,EstudianteDAO,192,0,4,0,41,0,7,0,5,0
+TrabajoISO2,persistencia,MatriculaDAO,220,0,2,0,46,0,6,0,5,0
+TrabajoISO2,persistencia,PersonalVicerrectoradoDAO,169,0,2,0,30,0,6,0,5,0
+TrabajoISO2,persistencia,AbstractEntityDAO,16,3,0,0,5,1,4,1,4,1
+TrabajoISO2,persistencia,ProfesorExternoDAO,158,0,2,0,36,0,6,0,5,0
+TrabajoISO2,persistencia,MateriaDAO,215,0,2,0,45,0,6,0,5,0
+TrabajoISO2,persistencia,CentroDAO,188,0,4,0,40,0,8,0,6,0
+TrabajoISO2,persistencia,CursoPropioDAO,300,259,9,3,58,51,10,7,4,7
+TrabajoISO2,persistencia,ProfesorDAO,227,0,4,0,42,0,8,0,6,0

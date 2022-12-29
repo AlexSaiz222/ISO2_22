@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CursoPropioDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">persistencia</a> &gt; <span class="el_source">CursoPropioDAO.java</span></div><h1>CursoPropioDAO.java</h1><pre class="source lang-java linenums">package persistencia;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
+import negocio.entities.TipoCurso;
+
+
+<span class="fc" id="L21">public class CursoPropioDAO extends AbstractEntityDAO {</span>
+
+<span class="fc" id="L23">	private static Logger logJava = Logger.getLogger(CursoPropioDAO.class);</span>
+<span class="fc" id="L24">	private final String patronFecha = &quot;yyyy-MM-dd&quot;;</span>
+	/**
+	 * 
+	 * @param curso
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException
+	 */
+
+	public int crearCurso(CursoPropio curso) throws SQLException {
+<span class="fc" id="L33">		int resultado = -1;</span>
+<span class="fc" id="L34">		GestorBD agente = new GestorBD();</span>
+
+		// Formateo de las fechas para la insercion en la BD
+<span class="fc" id="L37">		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);</span>
+<span class="fc" id="L38">		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));</span>
+<span class="fc" id="L39">		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));</span>
+
+<span class="fc" id="L41">		PreparedStatement pstmt = null;</span>
+		try {
+<span class="fc" id="L43">			pstmt = agente.mBD.prepareStatement(&quot;insert into cursospropios (idcentro, iddirector, idsecretario, &quot;</span>
+					+ &quot;estado, tipo, nombre, ects, fechaInicio, fechaFin, tasamatricula, edicion) values (?,?,?,?,?,?,?,?,?,?,?)&quot;);
+<span class="fc" id="L45">			pstmt.setInt(1, curso.getCentro().getIdCentro());</span>
+<span class="fc" id="L46">			pstmt.setString(2, curso.getDirector().getDni());</span>
+<span class="fc" id="L47">			pstmt.setString(3, curso.getSecretario().getDni());</span>
+<span class="fc" id="L48">			pstmt.setString(4, curso.getEstado().name());</span>
+<span class="fc" id="L49">			pstmt.setString(5, curso.getTipo().name());</span>
+<span class="fc" id="L50">			pstmt.setString(6, curso.getNombre());</span>
+<span class="fc" id="L51">			pstmt.setInt(7, curso.getECTS());</span>
+<span class="fc" id="L52">			pstmt.setDate(8, fechaInicio);</span>
+<span class="fc" id="L53">			pstmt.setDate(9, fechaFin);</span>
+<span class="fc" id="L54">			pstmt.setDouble(10, curso.getTasaMatricula());</span>
+<span class="fc" id="L55">			pstmt.setInt(11, curso.getEdicion());</span>
+
+<span class="fc" id="L57">			resultado = agente.insert(pstmt);</span>
+
+<span class="nc" id="L59">		} catch (SQLException e) {</span>
+<span class="nc" id="L60">			logJava.fatal(&quot;LOG FATAL: &quot;+e.toString());</span>
+		} finally {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">			if (pstmt != null)</span>
+<span class="fc" id="L63">				pstmt.close();</span>
+		}
+
+<span class="fc" id="L66">		return resultado;</span>
+
+	}
+
+	/**
+	 * 
+	 * @param curso
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	public CursoPropio seleccionarCurso(int curso) throws SQLException {
+<span class="nc" id="L77">		GestorBD agente = new GestorBD();</span>
+<span class="nc" id="L78">		CursoPropio curso1 = new CursoPropio();</span>
+<span class="nc" id="L79">		List&lt;Object&gt; cursoListado = agente.select(&quot;select * from cursospropios where idcursopropio=&quot; + curso);</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">		if (cursoListado.size() == 1) {</span>
+<span class="nc" id="L82">			List&lt;Object&gt; c = (List&lt;Object&gt;) cursoListado.get(0);</span>
+
+<span class="nc" id="L84">			CentroDAO centroDAO = new CentroDAO();</span>
+<span class="nc" id="L85">			Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));</span>
+
+<span class="nc" id="L87">			ProfesorUCLMDAO profeUCLMDAO = new ProfesorUCLMDAO();</span>
+<span class="nc" id="L88">			ProfesorUCLM profeUCLM = profeUCLMDAO.seleccionarProfesorUCLM(c.get(2).toString());</span>
+
+<span class="nc" id="L90">			ProfesorDAO secretarioDAO = new ProfesorDAO();</span>
+<span class="nc" id="L91">			Profesor secretario = secretarioDAO.seleccionarProfesor(c.get(3).toString());</span>
+
+<span class="nc" id="L93">			EstadoCurso estado = EstadoCurso.valueOf(c.get(4).toString());</span>
+
+<span class="nc" id="L95">			TipoCurso tipo = TipoCurso.valueOf(c.get(5).toString());</span>
+
+<span class="nc" id="L97">			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);</span>
+<span class="nc" id="L98">			Date fechainicio = null, fechafin = null;</span>
+			try {
+<span class="nc" id="L100">				fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());</span>
+<span class="nc" id="L101">				fechafin = (Date) simpleDateFormat.parse(c.get(9).toString());</span>
+<span class="nc" id="L102">			} catch (ParseException e) {</span>
+<span class="nc" id="L103">				logJava.fatal(&quot;LOG FATAL: &quot;+e.toString());</span>
+<span class="nc" id="L104">			}</span>
+
+<span class="nc" id="L106">			curso1.setId(Integer.parseInt(c.get(0).toString()));</span>
+<span class="nc" id="L107">			curso1.setCentro(centro);</span>
+<span class="nc" id="L108">			curso1.setDirector(profeUCLM);</span>
+<span class="nc" id="L109">			curso1.setSecretario(secretario);</span>
+<span class="nc" id="L110">			curso1.setEstado(estado);</span>
+<span class="nc" id="L111">			curso1.setTipo(tipo);</span>
+<span class="nc" id="L112">			curso1.setNombre(c.get(6).toString());</span>
+<span class="nc" id="L113">			curso1.setECTS(Integer.parseInt(c.get(7).toString()));</span>
+<span class="nc" id="L114">			curso1.setFechaInicio(fechainicio);</span>
+<span class="nc" id="L115">			curso1.setFechaFin(fechafin);</span>
+<span class="nc" id="L116">			curso1.setTasaMatricula(Double.parseDouble(c.get(10).toString()));</span>
+<span class="nc" id="L117">			curso1.setEdicion(Integer.parseInt(c.get(11).toString()));</span>
+			// setMatriculas y setMaterias faltan
+<span class="nc" id="L119">		} else {</span>
+<span class="nc" id="L120">			curso1.setId(-1);</span>
+		}
+
+<span class="nc" id="L123">		return curso1;</span>
+
+	}
+	
+	public int eliminarUltimoCurso() throws SQLException {
+<span class="fc" id="L128">		int resultado = -1;</span>
+		
+<span class="fc" id="L130">		int idUltimoCurso = obtenerUltimoCurso();</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">		if(idUltimoCurso != -1)</span>
+<span class="fc" id="L132">			resultado = eliminarCurso(idUltimoCurso);</span>
+		
+<span class="fc" id="L134">		return resultado;</span>
+		
+	}
+	
+	public int obtenerUltimoCurso() throws SQLException {
+<span class="fc" id="L139">		GestorBD agente = new GestorBD();</span>
+<span class="fc" id="L140">		List&lt;Object&gt; cursoListado = agente.select(&quot;select idcursopropio from cursospropios where idcursopropio=(select max(idcursopropio) from cursospropios)&quot;);</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">		if(cursoListado.size() == 1) {</span>
+<span class="fc" id="L142">			List&lt;Object&gt; c = (List&lt;Object&gt;) cursoListado.get(0);</span>
+<span class="fc" id="L143">			return Integer.parseInt(c.get(0).toString());</span>
+		} else {
+<span class="nc" id="L145">			return -1;</span>
+		}
+	}
+	
+	public int eliminarCurso(int idCurso) throws SQLException {
+<span class="fc" id="L150">		int resultado = -1;</span>
+<span class="fc" id="L151">		GestorBD agente = new GestorBD();</span>
+		
+<span class="fc" id="L153">		resultado = agente.delete(&quot;delete from cursospropios where idcursopropio=&quot;+idCurso);</span>
+		
+<span class="fc" id="L155">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param curso
+	 * @throws SQLException
+	 */
+	public int editarCurso(CursoPropio curso) throws SQLException {
+<span class="fc" id="L164">		int resultado = -1;</span>
+<span class="fc" id="L165">		GestorBD agente = new GestorBD();</span>
+		
+		// Formateo de las fechas para la insercion en la BD
+<span class="fc" id="L168">		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);</span>
+<span class="fc" id="L169">		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));</span>
+<span class="fc" id="L170">		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));</span>
+	
+<span class="fc" id="L172">		resultado = agente.update(&quot;update cursospropios &quot;</span>
+<span class="fc" id="L173">				+ &quot;set idcentro = &quot;+curso.getCentro().getIdCentro()+&quot;, iddirector='&quot;+curso.getDirector().getDni()</span>
+<span class="fc" id="L174">				+ &quot;', idsecretario='&quot;+curso.getSecretario().getDni()+&quot;', estado='&quot;+curso.getEstado().name()</span>
+<span class="fc" id="L175">				+ &quot;', tipo='&quot;+curso.getTipo().name()+&quot;', nombre='&quot;+curso.getNombre()+&quot;', ects=&quot;+curso.getECTS()</span>
+<span class="fc" id="L176">				+ &quot;, fechaInicio='&quot;+fechaInicio+&quot;', fechaFin='&quot;+fechaFin+&quot;', tasamatricula=&quot;+curso.getTasaMatricula()+&quot;, edicion=&quot;+curso.getEdicion()</span>
+<span class="fc" id="L177">				+ &quot; where idcursopropio=&quot;+curso.getId());</span>
+		
+<span class="fc" id="L179">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param estado
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @throws SQLException
+	 */
+	public List&lt;CursoPropio&gt; listarCursosPorEstado(EstadoCurso estado) throws SQLException {
+		// TODO Auto-generated method stub
+		// mirar si las variables de las columans de la tabla Cursospropios esta
+		// correctamente
+<span class="nc" id="L193">		List&lt;CursoPropio&gt; cursos = new ArrayList&lt;CursoPropio&gt;();</span>
+<span class="nc" id="L194">		GestorBD gestor = new GestorBD();</span>
+
+<span class="nc" id="L196">		List&lt;Object&gt; cursosListados = gestor.select(&quot;select * from cursospropios where estado='&quot; + estado + &quot;'&quot;);</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">		for (int i = 0; i &lt; cursosListados.size(); i++) {</span>
+<span class="nc" id="L198">			CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L199">			List&lt;Object&gt; curso = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L200">			cursoPropio.setId(Integer.parseInt(curso.get(0).toString()));</span>
+<span class="nc" id="L201">			cursoPropio.setNombre(curso.get(6).toString());</span>
+
+<span class="nc" id="L203">			cursos.add(cursoPropio);</span>
+		}
+
+<span class="nc" id="L206">		return cursos;</span>
+	}
+
+	/**
+	 * m
+	 * 
+	 * @param tipo
+	 * @param fechaInicio
+	 * @param fechaFin
+	 */
+	public List&lt;Double&gt; listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
+		// TODO - implement CursoPropioDAO.listarIngresos
+<span class="nc" id="L218">		throw new UnsupportedOperationException();</span>
+	}
+
+	/**
+	 * 
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @throws SQLException
+	 */
+	public List&lt;CursoPropio&gt; listarEdicionesCursos(Date fechaInicio, Date fechaFin) throws SQLException {
+		// TODO Auto-generated method stub
+<span class="nc" id="L229">		List&lt;CursoPropio&gt; cursos = new ArrayList&lt;CursoPropio&gt;();</span>
+<span class="nc" id="L230">		GestorBD gestor = new GestorBD();</span>
+
+<span class="nc" id="L232">		List&lt;Object&gt; cursosListados = gestor.select(</span>
+				&quot;select * from cursospropios where &quot; + &quot;fechainicio &gt;=&quot; + fechaInicio + &quot;and fechafin &lt;=&quot; + fechaFin);
+
+<span class="nc bnc" id="L235" title="All 2 branches missed.">		for (int i = 0; i &lt; cursosListados.size(); i++) {</span>
+<span class="nc" id="L236">			CursoPropio cursoPropio = new CursoPropio();</span>
+<span class="nc" id="L237">			List&lt;Object&gt; t = (List&lt;Object&gt;) cursosListados.get(i);</span>
+<span class="nc" id="L238">			cursoPropio.setNombre(t.get(1).toString());</span>
+
+<span class="nc" id="L240">			cursos.add(cursoPropio);</span>
+		}
+
+<span class="nc" id="L243">		return cursos;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

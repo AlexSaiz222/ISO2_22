@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfesorUCLMDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">persistencia</a> &gt; <span class="el_source">ProfesorUCLMDAO.java</span></div><h1>ProfesorUCLMDAO.java</h1><pre class="source lang-java linenums">package persistencia;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import negocio.entities.CategoriaProfesor;
+import negocio.entities.Centro;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
+
+<span class="nc" id="L15">public class ProfesorUCLMDAO extends AbstractEntityDAO {</span>
+	
+<span class="nc" id="L17">	private static Logger logJava = Logger.getLogger(ProfesorUCLMDAO.class);</span>
+
+	public List&lt;ProfesorUCLM&gt; listarProfesoresUCLM() throws SQLException {
+<span class="nc" id="L20">		List&lt;ProfesorUCLM&gt; profesoresUCLM = new ArrayList&lt;ProfesorUCLM&gt;();</span>
+<span class="nc" id="L21">		GestorBD gestor = new GestorBD();</span>
+
+<span class="nc" id="L23">		List&lt;Object&gt; profesoresUCLMListados = gestor.select(&quot;select * from profesoresUCLM&quot;);</span>
+<span class="nc" id="L24">		CentroDAO centroDAO = new CentroDAO();</span>
+<span class="nc" id="L25">		ProfesorDAO profesorDAO = new ProfesorDAO();</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">		for (int i = 0; i &lt; profesoresUCLMListados.size(); i++) {</span>
+<span class="nc" id="L28">			ProfesorUCLM profesorUCLM = new ProfesorUCLM();</span>
+<span class="nc" id="L29">			List&lt;Object&gt; c = (List&lt;Object&gt;) profesoresUCLMListados.get(i);</span>
+<span class="nc" id="L30">			profesorUCLM.setDni(c.get(0).toString());</span>
+<span class="nc" id="L31">			profesorUCLM.setCentroAdscripcion(centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString())));</span>
+<span class="nc" id="L32">			profesorUCLM.setCategoria(CategoriaProfesor.valueOf(c.get(2).toString()));</span>
+
+<span class="nc" id="L34">			Profesor profesor = profesorDAO.seleccionarProfesor(profesorUCLM.getDni());</span>
+<span class="nc" id="L35">			profesorUCLM.setNombre(profesor.getNombre());</span>
+<span class="nc" id="L36">			profesorUCLM.setApellidos(profesor.getApellidos());</span>
+<span class="nc" id="L37">			profesorUCLM.setPassword(profesor.getPassword());</span>
+<span class="nc" id="L38">			profesorUCLM.setDoctor(profesor.isDoctor());</span>
+
+<span class="nc" id="L40">			profesoresUCLM.add(profesorUCLM);</span>
+		}
+
+<span class="nc" id="L43">		return profesoresUCLM;</span>
+	}
+
+	public ProfesorUCLM listarProfesorUCLM(String dni) throws SQLException {
+<span class="nc" id="L47">		GestorBD gestor = new GestorBD();</span>
+<span class="nc" id="L48">		List&lt;Object&gt; profesorUCLMListado = gestor.select(&quot;select * from profesoresUCLM where dni='&quot; + dni + &quot;'&quot;);</span>
+<span class="nc" id="L49">		List&lt;Object&gt; profesorUCLM = (List&lt;Object&gt;) profesorUCLMListado.get(0);</span>
+<span class="nc" id="L50">		CentroDAO centroDAO = new CentroDAO();</span>
+<span class="nc" id="L51">		ProfesorDAO profesorDAO = new ProfesorDAO();</span>
+<span class="nc" id="L52">		Profesor profesorObtenido = profesorDAO.seleccionarProfesor(dni);</span>
+
+		// TODO Crear constructor vacío y añadir los atributos
+<span class="nc" id="L55">		ProfesorUCLM profesor = new ProfesorUCLM(profesorObtenido.getDni(), profesorObtenido.getNombre(),</span>
+<span class="nc" id="L56">				profesorObtenido.getApellidos(), profesorObtenido.getPassword(), profesorObtenido.isDoctor(),</span>
+<span class="nc" id="L57">				centroDAO.seleccionarCentro(Integer.parseInt(profesorUCLM.get(0).toString())),</span>
+<span class="nc" id="L58">				CategoriaProfesor.valueOf(profesorUCLM.get(1).toString()));</span>
+
+<span class="nc" id="L60">		return profesor;</span>
+	}
+
+	/**
+	 * 
+	 * @param profeUCLM
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException
+	 */
+
+	public int crearProfesorUCLM(ProfesorUCLM profeUCLM) throws SQLException {
+<span class="nc" id="L71">		int resultado = -1;</span>
+<span class="nc" id="L72">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L74">		PreparedStatement pstmt = null;</span>
+		try {
+<span class="nc" id="L76">			pstmt = agente.mBD.prepareStatement(</span>
+					&quot;insert into profesoresUCLM (dni, centroAdscripcion, categoria) &quot; + &quot;values (?,?,?)&quot;);
+<span class="nc" id="L78">			pstmt.setString(1, profeUCLM.getDni());</span>
+<span class="nc" id="L79">			pstmt.setInt(2, profeUCLM.getCentroAdscripcion().getIdCentro());</span>
+<span class="nc" id="L80">			pstmt.setString(3, profeUCLM.getCategoria().name());</span>
+
+<span class="nc" id="L82">			resultado = agente.insert(pstmt);</span>
+<span class="nc" id="L83">			pstmt.close();</span>
+
+<span class="nc" id="L85">		} catch (SQLException e) {</span>
+<span class="nc" id="L86">			System.out.println(&quot;ProfesorUCLMDAO: &quot; + e.getMessage());</span>
+		} finally {
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">			if (pstmt != null)</span>
+<span class="nc" id="L90">				pstmt.close();</span>
+		}
+
+<span class="nc" id="L93">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param profeUCLM
+	 * @throws SQLException
+	 */
+	public ProfesorUCLM seleccionarProfesorUCLM(String profeUCLM) throws SQLException {
+
+<span class="nc" id="L103">		GestorBD gestor = new GestorBD();</span>
+<span class="nc" id="L104">		List&lt;Object&gt; profeUCLMListado = gestor.select(&quot;select * from profesoresUCLM where dni = &quot; + profeUCLM);</span>
+<span class="nc" id="L105">		List&lt;Object&gt; c = (List&lt;Object&gt;) profeUCLMListado.get(0);</span>
+
+<span class="nc" id="L107">		ProfesorDAO profeDAO = new ProfesorDAO();</span>
+<span class="nc" id="L108">		Profesor profesor = profeDAO.seleccionarProfesor(c.get(0).toString());</span>
+
+<span class="nc" id="L110">		CentroDAO centroDAO = new CentroDAO();</span>
+<span class="nc" id="L111">		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));</span>
+
+<span class="nc" id="L113">		ProfesorUCLM profe1 = new ProfesorUCLM();</span>
+
+<span class="nc" id="L115">		profe1.setCentroAdscripcion(centro);</span>
+<span class="nc" id="L116">		profe1.setDni(c.get(0).toString());</span>
+<span class="nc" id="L117">		profe1.setApellidos(profesor.getApellidos());</span>
+<span class="nc" id="L118">		profe1.setPassword(profesor.getPassword());</span>
+<span class="nc" id="L119">		profe1.setDoctor(profesor.isDoctor());</span>
+<span class="nc" id="L120">		profe1.setCategoria(profe1.getCategoria());</span>
+<span class="nc" id="L121">		profe1.setNombre(profesor.getNombre());</span>
+<span class="nc" id="L122">		gestor.desconectarBD();</span>
+
+<span class="nc" id="L124">		return profe1;</span>
+	}
+
+	/**
+	 * 
+	 * @param profesorUCLM
+	 * @throws SQLException
+	 */
+	public int editarProfesorUCLM(ProfesorUCLM profesorUCLM) throws SQLException {
+<span class="nc" id="L133">		int resultado = -1;</span>
+<span class="nc" id="L134">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L136">		resultado = agente.update(&quot;update profesoresUCLM &quot; + &quot;set( dni = '&quot; + profesorUCLM.getDni()</span>
+<span class="nc" id="L137">				+ &quot;',centroAdscripcion='&quot; + profesorUCLM.getCentroAdscripcion().getIdCentro() + &quot;',categoria =&quot;</span>
+<span class="nc" id="L138">				+ profesorUCLM.getCategoria() + &quot;)&quot;);</span>
+
+<span class="nc" id="L140">		return resultado;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

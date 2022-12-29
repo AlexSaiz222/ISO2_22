@@ -131,7 +131,7 @@ public class GestorConsultas {
 		if (FechaFin == null || FechaInicio == null) {
 			bool = false;
 		}else {
-			if (FechaFin.compareTo(FechaInicio)==-1 || FechaFin.compareTo(FechaInicio)==0){
+			if (FechaFin.compareTo(FechaInicio)<0 || FechaFin.compareTo(FechaInicio)==0){
 				bool = false;
 			}
 		}
@@ -148,7 +148,7 @@ public class GestorConsultas {
 			if (FechaFin == null || FechaInicio == null) {
 				bool = false;
 			}else {
-				if (FechaFin.compareTo(FechaInicio)==-1 || FechaFin.compareTo(FechaInicio)==0){
+				if (FechaFin.compareTo(FechaInicio)<0 || FechaFin.compareTo(FechaInicio)==0){
 					bool = false;
 				}
 			}

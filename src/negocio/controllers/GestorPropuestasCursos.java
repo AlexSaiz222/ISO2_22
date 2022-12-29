@@ -79,7 +79,7 @@ public class GestorPropuestasCursos {
 					resultado = 3;
 				else
 					if(curso.getFechaFin() == null || 
-					curso.getFechaFin().compareTo(curso.getFechaInicio())==-1 || 
+					curso.getFechaFin().compareTo(curso.getFechaInicio())<0 || 
 					curso.getFechaFin().compareTo(curso.getFechaInicio())==0)
 						resultado = 4;
 					else

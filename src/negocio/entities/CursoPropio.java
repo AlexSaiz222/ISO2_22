@@ -25,7 +25,24 @@ public class CursoPropio {
 	private int edicion;
 
 	public CursoPropio() {
-
+		this.cursoPropioDao = new CursoPropioDAO();
+	}
+	
+	public CursoPropio(Centro centro, ProfesorUCLM director, Profesor secretario, EstadoCurso estado, TipoCurso tipo, int id,
+			String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion) {
+		this.centro = centro;
+		this.director = director;
+		this.secretario = secretario;
+		this.estado = estado;
+		this.tipo = tipo;
+		this.id = id;
+		this.nombre = nombre;
+		this.ECTS = eCTS;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.tasaMatricula = tasaMatricula;
+		this.edicion = edicion;
+		this.cursoPropioDao = new CursoPropioDAO();
 	}
 
 	public CursoPropio(Collection<Matricula> matriculas, Centro centro, ProfesorUCLM director, Profesor secretario,
@@ -194,4 +211,12 @@ public class CursoPropio {
 				&& tipo == other.tipo;
 	}
 
+	@Override
+	public String toString() {
+		return "CursoPropio [matriculas=" + matriculas + ", centro=" + centro + ", director=" + director
+				+ ", secretario=" + secretario + ", materias=" + materias + ", estado=" + estado + ", tipo=" + tipo
+				+ ", cursoPropioDao=" + cursoPropioDao + ", id=" + id + ", nombre=" + nombre + ", ECTS=" + ECTS
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", tasaMatricula=" + tasaMatricula
+				+ ", edicion=" + edicion + "]";
+	}
 }

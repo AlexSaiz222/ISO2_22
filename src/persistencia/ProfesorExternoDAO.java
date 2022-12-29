@@ -68,8 +68,7 @@ public class ProfesorExternoDAO extends AbstractEntityDAO {
 		profe1.setApellidos(profesor.getApellidos());
 		profe1.setPassword(profesor.getPassword());
 		profe1.setDoctor(profesor.isDoctor());
-		profe1.setTitulacion(profeExterno);
-		;
+		profe1.setTitulacion(c.get(1).toString());
 		profe1.setNombre(profesor.getNombre());
 
 		return profe1;

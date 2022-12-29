@@ -25,7 +25,6 @@ public class GestorMatriculacion {
 	 */
 	public void realizarMatriculacion(CursoPropio curso, Estudiante estudiante) throws SQLException {
 
-		
 		GestorBD gestor = new GestorBD();
 		List<Object> matriculaListado = gestor.select("select * from matriculas where " + "idEstudiante = '"
 				+ estudiante.getDni() + "' and idCursoPropio = " + curso.getId());

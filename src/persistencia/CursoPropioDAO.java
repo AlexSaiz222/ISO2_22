@@ -124,6 +124,37 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		return curso1;
 
 	}
+	
+	public int eliminarUltimoCurso() throws SQLException {
+		int resultado = -1;
+		
+		int idUltimoCurso = obtenerUltimoCurso();
+		if(idUltimoCurso != -1)
+			resultado = eliminarCurso(idUltimoCurso);
+		
+		return resultado;
+		
+	}
+	
+	public int obtenerUltimoCurso() throws SQLException {
+		GestorBD agente = new GestorBD();
+		List<Object> cursoListado = agente.select("select idcursopropio from cursospropios where idcursopropio=(select max(idcursopropio) from cursospropios)");
+		if(cursoListado.size() == 1) {
+			List<Object> c = (List<Object>) cursoListado.get(0);
+			return Integer.parseInt(c.get(0).toString());
+		} else {
+			return -1;
+		}
+	}
+	
+	public int eliminarCurso(int idCurso) throws SQLException {
+		int resultado = -1;
+		GestorBD agente = new GestorBD();
+		
+		resultado = agente.delete("delete from cursospropios where idcursopropio="+idCurso);
+		
+		return resultado;
+	}
 
 	/**
 	 * 
@@ -133,13 +164,20 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 	public int editarCurso(CursoPropio curso) throws SQLException {
 		int resultado = -1;
 		GestorBD agente = new GestorBD();
-
-		resultado = agente.update("update cursospropios " + "set( idcentro = " + curso.getCentro() + ",iddirector="
-				+ curso.getDirector().getDni() + ",idsecretario =" + curso.getSecretario().getDni() + ", estado = "
-				+ curso.getEstado() + ", tipo =" + curso.getTipo() + ", nombre =" + curso.getNombre() + ", ects = "
-				+ curso.getECTS() + ", tasamatricula = " + curso.getTasaMatricula() + ", edicion =" + curso.getEdicion()
-				+ ")");
-
+		
+		// Formateo de las fechas para la insercion en la BD
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));
+		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));
+	
+		resultado = agente.update("update cursospropios "
+				+ "set idcentro = "+curso.getCentro().getIdCentro()+", iddirector='"+curso.getDirector().getDni()
+				+ "', idsecretario='"+curso.getSecretario().getDni()+"', estado='"+curso.getEstado().name()
+				+ "', tipo='"+curso.getTipo().name()+"', nombre='"+curso.getNombre()+"', ects="+curso.getECTS()
+				+ ", fechaInicio='"+fechaInicio+"', fechaFin='"+fechaFin+"', tasamatricula="+curso.getTasaMatricula()+", edicion="+curso.getEdicion()
+				+ " where idcursopropio="+curso.getId());
+		
 		return resultado;
 	}
 

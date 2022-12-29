@@ -144,7 +144,7 @@ public class PantallaEvaluarPropuesta extends JFrame implements Serializable {
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					g.altaCursoAprobado(curso);
+					//g.altaCursoAprobado(curso);
 				} catch (Exception e) {
 					System.out.println("PantallaEvaluarPropuesta: " + e.getMessage());
 				}

@@ -143,7 +143,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serial
 				int idCurso = Integer.parseInt(NameField.getSelectedItem().toString());
 				try {
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
-					g.altaCursoAprobado(curso);
+					//g.altaCursoAprobado(curso);
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}

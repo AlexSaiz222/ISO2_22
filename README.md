@@ -1,35 +1,5 @@
-# Memoria del proyecto PIQUE BLINDERS
-
-## Integrantes de la empresa
-
- * **Estrella Bermejo**
- * **Alejandro Ramiro Jiménez Batuecas**
- * **Pedro Mena Castellanos**
- * **Alejandro Saiz García**
-
-## Cambios efectuados hasta el día 7/11/2022
 
   * Revisión y actualización del CM a la versión 1.0.1
-
-  * Creación de sprints en la plataforma ClickUp.
-
-  * Creación del plan de gestión de configuración de software.
-
-  * Creacion de una base de datos mediante derby. Métodos implementados en la clase GestorBD:
-
-    - ConectarBD -> Metodo que crea la base de datos en el caso que no este creada todavia y obtiene la conexión a esta.
-  
-    - DesconectarBD -> Metodo que cierra la Base de Datos.
-  
-    - Select -> Metodo que selecciona uno/varios elementos de la base de datos.
-  
-    - Insert -> Nos ayuda a introducir ciertos valores en la BBDD.
-  
-    - Update -> Por implementar
-  
-    - Delete -> Por implementar
-  
-    - CrearBaseDatosSinoExiste -> Metodo que crea la Base de datos e introduce ciertos valores a varias columnas de la base de datos.
   
   * Implementacion del método crearNuevoCurso de la clase CursoPropioDAO. En este método, se insertan los valores de los campos en la base de datos.
  
@@ -53,24 +23,9 @@
     
     - Las pantallas tendrán dos botones en la esquina derecha los cuales serán de log out (el cual nos dirigirá a la pantalla de inicio) y otro de Go Back que nos dirigira a la pestaña anterior.
     
-## Creación y gestión de ramas (branches) en GitHub
-
- 1.- La rama desarrollo ```develop``` es creada de la rama principal ```main o master```.
- 
- 2.- La rama lanzamiento ```release``` es creada a partir de la rama desarrollo ```develop```.
- 
- 3.- Desde desarrollo ```develop```, también creamos las ramas ```feature```, que hacen referencia a las distintas características.
- 
- 4.- Cuando una característica ```feature``` se ha completado, unimos la rama ```feature``` a la rama desarrollo ```develop```.
- 
- 5.- Cuando la rama de lanzamiento ```release``` está hecha, se une a la de desarrollo ```develop``` y a la principal ```main o master```.
- 
- 6.- Si surge un error o problema, lo modificamos en la rama en la que se está trabajando.
-
 
 ## Aclaraciones adicionales
 
  * Se ha utilizado la **rama GestionCursos** para implementar el caso de uso Realizar Propuesta de Curso
- * Se ha realizado la construcción del software utilizando Maven, que proporciona un archivo .jar ubicado en la carpeta target.
  * Cambio en la clase CursoPropio el atributo secretario de tipo ProfesorUCLM a Profesor, ya que se especifica que el profesor secretario puede ser de UCLM o externo.
  * Para el acceso a la BD, no se utiliza la Clase AbstractEntityDAO

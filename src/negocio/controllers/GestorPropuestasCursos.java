@@ -3,8 +3,6 @@ package negocio.controllers;
 import java.sql.SQLException;
 
 import negocio.entities.CursoPropio;
-import negocio.entities.EstadoCurso;
-import persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
 	

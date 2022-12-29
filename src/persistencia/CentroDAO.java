@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import negocio.controllers.GestorMatriculacion;
 import negocio.entities.Centro;
 
 public class CentroDAO {

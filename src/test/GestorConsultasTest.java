@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;
@@ -24,7 +25,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	public void fechaInicioMayorQueFechaFin() {
+	public void fechaInicioMayorQueFechaFin() throws SQLException {
 		Date fechaInicio = new Date(122,11,28); 
 		Date fechaFinDate = new Date(112,11,27); 
 
@@ -33,7 +34,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void fechaInicioIgualQueFechaFin() {
+	public void fechaInicioIgualQueFechaFin() throws SQLException {
 		Date fechaInicio = new Date(122,11,29); 
 		Date fechaFinDate = new Date(122,11,29); 
 
@@ -42,7 +43,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void FechaInicioBienFechaFinNull() {
+	public void FechaInicioBienFechaFinNull() throws SQLException {
 		Date fechaInicio = new Date(122,7,24); 
 		Date fechaFinDate = null;
 
@@ -51,7 +52,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void FechaInicioNullFechaFinBien() {
+	public void FechaInicioNullFechaFinBien() throws SQLException {
 		Date fechaInicio = null; 
 		Date fechaFinDate = new Date(123,8,29);
 
@@ -69,7 +70,7 @@ public class GestorConsultasTest {
 		Assert.assertTrue(resultado);
 	}
 	@Test
-	public void EstadoCursoCORRECTOFechaInicioFechaFinNull() {
+	public void EstadoCursoCORRECTOFechaInicioFechaFinNull() throws SQLException {
 		estadoCurso = EstadoCurso.PROPUESTO; 
 		Date fechaInicio = new Date(119,4,24);
 		Date fechaFinDate = null;
@@ -79,7 +80,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void EstadoCursoCORRECTOFechaInicioNullFechaFin() {
+	public void EstadoCursoCORRECTOFechaInicioNullFechaFin() throws SQLException {
 		estadoCurso = EstadoCurso.TERMINADO; 
 		Date fechaInicio = null;
 		Date fechaFinDate = new Date(120,4,5);
@@ -89,7 +90,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void EstadoCursoCORRECTOFechaInicioMayorFechaFin() {
+	public void EstadoCursoCORRECTOFechaInicioMayorFechaFin() throws SQLException {
 		estadoCurso = EstadoCurso.EN_MATRICULACION; 
 		Date fechaInicio = new Date(122,11,28);
 		Date fechaFinDate = new Date(122,11,27);
@@ -99,7 +100,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void EstadoCursoCORRECTOFechaInicioIgualFechaFin() {
+	public void EstadoCursoCORRECTOFechaInicioIgualFechaFin() throws SQLException {
 		estadoCurso = EstadoCurso.EN_IMPARTICION; 
 		Date fechaInicio = new Date(121,1,2);
 		Date fechaFinDate = new Date(121,1,2);
@@ -109,7 +110,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void EstadoCursoNULLFechaInicioBienFechaFinBien() {
+	public void EstadoCursoNULLFechaInicioBienFechaFinBien() throws SQLException {
 		estadoCurso = null; 
 		Date fechaInicio = new Date(120,0,21);
 		Date fechaFinDate = new Date(120,1,22);
@@ -129,7 +130,7 @@ public class GestorConsultasTest {
 		Assert.assertTrue(resultado);
 	}
 	@Test
-	public void EstadoCursoNull() {
+	public void EstadoCursoNull() throws SQLException {
 		estadoCurso = null;
 
 		List<CursoPropio> resultado = gestorConsultas.listarCursosPropiosPorEstado(estadoCurso);
@@ -137,7 +138,7 @@ public class GestorConsultasTest {
 		Assert.assertNull(resultado);
 	}
 	@Test
-	public void EstadoCursoPropuesto() {
+	public void EstadoCursoPropuesto() throws SQLException {
 		estadoCurso = EstadoCurso.PROPUESTO;
 
 		List<CursoPropio> resultado = gestorConsultas.listarCursosPropiosPorEstado(estadoCurso);

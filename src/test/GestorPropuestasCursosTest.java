@@ -1,5 +1,6 @@
 package test;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -42,9 +43,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP1
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoConNombreVacio() {
+	public void realizarPropuestaCursoConNombreVacio() throws SQLException {
 		this.resultadoEsperado = 1;
 		
 		int resultado = gestor.realizarPropuestaCurso(curso);
@@ -53,9 +55,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP2
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoConLongitudNombreMayor() {
+	public void realizarPropuestaCursoConLongitudNombreMayor() throws SQLException {
 		this.curso.setNombre("Curso de Prueba perteneciente al centro de Talavera de la Reina");
 		this.resultadoEsperado = 1;
 		
@@ -65,9 +68,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP3
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoECTSNegativo() {
+	public void realizarPropuestaCursoECTSNegativo() throws SQLException {
 		this.curso.setNombre("Curso de Prueba 2 perteneciente centro de Talavera");
 		this.curso.setECTS(-5);
 		this.resultadoEsperado = 2;
@@ -78,9 +82,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP4
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoECTSCero() {
+	public void realizarPropuestaCursoECTSCero() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(0);
 		this.resultadoEsperado = 2;
@@ -91,9 +96,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP5
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoFechaInicioNula() {
+	public void realizarPropuestaCursoFechaInicioNula() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.resultadoEsperado = 3;
@@ -104,9 +110,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP6
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoFechaFinNula() {
+	public void realizarPropuestaCursoFechaFinNula() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(1000);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -118,9 +125,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP7
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoFechaInicioMayorQueFechaFin() {
+	public void realizarPropuestaCursoFechaInicioMayorQueFechaFin() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -133,9 +141,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP8
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoFechaInicioIgualQueFechaFin() {
+	public void realizarPropuestaCursoFechaInicioIgualQueFechaFin() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -148,9 +157,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP9
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoTasaMatriculaNegativa() {
+	public void realizarPropuestaCursoTasaMatriculaNegativa() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -164,9 +174,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP10
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoTasaMatriculaCero() {
+	public void realizarPropuestaCursoTasaMatriculaCero() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -180,9 +191,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP11
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoEdicionNegativa() {
+	public void realizarPropuestaCursoEdicionNegativa() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -197,9 +209,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP12
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoEdicionCero() {
+	public void realizarPropuestaCursoEdicionCero() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -214,9 +227,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP13
+	 * @throws SQLException 
 	 */
 	@Test
-	public void realizarPropuestaCursoCorrecta() {
+	public void realizarPropuestaCursoCorrecta() throws SQLException {
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);
 		this.curso.setFechaInicio(new GregorianCalendar(2022, Calendar.DECEMBER, 23).getTime());
@@ -232,9 +246,10 @@ public class GestorPropuestasCursosTest {
 	
 	/**
 	 * Caso de Prueba CP14
+	 * @throws SQLException 
 	 */
 	@Test
-	public void editarPropuestaCursoCorrecta() {
+	public void editarPropuestaCursoCorrecta() throws SQLException {
 		this.curso.setId(this.curso.getCursoPropioDao().obtenerUltimoCurso());
 		this.curso.setNombre("Curso de Prueba");
 		this.curso.setECTS(6);

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorPropuestasCursos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">negocio.controllers</a> &gt; <span class="el_source">GestorPropuestasCursos.java</span></div><h1>GestorPropuestasCursos.java</h1><pre class="source lang-java linenums">package negocio.controllers;
+
+import java.sql.SQLException;
+
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import persistencia.CursoPropioDAO;
+
+<span class="fc" id="L9">public class GestorPropuestasCursos {</span>
+	
+	/**
+	 * 
+	 * @param curso
+	 * @return resultado
+	 * 	resultado = 0 	--&gt; Inserción correcta
+	 * 	resultado = -1 	--&gt; Inserción incorrecta
+	 * 	resultado = 1	--&gt; Nombre incorrecto
+	 * 	resultado = 2 	--&gt; ECTS incorrecto
+	 * 	resultado = 3	--&gt; FechaInicio no seleccionada
+	 * 	resultado = 4	--&gt; FechaFin no seleccionada
+	 *  resultado = 5	--&gt; TasaMatricula incorrecta
+	 *  resultado = 6	--&gt; Edición incorrecta
+	 * @throws SQLException 
+	 */
+	public int realizarPropuestaCurso(CursoPropio curso) throws SQLException {
+<span class="fc" id="L26">		int resultado = comprobarCurso(curso);</span>
+			
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		if(resultado == 0)</span>
+<span class="fc" id="L29">			resultado = curso.getCursoPropioDao().crearCurso(curso);</span>
+
+<span class="fc" id="L31">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param curso
+	 * @return resultado
+	 * 	resultado = 0 	--&gt; Actualización correcta
+	 * 	resultado = -1 	--&gt; Actualización incorrecta
+	 * 	resultado = 1	--&gt; Nombre incorrecto
+	 * 	resultado = 2 	--&gt; ECTS incorrecto
+	 * 	resultado = 3	--&gt; FechaInicio no seleccionada
+	 * 	resultado = 4	--&gt; FechaFin no seleccionada
+	 *  resultado = 5	--&gt; TasaMatricula incorrecta
+	 *  resultado = 6	--&gt; Edición incorrecta
+	 * @throws SQLException 
+	 */
+	public int editarPropuestaCurso(CursoPropio curso) throws SQLException {
+<span class="fc" id="L49">		int resultado = comprobarCurso(curso);</span>
+			
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">		if(resultado == 0)</span>
+<span class="fc" id="L52">			resultado = curso.getCursoPropioDao().editarCurso(curso);</span>
+
+<span class="fc" id="L54">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param curso
+	 * @return resultado
+	 * 	resultado = 0 	--&gt; Curso correcto
+	 * 	resultado = 1	--&gt; Nombre incorrecto
+	 * 	resultado = 2 	--&gt; ECTS incorrecto
+	 * 	resultado = 3	--&gt; FechaInicio no seleccionada
+	 * 	resultado = 4	--&gt; FechaFin no seleccionada
+	 *  resultado = 5	--&gt; TasaMatricula incorrecta
+	 *  resultado = 6	--&gt; Edición incorrecta
+	 */
+	public int comprobarCurso(CursoPropio curso) {
+<span class="fc" id="L70">		int resultado = 0;</span>
+
+<span class="fc bfc" id="L72" title="All 4 branches covered.">		if(curso.getNombre().equals(&quot;&quot;) || curso.getNombre().length()&gt;50)</span>
+<span class="fc" id="L73">			resultado = 1;</span>
+		else
+<span class="fc bfc" id="L75" title="All 2 branches covered.">			if(curso.getECTS()&lt;=0)</span>
+<span class="fc" id="L76">				resultado = 2;</span>
+			else
+<span class="fc bfc" id="L78" title="All 2 branches covered.">				if(curso.getFechaInicio() == null)</span>
+<span class="fc" id="L79">					resultado = 3;</span>
+				else
+<span class="fc bfc" id="L81" title="All 2 branches covered.">					if(curso.getFechaFin() == null || </span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">					curso.getFechaFin().compareTo(curso.getFechaInicio())&lt;0 || </span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">					curso.getFechaFin().compareTo(curso.getFechaInicio())==0)</span>
+<span class="fc" id="L84">						resultado = 4;</span>
+					else
+<span class="fc bfc" id="L86" title="All 2 branches covered.">						if(curso.getTasaMatricula()&lt;=0)</span>
+<span class="fc" id="L87">							resultado = 5;</span>
+						else
+<span class="fc bfc" id="L89" title="All 2 branches covered.">							if(curso.getEdicion()&lt;=0)</span>
+<span class="fc" id="L90">								resultado = 6;</span>
+		
+<span class="fc" id="L92">		return resultado;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

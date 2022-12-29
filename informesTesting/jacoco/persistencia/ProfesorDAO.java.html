@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfesorDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">persistencia</a> &gt; <span class="el_source">ProfesorDAO.java</span></div><h1>ProfesorDAO.java</h1><pre class="source lang-java linenums">package persistencia;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import negocio.entities.Profesor;
+
+<span class="nc" id="L12">public class ProfesorDAO {</span>
+<span class="nc" id="L13">	private static Logger logJava = Logger.getLogger(ProfesorDAO.class);</span>
+
+	public List&lt;Profesor&gt; listarProfesores() throws SQLException {
+<span class="nc" id="L16">		List&lt;Profesor&gt; profesores = new ArrayList&lt;Profesor&gt;();</span>
+<span class="nc" id="L17">		GestorBD gestor = new GestorBD();</span>
+
+<span class="nc" id="L19">		List&lt;Object&gt; profesoresListados = gestor.select(&quot;select * from profesores&quot;);</span>
+
+<span class="nc bnc" id="L21" title="All 2 branches missed.">		for (int i = 0; i &lt; profesoresListados.size(); i++) {</span>
+<span class="nc" id="L22">			Profesor profesor = new Profesor();</span>
+<span class="nc" id="L23">			List&lt;Object&gt; c = (List&lt;Object&gt;) profesoresListados.get(i);</span>
+<span class="nc" id="L24">			profesor.setDni(c.get(0).toString());</span>
+<span class="nc" id="L25">			profesor.setNombre(c.get(1).toString());</span>
+<span class="nc" id="L26">			profesor.setApellidos(c.get(2).toString());</span>
+<span class="nc" id="L27">			profesor.setPassword(c.get(3).toString());</span>
+<span class="nc" id="L28">			profesor.setDoctor(Boolean.getBoolean(c.get(4).toString()));</span>
+
+<span class="nc" id="L30">			profesores.add(profesor);</span>
+		}
+
+<span class="nc" id="L33">		return profesores;</span>
+	}
+
+	public Profesor seleccionarProfesor(String dni) throws SQLException {
+<span class="nc" id="L37">		GestorBD gestor = new GestorBD();</span>
+<span class="nc" id="L38">		List&lt;Object&gt; profesorListado = gestor.select(&quot;select * from profesores where dni='&quot; + dni + &quot;'&quot;);</span>
+<span class="nc" id="L39">		List&lt;Object&gt; c = (List&lt;Object&gt;) profesorListado.get(0);</span>
+<span class="nc" id="L40">		Profesor profesor = new Profesor(c.get(0).toString(), c.get(1).toString(), c.get(2).toString(),</span>
+<span class="nc" id="L41">				c.get(3).toString(), Boolean.getBoolean(c.get(4).toString()));</span>
+
+<span class="nc" id="L43">		return profesor;</span>
+	}
+
+	/**
+	 * 
+	 * @param profesor
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException
+	 */
+
+	public int crearProfesor(Profesor profesor) throws SQLException {
+<span class="nc" id="L54">		int resultado = -1;</span>
+<span class="nc" id="L55">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L57">		PreparedStatement pstmt = null;</span>
+		try {
+<span class="nc" id="L59">			pstmt = agente.mBD.prepareStatement(</span>
+					&quot;insert into profesores (dni, nombre, apellidos,password, doctor) &quot; + &quot;values (?,?,?,?,?)&quot;);
+<span class="nc" id="L61">			pstmt.setString(1, profesor.getDni());</span>
+<span class="nc" id="L62">			pstmt.setString(2, profesor.getNombre());</span>
+<span class="nc" id="L63">			pstmt.setString(3, profesor.getApellidos());</span>
+<span class="nc" id="L64">			pstmt.setString(4, profesor.getPassword());</span>
+<span class="nc" id="L65">			pstmt.setBoolean(5, profesor.isDoctor());</span>
+
+<span class="nc" id="L67">			resultado = agente.insert(pstmt);</span>
+
+<span class="nc" id="L69">		} catch (SQLException e) {</span>
+<span class="nc" id="L70">			System.out.println(&quot;ProfesorDAO: &quot; + e.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">			if (pstmt != null)</span>
+<span class="nc" id="L73">				pstmt.close();</span>
+		}
+
+<span class="nc" id="L76">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param profesor
+	 * @throws SQLException
+	 */
+	public int editarProfesor(Profesor profesor) throws SQLException {
+<span class="nc" id="L85">		int resultado = -1;</span>
+<span class="nc" id="L86">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L88">		resultado = agente.update(&quot;update profesores &quot; + &quot;set( dni = '&quot; + profesor.getDni() + &quot;',&quot; + &quot;nombre='&quot;</span>
+<span class="nc" id="L89">				+ profesor.getNombre() + &quot;',apellidos ='&quot; + profesor.getApellidos() + &quot;'password ='&quot;</span>
+<span class="nc" id="L90">				+ profesor.getNombre() + profesor.getApellidos() + &quot;', &quot; + &quot;doctor = &quot; + profesor.isDoctor() + &quot;)&quot;);</span>
+
+<span class="nc" id="L92">		return resultado;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

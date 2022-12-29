@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfesorExternoDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">persistencia</a> &gt; <span class="el_source">ProfesorExternoDAO.java</span></div><h1>ProfesorExternoDAO.java</h1><pre class="source lang-java linenums">package persistencia;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import negocio.entities.Centro;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorExterno;
+
+<span class="nc" id="L13">public class ProfesorExternoDAO extends AbstractEntityDAO {</span>
+	
+<span class="nc" id="L15">	private static Logger logJava = Logger.getLogger(ProfesorExternoDAO.class);</span>
+
+	/**
+	 * 
+	 * @param profeExterno
+	 * @return resultado. 0 si correcto. -1 si incorrecto.
+	 * @throws SQLException
+	 */
+
+	public int crearProfesorExterno(ProfesorExterno profeExterno) throws SQLException {
+<span class="nc" id="L25">		int resultado = -1;</span>
+<span class="nc" id="L26">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L28">		PreparedStatement pstmt = null;</span>
+		try {
+<span class="nc" id="L30">			pstmt = agente.mBD.prepareStatement(&quot;insert into profesoresExternos (dni ,titulacion) &quot; + &quot;values (?,?)&quot;);</span>
+<span class="nc" id="L31">			pstmt.setString(1, profeExterno.getDni());</span>
+<span class="nc" id="L32">			pstmt.setString(2, profeExterno.getTitulacion());</span>
+
+<span class="nc" id="L34">			resultado = agente.insert(pstmt);</span>
+<span class="nc" id="L35">			pstmt.close();</span>
+
+<span class="nc" id="L37">		} catch (SQLException e) {</span>
+<span class="nc" id="L38">			System.out.println(&quot;ProfesorExternoDAO: &quot; + e.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">			if (pstmt != null)</span>
+<span class="nc" id="L41">				pstmt.close();</span>
+		}
+
+<span class="nc" id="L44">		return resultado;</span>
+	}
+
+	/**
+	 * 
+	 * @param profeExterno
+	 * @throws SQLException
+	 */
+	public ProfesorExterno seleccionarProfesorExterno(String profeExterno) throws SQLException {
+
+<span class="nc" id="L54">		GestorBD gestor = new GestorBD();</span>
+<span class="nc" id="L55">		List&lt;Object&gt; profeExternoListado = gestor</span>
+<span class="nc" id="L56">				.select(&quot;select * from profesoresExternos where dni = &quot; + profeExterno);</span>
+<span class="nc" id="L57">		List&lt;Object&gt; c = (List&lt;Object&gt;) profeExternoListado.get(0);</span>
+
+<span class="nc" id="L59">		ProfesorDAO profeDAO = new ProfesorDAO();</span>
+<span class="nc" id="L60">		Profesor profesor = profeDAO.seleccionarProfesor(c.get(0).toString());</span>
+
+<span class="nc" id="L62">		CentroDAO centroDAO = new CentroDAO();</span>
+<span class="nc" id="L63">		Centro centro = centroDAO.seleccionarCentro(Integer.parseInt(c.get(1).toString()));</span>
+
+<span class="nc" id="L65">		ProfesorExterno profe1 = new ProfesorExterno();</span>
+
+<span class="nc" id="L67">		profe1.setDni(c.get(0).toString());</span>
+<span class="nc" id="L68">		profe1.setApellidos(profesor.getApellidos());</span>
+<span class="nc" id="L69">		profe1.setPassword(profesor.getPassword());</span>
+<span class="nc" id="L70">		profe1.setDoctor(profesor.isDoctor());</span>
+<span class="nc" id="L71">		profe1.setTitulacion(c.get(1).toString());</span>
+<span class="nc" id="L72">		profe1.setNombre(profesor.getNombre());</span>
+
+<span class="nc" id="L74">		return profe1;</span>
+	}
+
+	/**
+	 * 
+	 * @param profeExterno
+	 * @throws SQLException
+	 */
+	public int editarProfesorExterno(ProfesorExterno profeExterno) throws SQLException {
+<span class="nc" id="L83">		int resultado = -1;</span>
+<span class="nc" id="L84">		GestorBD agente = new GestorBD();</span>
+
+<span class="nc" id="L86">		resultado = agente.update(&quot;update profesoresExternos &quot; + &quot;set( dni = '&quot; + profeExterno.getDni()</span>
+<span class="nc" id="L87">				+ &quot;',titulacion='&quot; + profeExterno.getTitulacion() + &quot;')&quot;);</span>
+
+<span class="nc" id="L89">		return resultado;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

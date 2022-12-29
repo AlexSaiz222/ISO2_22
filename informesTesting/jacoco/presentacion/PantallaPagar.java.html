@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaPagar.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaPagar.java</span></div><h1>PantallaPagar.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+public class PantallaPagar extends JFrame {
+	
+<span class="nc" id="L22">	private static Logger logJava = Logger.getLogger(PantallaPagar.class);</span>
+
+	private JPanel contentPane;
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L31">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L34">					PantallaPagar frame = new PantallaPagar();</span>
+<span class="nc" id="L35">					frame.setVisible(true);</span>
+<span class="nc" id="L36">				} catch (Exception e) {</span>
+<span class="nc" id="L37">					System.out.println(e.toString());</span>
+<span class="nc" id="L38">				}</span>
+<span class="nc" id="L39">			}</span>
+		});
+<span class="nc" id="L41">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L46">	public PantallaPagar() {</span>
+<span class="nc" id="L47">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L48">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L49">		contentPane = new JPanel();</span>
+<span class="nc" id="L50">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L52">		setContentPane(contentPane);</span>
+<span class="nc" id="L53">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L55">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L56">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L58">				PantallaMatriculacion M1 = new PantallaMatriculacion();</span>
+<span class="nc" id="L59">				M1.setVisible(true);</span>
+<span class="nc" id="L60">			}</span>
+		});
+<span class="nc" id="L62">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L63">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L65">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L66">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L68">				pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L69">				pantLogin.logout();</span>
+<span class="nc" id="L70">			}</span>
+		});
+<span class="nc" id="L72">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L73">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L75">		JLabel lblPayment = new JLabel(&quot;Pago&quot;);</span>
+<span class="nc" id="L76">		lblPayment.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L77">		lblPayment.setBounds(10, 15, 270, 39);</span>
+<span class="nc" id="L78">		contentPane.add(lblPayment);</span>
+
+<span class="nc" id="L80">		JLabel lblPleaseSelectAn = new JLabel(&quot;Por favor, escoja una opcion&quot;);</span>
+<span class="nc" id="L81">		lblPleaseSelectAn.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 19));</span>
+<span class="nc" id="L82">		lblPleaseSelectAn.setBounds(43, 54, 391, 39);</span>
+<span class="nc" id="L83">		contentPane.add(lblPleaseSelectAn);</span>
+
+<span class="nc" id="L85">		JLabel Payment = new JLabel(new ImageIcon(&quot;./images/metodosPago.png&quot;));</span>
+<span class="nc" id="L86">		Payment.setBounds(150, 162, 379, 168);</span>
+<span class="nc" id="L87">		contentPane.add(Payment);</span>
+
+<span class="nc" id="L89">		JButton CardBtn = new JButton(&quot;Pago con tarjeta&quot;);</span>
+<span class="nc" id="L90">		CardBtn.setForeground(Color.BLACK);</span>
+<span class="nc" id="L91">		CardBtn.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L92">		CardBtn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L94">				PantallaPagoTarjeta PT1 = new PantallaPagoTarjeta();</span>
+<span class="nc" id="L95">				PT1.setVisible(true);</span>
+<span class="nc" id="L96">			}</span>
+		});
+<span class="nc" id="L98">		CardBtn.setBounds(104, 104, 131, 47);</span>
+<span class="nc" id="L99">		contentPane.add(CardBtn);</span>
+
+<span class="nc" id="L101">		JButton TransferBtn = new JButton(&quot;Pago por transferencia&quot;);</span>
+<span class="nc" id="L102">		TransferBtn.setForeground(Color.BLACK);</span>
+<span class="nc" id="L103">		TransferBtn.setBackground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L104">		TransferBtn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L106">				PantallaTransferencia T1 = new PantallaTransferencia();</span>
+<span class="nc" id="L107">				T1.setVisible(true);</span>
+<span class="nc" id="L108">			}</span>
+		});
+<span class="nc" id="L110">		TransferBtn.setBounds(419, 104, 167, 47);</span>
+<span class="nc" id="L111">		contentPane.add(TransferBtn);</span>
+
+<span class="nc" id="L113">		JLabel orTxt = new JLabel(&quot;o&quot;);</span>
+<span class="nc" id="L114">		orTxt.setBounds(316, 120, 46, 14);</span>
+<span class="nc" id="L115">		contentPane.add(orTxt);</span>
+<span class="nc" id="L116">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

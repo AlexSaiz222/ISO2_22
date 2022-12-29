@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaRegistrarCurso.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaRegistrarCurso.java</span></div><h1>PantallaRegistrarCurso.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.io.Serializable;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import com.toedter.calendar.JDateChooser;
+
+import negocio.controllers.GestorPropuestasCursos;
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.Profesor;
+import negocio.entities.ProfesorUCLM;
+import negocio.entities.TipoCurso;
+import persistencia.CentroDAO;
+import persistencia.ProfesorDAO;
+
+public class PantallaRegistrarCurso extends JFrame implements Serializable {
+	
+<span class="nc" id="L40">	private static Logger logJava = Logger.getLogger(PantallaRegistrarCurso.class);</span>
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5906974317605751792L;
+	private JPanel contentPane;
+	private JTextField NameField;
+	private JTextField ETCSField;
+	private JTextField FeeField;
+	private JTextField EditionField;
+	private JTextField resultadoField;
+	private JComboBox&lt;TipoCurso&gt; typeBox;
+	private JComboBox secretaryBox;
+	private JDateChooser StartDateField;
+	private JDateChooser EndDateField;
+	private transient CentroDAO centroDAO;
+	private transient List&lt;Centro&gt; centros;
+	private transient ProfesorDAO profesorDAO;
+	private transient List&lt;Profesor&gt; profesores;
+	private transient CursoPropio curso;
+	private transient ProfesorUCLM profesorUCLM;
+	private JComboBox centerBox;
+	private PantallaLogin pantLogin;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L69">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L72">					PantallaRegistrarCurso frame = new PantallaRegistrarCurso();</span>
+<span class="nc" id="L73">					frame.setVisible(true);</span>
+<span class="nc" id="L74">				} catch (Exception e) {</span>
+<span class="nc" id="L75">					System.out.println(e.toString());</span>
+<span class="nc" id="L76">				}</span>
+<span class="nc" id="L77">			}</span>
+		});
+<span class="nc" id="L79">	}</span>
+
+	/**
+	 * Create the frame.
+	 * 
+	 * @throws SQLException
+	 */
+<span class="nc" id="L86">	public PantallaRegistrarCurso() throws SQLException {</span>
+<span class="nc" id="L87">		pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L88">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L89">		setBounds(100, 100, 685, 415);</span>
+<span class="nc" id="L90">		contentPane = new JPanel();</span>
+<span class="nc" id="L91">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L93">		setContentPane(contentPane);</span>
+<span class="nc" id="L94">		contentPane.setLayout(null);</span>
+
+<span class="nc" id="L96">		JLabel Title = new JLabel(&quot;Registrar una propuesta de un curso&quot;);</span>
+<span class="nc" id="L97">		Title.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 23));</span>
+<span class="nc" id="L98">		Title.setBounds(63, 11, 497, 39);</span>
+<span class="nc" id="L99">		contentPane.add(Title);</span>
+
+<span class="nc" id="L101">		JButton LogOutBttn = new JButton(&quot;Log out&quot;);</span>
+<span class="nc" id="L102">		LogOutBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L104">				pantLogin.logout();</span>
+<span class="nc" id="L105">			}</span>
+		});
+<span class="nc" id="L107">		LogOutBttn.setBounds(570, 11, 89, 23);</span>
+<span class="nc" id="L108">		contentPane.add(LogOutBttn);</span>
+
+<span class="nc" id="L110">		JButton GoBackBttn = new JButton(&quot;Go back&quot;);</span>
+<span class="nc" id="L111">		GoBackBttn.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L113">				PantallaDireccionCurso D1 = new PantallaDireccionCurso();</span>
+<span class="nc" id="L114">				D1.setVisible(true);</span>
+<span class="nc" id="L115">			}</span>
+		});
+<span class="nc" id="L117">		GoBackBttn.setBounds(570, 45, 89, 23);</span>
+<span class="nc" id="L118">		contentPane.add(GoBackBttn);</span>
+
+<span class="nc" id="L120">		JLabel Name = new JLabel(&quot;Nombre&quot;);</span>
+<span class="nc" id="L121">		Name.setBounds(60, 94, 57, 14);</span>
+<span class="nc" id="L122">		contentPane.add(Name);</span>
+
+<span class="nc" id="L124">		JLabel ETCStxt = new JLabel(&quot;ETCS&quot;);</span>
+<span class="nc" id="L125">		ETCStxt.setBounds(60, 119, 57, 14);</span>
+<span class="nc" id="L126">		contentPane.add(ETCStxt);</span>
+
+<span class="nc" id="L128">		JLabel StarDateTxt = new JLabel(&quot;Fecha Inicio&quot;);</span>
+<span class="nc" id="L129">		StarDateTxt.setBounds(60, 145, 79, 14);</span>
+<span class="nc" id="L130">		contentPane.add(StarDateTxt);</span>
+
+<span class="nc" id="L132">		JLabel EndDateTxt = new JLabel(&quot;Fecha Fin&quot;);</span>
+<span class="nc" id="L133">		EndDateTxt.setBounds(60, 176, 79, 14);</span>
+<span class="nc" id="L134">		contentPane.add(EndDateTxt);</span>
+
+<span class="nc" id="L136">		JLabel FeeTxt = new JLabel(&quot;Tasa&quot;);</span>
+<span class="nc" id="L137">		FeeTxt.setBounds(60, 207, 102, 14);</span>
+<span class="nc" id="L138">		contentPane.add(FeeTxt);</span>
+
+<span class="nc" id="L140">		JLabel EditionTxt = new JLabel(&quot;Edicion&quot;);</span>
+<span class="nc" id="L141">		EditionTxt.setBounds(60, 232, 68, 14);</span>
+<span class="nc" id="L142">		contentPane.add(EditionTxt);</span>
+
+<span class="nc" id="L144">		JLabel UCLM_Image = new JLabel(new ImageIcon(&quot;./images/uclm.png&quot;));</span>
+<span class="nc" id="L145">		UCLM_Image.setBackground(SystemColor.activeCaptionText);</span>
+<span class="nc" id="L146">		UCLM_Image.setBounds(439, 95, 123, 70);</span>
+<span class="nc" id="L147">		contentPane.add(UCLM_Image);</span>
+
+<span class="nc" id="L149">		NameField = new JTextField();</span>
+<span class="nc" id="L150">		NameField.setColumns(10);</span>
+<span class="nc" id="L151">		NameField.setBounds(170, 91, 159, 20);</span>
+<span class="nc" id="L152">		contentPane.add(NameField);</span>
+
+<span class="nc" id="L154">		ETCSField = new JTextField();</span>
+<span class="nc" id="L155">		ETCSField.setColumns(10);</span>
+<span class="nc" id="L156">		ETCSField.setBounds(170, 116, 159, 20);</span>
+<span class="nc" id="L157">		contentPane.add(ETCSField);</span>
+
+<span class="nc" id="L159">		FeeField = new JTextField();</span>
+<span class="nc" id="L160">		FeeField.setColumns(10);</span>
+<span class="nc" id="L161">		FeeField.setBounds(170, 204, 159, 20);</span>
+<span class="nc" id="L162">		contentPane.add(FeeField);</span>
+
+<span class="nc" id="L164">		EditionField = new JTextField();</span>
+<span class="nc" id="L165">		EditionField.setColumns(10);</span>
+<span class="nc" id="L166">		EditionField.setBounds(170, 229, 159, 20);</span>
+<span class="nc" id="L167">		contentPane.add(EditionField);</span>
+
+<span class="nc" id="L169">		StartDateField = new JDateChooser();</span>
+<span class="nc" id="L170">		StartDateField.setBounds(170, 145, 159, 20);</span>
+<span class="nc" id="L171">		contentPane.add(StartDateField);</span>
+
+<span class="nc" id="L173">		EndDateField = new JDateChooser();</span>
+<span class="nc" id="L174">		EndDateField.setBounds(170, 176, 159, 20);</span>
+<span class="nc" id="L175">		contentPane.add(EndDateField);</span>
+
+<span class="nc" id="L177">		JLabel CenterTxt = new JLabel(&quot;Centro&quot;);</span>
+<span class="nc" id="L178">		CenterTxt.setBounds(60, 256, 68, 22);</span>
+<span class="nc" id="L179">		contentPane.add(CenterTxt);</span>
+
+<span class="nc" id="L181">		centerBox = new JComboBox();</span>
+<span class="nc" id="L182">		centerBox.setBounds(170, 257, 409, 21);</span>
+<span class="nc" id="L183">		contentPane.add(centerBox);</span>
+<span class="nc" id="L184">		centerBox.removeAllItems();</span>
+<span class="nc" id="L185">		centroDAO = new CentroDAO();</span>
+<span class="nc" id="L186">		centros = centroDAO.listarCentros();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">		for (Centro c : centros) {</span>
+<span class="nc" id="L188">			centerBox.addItem(c.getNombre() + &quot; - &quot; + c.getLocalizacion());</span>
+<span class="nc" id="L189">		}</span>
+
+<span class="nc" id="L191">		JLabel secretaryTxt = new JLabel(&quot;Secretario&quot;);</span>
+<span class="nc" id="L192">		secretaryTxt.setBounds(60, 287, 102, 22);</span>
+<span class="nc" id="L193">		contentPane.add(secretaryTxt);</span>
+
+<span class="nc" id="L195">		secretaryBox = new JComboBox();</span>
+<span class="nc" id="L196">		secretaryBox.setBounds(170, 288, 214, 21);</span>
+<span class="nc" id="L197">		contentPane.add(secretaryBox);</span>
+<span class="nc" id="L198">		secretaryBox.removeAllItems();</span>
+<span class="nc" id="L199">		profesorDAO = new ProfesorDAO();</span>
+<span class="nc" id="L200">		profesores = profesorDAO.listarProfesores();</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		for (Profesor p : profesores) {</span>
+<span class="nc" id="L202">			secretaryBox.addItem(p.getNombre() + &quot; &quot; + p.getApellidos());</span>
+<span class="nc" id="L203">		}</span>
+
+<span class="nc" id="L205">		JLabel typeTxt = new JLabel(&quot;Tipo&quot;);</span>
+<span class="nc" id="L206">		typeTxt.setBounds(60, 321, 68, 22);</span>
+<span class="nc" id="L207">		contentPane.add(typeTxt);</span>
+
+<span class="nc" id="L209">		typeBox = new JComboBox();</span>
+<span class="nc" id="L210">		typeBox.setBounds(170, 319, 214, 21);</span>
+<span class="nc" id="L211">		contentPane.add(typeBox);</span>
+<span class="nc" id="L212">		typeBox.removeAllItems();</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">		for (TipoCurso t : TipoCurso.values()) {</span>
+<span class="nc" id="L214">			typeBox.addItem(t);</span>
+		}
+
+<span class="nc" id="L217">		resultadoField = new JTextField();</span>
+<span class="nc" id="L218">		resultadoField.setEnabled(false);</span>
+<span class="nc" id="L219">		resultadoField.setBounds(356, 205, 303, 23);</span>
+<span class="nc" id="L220">		contentPane.add(resultadoField);</span>
+<span class="nc" id="L221">		resultadoField.setColumns(10);</span>
+
+<span class="nc" id="L223">		JButton EditBtn = new JButton(&quot;Registrar propuesta&quot;);</span>
+<span class="nc" id="L224">		EditBtn.setBackground(new Color(50, 205, 50));</span>
+<span class="nc" id="L225">		EditBtn.setBounds(412, 308, 247, 39);</span>
+<span class="nc" id="L226">		EditBtn.addActionListener(new ActionListener() {</span>
+
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+<span class="nc" id="L230">					int resultado = 0, ects = -1, edicion = -1;</span>
+<span class="nc" id="L231">					double tasaMatricula = -1;</span>
+					
+					try {
+<span class="nc" id="L234">						ects = Integer.parseInt(ETCSField.getText());</span>
+<span class="nc" id="L235">					} catch (NumberFormatException e) {</span>
+<span class="nc" id="L236">						resultado = 1;</span>
+<span class="nc" id="L237">					}</span>
+					
+					try {
+<span class="nc" id="L240">						tasaMatricula = Double.parseDouble(FeeField.getText());</span>
+<span class="nc" id="L241">					} catch (Exception e) {</span>
+<span class="nc" id="L242">						resultado = 5;</span>
+<span class="nc" id="L243">					}</span>
+					
+					try {
+<span class="nc" id="L246">						edicion = Integer.parseInt(EditionField.getText());</span>
+<span class="nc" id="L247">					} catch (NumberFormatException e) {</span>
+<span class="nc" id="L248">						resultado = 6;</span>
+<span class="nc" id="L249">					}</span>
+					
+<span class="nc" id="L251">					profesorUCLM = new ProfesorUCLM();</span>
+<span class="nc" id="L252">					curso = new CursoPropio();</span>
+<span class="nc" id="L253">					curso.setCentro(centros.get(centerBox.getSelectedIndex()));</span>
+					// Anadir el director, que es el usuario que este logueado
+<span class="nc" id="L255">					profesorUCLM = pantLogin.getDirectorLogeado();</span>
+
+<span class="nc" id="L257">					curso.setDirector(profesorUCLM);</span>
+<span class="nc" id="L258">					curso.setSecretario(profesores.get(secretaryBox.getSelectedIndex()));</span>
+<span class="nc" id="L259">					curso.setEstado(EstadoCurso.PROPUESTO); // Al crear el curso, el estado es PROPUESTO</span>
+<span class="nc" id="L260">					curso.setTipo(TipoCurso.valueOf(typeBox.getSelectedItem().toString()));</span>
+<span class="nc" id="L261">					curso.setNombre(NameField.getText());</span>
+<span class="nc" id="L262">					curso.setECTS(ects);</span>
+<span class="nc" id="L263">					curso.setFechaInicio(StartDateField.getDate());</span>
+<span class="nc" id="L264">					curso.setFechaFin(EndDateField.getDate());</span>
+<span class="nc" id="L265">					curso.setTasaMatricula(tasaMatricula);</span>
+<span class="nc" id="L266">					curso.setEdicion(edicion);</span>
+					
+<span class="nc" id="L268">					GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();</span>
+
+<span class="nc" id="L270">					resultado = gestorPropuestasCursos.realizarPropuestaCurso(curso);</span>
+					
+<span class="nc" id="L272">					System.out.println(&quot;Resultado Interfaz: &quot;+resultado);</span>
+					
+<span class="nc bnc" id="L274" title="All 9 branches missed.">					switch(resultado) {</span>
+						case -1:
+<span class="nc" id="L276">							resultadoField.setText(&quot;No se ha podido crear el curso&quot;);</span>
+<span class="nc" id="L277">							break;</span>
+						case 0:
+<span class="nc" id="L279">							resultadoField.setText(&quot;Curso propuesto correctamente&quot;);</span>
+<span class="nc" id="L280">							break;</span>
+						case 1:
+<span class="nc" id="L282">							resultadoField.setText(&quot;Nombre requerido&quot;);</span>
+<span class="nc" id="L283">							break;</span>
+						case 2:
+<span class="nc" id="L285">							resultadoField.setText(&quot;ECTS debe ser un número entero positivo&quot;);</span>
+<span class="nc" id="L286">							break;</span>
+						case 3:
+<span class="nc" id="L288">							resultadoField.setText(&quot;Fecha Inicio debe ser seleccionada&quot;);</span>
+<span class="nc" id="L289">							break;</span>
+						case 4:
+<span class="nc" id="L291">							resultadoField.setText(&quot;Fecha Fin debe ser seleccionada y mayor a Fecha Inicio&quot;);</span>
+<span class="nc" id="L292">							break;</span>
+						case 5:
+<span class="nc" id="L294">							resultadoField.setText(&quot;Tasa Matrícula debe ser un número positivo&quot;);</span>
+<span class="nc" id="L295">							break;</span>
+						case 6:
+<span class="nc" id="L297">							resultadoField.setText(&quot;Edición debe ser un número entero positivo&quot;);</span>
+<span class="nc" id="L298">							break;</span>
+						default:
+							break;
+					}
+<span class="nc" id="L302">				} catch (Exception e) {</span>
+<span class="nc" id="L303">					resultadoField.setText(&quot;Ha ocurrido un error, vuelva a intentarlo&quot;);</span>
+<span class="nc" id="L304">				}</span>
+
+<span class="nc" id="L306">			}</span>
+		});
+<span class="nc" id="L308">		contentPane.add(EditBtn);</span>
+<span class="nc" id="L309">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaLogin.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">presentacion</a> &gt; <span class="el_source">PantallaLogin.java</span></div><h1>PantallaLogin.java</h1><pre class="source lang-java linenums">package presentacion;
+
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.Logger;
+
+import javax.swing.WindowConstants;
+
+import negocio.entities.Estudiante;
+import negocio.entities.PersonalVicerrectorado;
+import negocio.entities.ProfesorUCLM;
+import persistencia.EstudianteDAO;
+import persistencia.PersonalVicerrectoradoDAO;
+import persistencia.ProfesorUCLMDAO;
+
+public class PantallaLogin extends JFrame implements Serializable {
+	
+<span class="nc" id="L35">	private static Logger logJava = Logger.getLogger(PantallaLogin.class);</span>
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4463273531768871291L;
+	private JPanel contentPane;
+	private JPasswordField passwordField;
+	private JTextField textField_userName;
+	private JButton btn_access;
+	private transient Estudiante estudianteLogeado;
+	private transient ProfesorUCLM directorLogeado;
+	private String nombreUsuario;
+	private String contrasena;
+	private PantallaLogin pantLogin;
+<span class="nc" id="L50">	final String tipoLetra = &quot;Arial&quot;;</span>
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L56">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L59">					PantallaLogin frame = new PantallaLogin();</span>
+<span class="nc" id="L60">					frame.setVisible(true);</span>
+<span class="nc" id="L61">				} catch (Exception e) {</span>
+<span class="nc" id="L62">					System.out.println(e.toString());</span>
+<span class="nc" id="L63">				}</span>
+<span class="nc" id="L64">			}</span>
+		});
+<span class="nc" id="L66">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L71">	public PantallaLogin() {</span>
+
+<span class="nc" id="L73">		setTitle(&quot;Login&quot;);</span>
+<span class="nc" id="L74">		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L75">		setBounds(100, 100, 450, 300);</span>
+<span class="nc" id="L76">		contentPane = new JPanel();</span>
+<span class="nc" id="L77">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+
+<span class="nc" id="L79">		setContentPane(contentPane);</span>
+<span class="nc" id="L80">		GridBagLayout gbl_contentPane = new GridBagLayout();</span>
+<span class="nc" id="L81">		gbl_contentPane.columnWidths = new int[] { 50, 50, 50, 50, 50, 50, 50, 50 };</span>
+<span class="nc" id="L82">		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 33, 0, 0 };</span>
+<span class="nc" id="L83">		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };</span>
+<span class="nc" id="L84">		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };</span>
+<span class="nc" id="L85">		contentPane.setLayout(gbl_contentPane);</span>
+
+<span class="nc" id="L87">		JLabel lbl_userName = new JLabel(&quot;Nombre de usuario&quot;);</span>
+<span class="nc" id="L88">		lbl_userName.setFont(new Font(tipoLetra, Font.BOLD, 12));</span>
+<span class="nc" id="L89">		GridBagConstraints gbc_lbl_userName = new GridBagConstraints();</span>
+<span class="nc" id="L90">		gbc_lbl_userName.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L91">		gbc_lbl_userName.gridx = 3;</span>
+<span class="nc" id="L92">		gbc_lbl_userName.gridy = 2;</span>
+<span class="nc" id="L93">		contentPane.add(lbl_userName, gbc_lbl_userName);</span>
+
+<span class="nc" id="L95">		textField_userName = new JTextField();</span>
+<span class="nc" id="L96">		textField_userName.setToolTipText(&quot;Insertar aqui el nombre de usuario&quot;);</span>
+<span class="nc" id="L97">		textField_userName.setFont(new Font(&quot;tipoLetra&quot;, Font.PLAIN, 11));</span>
+<span class="nc" id="L98">		GridBagConstraints gbc_textField_userName = new GridBagConstraints();</span>
+<span class="nc" id="L99">		gbc_textField_userName.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L100">		gbc_textField_userName.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L101">		gbc_textField_userName.gridx = 3;</span>
+<span class="nc" id="L102">		gbc_textField_userName.gridy = 3;</span>
+<span class="nc" id="L103">		contentPane.add(textField_userName, gbc_textField_userName);</span>
+<span class="nc" id="L104">		textField_userName.setColumns(10);</span>
+<span class="nc" id="L105">		nombreUsuario = textField_userName.getText();</span>
+
+<span class="nc" id="L107">		JLabel lbl_password = new JLabel(&quot;Contrasena&quot;);</span>
+<span class="nc" id="L108">		lbl_password.setFont(new Font(tipoLetra, Font.BOLD, 12));</span>
+<span class="nc" id="L109">		GridBagConstraints gbc_lbl_password = new GridBagConstraints();</span>
+<span class="nc" id="L110">		gbc_lbl_password.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L111">		gbc_lbl_password.gridx = 3;</span>
+<span class="nc" id="L112">		gbc_lbl_password.gridy = 4;</span>
+<span class="nc" id="L113">		contentPane.add(lbl_password, gbc_lbl_password);</span>
+
+<span class="nc" id="L115">		passwordField = new JPasswordField();</span>
+<span class="nc" id="L116">		passwordField.setFont(new Font(tipoLetra, Font.PLAIN, 11));</span>
+<span class="nc" id="L117">		passwordField.setToolTipText(&quot;Insertar aqui la contrasena&quot;);</span>
+<span class="nc" id="L118">		GridBagConstraints gbc_passwordField = new GridBagConstraints();</span>
+<span class="nc" id="L119">		gbc_passwordField.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L120">		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L121">		gbc_passwordField.gridx = 3;</span>
+<span class="nc" id="L122">		gbc_passwordField.gridy = 5;</span>
+<span class="nc" id="L123">		contentPane.add(passwordField, gbc_passwordField);</span>
+<span class="nc" id="L124">		contrasena = new String(passwordField.getPassword());</span>
+
+<span class="nc" id="L126">		btn_access = new JButton(&quot;Acceso&quot;);</span>
+<span class="nc" id="L127">		btn_access.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L129">				PantallaMatriculacion pantallamatricula = new PantallaMatriculacion();</span>
+<span class="nc" id="L130">				PantallaDireccionCurso pantallaDireccionEdicion = new PantallaDireccionCurso();</span>
+<span class="nc" id="L131">				EstudianteDAO ed1 = new EstudianteDAO();</span>
+<span class="nc" id="L132">				ProfesorUCLMDAO pf1 = new ProfesorUCLMDAO();</span>
+<span class="nc" id="L133">				PersonalVicerrectoradoDAO pv1 = new PersonalVicerrectoradoDAO();</span>
+
+				// si es un alumno --&gt; pantalla realizar matricula
+				try {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">					if (ed1.seleccionarEstudiante(nombreUsuario) != null) {</span>
+<span class="nc" id="L138">						estudianteSeleccionado(ed1);</span>
+<span class="nc" id="L139">						pantallamatricula.setVisible(true);</span>
+					} else {
+						// si no es alumno
+						// si es director curso --&gt; pantalla realizar/editar propuesta curso o pantalla
+						// visualizar propuesta curso
+						// es profesor de la UCLM
+<span class="nc bnc" id="L145" title="All 2 branches missed.">						if (pf1.listarProfesorUCLM(nombreUsuario) != null) {</span>
+<span class="nc" id="L146">							ProfesorUCLM p1 = pf1.seleccionarProfesorUCLM(nombreUsuario);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">							if (p1.getPassword().compareTo(contrasena) == 0) {</span>
+								// Si es un profesor de la UCLM --&gt; es director
+<span class="nc" id="L149">								pantallaDireccionEdicion.setVisible(true);</span>
+<span class="nc" id="L150">								directorLogeado = p1;</span>
+							}
+<span class="nc bnc" id="L152" title="All 2 branches missed.">						} else if (pv1.seleccionarProfesor(nombreUsuario) != null) {// personal vicerrectorado/jefe de</span>
+																					// gabinete
+							// si es personal vicerrectorado --&gt; pantalla evaluar propuesta curso
+<span class="nc" id="L155">							profesorSeleccionado(pv1);</span>
+						}
+					}
+<span class="nc" id="L158">				} catch (Exception exception1) {</span>
+<span class="nc" id="L159">					System.out.println(&quot;El usuario no se encuentra en la base de datos.&quot;);</span>
+<span class="nc" id="L160">				}</span>
+
+<span class="nc" id="L162">			}</span>
+
+		});
+<span class="nc" id="L165">		btn_access.setBackground(new Color(192, 192, 192));</span>
+<span class="nc" id="L166">		btn_access.setFont(new Font(tipoLetra, Font.BOLD, 12));</span>
+<span class="nc" id="L167">		GridBagConstraints gbc_btn_access = new GridBagConstraints();</span>
+<span class="nc" id="L168">		gbc_btn_access.gridwidth = 3;</span>
+<span class="nc" id="L169">		gbc_btn_access.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L170">		gbc_btn_access.gridx = 2;</span>
+<span class="nc" id="L171">		gbc_btn_access.gridy = 6;</span>
+<span class="nc" id="L172">		contentPane.add(btn_access, gbc_btn_access);</span>
+<span class="nc" id="L173">	}</span>
+
+	public void logout() {
+<span class="nc" id="L176">		pantLogin = new PantallaLogin();</span>
+<span class="nc" id="L177">		pantLogin.setVisible(true);</span>
+<span class="nc" id="L178">		borrarEstudianteLogeado();</span>
+<span class="nc" id="L179">		borrarDirectorLogeado();</span>
+<span class="nc" id="L180">	}</span>
+
+	public Estudiante getEstudianteLogeado() {
+<span class="nc" id="L183">		return estudianteLogeado;</span>
+	}
+
+	public void borrarEstudianteLogeado() {
+<span class="nc" id="L187">		estudianteLogeado = null;</span>
+<span class="nc" id="L188">	}</span>
+
+	public ProfesorUCLM getDirectorLogeado() {
+<span class="nc" id="L191">		return directorLogeado;</span>
+	}
+
+	public void borrarDirectorLogeado() {
+<span class="nc" id="L195">		directorLogeado = null;</span>
+<span class="nc" id="L196">	}</span>
+
+	public void profesorSeleccionado(PersonalVicerrectoradoDAO pv1) throws SQLException {
+<span class="nc" id="L199">		PersonalVicerrectorado personalVicerrectorado = pv1.seleccionarProfesor(nombreUsuario);</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">		if (personalVicerrectorado.getPassword().compareTo(contrasena) == 0) {</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">			if (personalVicerrectorado.isJefe() == true) {</span>
+<span class="nc" id="L202">				PantallaJefeVicerrectorado pjfGabineteVicerrectorado = new PantallaJefeVicerrectorado();</span>
+<span class="nc" id="L203">				pjfGabineteVicerrectorado.setVisible(true);</span>
+<span class="nc" id="L204">			} else {</span>
+<span class="nc" id="L205">				PantallaEvaluarPropuesta pfGabineteVicerrectorado = new PantallaEvaluarPropuesta();</span>
+<span class="nc" id="L206">				pfGabineteVicerrectorado.setVisible(true);</span>
+			}
+
+		}
+<span class="nc" id="L210">	}</span>
+
+	public void estudianteSeleccionado(EstudianteDAO ed1) throws SQLException {
+<span class="nc" id="L213">		Estudiante e1 = ed1.seleccionarEstudiante(nombreUsuario);</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">		if (e1.getPassword().compareTo(contrasena) == 0) {</span>
+<span class="nc" id="L215">			estudianteLogeado = e1;</span>
+		}
+
+<span class="nc" id="L218">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

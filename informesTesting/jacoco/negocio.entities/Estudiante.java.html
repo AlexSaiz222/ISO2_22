@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Estudiante.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">negocio.entities</a> &gt; <span class="el_source">Estudiante.java</span></div><h1>Estudiante.java</h1><pre class="source lang-java linenums">package negocio.entities;
+
+import java.util.Collection;
+import java.util.Objects;
+
+public class Estudiante {
+
+	Collection&lt;Matricula&gt; matriculas;
+	private String dni;
+	private String nombre;
+	private String apellidos;
+	private String titulacion;
+	private String cualificacion;
+	private String password;
+	private int idEstudiante;
+
+<span class="nc" id="L17">	public Estudiante() {</span>
+
+<span class="nc" id="L19">	}</span>
+
+	public Estudiante(Collection&lt;Matricula&gt; matriculas, String dni, String nombre, String apellidos, String titulacion,
+			String cualificacion, int idEstudiante, String password) {
+<span class="nc" id="L23">		super();</span>
+<span class="nc" id="L24">		this.matriculas = matriculas;</span>
+<span class="nc" id="L25">		this.dni = dni;</span>
+<span class="nc" id="L26">		this.nombre = nombre;</span>
+<span class="nc" id="L27">		this.apellidos = apellidos;</span>
+<span class="nc" id="L28">		this.titulacion = titulacion;</span>
+<span class="nc" id="L29">		this.cualificacion = cualificacion;</span>
+<span class="nc" id="L30">		this.setIdEstudiante(idEstudiante);</span>
+<span class="nc" id="L31">		this.password = password;</span>
+<span class="nc" id="L32">	}</span>
+
+	public Collection&lt;Matricula&gt; getMatriculas() {
+<span class="nc" id="L35">		return matriculas;</span>
+	}
+
+	public void setMatriculas(Collection&lt;Matricula&gt; matriculas) {
+<span class="nc" id="L39">		this.matriculas = matriculas;</span>
+<span class="nc" id="L40">	}</span>
+
+	public String getDni() {
+<span class="nc" id="L43">		return dni;</span>
+	}
+
+	public void setDni(String dni) {
+<span class="nc" id="L47">		this.dni = dni;</span>
+<span class="nc" id="L48">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L51">		return nombre;</span>
+	}
+
+	public void setNombre(String nombre) {
+<span class="nc" id="L55">		this.nombre = nombre;</span>
+<span class="nc" id="L56">	}</span>
+
+	public String getApellidos() {
+<span class="nc" id="L59">		return apellidos;</span>
+	}
+
+	public void setApellidos(String apellidos) {
+<span class="nc" id="L63">		this.apellidos = apellidos;</span>
+<span class="nc" id="L64">	}</span>
+
+	public String getTitulacion() {
+<span class="nc" id="L67">		return titulacion;</span>
+	}
+
+	public void setTitulacion(String titulacion) {
+<span class="nc" id="L71">		this.titulacion = titulacion;</span>
+<span class="nc" id="L72">	}</span>
+
+	public String getCualificacion() {
+<span class="nc" id="L75">		return cualificacion;</span>
+	}
+
+	public void setCualificacion(String cualificacion) {
+<span class="nc" id="L79">		this.cualificacion = cualificacion;</span>
+<span class="nc" id="L80">	}</span>
+
+	public int getIdEstudiante() {
+<span class="nc" id="L83">		return idEstudiante;</span>
+	}
+
+	public void setIdEstudiante(int idEstudiante) {
+<span class="nc" id="L87">		this.idEstudiante = idEstudiante;</span>
+<span class="nc" id="L88">	}</span>
+
+	public String getPassword() {
+<span class="nc" id="L91">		return password;</span>
+	}
+
+	public void setPassword(String psswd) {
+<span class="nc" id="L95">		this.password = psswd;</span>
+<span class="nc" id="L96">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L100">		return Objects.hash(apellidos, cualificacion, dni, idEstudiante, matriculas, nombre, password, titulacion);</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L105" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L106">			return true;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L108">			return false;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L110">			return false;</span>
+<span class="nc" id="L111">		Estudiante other = (Estudiante) obj;</span>
+<span class="nc bnc" id="L112" title="All 4 branches missed.">		return Objects.equals(apellidos, other.apellidos) &amp;&amp; Objects.equals(cualificacion, other.cualificacion)</span>
+<span class="nc bnc" id="L113" title="All 4 branches missed.">				&amp;&amp; Objects.equals(dni, other.dni) &amp;&amp; idEstudiante == other.idEstudiante</span>
+<span class="nc bnc" id="L114" title="All 4 branches missed.">				&amp;&amp; Objects.equals(matriculas, other.matriculas) &amp;&amp; Objects.equals(nombre, other.nombre)</span>
+<span class="nc bnc" id="L115" title="All 4 branches missed.">				&amp;&amp; Objects.equals(password, other.password) &amp;&amp; Objects.equals(titulacion, other.titulacion);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

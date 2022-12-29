@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorBD.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">persistencia</a> &gt; <span class="el_source">GestorBD.java</span></div><h1>GestorBD.java</h1><pre class="source lang-java linenums">package persistencia;
+
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.derby.jdbc.EmbeddedDriver;
+import org.apache.log4j.Logger;
+
+
+public class GestorBD {
+	
+<span class="fc" id="L19">	private static Logger logJava = Logger.getLogger(GestorBD.class);</span>
+<span class="fc" id="L20">	private final String logFatal = &quot;LOG FATAL: &quot;;</span>
+
+	protected Connection mBD;
+	private final static String DRIVER = &quot;jdbc:derby&quot;;
+	private final static String CONNECTION_STRING = &quot;jdbc:derby:db_proyecto_iso2;create=true&quot;;
+	private final static String DBNAME = &quot;db_proyecto_iso2&quot;;
+	private final static String DBUSER = &quot;admin&quot;;
+	private final static String DBPASS = &quot;admin&quot;;
+
+<span class="fc" id="L29">	public GestorBD() throws SQLException {</span>
+<span class="fc" id="L30">		conectarBD();</span>
+<span class="fc" id="L31">	}</span>
+
+	public void conectarBD() throws SQLException {
+<span class="fc" id="L34">		Driver derbyEmbeddedDriver = new EmbeddedDriver();</span>
+		try {
+<span class="fc" id="L36">			DriverManager.registerDriver(derbyEmbeddedDriver);</span>
+<span class="fc" id="L37">			this.mBD = DriverManager.getConnection(DRIVER + &quot;:&quot; + DBNAME, DBUSER, DBPASS);</span>
+<span class="nc" id="L38">		} catch (SQLException e) {</span>
+			// Si no esta creada la base de datos, la crea y se conecta
+<span class="nc bnc" id="L40" title="All 4 branches missed.">			if (((e.getErrorCode() == 40000) &amp;&amp; (&quot;XJ004&quot;.equals(e.getSQLState())))) {</span>
+<span class="nc" id="L41">				crearBaseDatosSinoExiste();</span>
+<span class="nc" id="L42">				conectarBD();</span>
+			} else {
+<span class="nc" id="L44">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L45">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L46">				logJava.fatal(logFatal+e.getSQLState());</span>
+			}
+<span class="fc" id="L48">		}</span>
+<span class="fc" id="L49">	}</span>
+
+	public void desconectarBD() {
+		try {
+<span class="nc" id="L53">			DriverManager.getConnection(&quot;jdbc:derby:;shutdown=true&quot;);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">			if (!this.mBD.isClosed())</span>
+<span class="nc" id="L55">				this.mBD.close();</span>
+<span class="fc" id="L56">		} catch (SQLException ex) {</span>
+<span class="pc bpc" id="L57" title="2 of 4 branches missed.">			if (((ex.getErrorCode() == 50000) &amp;&amp; (&quot;XJ015&quot;.equals(ex.getSQLState())))) {</span>
+<span class="fc" id="L58">				logJava.info(&quot;LOG INFO: Derby shut down normally&quot;);</span>
+			} else {
+<span class="nc" id="L60">				logJava.info(&quot;LOG INFO: Derby did not shut down normally&quot;);</span>
+<span class="nc" id="L61">				logJava.fatal(logFatal+ex.toString());</span>
+			}
+<span class="nc" id="L63">		}</span>
+<span class="fc" id="L64">	}</span>
+
+	/**
+	 * 
+	 * @param sql
+	 * @return
+	 * @throws SQLException
+	 */
+	public List&lt;Object&gt; select(String sql) throws SQLException {
+<span class="fc" id="L73">		List&lt;Object&gt; resultado = new ArrayList&lt;Object&gt;();</span>
+<span class="fc" id="L74">		Statement stmt = null;</span>
+<span class="fc" id="L75">		ResultSet rs = null;</span>
+		try {
+<span class="fc" id="L77">			stmt = this.mBD.createStatement();</span>
+<span class="fc" id="L78">			rs = stmt.executeQuery(sql);</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L81">				List&lt;Object&gt; v = new ArrayList&lt;Object&gt;();</span>
+<span class="fc" id="L82">				int i = 1;</span>
+<span class="fc" id="L83">				boolean j = true;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">				while (j) {</span>
+					try {
+<span class="fc" id="L86">						v.add(rs.getObject(i));</span>
+<span class="fc" id="L87">						i++;</span>
+<span class="fc" id="L88">					} catch (SQLException e) {</span>
+<span class="fc" id="L89">						j = false;</span>
+<span class="fc" id="L90">					}</span>
+				}
+<span class="fc" id="L92">				resultado.add(v);</span>
+<span class="fc" id="L93">			}</span>
+
+<span class="fc" id="L95">			stmt.close();</span>
+<span class="nc" id="L96">		} catch (SQLException e) {</span>
+<span class="nc" id="L97">			logJava.fatal(logFatal+e.toString());</span>
+		} finally {
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">			if (stmt != null)</span>
+<span class="fc" id="L100">				stmt.close();</span>
+		}
+
+<span class="fc" id="L103">		desconectarBD();</span>
+<span class="fc" id="L104">		return resultado;</span>
+	}
+
+	/**
+	 * @param pstmt
+	 * @return res * 0 si se ha insertado correctamente * -1 si se produce un error
+	 */
+	public int insert(PreparedStatement pstmt) {
+<span class="fc" id="L112">		int res = -1;</span>
+		try {
+<span class="fc" id="L114">			res = pstmt.executeUpdate();</span>
+<span class="fc" id="L115">			pstmt.close();</span>
+<span class="nc" id="L116">		} catch (SQLException e) {</span>
+<span class="nc" id="L117">			logJava.fatal(&quot;LOG FATAL Insert: &quot;+e.toString());</span>
+<span class="fc" id="L118">		}</span>
+
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		if (res == 0) // Si devuelve 0, es que no se ha insertado ninguna fila --&gt; Incorrecto</span>
+<span class="nc" id="L121">			res = -1;</span>
+
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">		if (res == 1) // Se ha insertado 1 fila --&gt; Correcto</span>
+<span class="fc" id="L124">			res = 0;</span>
+
+<span class="fc" id="L126">		desconectarBD();</span>
+<span class="fc" id="L127">		return res;</span>
+	}
+
+	/**
+	 * 
+	 * @param sql
+	 * @return res * 0 si se ha actualizado correctamente * -1 si se produce un
+	 *         error
+	 * @throws SQLException
+	 */
+	public int update(String sql) throws SQLException {
+<span class="fc" id="L138">		conectarBD();</span>
+<span class="fc" id="L139">		PreparedStatement stmt = null;</span>
+<span class="fc" id="L140">		int res = -1;</span>
+		try {
+<span class="fc" id="L142">			stmt = this.mBD.prepareStatement(sql);</span>
+<span class="fc" id="L143">			res = stmt.executeUpdate();</span>
+<span class="fc" id="L144">			stmt.close();</span>
+<span class="nc" id="L145">		} catch (SQLException e) {</span>
+<span class="nc" id="L146">			logJava.fatal(logFatal+e.toString());</span>
+		} finally {
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">			if (stmt != null)</span>
+<span class="fc" id="L149">				stmt.close();</span>
+		}
+
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">		if (res == 0) // Si devuelve 0, es que no se ha actualizado ninguna fila --&gt; Incorrecto</span>
+<span class="nc" id="L153">			res = -1;</span>
+
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">		if (res == 1) // Se ha actualizado 1 fila --&gt; Correcto</span>
+<span class="fc" id="L156">			res = 0;</span>
+
+<span class="fc" id="L158">		desconectarBD();</span>
+<span class="fc" id="L159">		return res;</span>
+	}
+
+	/**
+	 * 
+	 * @param sql
+	 * @return res * * 0 si se ha eliminado correctamente * -1 si se produce un
+	 *         error
+	 * @throws SQLException
+	 */
+	public int delete(String sql) throws SQLException {
+<span class="fc" id="L170">		conectarBD();</span>
+<span class="fc" id="L171">		PreparedStatement stmt = null;</span>
+<span class="fc" id="L172">		int res = -1;</span>
+		try {
+<span class="fc" id="L174">			stmt = this.mBD.prepareStatement(sql);</span>
+<span class="fc" id="L175">			res = stmt.executeUpdate();</span>
+<span class="fc" id="L176">			stmt.close();</span>
+<span class="nc" id="L177">		} catch (SQLException e) {</span>
+<span class="nc" id="L178">			logJava.fatal(logFatal+e.toString());</span>
+		} finally {
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">			if (stmt != null)</span>
+<span class="fc" id="L181">				stmt.close();</span>
+		}
+
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">		if (res == 0) // Si devuelve 0, es que no se ha eliminado ninguna fila --&gt; Incorrecto</span>
+<span class="nc" id="L185">			res = -1;</span>
+
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">		if (res == 1) // Se ha eliminado 1 fila --&gt; Correcto</span>
+<span class="fc" id="L188">			res = 0;</span>
+
+<span class="fc" id="L190">		desconectarBD();</span>
+<span class="fc" id="L191">		return res;</span>
+	}
+
+	private void crearBaseDatosSinoExiste() throws SQLException {
+<span class="nc" id="L195">		logJava.info(&quot;LOG INFO: Creando base de datos...&quot;);</span>
+<span class="nc" id="L196">		PreparedStatement pstmt = null;</span>
+<span class="nc" id="L197">		Statement stmt = null;</span>
+<span class="nc" id="L198">		String createSQL = &quot;create table estudiantes (dni varchar(10) not null, &quot;</span>
+				+ &quot;nombre varchar(50) not null, apellidos varchar(50) not null, &quot;
+				+ &quot;password varchar(50), titulacion varchar(50), cualificacion varchar(50), primary key (dni))&quot;;
+
+		try {
+			// Crear la conexion y la BBDD
+<span class="nc" id="L204">			Driver derbyEmbeddedDriver = new EmbeddedDriver();</span>
+<span class="nc" id="L205">			DriverManager.registerDriver(derbyEmbeddedDriver);</span>
+<span class="nc" id="L206">			this.mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);</span>
+<span class="nc" id="L207">			this.mBD.setAutoCommit(false);</span>
+<span class="nc" id="L208">			stmt = this.mBD.createStatement();</span>
+
+			// Crear la tabla estudiantes
+<span class="nc" id="L211">			stmt.execute(createSQL);</span>
+
+			try {
+				// Datos iniciales de estudiantes
+<span class="nc" id="L215">				pstmt = this.mBD.prepareStatement(</span>
+						&quot;insert into ESTUDIANTES (DNI, NOMBRE, APELLIDOS, PASSWORD, TITULACION, CUALIFICACION) VALUES (?,?,?,?,?,?)&quot;);
+<span class="nc" id="L217">				pstmt.setString(1, &quot;00000000A&quot;);</span>
+<span class="nc" id="L218">				pstmt.setString(2, &quot;Pepe&quot;);</span>
+<span class="nc" id="L219">				pstmt.setString(3, &quot;Perez&quot;);</span>
+<span class="nc" id="L220">				pstmt.setString(4, &quot;PepePerez&quot;);</span>
+<span class="nc" id="L221">				pstmt.setString(5, &quot;Ingenieria Informatica&quot;);</span>
+<span class="nc" id="L222">				pstmt.setString(6, &quot;Ingeniero SW&quot;);</span>
+<span class="nc" id="L223">				pstmt.executeUpdate();</span>
+
+<span class="nc" id="L225">			} catch (SQLException e) {</span>
+<span class="nc" id="L226">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L227">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L228">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L230" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L231">					pstmt.close();</span>
+			}
+
+			// Crear la tabla centros
+<span class="nc" id="L235">			createSQL = &quot;create table centros (idCentro int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), nombre varchar(50) not null, &quot;</span>
+					+ &quot;localizacion varchar(50) not null, primary key (idCentro))&quot;;
+<span class="nc" id="L237">			stmt.execute(createSQL);</span>
+
+			try {
+				// Datos iniciales de centros
+<span class="nc" id="L241">				pstmt = this.mBD.prepareStatement(&quot;insert into centros (nombre, localizacion) VALUES (?,?)&quot;);</span>
+<span class="nc" id="L242">				pstmt.setString(1, &quot;Facultad de Ciencias Sociales&quot;);</span>
+<span class="nc" id="L243">				pstmt.setString(2, &quot;Talavera de la Reina&quot;);</span>
+<span class="nc" id="L244">				pstmt.executeUpdate();</span>
+
+<span class="nc" id="L246">			} catch (SQLException e) {</span>
+<span class="nc" id="L247">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L248">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L249">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L251" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L252">					pstmt.close();</span>
+			}
+
+			// Crear la tabla profesores
+<span class="nc" id="L256">			createSQL = &quot;create table profesores (dni varchar(10) not null, nombre varchar(50) not null, &quot;</span>
+					+ &quot;apellidos varchar(50) not null, password varchar(50), doctor boolean, primary key (dni))&quot;;
+<span class="nc" id="L258">			stmt.execute(createSQL);</span>
+
+			try {
+				// Datos iniciales de profesores
+<span class="nc" id="L262">				pstmt = this.mBD.prepareStatement(</span>
+						&quot;insert into profesores (dni, nombre, apellidos, password, doctor) VALUES (?,?,?,?,?)&quot;);
+<span class="nc" id="L264">				pstmt.setString(1, &quot;11111111B&quot;);</span>
+<span class="nc" id="L265">				pstmt.setString(2, &quot;Jaime&quot;);</span>
+<span class="nc" id="L266">				pstmt.setString(3, &quot;Garcia&quot;);</span>
+<span class="nc" id="L267">				pstmt.setString(4, &quot;JaimeGarcia&quot;);</span>
+<span class="nc" id="L268">				pstmt.setBoolean(5, true);</span>
+<span class="nc" id="L269">				pstmt.executeUpdate();</span>
+<span class="nc" id="L270">			} catch (SQLException e) {</span>
+<span class="nc" id="L271">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L272">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L273">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L275" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L276">					pstmt.close();</span>
+			}
+			try {
+<span class="nc" id="L279">				pstmt = this.mBD.prepareStatement(</span>
+						&quot;insert into profesores (dni, nombre, apellidos, password, doctor) VALUES (?,?,?,?,?)&quot;);
+<span class="nc" id="L281">				pstmt.setString(1, &quot;22222222C&quot;);</span>
+<span class="nc" id="L282">				pstmt.setString(2, &quot;Alberto&quot;);</span>
+<span class="nc" id="L283">				pstmt.setString(3, &quot;Sanchez&quot;);</span>
+<span class="nc" id="L284">				pstmt.setString(4, &quot;AlbertoSanchez&quot;);</span>
+<span class="nc" id="L285">				pstmt.setBoolean(5, false);</span>
+<span class="nc" id="L286">				pstmt.executeUpdate();</span>
+<span class="nc" id="L287">			} catch (SQLException e) {</span>
+<span class="nc" id="L288">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L289">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L290">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L292" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L293">					pstmt.close();</span>
+			}
+
+			// Crear la tabla profesoresExternos
+<span class="nc" id="L297">			createSQL = &quot;create table profesoresExternos (dni varchar(10) not null, &quot;</span>
+					+ &quot;titulacion varchar(50) not null, primary key (dni), foreign key (dni) references profesores(dni))&quot;;
+<span class="nc" id="L299">			stmt.execute(createSQL);</span>
+
+			// Crear la tabla profesoresUCLM
+<span class="nc" id="L302">			createSQL = &quot;create table profesoresUCLM (dni varchar(10) not null, centroAdscripcion int not null, &quot;</span>
+					+ &quot;categoria varchar(30) not null, primary key (dni), foreign key (centroAdscripcion) references centros(idCentro), &quot;
+					+ &quot;foreign key (dni) references profesores(dni))&quot;;
+<span class="nc" id="L305">			stmt.execute(createSQL);</span>
+			try {
+				// Datos iniciales de profesoresUCLM
+<span class="nc" id="L308">				pstmt = this.mBD.prepareStatement(</span>
+						&quot;insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)&quot;);
+<span class="nc" id="L310">				pstmt.setString(1, &quot;11111111B&quot;);</span>
+<span class="nc" id="L311">				pstmt.setInt(2, 1);</span>
+<span class="nc" id="L312">				pstmt.setString(3, &quot;CATEDRATICO&quot;);</span>
+<span class="nc" id="L313">				pstmt.executeUpdate();</span>
+<span class="nc" id="L314">			} catch (SQLException e) {</span>
+<span class="nc" id="L315">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L316">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L317">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L319" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L320">					pstmt.close();</span>
+			}
+			try {
+<span class="nc" id="L323">				pstmt = this.mBD.prepareStatement(</span>
+						&quot;insert into profesoresUCLM (dni, centroAdscripcion, categoria) VALUES (?,?,?)&quot;);
+<span class="nc" id="L325">				pstmt.setString(1, &quot;22222222C&quot;);</span>
+<span class="nc" id="L326">				pstmt.setInt(2, 1);</span>
+<span class="nc" id="L327">				pstmt.setString(3, &quot;TITULAR_UNIVERSIDAD&quot;);</span>
+<span class="nc" id="L328">				pstmt.executeUpdate();</span>
+<span class="nc" id="L329">			} catch (SQLException e) {</span>
+<span class="nc" id="L330">				logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L331">				logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L332">				logJava.fatal(logFatal+e.getSQLState());</span>
+			} finally {
+<span class="nc bnc" id="L334" title="All 2 branches missed.">				if (pstmt != null)</span>
+<span class="nc" id="L335">					pstmt.close();</span>
+			}
+
+			// Crear la tabla cursosPropios
+<span class="nc" id="L339">			createSQL = &quot;create table cursosPropios (idCursoPropio int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), &quot;</span>
+					+ &quot;idCentro int not null, &quot; + &quot;idDirector varchar(10) not null, &quot;
+					+ &quot;idSecretario varchar(10) not null, &quot; + &quot;estado varchar(30) not null, &quot;
+					+ &quot;tipo varchar(30) not null, &quot; + &quot;nombre varchar(50) not null, &quot; + &quot;ECTS int not null, &quot;
+					+ &quot;fechaInicio date, &quot; + &quot;fechaFin date, &quot; + &quot;tasaMatricula double, &quot; + &quot;edicion int, &quot;
+					+ &quot;primary key (idCursoPropio), foreign key (idCentro) references centros(idCentro), &quot;
+					+ &quot;foreign key (idDirector) references profesoresUCLM(dni), &quot;
+					+ &quot;foreign key (idSecretario) references profesoresUCLM(dni))&quot;;
+<span class="nc" id="L347">			stmt.execute(createSQL);</span>
+
+			// Crear la tabla matriculas
+<span class="nc" id="L350">			createSQL = &quot;create table matriculas (idMatricula int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), idEstudiante varchar(10) not null, &quot;</span>
+					+ &quot;idCursoPropio int not null, tipoPago varchar(30) not null, fecha date, pagado boolean, &quot;
+					+ &quot;primary key (idMatricula), foreign key (idEstudiante) references estudiantes(dni), &quot;
+					+ &quot;foreign key (idCursoPropio) references cursosPropios(idCursoPropio))&quot;;
+<span class="nc" id="L354">			stmt.execute(createSQL);</span>
+
+			// Crear la tabla materias
+<span class="nc" id="L357">			createSQL = &quot;create table materias (idMateria int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), responsable varchar(10) not null, &quot;</span>
+					+ &quot;nombre varchar(50) not null, horas double not null, fechaInicio date, fechaFin date, &quot;
+					+ &quot;primary key (idMateria), foreign key (responsable) references profesores(dni))&quot;;
+<span class="nc" id="L360">			stmt.execute(createSQL);</span>
+
+			// Crear la tabla Pers.Vic
+<span class="nc" id="L363">			createSQL = &quot;create table vicerrectorado (dni varchar(50) not null, &quot;</span>
+					+ &quot;nombre varchar(50) not null, apellidos varchar(50) not null, password varchar(50) not null, jefe boolean, &quot;
+					+ &quot;primary key (dni))&quot;;
+<span class="nc" id="L366">			stmt.execute(createSQL);</span>
+
+			// Guardar cambios en la BD
+<span class="nc" id="L369">			this.mBD.commit();</span>
+
+<span class="nc" id="L371">		} catch (SQLException e) {</span>
+<span class="nc" id="L372">			logJava.fatal(logFatal+e.toString());</span>
+<span class="nc" id="L373">			logJava.fatal(logFatal+e.getErrorCode());</span>
+<span class="nc" id="L374">			logJava.fatal(logFatal+e.getSQLState());</span>
+		} finally {
+<span class="nc bnc" id="L376" title="All 2 branches missed.">			if (stmt != null)</span>
+<span class="nc" id="L377">				stmt.close();</span>
+		}
+
+<span class="nc" id="L380">		desconectarBD();</span>
+
+<span class="nc" id="L382">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

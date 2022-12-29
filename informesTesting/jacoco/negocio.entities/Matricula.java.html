@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Matricula.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TrabajoISO2</a> &gt; <a href="index.source.html" class="el_package">negocio.entities</a> &gt; <span class="el_source">Matricula.java</span></div><h1>Matricula.java</h1><pre class="source lang-java linenums">package negocio.entities;
+
+import java.sql.Date;
+import java.util.Objects;
+
+public class Matricula {
+
+	private int idMatricula;
+	Estudiante estudiante;
+	CursoPropio titulo;
+	ModoPago tipoPago;
+	private Date fecha;
+	private boolean pagado;
+
+	public Matricula(int idMatricula, Estudiante estudiante, CursoPropio titulo, ModoPago tipoPago, Date fecha,
+			boolean pagado) {
+<span class="nc" id="L17">		super();</span>
+<span class="nc" id="L18">		this.idMatricula = idMatricula;</span>
+<span class="nc" id="L19">		this.estudiante = estudiante;</span>
+<span class="nc" id="L20">		this.titulo = titulo;</span>
+<span class="nc" id="L21">		this.tipoPago = tipoPago;</span>
+<span class="nc" id="L22">		this.fecha = fecha;</span>
+<span class="nc" id="L23">		this.pagado = pagado;</span>
+<span class="nc" id="L24">	}</span>
+
+<span class="nc" id="L26">	public Matricula() {</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L28">	}</span>
+
+	public int getIdMatricula() {
+<span class="nc" id="L31">		return idMatricula;</span>
+	}
+
+	public void setIdMatricula(int idMatricula) {
+<span class="nc" id="L35">		this.idMatricula = idMatricula;</span>
+<span class="nc" id="L36">	}</span>
+
+	public Estudiante getEstudiante() {
+<span class="nc" id="L39">		return estudiante;</span>
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+<span class="nc" id="L43">		this.estudiante = estudiante;</span>
+<span class="nc" id="L44">	}</span>
+
+	public CursoPropio getTitulo() {
+<span class="nc" id="L47">		return titulo;</span>
+	}
+
+	public void setTitulo(CursoPropio titulo) {
+<span class="nc" id="L51">		this.titulo = titulo;</span>
+<span class="nc" id="L52">	}</span>
+
+	public ModoPago getTipoPago() {
+<span class="nc" id="L55">		return tipoPago;</span>
+	}
+
+	public void setTipoPago(ModoPago tipoPago) {
+<span class="nc" id="L59">		this.tipoPago = tipoPago;</span>
+<span class="nc" id="L60">	}</span>
+
+	public Date getFecha() {
+<span class="nc" id="L63">		return fecha;</span>
+	}
+
+	public void setFecha(Date fecha) {
+<span class="nc" id="L67">		this.fecha = fecha;</span>
+<span class="nc" id="L68">	}</span>
+
+	public boolean isPagado() {
+<span class="nc" id="L71">		return pagado;</span>
+	}
+
+	public void setPagado(boolean pagado) {
+<span class="nc" id="L75">		this.pagado = pagado;</span>
+<span class="nc" id="L76">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L80">		return Objects.hash(estudiante, fecha, idMatricula, pagado, tipoPago, titulo);</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L85" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L86">			return true;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L88">			return false;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L90">			return false;</span>
+<span class="nc" id="L91">		Matricula other = (Matricula) obj;</span>
+<span class="nc bnc" id="L92" title="All 10 branches missed.">		return Objects.equals(estudiante, other.estudiante) &amp;&amp; Objects.equals(fecha, other.fecha)</span>
+				&amp;&amp; idMatricula == other.idMatricula &amp;&amp; pagado == other.pagado &amp;&amp; tipoPago == other.tipoPago
+<span class="nc bnc" id="L94" title="All 2 branches missed.">				&amp;&amp; Objects.equals(titulo, other.titulo);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

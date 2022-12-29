@@ -296,6 +296,8 @@ public class PantallaRegistrarCurso extends JFrame implements Serializable {
 						case 6:
 							resultadoField.setText("Edición debe ser un número entero positivo");
 							break;
+						default:
+							break;
 					}
 				} catch (Exception e) {
 					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");

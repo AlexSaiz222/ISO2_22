@@ -30,7 +30,7 @@ import persistencia.CursoPropioDAO;
 public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serializable {
 	
 	private static Logger logJava = Logger.getLogger(PantallaJefeGabineteVicerrectorado.class);
-	private final static String logFatal = "LOG FATAL: ";
+	private final static String LOGFATAL = "LOG FATAL: ";
 	
 	/**
 	 * 
@@ -52,7 +52,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serial
 					PantallaJefeGabineteVicerrectorado frame = new PantallaJefeGabineteVicerrectorado();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -129,7 +129,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serial
 					EstadoCurso rechazadoCurso = EstadoCurso.PROPUESTA_RECHAZADA;
 					curso.setEstado(rechazadoCurso);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -146,7 +146,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame implements Serial
 					CursoPropio curso = cursoDAO.seleccionarCurso(idCurso);
 					//g.altaCursoAprobado(curso);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

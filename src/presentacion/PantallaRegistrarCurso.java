@@ -38,7 +38,7 @@ import persistencia.ProfesorDAO;
 public class PantallaRegistrarCurso extends JFrame implements Serializable {
 	
 	private static Logger logJava = Logger.getLogger(PantallaRegistrarCurso.class);
-	private final static String logFatal = "LOG FATAL: ";
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	/**
 	 * 
@@ -73,7 +73,7 @@ public class PantallaRegistrarCurso extends JFrame implements Serializable {
 					PantallaRegistrarCurso frame = new PantallaRegistrarCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});
@@ -301,7 +301,7 @@ public class PantallaRegistrarCurso extends JFrame implements Serializable {
 							break;
 					}
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 
 			}

@@ -21,7 +21,7 @@ import javax.swing.WindowConstants;
 public class PantallaTransferencia extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaTransferencia.class);
-	private final static String logFatal = "LOG FATAL: ";
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private JTextField OwnerField;
@@ -40,7 +40,7 @@ public class PantallaTransferencia extends JFrame {
 					PantallaTransferencia frame = new PantallaTransferencia();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

@@ -20,7 +20,7 @@ import javax.swing.WindowConstants;
 public class PantallaPagar extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaPagar.class);
-	private final static String logFatal = "LOG FATAL: ";
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;
@@ -35,7 +35,7 @@ public class PantallaPagar extends JFrame {
 					PantallaPagar frame = new PantallaPagar();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

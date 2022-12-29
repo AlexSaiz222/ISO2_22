@@ -25,7 +25,7 @@ import negocio.entities.TipoCurso;
 public class PantallaListarIngresos extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaListarIngresos.class);
-	private final static String logFatal = "LOG FATAL: ";
+	private final static String LOGFATAL = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;
@@ -40,7 +40,7 @@ public class PantallaListarIngresos extends JFrame {
 					PantallaListarIngresos frame = new PantallaListarIngresos();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					logJava.fatal(logFatal+e.toString());
+					logJava.fatal(LOGFATAL+e.toString());
 				}
 			}
 		});

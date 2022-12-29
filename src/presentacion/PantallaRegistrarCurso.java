@@ -248,11 +248,15 @@ public class PantallaRegistrarCurso extends JFrame implements Serializable {
 						resultado = 6;
 					}
 					
-					profesorUCLM = new ProfesorUCLM();
 					curso = new CursoPropio();
 					curso.setCentro(centros.get(centerBox.getSelectedIndex()));
+					
 					// Anadir el director, que es el usuario que este logueado
 					profesorUCLM = pantLogin.getDirectorLogeado();
+					if(profesorUCLM == null) { // Si no hay ningún profesor logueado, se utiliza este por defecto
+						profesorUCLM = new ProfesorUCLM();
+						profesorUCLM.setDni("11111111B");
+					}
 
 					curso.setDirector(profesorUCLM);
 					curso.setSecretario(profesores.get(secretaryBox.getSelectedIndex()));

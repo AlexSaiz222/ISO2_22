@@ -17,6 +17,7 @@ import negocio.entities.ModoPago;
 public class MatriculaDAO {
 
 	private static Logger logJava = Logger.getLogger(MatriculaDAO.class);
+	private final String logFatal = "LOG FATAL: ";
 	
 	/**
 	 * 
@@ -48,7 +49,7 @@ public class MatriculaDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("MatriculaDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

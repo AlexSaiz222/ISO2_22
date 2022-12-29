@@ -16,6 +16,7 @@ public class MateriaDAO extends AbstractEntityDAO {
 
 	
 	private static Logger logJava = Logger.getLogger(MateriaDAO.class);
+	private final String logFatal = "LOG FATAL: ";
 	/**
 	 * 
 	 * @param materia
@@ -47,7 +48,7 @@ public class MateriaDAO extends AbstractEntityDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("MateriaDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

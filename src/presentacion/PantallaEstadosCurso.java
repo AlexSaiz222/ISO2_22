@@ -24,6 +24,7 @@ import persistencia.ProfesorUCLMDAO;
 public class PantallaEstadosCurso extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaEstadosCurso.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;
@@ -38,7 +39,7 @@ public class PantallaEstadosCurso extends JFrame {
 					PantallaEstadosCurso frame = new PantallaEstadosCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});

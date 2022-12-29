@@ -25,6 +25,7 @@ import javax.swing.WindowConstants;
 public class PantallaDireccionCurso extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaDireccionCurso.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private final Action action = new SwingAction();
@@ -40,7 +41,7 @@ public class PantallaDireccionCurso extends JFrame {
 					PantallaDireccionCurso frame = new PantallaDireccionCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});
@@ -66,7 +67,7 @@ public class PantallaDireccionCurso extends JFrame {
 					E1 = new PantallaEditarPropuestaCurso();
 					E1.setVisible(true);
 				} catch (SQLException e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 
 			}
@@ -96,7 +97,7 @@ public class PantallaDireccionCurso extends JFrame {
 					PantallaRegistrarCurso R1 = new PantallaRegistrarCurso();
 					R1.setVisible(true);
 				} catch (SQLException e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 
 			}

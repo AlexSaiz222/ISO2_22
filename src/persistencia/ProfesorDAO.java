@@ -11,6 +11,7 @@ import negocio.entities.Profesor;
 
 public class ProfesorDAO {
 	private static Logger logJava = Logger.getLogger(ProfesorDAO.class);
+	private final String logFatal = "LOG FATAL: ";
 
 	public List<Profesor> listarProfesores() throws SQLException {
 		List<Profesor> profesores = new ArrayList<Profesor>();
@@ -67,7 +68,7 @@ public class ProfesorDAO {
 			resultado = agente.insert(pstmt);
 
 		} catch (SQLException e) {
-			System.out.println("ProfesorDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (pstmt != null)
 				pstmt.close();

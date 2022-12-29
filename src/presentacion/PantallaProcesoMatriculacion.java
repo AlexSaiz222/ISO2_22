@@ -35,6 +35,7 @@ import persistencia.MatriculaDAO;
 public class PantallaProcesoMatriculacion extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaProcesoMatriculacion.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private JTextField resultadoField;
@@ -53,7 +54,7 @@ public class PantallaProcesoMatriculacion extends JFrame {
 					PantallaProcesoMatriculacion frame = new PantallaProcesoMatriculacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});

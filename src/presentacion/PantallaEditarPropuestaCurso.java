@@ -42,6 +42,7 @@ import persistencia.ProfesorDAO;
 public class PantallaEditarPropuestaCurso extends JFrame implements Serializable  {
 	
 	private static Logger logJava = Logger.getLogger(PantallaEditarPropuestaCurso.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	/**
 	 * 
@@ -74,7 +75,7 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 					PantallaEditarPropuestaCurso frame = new PantallaEditarPropuestaCurso();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});
@@ -238,7 +239,7 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 						typeBox.addItem(cursoSeleccionado.getTipo());
 					}
 				} catch (SQLException e1) {
-					System.out.println(e1.toString());
+					logJava.fatal(logFatal+e1.toString());
 				}
 			}
 		});
@@ -288,7 +289,7 @@ public class PantallaEditarPropuestaCurso extends JFrame implements Serializable
 					int resultado = gestorPropuestasCursos.editarPropuestaCurso(curso);
 					propuestaCorrecta(resultado);
 				} catch (Exception e) {
-					resultadoField.setText("Ha ocurrido un error, vuelva a intentarlo");
+					logJava.info("LOG INFO: Ha ocurrido un error, vuelva a intentarlo "+e.toString());
 				}
 
 			}

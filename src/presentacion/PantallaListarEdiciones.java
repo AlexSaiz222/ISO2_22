@@ -22,6 +22,7 @@ import com.toedter.calendar.JDateChooser;
 public class PantallaListarEdiciones extends JFrame {
 	
 	private static Logger logJava = Logger.getLogger(PantallaListarEdiciones.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	private JPanel contentPane;
 	private PantallaLogin pantLogin;
@@ -36,7 +37,7 @@ public class PantallaListarEdiciones extends JFrame {
 					PantallaListarEdiciones frame = new PantallaListarEdiciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});

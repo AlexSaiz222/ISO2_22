@@ -22,6 +22,7 @@ import javax.swing.WindowConstants;
 public class PantallaMatriculacion extends JFrame implements Serializable{
 	
 	private static Logger logJava = Logger.getLogger(PantallaMatriculacion.class);
+	private final static String logFatal = "LOG FATAL: ";
 
 	/**
 	 * 
@@ -40,7 +41,7 @@ public class PantallaMatriculacion extends JFrame implements Serializable{
 					PantallaMatriculacion frame = new PantallaMatriculacion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 			}
 		});
@@ -82,7 +83,7 @@ public class PantallaMatriculacion extends JFrame implements Serializable{
 					PantallaProcesoMatriculacion M1 = new PantallaProcesoMatriculacion();
 					M1.setVisible(true);
 				} catch (SQLException e) {
-					System.out.println(e.toString());
+					logJava.fatal(logFatal+e.toString());
 				}
 
 			}

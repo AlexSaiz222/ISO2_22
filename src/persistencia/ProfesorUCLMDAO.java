@@ -15,6 +15,7 @@ import negocio.entities.ProfesorUCLM;
 public class ProfesorUCLMDAO extends AbstractEntityDAO {
 	
 	private static Logger logJava = Logger.getLogger(ProfesorUCLMDAO.class);
+	private final String logFatal = "LOG FATAL: ";
 
 	public List<ProfesorUCLM> listarProfesoresUCLM() throws SQLException {
 		List<ProfesorUCLM> profesoresUCLM = new ArrayList<ProfesorUCLM>();
@@ -83,7 +84,7 @@ public class ProfesorUCLMDAO extends AbstractEntityDAO {
 			pstmt.close();
 
 		} catch (SQLException e) {
-			System.out.println("ProfesorUCLMDAO: " + e.getMessage());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 
 			if (pstmt != null)

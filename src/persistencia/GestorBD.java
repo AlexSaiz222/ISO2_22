@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 public class GestorBD {
 	
 	private static Logger logJava = Logger.getLogger(GestorBD.class);
+	private final String logFatal = "LOG FATAL: ";
 
 	protected Connection mBD;
 	private final static String DRIVER = "jdbc:derby";
@@ -40,9 +41,9 @@ public class GestorBD {
 				crearBaseDatosSinoExiste();
 				conectarBD();
 			} else {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			}
 		}
 	}
@@ -57,7 +58,7 @@ public class GestorBD {
 				logJava.info("LOG INFO: Derby shut down normally");
 			} else {
 				logJava.info("LOG INFO: Derby did not shut down normally");
-				logJava.fatal("LOG FATAL: "+ex.toString());
+				logJava.fatal(logFatal+ex.toString());
 			}
 		}
 	}
@@ -93,7 +94,7 @@ public class GestorBD {
 
 			stmt.close();
 		} catch (SQLException e) {
-			logJava.fatal("LOG FATAL: "+e.toString());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (stmt != null)
 				stmt.close();
@@ -142,7 +143,7 @@ public class GestorBD {
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			logJava.fatal("LOG FATAL: "+e.toString());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (stmt != null)
 				stmt.close();
@@ -174,7 +175,7 @@ public class GestorBD {
 			res = stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			logJava.fatal("LOG FATAL: "+e.toString());
+			logJava.fatal(logFatal+e.toString());
 		} finally {
 			if (stmt != null)
 				stmt.close();
@@ -222,9 +223,9 @@ public class GestorBD {
 				pstmt.executeUpdate();
 
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -243,9 +244,9 @@ public class GestorBD {
 				pstmt.executeUpdate();
 
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -267,9 +268,9 @@ public class GestorBD {
 				pstmt.setBoolean(5, true);
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -284,9 +285,9 @@ public class GestorBD {
 				pstmt.setBoolean(5, false);
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -311,9 +312,9 @@ public class GestorBD {
 				pstmt.setString(3, "CATEDRATICO");
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -326,9 +327,9 @@ public class GestorBD {
 				pstmt.setString(3, "TITULAR_UNIVERSIDAD");
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
-				logJava.fatal("LOG FATAL: "+e.toString());
-				logJava.fatal("LOG FATAL: "+e.getErrorCode());
-				logJava.fatal("LOG FATAL: "+e.getSQLState());
+				logJava.fatal(logFatal+e.toString());
+				logJava.fatal(logFatal+e.getErrorCode());
+				logJava.fatal(logFatal+e.getSQLState());
 			} finally {
 				if (pstmt != null)
 					pstmt.close();
@@ -368,9 +369,9 @@ public class GestorBD {
 			this.mBD.commit();
 
 		} catch (SQLException e) {
-			logJava.fatal("LOG FATAL: "+e.toString());
-			logJava.fatal("LOG FATAL: "+e.getErrorCode());
-			logJava.fatal("LOG FATAL: "+e.getSQLState());
+			logJava.fatal(logFatal+e.toString());
+			logJava.fatal(logFatal+e.getErrorCode());
+			logJava.fatal(logFatal+e.getSQLState());
 		} finally {
 			if (stmt != null)
 				stmt.close();

@@ -21,6 +21,7 @@ import negocio.entities.TipoCurso;
 public class CursoPropioDAO extends AbstractEntityDAO {
 
 	private static Logger logJava = Logger.getLogger(CursoPropioDAO.class);
+	private final String patronFecha = "yyyy-MM-dd";
 	/**
 	 * 
 	 * @param curso
@@ -33,8 +34,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		GestorBD agente = new GestorBD();
 
 		// Formateo de las fechas para la insercion en la BD
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));
 		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));
 
@@ -94,8 +94,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 
 			TipoCurso tipo = TipoCurso.valueOf(c.get(5).toString());
 
-			String pattern = "yyyy-MM-dd";
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);
 			Date fechainicio = null, fechafin = null;
 			try {
 				fechainicio = (Date) simpleDateFormat.parse(c.get(8).toString());
@@ -166,8 +165,7 @@ public class CursoPropioDAO extends AbstractEntityDAO {
 		GestorBD agente = new GestorBD();
 		
 		// Formateo de las fechas para la insercion en la BD
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patronFecha);
 		Date fechaInicio = Date.valueOf(simpleDateFormat.format(curso.getFechaInicio()));
 		Date fechaFin = Date.valueOf(simpleDateFormat.format(curso.getFechaFin()));
 	
